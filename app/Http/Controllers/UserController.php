@@ -16,6 +16,16 @@ class UserController extends Controller
             "usuarios.edit",
             "usuarios.destroy",
 
+            "unidad_areas.index",
+            "unidad_areas.create",
+            "unidad_areas.edit",
+            "unidad_areas.destroy",
+
+            "empresas.index",
+            "empresas.create",
+            "empresas.edit",
+            "empresas.destroy",
+
             "institucions.index",
             "institucions.create",
             "institucions.edit",

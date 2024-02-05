@@ -53,6 +53,19 @@ class UsuarioController extends Controller
         ]);
     }
 
+    public function byTipo(Request $request)
+    {
+        $usuarios = User::where("id", "!=", 1);
+        if (isset($request->tipo) && trim($request->tipo) != "") {
+            $usuarios = $usuarios->where("tipo", $request->tipo);
+        }
+        $usuarios = $usuarios->get();
+
+        return response()->JSON([
+            "usuarios" => $usuarios
+        ]);
+    }
+
     public function paginado(Request $request)
     {
 

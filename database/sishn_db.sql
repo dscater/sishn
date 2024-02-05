@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 03-02-2024 a las 21:20:38
+-- Tiempo de generación: 05-02-2024 a las 22:25:39
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -59,6 +59,7 @@ CREATE TABLE `empresas` (
   `nit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fono` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fecha_ini` date DEFAULT NULL,
+  `fecha_fin` date DEFAULT NULL,
   `correo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `dir` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -66,6 +67,15 @@ CREATE TABLE `empresas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `empresas`
+--
+
+INSERT INTO `empresas` (`id`, `nombre`, `nit`, `fono`, `fecha_ini`, `fecha_fin`, `correo`, `dir`, `logo`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(1, 'EMPRESA #1', '111111', '7777777', '2024-01-01', '2024-09-03', 'EMPRESA1@GMAIL.COM', 'LOS OLIVOS', '1707171817_1.jpg', '2024-02-05', '2024-02-05 22:23:37', '2024-02-05 22:23:37'),
+(2, 'EMPRESA #2', '', '', NULL, NULL, '', '', NULL, '2024-02-05', '2024-02-05 22:23:45', '2024-02-05 22:23:45'),
+(3, 'EMPRESA 3', '33', '33', '2024-03-03', '2024-02-06', '', '', NULL, '2024-02-05', '2024-02-05 22:24:32', '2024-02-05 22:24:32');
 
 -- --------------------------------------------------------
 
@@ -86,6 +96,31 @@ CREATE TABLE `historial_accions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `historial_accions`
+--
+
+INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `datos_original`, `datos_nuevo`, `modulo`, `fecha`, `hora`, `created_at`, `updated_at`) VALUES
+(1, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN USUARIO', 'id: 2<br/>usuario: JPERES<br/>password: $2y$12$K9AOPb12uULsg1TRY3QPseyxasLnvrLYkisBXai3aU3gdfQowza5K<br/>nombre: JUAN<br/>paterno: PERES<br/>materno: MAMANI<br/>ci: 1234<br/>ci_exp: LP<br/>dir: LOS OLIVOS<br/>email: JUAN@GMAIL.COM<br/>fono: 777777<br/>tipo: JEFE DE ÁREA<br/>foto: 1707167967_JPERES.jpg<br/>acceso: 1<br/>fecha_registro: 2024-02-05 00:00:00<br/>created_at: 2024-02-05 17:19:27<br/>updated_at: 2024-02-05 17:19:27<br/>', NULL, 'USUARIOS', '2024-02-05', '17:19:27', '2024-02-05 21:19:27', '2024-02-05 21:19:27'),
+(2, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA UNIDAD/ÁREA', 'id: 1<br/>nombre: UNIDAD #1<br/>descripcion: <br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:31:56<br/>updated_at: 2024-02-05 17:31:56<br/>', NULL, 'UNIDADES Y ÁREAS', '2024-02-05', '17:31:56', '2024-02-05 21:31:56', '2024-02-05 21:31:56'),
+(3, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA UNIDAD/ÁREA', 'id: 1<br/>nombre: UNIDAD #1<br/>descripcion: <br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:31:56<br/>updated_at: 2024-02-05 17:31:56<br/>', 'id: 1<br/>nombre: UNIDAD #1<br/>descripcion: DESC. #1<br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:31:56<br/>updated_at: 2024-02-05 17:33:16<br/>', 'UNIDADES Y ÁREAS', '2024-02-05', '17:33:16', '2024-02-05 21:33:16', '2024-02-05 21:33:16'),
+(4, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA UNIDAD/ÁREA', 'id: 1<br/>nombre: UNIDAD #1<br/>descripcion: DESC. #1<br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:31:56<br/>updated_at: 2024-02-05 17:33:16<br/>', 'id: 1<br/>nombre: UNIDAD #1<br/>descripcion: DESC. #1<br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:31:56<br/>updated_at: 2024-02-05 17:33:16<br/>', 'UNIDADES Y ÁREAS', '2024-02-05', '17:34:44', '2024-02-05 21:34:44', '2024-02-05 21:34:44'),
+(5, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UNA UNIDAD/ÁREA', 'id: 1<br/>nombre: UNIDAD #1<br/>descripcion: DESC. #1<br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:31:56<br/>updated_at: 2024-02-05 17:33:16<br/>', NULL, 'UNIDADES Y ÁREAS', '2024-02-05', '17:34:48', '2024-02-05 21:34:48', '2024-02-05 21:34:48'),
+(6, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UNA UNIDAD/ÁREA', 'id: 1<br/>nombre: UNIDAD #1<br/>descripcion: DESC. #1<br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:35:08<br/>updated_at: 2024-02-05 17:35:08<br/>', NULL, 'UNIDADES Y ÁREAS', '2024-02-05', '17:35:08', '2024-02-05 21:35:08', '2024-02-05 21:35:08'),
+(7, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA UNIDAD/ÁREA', 'id: 1<br/>nombre: UNIDAD #1<br/>descripcion: DESC. #1<br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:35:08<br/>updated_at: 2024-02-05 17:35:08<br/>', 'id: 1<br/>nombre: UNIDAD #1<br/>descripcion: DESC. #1<br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:35:08<br/>updated_at: 2024-02-05 17:35:08<br/>', 'UNIDADES Y ÁREAS', '2024-02-05', '17:46:12', '2024-02-05 21:46:12', '2024-02-05 21:46:12'),
+(8, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA UNIDAD/ÁREA', 'id: 1<br/>nombre: UNIDAD #1<br/>descripcion: DESC. #1<br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:35:08<br/>updated_at: 2024-02-05 17:35:08<br/>', 'id: 1<br/>nombre: UNIDAD #1<br/>descripcion: DESC. #1<br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:35:08<br/>updated_at: 2024-02-05 17:35:08<br/>', 'UNIDADES Y ÁREAS', '2024-02-05', '17:47:47', '2024-02-05 21:47:47', '2024-02-05 21:47:47'),
+(9, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UNA EMPRESA', 'id: 2<br/>nombre: EMPRESA #1<br/>nit: 11111<br/>fono: 222222<br/>fecha_ini: 2023-01-01<br/>fecha_fin: 2024-01-01<br/>correo: EMPRESA1@GMAIL.COM<br/>dir: LOS OLIVOS<br/>logo: 1707171353_2.jpg<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:15:53<br/>updated_at: 2024-02-05 18:15:53<br/>', NULL, 'EMPRESAS', '2024-02-05', '18:15:53', '2024-02-05 22:15:53', '2024-02-05 22:15:53'),
+(10, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UNA EMPRESA', 'id: 2<br/>nombre: EMPRESA #1<br/>nit: 11111<br/>fono: 222222<br/>fecha_ini: 2023-01-01<br/>fecha_fin: 2024-01-01<br/>correo: EMPRESA1@GMAIL.COM<br/>dir: LOS OLIVOS<br/>logo: 1707171353_2.jpg<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:15:53<br/>updated_at: 2024-02-05 18:15:53<br/>', 'id: 2<br/>nombre: EMPRESA #12<br/>nit: 111112<br/>fono: 2222223<br/>fecha_ini: 2023-02-01<br/>fecha_fin: 2024-03-01<br/>correo: EMPRESA1@GMAIL.COM<br/>dir: LOS OLIVOS2<br/>logo: 1707171397_2.png<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:15:53<br/>updated_at: 2024-02-05 18:16:37<br/>', 'EMPRESAS', '2024-02-05', '18:16:37', '2024-02-05 22:16:37', '2024-02-05 22:16:37'),
+(11, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UNA EMPRESA', 'id: 2<br/>nombre: EMPRESA #12<br/>nit: 111112<br/>fono: 2222223<br/>fecha_ini: 2023-02-01<br/>fecha_fin: 2024-03-01<br/>correo: EMPRESA1@GMAIL.COM<br/>dir: LOS OLIVOS2<br/>logo: 1707171397_2.png<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:15:53<br/>updated_at: 2024-02-05 18:16:37<br/>', 'id: 2<br/>nombre: EMPRESA #1<br/>nit: 11111<br/>fono: 222222<br/>fecha_ini: 2023-02-01<br/>fecha_fin: 2024-03-01<br/>correo: EMPRESA1@GMAIL.COM<br/>dir: LOS OLIVOS2<br/>logo: 1707171397_2.png<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:15:53<br/>updated_at: 2024-02-05 18:16:47<br/>', 'EMPRESAS', '2024-02-05', '18:16:47', '2024-02-05 22:16:47', '2024-02-05 22:16:47'),
+(12, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UNA EMPRESA', 'id: 2<br/>nombre: EMPRESA #1<br/>nit: 11111<br/>fono: 222222<br/>fecha_ini: 2023-02-01<br/>fecha_fin: 2024-03-01<br/>correo: EMPRESA1@GMAIL.COM<br/>dir: LOS OLIVOS2<br/>logo: 1707171397_2.png<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:15:53<br/>updated_at: 2024-02-05 18:16:47<br/>', 'id: 2<br/>nombre: EMPRESA #1<br/>nit: 11111<br/>fono: 222222<br/>fecha_ini: 2023-02-01<br/>fecha_fin: 2024-03-01<br/>correo: EMPRESA1@GMAIL.COM<br/>dir: LOS OLIVOS2<br/>logo: 1707171578_2.jpg<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:15:53<br/>updated_at: 2024-02-05 18:19:38<br/>', 'EMPRESAS', '2024-02-05', '18:19:38', '2024-02-05 22:19:38', '2024-02-05 22:19:38'),
+(13, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UNA EMPRESA', 'id: 3<br/>nombre: EMPRESA #2<br/>nit: <br/>fono: <br/>fecha_ini: <br/>fecha_fin: <br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:20:50<br/>updated_at: 2024-02-05 18:20:50<br/>', NULL, 'EMPRESAS', '2024-02-05', '18:20:50', '2024-02-05 22:20:50', '2024-02-05 22:20:50'),
+(14, 1, 'ELIMINACIÓN', 'EL USUARIO admin ELIMINÓ UNA EMPRESA', 'id: 3<br/>nombre: EMPRESA #2<br/>nit: <br/>fono: <br/>fecha_ini: <br/>fecha_fin: <br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:20:50<br/>updated_at: 2024-02-05 18:20:50<br/>', NULL, 'EMPRESAS', '2024-02-05', '18:22:54', '2024-02-05 22:22:54', '2024-02-05 22:22:54'),
+(15, 1, 'ELIMINACIÓN', 'EL USUARIO admin ELIMINÓ UNA EMPRESA', 'id: 2<br/>nombre: EMPRESA #1<br/>nit: 11111<br/>fono: 222222<br/>fecha_ini: 2023-02-01<br/>fecha_fin: 2024-03-01<br/>correo: EMPRESA1@GMAIL.COM<br/>dir: LOS OLIVOS2<br/>logo: 1707171578_2.jpg<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:15:53<br/>updated_at: 2024-02-05 18:19:38<br/>', NULL, 'EMPRESAS', '2024-02-05', '18:22:59', '2024-02-05 22:22:59', '2024-02-05 22:22:59'),
+(16, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UNA EMPRESA', 'id: 1<br/>nombre: EMPRESA #1<br/>nit: 111111<br/>fono: 7777777<br/>fecha_ini: 2024-01-01<br/>fecha_fin: 2024-09-03<br/>correo: EMPRESA1@GMAIL.COM<br/>dir: LOS OLIVOS<br/>logo: 1707171817_1.jpg<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:23:37<br/>updated_at: 2024-02-05 18:23:37<br/>', NULL, 'EMPRESAS', '2024-02-05', '18:23:37', '2024-02-05 22:23:37', '2024-02-05 22:23:37'),
+(17, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UNA EMPRESA', 'id: 2<br/>nombre: EMPRESA #2<br/>nit: <br/>fono: <br/>fecha_ini: <br/>fecha_fin: <br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:23:45<br/>updated_at: 2024-02-05 18:23:45<br/>', NULL, 'EMPRESAS', '2024-02-05', '18:23:45', '2024-02-05 22:23:45', '2024-02-05 22:23:45'),
+(18, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UNA EMPRESA', 'id: 3<br/>nombre: EMPRESA 3<br/>nit: 33<br/>fono: 33<br/>fecha_ini: 2024-03-03<br/>fecha_fin: 2024-02-06<br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:24:32<br/>updated_at: 2024-02-05 18:24:32<br/>', NULL, 'EMPRESAS', '2024-02-05', '18:24:32', '2024-02-05 22:24:32', '2024-02-05 22:24:32'),
+(19, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UNA EMPRESA', 'id: 2<br/>nombre: EMPRESA #2<br/>nit: <br/>fono: <br/>fecha_ini: <br/>fecha_fin: <br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:23:45<br/>updated_at: 2024-02-05 18:23:45<br/>', 'id: 2<br/>nombre: EMPRESA #2<br/>nit: <br/>fono: <br/>fecha_ini: <br/>fecha_fin: <br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:23:45<br/>updated_at: 2024-02-05 18:23:45<br/>', 'EMPRESAS', '2024-02-05', '18:25:01', '2024-02-05 22:25:01', '2024-02-05 22:25:01');
 
 -- --------------------------------------------------------
 
@@ -254,6 +289,13 @@ CREATE TABLE `unidad_areas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `unidad_areas`
+--
+
+INSERT INTO `unidad_areas` (`id`, `nombre`, `descripcion`, `user_id`, `ubicacion`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(1, 'UNIDAD #1', 'DESC. #1', 2, 'UBICACION #1', '2024-02-05', '2024-02-05 21:35:08', '2024-02-05 21:35:08');
+
 -- --------------------------------------------------------
 
 --
@@ -285,7 +327,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `usuario`, `password`, `nombre`, `paterno`, `materno`, `ci`, `ci_exp`, `dir`, `email`, `fono`, `tipo`, `foto`, `acceso`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '$2y$12$65d4fgZsvBV5Lc/AxNKh4eoUdbGyaczQ4sSco20feSQANshNLuxSC', 'admin', NULL, NULL, '0', '', '', 'admin@gmail.com', '', 'ADMINISTRADOR', NULL, 1, '2024-01-31', NULL, '2024-02-02 18:13:58');
+(1, 'admin', '$2y$12$65d4fgZsvBV5Lc/AxNKh4eoUdbGyaczQ4sSco20feSQANshNLuxSC', 'admin', NULL, NULL, '0', '', '', 'admin@gmail.com', '', 'ADMINISTRADOR', NULL, 1, '2024-01-31', NULL, '2024-02-02 18:13:58'),
+(2, 'JPERES', '$2y$12$K9AOPb12uULsg1TRY3QPseyxasLnvrLYkisBXai3aU3gdfQowza5K', 'JUAN', 'PERES', 'MAMANI', '1234', 'LP', 'LOS OLIVOS', 'JUAN@GMAIL.COM', '777777', 'JEFE DE ÁREA', '1707167967_JPERES.jpg', 1, '2024-02-05', '2024-02-05 21:19:27', '2024-02-05 21:19:27');
 
 --
 -- Índices para tablas volcadas
@@ -380,13 +423,13 @@ ALTER TABLE `biometricos`
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `institucions`
@@ -428,13 +471,13 @@ ALTER TABLE `solicitud_mantenimientos`
 -- AUTO_INCREMENT de la tabla `unidad_areas`
 --
 ALTER TABLE `unidad_areas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

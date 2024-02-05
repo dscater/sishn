@@ -1,31 +1,25 @@
+import { useForm } from "@inertiajs/vue3";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import { usePage } from "@inertiajs/vue3";
 
-const oUsuario = ref({
+const oUnidadArea = ref({
     id: 0,
     nombre: "",
-    paterno: "",
-    materno: "",
-    ci: "",
-    ci_exp: "",
-    dir: "",
-    email: "",
-    fono: "",
-    tipo: "",
-    foto: "",
-    acceso: 0 + "",
+    descripcion: "",
+    user_id: "",
+    ubicacion: "",
     _method: "POST",
 });
 
-export const useUsuarios = () => {
+export const useUnidadAreas = () => {
     const { flash } = usePage().props;
-    const getUsuarios = async () => {
+    const getUnidadAreas = async () => {
         try {
-            const response = await axios.get(route("usuarios.listado"), {
+            const response = await axios.get(route("unidad_areas.listado"), {
                 headers: { Accept: "application/json" },
             });
-            return response.data.usuarios;
+            return response.data.unidad_areas;
         } catch (err) {
             Swal.fire({
                 icon: "info",
@@ -45,36 +39,18 @@ export const useUsuarios = () => {
         }
     };
 
-    const getUsuariosByTipo = async (tipo) => {
+    const getItemsForSelect = async () => {
         try {
-            const response = await axios.get(route("usuarios.byTipo"), {
+            const response = await axios.get(route("unidad_areas.listado"), {
                 headers: { Accept: "application/json" },
-                params: {
-                    tipo,
-                },
-            });
-            return response.data.usuarios;
-        } catch (error) {
-            console.error("Error:", error);
-            throw error; // Puedes manejar el error según tus necesidades
-        }
-    };
-
-    const getItemsForSelect = async (tipo = "") => {
-        try {
-            const response = await axios.get(route("usuarios.byTipo"), {
-                headers: { Accept: "application/json" },
-                params: {
-                    tipo,
-                },
             });
 
-            let listItems = response.data.usuarios;
+            let listItems = response.data.unidad_areas;
             let listSelect = [];
             listItems.forEach((elem) => {
                 listSelect.push({
                     value: elem.id,
-                    label: elem.full_name,
+                    label: elem.nombre,
                 });
             });
             return listSelect;
@@ -84,12 +60,15 @@ export const useUsuarios = () => {
         }
     };
 
-    const getUsuariosApi = async (data) => {
+    const getUnidadAreasApi = async (data) => {
         try {
-            const response = await axios.get(route("usuarios.paginado", data), {
-                headers: { Accept: "application/json" },
-            });
-            return response.data.usuarios;
+            const response = await axios.get(
+                route("unidad_areas.paginado", data),
+                {
+                    headers: { Accept: "application/json" },
+                }
+            );
+            return response.data.unidad_areas;
         } catch (err) {
             Swal.fire({
                 icon: "info",
@@ -108,11 +87,14 @@ export const useUsuarios = () => {
             throw err; // Puedes manejar el error según tus necesidades
         }
     };
-    const saveUsuario = async (data) => {
+    const saveUnidadArea = async (data) => {
         try {
-            const response = await axios.post(route("usuarios.store", data), {
-                headers: { Accept: "application/json" },
-            });
+            const response = await axios.post(
+                route("unidad_areas.store", data),
+                {
+                    headers: { Accept: "application/json" },
+                }
+            );
             Swal.fire({
                 icon: "success",
                 title: "Correcto",
@@ -140,11 +122,14 @@ export const useUsuarios = () => {
         }
     };
 
-    const deleteUsuario = async (id) => {
+    const deleteUnidadArea = async (id) => {
         try {
-            const response = await axios.delete(route("usuarios.destroy", id), {
-                headers: { Accept: "application/json" },
-            });
+            const response = await axios.delete(
+                route("unidad_areas.destroy", id),
+                {
+                    headers: { Accept: "application/json" },
+                }
+            );
             Swal.fire({
                 icon: "success",
                 title: "Correcto",
@@ -172,53 +157,38 @@ export const useUsuarios = () => {
         }
     };
 
-    const setUsuario = (item = null) => {
+    const setUnidadArea = (item = null) => {
         if (item) {
-            oUsuario.value.id = item.id;
-            oUsuario.value.nombre = item.nombre;
-            oUsuario.value.paterno = item.paterno;
-            oUsuario.value.materno = item.materno;
-            oUsuario.value.ci = item.ci;
-            oUsuario.value.ci_exp = item.ci_exp;
-            oUsuario.value.dir = item.dir;
-            oUsuario.value.email = item.email;
-            oUsuario.value.fono = item.fono;
-            oUsuario.value.tipo = item.tipo;
-            oUsuario.value.foto = item.foto;
-            oUsuario.value.acceso = item.acceso + "";
-            oUsuario.value._method = "PUT";
-            return oUsuario;
+            oUnidadArea.value.id = item.id;
+            oUnidadArea.value.nombre = item.nombre;
+            oUnidadArea.value.descripcion = item.descripcion;
+            oUnidadArea.value.user_id = item.user_id;
+            oUnidadArea.value.ubicacion = item.ubicacion;
+            oUnidadArea.value._method = "PUT";
+            return oUnidadArea;
         }
         return false;
     };
 
-    const limpiarUsuario = () => {
-        oUsuario.value.id = 0;
-        oUsuario.value.nombre = "";
-        oUsuario.value.paterno = "";
-        oUsuario.value.materno = "";
-        oUsuario.value.ci = "";
-        oUsuario.value.ci_exp = "";
-        oUsuario.value.dir = "";
-        oUsuario.value.email = "";
-        oUsuario.value.fono = "";
-        oUsuario.value.tipo = "";
-        oUsuario.value.foto = "";
-        oUsuario.value.acceso = 0 + "";
-        oUsuario.value._method = "POST";
+    const limpiarUnidadArea = () => {
+        oUnidadArea.value.id = 0;
+        oUnidadArea.value.nombre = "";
+        oUnidadArea.value.descripcion = "";
+        oUnidadArea.value.user_id = "";
+        oUnidadArea.value.ubicacion = "";
+        oUnidadArea.value._method = "POST";
     };
 
     onMounted(() => {});
 
     return {
-        oUsuario,
-        getUsuarios,
-        getUsuariosApi,
-        saveUsuario,
-        deleteUsuario,
-        setUsuario,
-        limpiarUsuario,
-        getUsuariosByTipo,
+        oUnidadArea,
+        getUnidadAreas,
+        getUnidadAreasApi,
+        saveUnidadArea,
+        deleteUnidadArea,
+        setUnidadArea,
+        limpiarUnidadArea,
         getItemsForSelect,
     };
 };

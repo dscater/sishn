@@ -7,7 +7,7 @@ const breadbrums = [
         name_url: "inicio",
     },
     {
-        title: "Usuarios",
+        title: "UnidadAreas",
         disabled: false,
         url: "",
         name_url: "",
@@ -18,7 +18,7 @@ const breadbrums = [
 import BreadBrums from "@/Components/BreadBrums.vue";
 import { useApp } from "@/composables/useApp";
 import { Head } from "@inertiajs/vue3";
-import { useUsuarios } from "@/composables/usuarios/useUsuarios";
+import { useUnidadAreas } from "@/composables/unidad_areas/useUnidadAreas";
 import { ref, onMounted } from "vue";
 import { useMenu } from "@/composables/useMenu";
 import Formulario from "./Formulario.vue";
@@ -31,10 +31,14 @@ onMounted(() => {
     }, 300);
 });
 
-const { getUsuariosApi, setUsuario, limpiarUsuario, deleteUsuario } =
-    useUsuarios();
-const responseUsuarios = ref([]);
-const listUsuarios = ref([]);
+const {
+    getUnidadAreasApi,
+    setUnidadArea,
+    limpiarUnidadArea,
+    deleteUnidadArea,
+} = useUnidadAreas();
+const responseUnidadAreas = ref([]);
+const listUnidadAreas = ref([]);
 const itemsPerPage = ref(5);
 const headers = ref([
     {
@@ -43,15 +47,11 @@ const headers = ref([
         sortable: true,
         key: "id",
     },
-    { title: "Usuario", key: "usuario", align: "start" },
-    { title: "Nombre", key: "full_name", align: "start" },
-    { title: "C.I.", key: "full_ci", align: "start" },
-    { title: "Dirección", key: "dir", align: "start" },
-    { title: "Correo", key: "email", align: "start" },
-    { title: "Teléfono/Celular", key: "fono", align: "start" },
-    { title: "Foto", key: "foto", align: "start", sortable: false },
-    { title: "Tipo", key: "tipo", align: "start" },
-    { title: "Acceso", key: "acceso", align: "start" },
+    { title: "Nombre Unidad/Área", key: "nombre", align: "start" },
+    { title: "Descripción", key: "descripcion", align: "start" },
+    { title: "Responsable", key: "user.full_name", align: "start" },
+    { title: "Ubicación Área", key: "email", align: "start" },
+    { title: "Fecha de Registro", key: "fecha_registro_t", align: "start" },
     { title: "Acción", key: "accion", align: "end", sortable: false },
 ]);
 
@@ -78,19 +78,19 @@ const loadItems = async ({ page, itemsPerPage, sortBy }) => {
 
     clearInterval(setTimeOutLoadData);
     setTimeOutLoadData = setTimeout(async () => {
-        responseUsuarios.value = await getUsuariosApi(options.value);
-        listUsuarios.value = responseUsuarios.value.data;
-        totalItems.value = parseInt(responseUsuarios.value.total);
+        responseUnidadAreas.value = await getUnidadAreasApi(options.value);
+        listUnidadAreas.value = responseUnidadAreas.value.data;
+        totalItems.value = parseInt(responseUnidadAreas.value.total);
         loading.value = false;
     }, 300);
 };
-const recargaUsuarios = async () => {
+const recargaUnidadAreas = async () => {
     loading.value = true;
-    listUsuarios.value = [];
+    listUnidadAreas.value = [];
     options.value.search = search.value;
-    responseUsuarios.value = await getUsuariosApi(options.value);
-    listUsuarios.value = responseUsuarios.value.data;
-    totalItems.value = parseInt(responseUsuarios.value.total);
+    responseUnidadAreas.value = await getUnidadAreasApi(options.value);
+    listUnidadAreas.value = responseUnidadAreas.value.data;
+    totalItems.value = parseInt(responseUnidadAreas.value.total);
     setTimeout(() => {
         loading.value = false;
         open_dialog.value = false;
@@ -99,19 +99,19 @@ const recargaUsuarios = async () => {
 const accion_dialog = ref(0);
 const open_dialog = ref(false);
 const agregarRegistro = () => {
-    limpiarUsuario();
+    limpiarUnidadArea();
     accion_dialog.value = 0;
     open_dialog.value = true;
 };
-const editarUsuario = (item) => {
-    setUsuario(item);
+const editarUnidadArea = (item) => {
+    setUnidadArea(item);
     accion_dialog.value = 1;
     open_dialog.value = true;
 };
-const eliminarUsuario = (item) => {
+const eliminarUnidadArea = (item) => {
     Swal.fire({
         title: "¿Quierés eliminar este registro?",
-        html: `<strong>${item.full_name}</strong>`,
+        html: `<strong>${item.nombre}</strong>`,
         showCancelButton: true,
         confirmButtonColor: "#B61431",
         confirmButtonText: "Si, eliminar",
@@ -120,16 +120,16 @@ const eliminarUsuario = (item) => {
     }).then(async (result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            let respuesta = await deleteUsuario(item.id);
+            let respuesta = await deleteUnidadArea(item.id);
             if (respuesta && respuesta.sw) {
-                recargaUsuarios();
+                recargaUnidadAreas();
             }
         }
     });
 };
 </script>
 <template>
-    <Head title="Usuarios"></Head>
+    <Head title="Unidades/Áreas"></Head>
     <v-container>
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
         <v-row class="mt-0">
@@ -148,7 +148,9 @@ const eliminarUsuario = (item) => {
                 <v-card flat>
                     <v-card-title>
                         <v-row class="bg-blue d-flex align-center pa-3">
-                            <v-col cols="12" sm="6" md="4"> Usuarios </v-col>
+                            <v-col cols="12" sm="6" md="4">
+                                Unidades/Áreas
+                            </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field
                                     v-model="search"
@@ -167,7 +169,7 @@ const eliminarUsuario = (item) => {
                             :headers="!mobile ? headers : []"
                             :class="[mobile ? 'mobile' : '']"
                             :items-length="totalItems"
-                            :items="listUsuarios"
+                            :items="listUnidadAreas"
                             :loading="loading"
                             :search="search"
                             @update:options="loadItems"
@@ -190,65 +192,26 @@ const eliminarUsuario = (item) => {
                             <template v-slot:item="{ item }">
                                 <tr v-if="!mobile">
                                     <td>{{ item.id }}</td>
-                                    <td>{{ item.usuario }}</td>
-                                    <td class="text-xs-right">
-                                        {{ item.full_name }}
-                                    </td>
-                                    <td>{{ item.full_ci }}</td>
-                                    <td>{{ item.dir }}</td>
-                                    <td>{{ item.email }}</td>
-                                    <td>{{ item.fono }}</td>
+                                    <td>{{ item.nombre }}</td>
+                                    <td>{{ item.descripcion }}</td>
+                                    <td>{{ item.user.full_name }}</td>
+                                    <td>{{ item.ubicacion }}</td>
                                     <td>
-                                        <v-avatar color="blue">
-                                            <v-img
-                                                v-if="item.url_foto"
-                                                :src="item.url_foto"
-                                                cover
-                                                :lazy-src="item.url_foto"
-                                            ></v-img>
-                                            <span v-else>{{
-                                                item.iniciales_nombre
-                                            }}</span>
-                                        </v-avatar>
-                                    </td>
-                                    <td class="text-xs-right">
-                                        {{ item.tipo }}
-                                    </td>
-                                    <td>
-                                        <v-chip
-                                            :color="
-                                                item.acceso == 1
-                                                    ? 'success'
-                                                    : 'error'
-                                            "
-                                            :prepend-icon="
-                                                item.acceso == 1
-                                                    ? 'mdi-check'
-                                                    : 'mdi-lock'
-                                            "
-                                        >
-                                            <span
-                                                v-text="
-                                                    item.acceso == 1
-                                                        ? 'Habilitado'
-                                                        : 'Denegado'
-                                                "
-                                            ></span>
-                                        </v-chip>
+                                        {{ item.fecha_registro_t }}
                                     </td>
                                     <td class="text-right">
                                         <v-btn
                                             color="yellow"
                                             size="small"
                                             class="pa-1 ma-1"
-                                            @click="editarUsuario(item)"
+                                            @click="editarUnidadArea(item)"
                                             icon="mdi-pencil"
                                         ></v-btn>
                                         <v-btn
                                             color="error"
                                             size="small"
                                             class="pa-1 ma-1"
-                                            @click="eliminarUsuario(item)"
+                                            @click="eliminarUnidadArea(item)"
                                             icon="mdi-trash-can"
                                         ></v-btn>
                                     </td>
@@ -264,88 +227,33 @@ const eliminarUsuario = (item) => {
                                             </li>
                                             <li
                                                 class="flex-item"
-                                                data-label="Usuario"
-                                            >
-                                                {{ item.usuario }}
-                                            </li>
-                                            <li
-                                                class="flex-item"
                                                 data-label="Nombre"
                                             >
-                                                {{ item.full_name }}
+                                                {{ item.nombre }}
                                             </li>
                                             <li
                                                 class="flex-item"
-                                                data-label="C.I:"
+                                                data-label="Descripción"
                                             >
-                                                {{ item.full_ci }}
+                                                {{ item.descripcion }}
                                             </li>
                                             <li
                                                 class="flex-item"
-                                                data-label="Dirección"
+                                                data-label="Responsable"
                                             >
-                                                {{ item.dir }}
+                                                {{ item.user.full_name }}
                                             </li>
                                             <li
                                                 class="flex-item"
-                                                data-label="Correo"
+                                                data-label="Ubicación Área"
                                             >
-                                                {{ item.email }}
+                                                {{ item.ubicacion }}
                                             </li>
                                             <li
                                                 class="flex-item"
-                                                data-label="Teléfono/Celular"
+                                                data-label="Fecha de Registro"
                                             >
-                                                {{ item.fono }}
-                                            </li>
-                                            <li
-                                                class="flex-item"
-                                                data-label="Foto"
-                                            >
-                                                <v-avatar color="blue">
-                                                    <v-img
-                                                        v-if="item.url_foto"
-                                                        :src="item.url_foto"
-                                                        cover
-                                                        :lazy-src="
-                                                            item.url_foto
-                                                        "
-                                                    ></v-img>
-                                                    <span v-else>{{
-                                                        item.iniciales_nombre
-                                                    }}</span>
-                                                </v-avatar>
-                                            </li>
-                                            <li
-                                                class="flex-item"
-                                                data-label="Tipo"
-                                            >
-                                                {{ item.tipo }}
-                                            </li>
-                                            <li
-                                                class="flex-item"
-                                                data-label="Acceso"
-                                            >
-                                                <v-chip
-                                                    :color="
-                                                        item.acceso == 1
-                                                            ? 'success'
-                                                            : 'error'
-                                                    "
-                                                    :prepend-icon="
-                                                        item.acceso == 1
-                                                            ? 'mdi-check'
-                                                            : 'mdi-lock'
-                                                    "
-                                                >
-                                                    <span
-                                                        v-text="
-                                                            item.acceso == 1
-                                                                ? 'Habilitado'
-                                                                : 'Denegado'
-                                                        "
-                                                    ></span>
-                                                </v-chip>
+                                                {{ item.fecha_registro_t }}
                                             </li>
                                         </ul>
                                         <v-row>
@@ -357,7 +265,9 @@ const eliminarUsuario = (item) => {
                                                     color="yellow"
                                                     size="small"
                                                     class="pa-1 ma-1"
-                                                    @click="editarUsuario(item)"
+                                                    @click="
+                                                        editarUnidadArea(item)
+                                                    "
                                                     icon="mdi-pencil"
                                                 ></v-btn>
                                                 <v-btn
@@ -365,7 +275,7 @@ const eliminarUsuario = (item) => {
                                                     size="small"
                                                     class="pa-1 ma-1"
                                                     @click="
-                                                        eliminarUsuario(item)
+                                                        eliminarUnidadArea(item)
                                                     "
                                                     icon="mdi-trash-can"
                                                 ></v-btn>
@@ -382,7 +292,7 @@ const eliminarUsuario = (item) => {
         <Formulario
             :open_dialog="open_dialog"
             :accion_dialog="accion_dialog"
-            @envio-formulario="recargaUsuarios"
+            @envio-formulario="recargaUnidadAreas"
             @cerrar-dialog="open_dialog = false"
         ></Formulario>
     </v-container>

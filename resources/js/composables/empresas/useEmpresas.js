@@ -2,30 +2,27 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 import { usePage } from "@inertiajs/vue3";
 
-const oUsuario = ref({
+const oEmpresa = ref({
     id: 0,
     nombre: "",
-    paterno: "",
-    materno: "",
-    ci: "",
-    ci_exp: "",
-    dir: "",
-    email: "",
+    nit: "",
     fono: "",
-    tipo: "",
-    foto: "",
-    acceso: 0 + "",
+    fecha_ini: "",
+    fecha_fin: "",
+    correo: "",
+    dir: "",
+    logo: "",
     _method: "POST",
 });
 
-export const useUsuarios = () => {
+export const useEmpresas = () => {
     const { flash } = usePage().props;
-    const getUsuarios = async () => {
+    const getEmpresas = async () => {
         try {
-            const response = await axios.get(route("usuarios.listado"), {
+            const response = await axios.get(route("empresas.listado"), {
                 headers: { Accept: "application/json" },
             });
-            return response.data.usuarios;
+            return response.data.empresas;
         } catch (err) {
             Swal.fire({
                 icon: "info",
@@ -45,15 +42,15 @@ export const useUsuarios = () => {
         }
     };
 
-    const getUsuariosByTipo = async (tipo) => {
+    const getEmpresasByTipo = async (tipo) => {
         try {
-            const response = await axios.get(route("usuarios.byTipo"), {
+            const response = await axios.get(route("empresas.byTipo"), {
                 headers: { Accept: "application/json" },
                 params: {
                     tipo,
                 },
             });
-            return response.data.usuarios;
+            return response.data.empresas;
         } catch (error) {
             console.error("Error:", error);
             throw error; // Puedes manejar el error según tus necesidades
@@ -62,14 +59,14 @@ export const useUsuarios = () => {
 
     const getItemsForSelect = async (tipo = "") => {
         try {
-            const response = await axios.get(route("usuarios.byTipo"), {
+            const response = await axios.get(route("empresas.byTipo"), {
                 headers: { Accept: "application/json" },
                 params: {
                     tipo,
                 },
             });
 
-            let listItems = response.data.usuarios;
+            let listItems = response.data.empresas;
             let listSelect = [];
             listItems.forEach((elem) => {
                 listSelect.push({
@@ -84,12 +81,12 @@ export const useUsuarios = () => {
         }
     };
 
-    const getUsuariosApi = async (data) => {
+    const getEmpresasApi = async (data) => {
         try {
-            const response = await axios.get(route("usuarios.paginado", data), {
+            const response = await axios.get(route("empresas.paginado", data), {
                 headers: { Accept: "application/json" },
             });
-            return response.data.usuarios;
+            return response.data.empresas;
         } catch (err) {
             Swal.fire({
                 icon: "info",
@@ -108,9 +105,9 @@ export const useUsuarios = () => {
             throw err; // Puedes manejar el error según tus necesidades
         }
     };
-    const saveUsuario = async (data) => {
+    const saveEmpresa = async (data) => {
         try {
-            const response = await axios.post(route("usuarios.store", data), {
+            const response = await axios.post(route("empresas.store", data), {
                 headers: { Accept: "application/json" },
             });
             Swal.fire({
@@ -140,9 +137,9 @@ export const useUsuarios = () => {
         }
     };
 
-    const deleteUsuario = async (id) => {
+    const deleteEmpresa = async (id) => {
         try {
-            const response = await axios.delete(route("usuarios.destroy", id), {
+            const response = await axios.delete(route("empresas.destroy", id), {
                 headers: { Accept: "application/json" },
             });
             Swal.fire({
@@ -172,53 +169,46 @@ export const useUsuarios = () => {
         }
     };
 
-    const setUsuario = (item = null) => {
+    const setEmpresa = (item = null) => {
         if (item) {
-            oUsuario.value.id = item.id;
-            oUsuario.value.nombre = item.nombre;
-            oUsuario.value.paterno = item.paterno;
-            oUsuario.value.materno = item.materno;
-            oUsuario.value.ci = item.ci;
-            oUsuario.value.ci_exp = item.ci_exp;
-            oUsuario.value.dir = item.dir;
-            oUsuario.value.email = item.email;
-            oUsuario.value.fono = item.fono;
-            oUsuario.value.tipo = item.tipo;
-            oUsuario.value.foto = item.foto;
-            oUsuario.value.acceso = item.acceso + "";
-            oUsuario.value._method = "PUT";
-            return oUsuario;
+            oEmpresa.value.id = item.id;
+            oEmpresa.value.nombre = item.nombre;
+            oEmpresa.value.nit = item.nit;
+            oEmpresa.value.fono = item.fono;
+            oEmpresa.value.fecha_ini = item.fecha_ini;
+            oEmpresa.value.fecha_fin = item.fecha_fin;
+            oEmpresa.value.correo = item.correo;
+            oEmpresa.value.dir = item.dir;
+            oEmpresa.value._method = "PUT";
+            return oEmpresa;
         }
         return false;
     };
 
-    const limpiarUsuario = () => {
-        oUsuario.value.id = 0;
-        oUsuario.value.nombre = "";
-        oUsuario.value.paterno = "";
-        oUsuario.value.materno = "";
-        oUsuario.value.ci = "";
-        oUsuario.value.ci_exp = "";
-        oUsuario.value.dir = "";
-        oUsuario.value.email = "";
-        oUsuario.value.fono = "";
-        oUsuario.value.tipo = "";
-        oUsuario.value.foto = "";
-        oUsuario.value.acceso = 0 + "";
-        oUsuario.value._method = "POST";
+    const limpiarEmpresa = () => {
+        oEmpresa.value.id = 0;
+        oEmpresa.value.nombre = "";
+        oEmpresa.value.nit = "";
+        oEmpresa.value.fono = "";
+        oEmpresa.value.fecha_ini = "";
+        oEmpresa.value.fecha_fin = "";
+        oEmpresa.value.correo = "";
+        oEmpresa.value.dir = "";
+        oEmpresa.value.logo = "";
+        oEmpresa.value._method = "POST";
     };
 
     onMounted(() => {});
 
     return {
-        oUsuario,
-        getUsuarios,
-        getUsuariosApi,
-        saveUsuario,
-        deleteUsuario,
-        setUsuario,
-        limpiarUsuario,
-        getUsuariosByTipo,
+        oEmpresa,
+        getEmpresas,
+        getEmpresasApi,
+        saveEmpresa,
+        deleteEmpresa,
+        setEmpresa,
+        limpiarEmpresa,
+        getEmpresasByTipo,
         getItemsForSelect,
     };
 };

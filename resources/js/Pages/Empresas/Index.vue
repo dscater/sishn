@@ -7,7 +7,7 @@ const breadbrums = [
         name_url: "inicio",
     },
     {
-        title: "Usuarios",
+        title: "Empresas",
         disabled: false,
         url: "",
         name_url: "",
@@ -18,7 +18,7 @@ const breadbrums = [
 import BreadBrums from "@/Components/BreadBrums.vue";
 import { useApp } from "@/composables/useApp";
 import { Head } from "@inertiajs/vue3";
-import { useUsuarios } from "@/composables/usuarios/useUsuarios";
+import { useEmpresas } from "@/composables/empresas/useEmpresas";
 import { ref, onMounted } from "vue";
 import { useMenu } from "@/composables/useMenu";
 import Formulario from "./Formulario.vue";
@@ -31,10 +31,10 @@ onMounted(() => {
     }, 300);
 });
 
-const { getUsuariosApi, setUsuario, limpiarUsuario, deleteUsuario } =
-    useUsuarios();
-const responseUsuarios = ref([]);
-const listUsuarios = ref([]);
+const { getEmpresasApi, setEmpresa, limpiarEmpresa, deleteEmpresa } =
+    useEmpresas();
+const responseEmpresas = ref([]);
+const listEmpresas = ref([]);
 const itemsPerPage = ref(5);
 const headers = ref([
     {
@@ -43,15 +43,15 @@ const headers = ref([
         sortable: true,
         key: "id",
     },
-    { title: "Usuario", key: "usuario", align: "start" },
-    { title: "Nombre", key: "full_name", align: "start" },
-    { title: "C.I.", key: "full_ci", align: "start" },
-    { title: "Dirección", key: "dir", align: "start" },
-    { title: "Correo", key: "email", align: "start" },
-    { title: "Teléfono/Celular", key: "fono", align: "start" },
-    { title: "Foto", key: "foto", align: "start", sortable: false },
-    { title: "Tipo", key: "tipo", align: "start" },
-    { title: "Acceso", key: "acceso", align: "start" },
+    { title: "Nombre Empresa", key: "nombre", align: "start" },
+    { title: "Nit", key: "nit", align: "start" },
+    { title: "Teléfono", key: "fono", align: "start" },
+    { title: "Fecha Inicio", key: "fecha_ini_t", align: "start" },
+    { title: "Fecha Fin", key: "fecha_fin_t", align: "start" },
+    { title: "Correo", key: "correo", align: "start" },
+    { title: "Dirección", key: "dir", align: "start", sortable: false },
+    { title: "Logo", key: "logo", align: "start" },
+    { title: "Fecha Registro", key: "fecha_registro_t", align: "start" },
     { title: "Acción", key: "accion", align: "end", sortable: false },
 ]);
 
@@ -78,19 +78,19 @@ const loadItems = async ({ page, itemsPerPage, sortBy }) => {
 
     clearInterval(setTimeOutLoadData);
     setTimeOutLoadData = setTimeout(async () => {
-        responseUsuarios.value = await getUsuariosApi(options.value);
-        listUsuarios.value = responseUsuarios.value.data;
-        totalItems.value = parseInt(responseUsuarios.value.total);
+        responseEmpresas.value = await getEmpresasApi(options.value);
+        listEmpresas.value = responseEmpresas.value.data;
+        totalItems.value = parseInt(responseEmpresas.value.total);
         loading.value = false;
     }, 300);
 };
-const recargaUsuarios = async () => {
+const recargaEmpresas = async () => {
     loading.value = true;
-    listUsuarios.value = [];
+    listEmpresas.value = [];
     options.value.search = search.value;
-    responseUsuarios.value = await getUsuariosApi(options.value);
-    listUsuarios.value = responseUsuarios.value.data;
-    totalItems.value = parseInt(responseUsuarios.value.total);
+    responseEmpresas.value = await getEmpresasApi(options.value);
+    listEmpresas.value = responseEmpresas.value.data;
+    totalItems.value = parseInt(responseEmpresas.value.total);
     setTimeout(() => {
         loading.value = false;
         open_dialog.value = false;
@@ -99,19 +99,19 @@ const recargaUsuarios = async () => {
 const accion_dialog = ref(0);
 const open_dialog = ref(false);
 const agregarRegistro = () => {
-    limpiarUsuario();
+    limpiarEmpresa();
     accion_dialog.value = 0;
     open_dialog.value = true;
 };
-const editarUsuario = (item) => {
-    setUsuario(item);
+const editarEmpresa = (item) => {
+    setEmpresa(item);
     accion_dialog.value = 1;
     open_dialog.value = true;
 };
-const eliminarUsuario = (item) => {
+const eliminarEmpresa = (item) => {
     Swal.fire({
         title: "¿Quierés eliminar este registro?",
-        html: `<strong>${item.full_name}</strong>`,
+        html: `<strong>${item.nombre}</strong>`,
         showCancelButton: true,
         confirmButtonColor: "#B61431",
         confirmButtonText: "Si, eliminar",
@@ -120,16 +120,16 @@ const eliminarUsuario = (item) => {
     }).then(async (result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            let respuesta = await deleteUsuario(item.id);
+            let respuesta = await deleteEmpresa(item.id);
             if (respuesta && respuesta.sw) {
-                recargaUsuarios();
+                recargaEmpresas();
             }
         }
     });
 };
 </script>
 <template>
-    <Head title="Usuarios"></Head>
+    <Head title="Empresas"></Head>
     <v-container>
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
         <v-row class="mt-0">
@@ -148,7 +148,7 @@ const eliminarUsuario = (item) => {
                 <v-card flat>
                     <v-card-title>
                         <v-row class="bg-blue d-flex align-center pa-3">
-                            <v-col cols="12" sm="6" md="4"> Usuarios </v-col>
+                            <v-col cols="12" sm="6" md="4"> Empresas </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field
                                     v-model="search"
@@ -167,7 +167,7 @@ const eliminarUsuario = (item) => {
                             :headers="!mobile ? headers : []"
                             :class="[mobile ? 'mobile' : '']"
                             :items-length="totalItems"
-                            :items="listUsuarios"
+                            :items="listEmpresas"
                             :loading="loading"
                             :search="search"
                             @update:options="loadItems"
@@ -190,65 +190,46 @@ const eliminarUsuario = (item) => {
                             <template v-slot:item="{ item }">
                                 <tr v-if="!mobile">
                                     <td>{{ item.id }}</td>
-                                    <td>{{ item.usuario }}</td>
-                                    <td class="text-xs-right">
-                                        {{ item.full_name }}
-                                    </td>
-                                    <td>{{ item.full_ci }}</td>
-                                    <td>{{ item.dir }}</td>
-                                    <td>{{ item.email }}</td>
+                                    <td>{{ item.nombre }}</td>
+                                    <td>{{ item.nit }}</td>
                                     <td>{{ item.fono }}</td>
+                                    <td>{{ item.fecha_ini_t }}</td>
+                                    <td>{{ item.fecha_fin_t }}</td>
+                                    <td>{{ item.correo }}</td>
+                                    <td>{{ item.dir }}</td>
                                     <td>
-                                        <v-avatar color="blue">
+                                        <v-card
+                                            class="my-2"
+                                            elevation="2"
+                                            rounded
+                                            v-if="item.url_logo"
+                                        >
                                             <v-img
-                                                v-if="item.url_foto"
-                                                :src="item.url_foto"
+                                                :src="item.url_logo"
+                                                height="64"
                                                 cover
-                                                :lazy-src="item.url_foto"
                                             ></v-img>
-                                            <span v-else>{{
+                                        </v-card>
+                                        <v-avatar v-else color="blue" size="45">
+                                            <span class="text-body-1">{{
                                                 item.iniciales_nombre
                                             }}</span>
                                         </v-avatar>
                                     </td>
-                                    <td class="text-xs-right">
-                                        {{ item.tipo }}
-                                    </td>
-                                    <td>
-                                        <v-chip
-                                            :color="
-                                                item.acceso == 1
-                                                    ? 'success'
-                                                    : 'error'
-                                            "
-                                            :prepend-icon="
-                                                item.acceso == 1
-                                                    ? 'mdi-check'
-                                                    : 'mdi-lock'
-                                            "
-                                        >
-                                            <span
-                                                v-text="
-                                                    item.acceso == 1
-                                                        ? 'Habilitado'
-                                                        : 'Denegado'
-                                                "
-                                            ></span>
-                                        </v-chip>
-                                    </td>
+                                    <td>{{ item.fecha_registro_t }}</td>
                                     <td class="text-right">
                                         <v-btn
                                             color="yellow"
                                             size="small"
                                             class="pa-1 ma-1"
-                                            @click="editarUsuario(item)"
+                                            @click="editarEmpresa(item)"
                                             icon="mdi-pencil"
                                         ></v-btn>
                                         <v-btn
                                             color="error"
                                             size="small"
                                             class="pa-1 ma-1"
-                                            @click="eliminarUsuario(item)"
+                                            @click="eliminarEmpresa(item)"
                                             icon="mdi-trash-can"
                                         ></v-btn>
                                     </td>
@@ -264,21 +245,39 @@ const eliminarUsuario = (item) => {
                                             </li>
                                             <li
                                                 class="flex-item"
-                                                data-label="Usuario"
+                                                data-label="Nombre Empresa"
                                             >
-                                                {{ item.usuario }}
+                                                {{ item.nombre }}
                                             </li>
                                             <li
                                                 class="flex-item"
-                                                data-label="Nombre"
+                                                data-label="Nit"
                                             >
-                                                {{ item.full_name }}
+                                                {{ item.nit }}
                                             </li>
                                             <li
                                                 class="flex-item"
-                                                data-label="C.I:"
+                                                data-label="Teléfono"
                                             >
-                                                {{ item.full_ci }}
+                                                {{ item.fono }}
+                                            </li>
+                                            <li
+                                                class="flex-item"
+                                                data-label="Fecha Inicio"
+                                            >
+                                                {{ item.fecha_ini_t }}
+                                            </li>
+                                            <li
+                                                class="flex-item"
+                                                data-label="Fecha Fin"
+                                            >
+                                                {{ item.fecha_fin_t }}
+                                            </li>
+                                            <li
+                                                class="flex-item"
+                                                data-label="Correo"
+                                            >
+                                                {{ item.correo }}
                                             </li>
                                             <li
                                                 class="flex-item"
@@ -288,64 +287,15 @@ const eliminarUsuario = (item) => {
                                             </li>
                                             <li
                                                 class="flex-item"
-                                                data-label="Correo"
-                                            >
-                                                {{ item.email }}
-                                            </li>
-                                            <li
-                                                class="flex-item"
-                                                data-label="Teléfono/Celular"
-                                            >
-                                                {{ item.fono }}
-                                            </li>
-                                            <li
-                                                class="flex-item"
-                                                data-label="Foto"
-                                            >
-                                                <v-avatar color="blue">
-                                                    <v-img
-                                                        v-if="item.url_foto"
-                                                        :src="item.url_foto"
-                                                        cover
-                                                        :lazy-src="
-                                                            item.url_foto
-                                                        "
-                                                    ></v-img>
-                                                    <span v-else>{{
-                                                        item.iniciales_nombre
-                                                    }}</span>
-                                                </v-avatar>
-                                            </li>
-                                            <li
-                                                class="flex-item"
                                                 data-label="Tipo"
                                             >
-                                                {{ item.tipo }}
+                                                {{ item.logo }}
                                             </li>
                                             <li
                                                 class="flex-item"
-                                                data-label="Acceso"
+                                                data-label="Fecha Registro"
                                             >
-                                                <v-chip
-                                                    :color="
-                                                        item.acceso == 1
-                                                            ? 'success'
-                                                            : 'error'
-                                                    "
-                                                    :prepend-icon="
-                                                        item.acceso == 1
-                                                            ? 'mdi-check'
-                                                            : 'mdi-lock'
-                                                    "
-                                                >
-                                                    <span
-                                                        v-text="
-                                                            item.acceso == 1
-                                                                ? 'Habilitado'
-                                                                : 'Denegado'
-                                                        "
-                                                    ></span>
-                                                </v-chip>
+                                                {{ item.fecha_registro_t }}
                                             </li>
                                         </ul>
                                         <v-row>
@@ -357,7 +307,7 @@ const eliminarUsuario = (item) => {
                                                     color="yellow"
                                                     size="small"
                                                     class="pa-1 ma-1"
-                                                    @click="editarUsuario(item)"
+                                                    @click="editarEmpresa(item)"
                                                     icon="mdi-pencil"
                                                 ></v-btn>
                                                 <v-btn
@@ -365,7 +315,7 @@ const eliminarUsuario = (item) => {
                                                     size="small"
                                                     class="pa-1 ma-1"
                                                     @click="
-                                                        eliminarUsuario(item)
+                                                        eliminarEmpresa(item)
                                                     "
                                                     icon="mdi-trash-can"
                                                 ></v-btn>
@@ -382,7 +332,7 @@ const eliminarUsuario = (item) => {
         <Formulario
             :open_dialog="open_dialog"
             :accion_dialog="accion_dialog"
-            @envio-formulario="recargaUsuarios"
+            @envio-formulario="recargaEmpresas"
             @cerrar-dialog="open_dialog = false"
         ></Formulario>
     </v-container>

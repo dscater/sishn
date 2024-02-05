@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("nit", 255)->nullable();
             $table->string("fono", 255)->nullable();
             $table->date("fecha_ini", 255)->nullable();
+            $table->date("fecha_fin", 255)->nullable();
             $table->string("correo", 255)->nullable();
             $table->string("dir", 255)->nullable();
             $table->string("logo", 255)->nullable();

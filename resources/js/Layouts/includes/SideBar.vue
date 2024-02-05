@@ -141,6 +141,39 @@ const scrollActive = () => {
                 >
                 <span v-else>ADMINISTRACIÓN</span></v-list-item
             >
+            <v-list-item
+                :class="[route_current == 'empresas.index' ? 'active' : '']"
+                v-if="oUser.permisos.includes('empresas.index')"
+                prepend-icon="mdi-list-box"
+                @click="cambiarUrl(route('empresas.index'))"
+                link
+            >
+                <v-list-item-title>Empresas</v-list-item-title>
+                <v-tooltip
+                    v-if="rail && !mobile"
+                    color="white"
+                    activator="parent"
+                    location="end"
+                    >Empresas</v-tooltip
+                >
+            </v-list-item>
+            
+            <v-list-item
+                :class="[route_current == 'unidad_areas.index' ? 'active' : '']"
+                v-if="oUser.permisos.includes('unidad_areas.index')"
+                prepend-icon="mdi-list-box"
+                @click="cambiarUrl(route('unidad_areas.index'))"
+                link
+            >
+                <v-list-item-title>Unidades/Áreas</v-list-item-title>
+                <v-tooltip
+                    v-if="rail && !mobile"
+                    color="white"
+                    activator="parent"
+                    location="end"
+                    >Unidades/Áreas</v-tooltip
+                >
+            </v-list-item>
 
             <v-list-item
                 :class="[route_current == 'usuarios.index' ? 'active' : '']"
