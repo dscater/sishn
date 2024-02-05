@@ -135,7 +135,7 @@ const enviaFormulario = () => {
                         <v-container>
                             <v-row>
                                 <v-col cols="12 text-center">
-                                    <v-avatar color="blue-darken-3" size="80">
+                                    <v-avatar color="grey-darken-3" size="80">
                                         <v-img
                                             cover
                                             v-if="user.url_foto"
@@ -186,46 +186,46 @@ const enviaFormulario = () => {
                             <v-row>
                                 <v-col cols="12">
                                     <v-row>
-                                        <v-col cols="4" class="text-right"
+                                        <v-col cols="4" class="text-right font-weight-black text-caption d-flex align-center justify-end"
                                             >Nombre:
                                         </v-col>
-                                        <v-col cols="8">{{
+                                        <v-col cols="8" class="text-body-1">{{
                                             user.full_name
                                         }}</v-col>
                                     </v-row>
                                     <v-row>
-                                        <v-col cols="4" class="text-right"
+                                        <v-col cols="4" class="text-right font-weight-black text-caption d-flex align-center justify-end"
                                             >C.I.:
                                         </v-col>
-                                        <v-col cols="8">{{
+                                        <v-col cols="8" class="text-body-1">{{
                                             user.full_ci
                                         }}</v-col>
                                     </v-row>
                                     <v-row>
-                                        <v-col cols="4" class="text-right"
+                                        <v-col cols="4" class="text-right font-weight-black text-caption d-flex align-center justify-end"
                                             >Dirección:
                                         </v-col>
-                                        <v-col cols="8">{{ user.dir }}</v-col>
+                                        <v-col cols="8" class="text-body-1">{{ user.dir }}</v-col>
                                     </v-row>
                                     <v-row>
-                                        <v-col cols="4" class="text-right"
+                                        <v-col cols="4" class="text-right font-weight-black text-caption d-flex align-center justify-end"
                                             >Correo:
                                         </v-col>
-                                        <v-col cols="8">{{
+                                        <v-col cols="8" class="text-body-1">{{
                                             user.correo
                                         }}</v-col>
                                     </v-row>
                                     <v-row>
-                                        <v-col cols="4" class="text-right"
+                                        <v-col cols="4" class="text-right font-weight-black text-caption d-flex align-center justify-end"
                                             >Teléfono/Celular:
                                         </v-col>
-                                        <v-col cols="8">{{ user.fono }}</v-col>
+                                        <v-col cols="8" class="text-body-1">{{ user.fono }}</v-col>
                                     </v-row>
                                     <v-row>
-                                        <v-col cols="4" class="text-right"
+                                        <v-col cols="4" class="text-right font-weight-black text-caption d-flex align-center justify-end"
                                             >Fecha Registro:
                                         </v-col>
-                                        <v-col cols="8">{{
+                                        <v-col cols="8" class="text-body-1">{{
                                             user.fecha_registro_t
                                         }}</v-col>
                                     </v-row>
@@ -236,9 +236,9 @@ const enviaFormulario = () => {
                 </v-card>
             </v-col>
             <v-col cols="12" sm="12" md="8">
-                <v-card class="pa-3">
-                    <v-card-title>Cambiar contraseña </v-card-title>
-                    <v-card-item>
+                <v-card>
+                    <v-card-title class="bg-grey-darken-3 ma-0">Cambiar contraseña </v-card-title>
+                    <v-card-item class="px-8">
                         <form>
                             <v-row class="mt-2">
                                 <v-col cols="12">
@@ -321,8 +321,8 @@ const enviaFormulario = () => {
                             </v-row>
                         </form>
                     </v-card-item>
-                    <v-card-actions>
-                        <v-btn class="bg-blue" @click="enviaFormulario"
+                    <v-card-actions class="px-7 pb-3">
+                        <v-btn class="bg-yellow-lighten-1" @click="enviaFormulario"
                             >Guardar cambios</v-btn
                         >
                     </v-card-actions>

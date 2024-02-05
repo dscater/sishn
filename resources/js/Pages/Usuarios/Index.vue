@@ -135,7 +135,7 @@ const eliminarUsuario = (item) => {
         <v-row class="mt-0">
             <v-col cols="12" class="d-flex justify-end">
                 <v-btn
-                    color="blue"
+                    color="yellow-lighten-1"
                     prepend-icon="mdi-plus"
                     @click="agregarRegistro"
                 >
@@ -147,7 +147,7 @@ const eliminarUsuario = (item) => {
             <v-col cols="12">
                 <v-card flat>
                     <v-card-title>
-                        <v-row class="bg-blue d-flex align-center pa-3">
+                        <v-row class="bg-grey-darken-3 d-flex align-center pa-3">
                             <v-col cols="12" sm="6" md="4"> Usuarios </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field

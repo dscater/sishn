@@ -82,14 +82,15 @@ const scrollActive = () => {
         class="border-0 elevation-2 __sidebar"
         :width="width"
         id="sidebar"
+        color="grey-darken-4"
     >
         <v-sheet>
             <div
-                class="w-100 d-flex flex-column align-center elevation-1 bg-blue pa-2 __info_usuario"
+                class="w-100 d-flex flex-column align-center elevation-1 bg-yellow-lighten-1 pa-2 __info_usuario"
             >
                 <v-avatar
                     class="mb-1"
-                    color="blue-darken-3"
+                    color="grey-darken-3"
                     :size="`${!rail ? '64' : '32'}`"
                 >
                     <v-img

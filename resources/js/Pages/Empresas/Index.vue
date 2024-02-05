@@ -135,7 +135,7 @@ const eliminarEmpresa = (item) => {
         <v-row class="mt-0">
             <v-col cols="12" class="d-flex justify-end">
                 <v-btn
-                    color="blue"
+                    color="yellow-lighten-1"
                     prepend-icon="mdi-plus"
                     @click="agregarRegistro"
                 >
@@ -147,7 +147,7 @@ const eliminarEmpresa = (item) => {
             <v-col cols="12">
                 <v-card flat>
                     <v-card-title>
-                        <v-row class="bg-blue d-flex align-center pa-3">
+                        <v-row class="bg-grey-darken-3 d-flex align-center pa-3">
                             <v-col cols="12" sm="6" md="4"> Empresas </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field
@@ -210,7 +210,7 @@ const eliminarEmpresa = (item) => {
                                                 cover
                                             ></v-img>
                                         </v-card>
-                                        <v-avatar v-else color="blue" size="45">
+                                        <v-avatar v-else color="yellow-lighten-1" size="45">
                                             <span class="text-body-1">{{
                                                 item.iniciales_nombre
                                             }}</span>

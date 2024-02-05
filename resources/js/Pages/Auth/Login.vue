@@ -65,7 +65,12 @@ onMounted(() => {
                                 :src="url_asset + '/imgs/lateral.jpg'"
                             ></v-img>
                         </v-col>
-                        <v-col cols="12" sm="12" md="6" xl="6" class="border">
+                        <v-col
+                            cols="12"
+                            sm="12"
+                            md="6"
+                            xl="6"
+                        >
                             <v-card-text>
                                 <v-img
                                     :src="oInstitucion.url_logo"
@@ -101,6 +106,11 @@ onMounted(() => {
 
                                             <v-text-field
                                                 density="compact"
+                                                :hide-details="
+                                                    form.errors?.usuario
+                                                        ? false
+                                                        : true
+                                                "
                                                 :error="
                                                     form.errors?.usuario
                                                         ? true
@@ -114,7 +124,8 @@ onMounted(() => {
                                                 placeholder="Ingresa tu usuario"
                                                 prepend-inner-icon="mdi-account"
                                                 variant="outlined"
-                                                color="blue"
+                                                color="grey-darken-4"
+                                                class="mb-3"
                                                 autocomplete="false"
                                                 v-model="form.usuario"
                                                 autofocus=""
@@ -137,6 +148,11 @@ onMounted(() => {
                                                         ? 'text'
                                                         : 'password'
                                                 "
+                                                :hide-details="
+                                                    form.errors?.password
+                                                        ? false
+                                                        : true
+                                                "
                                                 :error="
                                                     form.errors?.password
                                                         ? true
@@ -151,7 +167,7 @@ onMounted(() => {
                                                 placeholder="Ingresa tu contraseña"
                                                 prepend-inner-icon="mdi-lock-outline"
                                                 variant="outlined"
-                                                color="blue"
+                                                color="grey-darken-4"
                                                 @click:append-inner="
                                                     visible = !visible
                                                 "
@@ -159,10 +175,10 @@ onMounted(() => {
                                                 v-model="form.password"
                                             ></v-text-field>
                                             <v-btn
-                                                class="mt-2"
+                                                class="mt-4"
                                                 elevation="4"
                                                 rounded="0"
-                                                color="blue"
+                                                color="yellow-lighten-1"
                                                 dark
                                                 block
                                                 type="submit"
@@ -182,7 +198,7 @@ onMounted(() => {
 
 <style scoped>
 .v-container {
-    background-color: var(--secundario);
+    background-color: var(--dark);
     display: flex;
     justify-content: center;
     align-items: center;
