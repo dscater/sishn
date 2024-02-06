@@ -120,7 +120,7 @@ const eliminarRepuesto = (item) => {
 };
 </script>
 <template>
-    <Head title="Unidades/Áreas"></Head>
+    <Head title="Repuestos"></Head>
     <v-container>
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
         <v-row class="mt-0">
@@ -142,7 +142,7 @@ const eliminarRepuesto = (item) => {
                             class="bg-grey-darken-3 d-flex align-center pa-3"
                         >
                             <v-col cols="12" sm="6" md="4">
-                                Unidades/Áreas
+                                Repuestos
                             </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field

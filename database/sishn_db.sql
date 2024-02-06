@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 06-02-2024 a las 17:00:00
+-- Tiempo de generación: 06-02-2024 a las 17:03:20
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -142,7 +142,8 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (31, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>nombre: REPUESTO #1<br/>created_at: 2024-02-06 12:57:55<br/>updated_at: 2024-02-06 12:57:55<br/>', 'id: 1<br/>nombre: REPUESTO #1ASD<br/>created_at: 2024-02-06 12:57:55<br/>updated_at: 2024-02-06 12:58:46<br/>', 'REPUESTOS', '2024-02-06', '12:58:46', '2024-02-06 16:58:46', '2024-02-06 16:58:46'),
 (32, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN REPUESTO', 'id: 1<br/>nombre: REPUESTO #1ASD<br/>created_at: 2024-02-06 12:57:55<br/>updated_at: 2024-02-06 12:58:46<br/>', NULL, 'REPUESTOS', '2024-02-06', '12:58:55', '2024-02-06 16:58:55', '2024-02-06 16:58:55'),
 (33, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 1<br/>nombre: REPUESTO #1<br/>created_at: 2024-02-06 12:59:34<br/>updated_at: 2024-02-06 12:59:34<br/>', NULL, 'REPUESTOS', '2024-02-06', '12:59:34', '2024-02-06 16:59:34', '2024-02-06 16:59:34'),
-(34, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 2<br/>nombre: REPUESTO #2<br/>created_at: 2024-02-06 12:59:50<br/>updated_at: 2024-02-06 12:59:50<br/>', NULL, 'REPUESTOS', '2024-02-06', '12:59:50', '2024-02-06 16:59:50', '2024-02-06 16:59:50');
+(34, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 2<br/>nombre: REPUESTO #2<br/>created_at: 2024-02-06 12:59:50<br/>updated_at: 2024-02-06 12:59:50<br/>', NULL, 'REPUESTOS', '2024-02-06', '12:59:50', '2024-02-06 16:59:50', '2024-02-06 16:59:50'),
+(35, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN USUARIO', 'id: 2<br/>usuario: JPERES<br/>password: $2y$12$K9AOPb12uULsg1TRY3QPseyxasLnvrLYkisBXai3aU3gdfQowza5K<br/>nombre: JUAN<br/>paterno: PERES<br/>materno: MAMANI<br/>ci: 1234<br/>ci_exp: LP<br/>dir: LOS OLIVOS<br/>email: JUAN@GMAIL.COM<br/>fono: 777777<br/>tipo: JEFE DE ÁREA<br/>foto: 1707167967_JPERES.jpg<br/>acceso: 1<br/>fecha_registro: 2024-02-05 00:00:00<br/>created_at: 2024-02-05 17:19:27<br/>updated_at: 2024-02-05 17:19:27<br/>', 'id: 2<br/>usuario: JPERES<br/>password: $2y$12$K9AOPb12uULsg1TRY3QPseyxasLnvrLYkisBXai3aU3gdfQowza5K<br/>nombre: JUAN<br/>paterno: PERES<br/>materno: MAMANI<br/>ci: 1234<br/>ci_exp: LP<br/>dir: LOS OLIVOS<br/>email: JUAN@GMAIL.COM<br/>fono: 777777<br/>tipo: JEFE DE ÁREA<br/>foto: 1707167967_JPERES.jpg<br/>acceso: 1<br/>fecha_registro: 2024-02-05 00:00:00<br/>created_at: 2024-02-05 17:19:27<br/>updated_at: 2024-02-05 17:19:27<br/>', 'USUARIOS', '2024-02-06', '13:01:24', '2024-02-06 17:01:24', '2024-02-06 17:01:24');
 
 -- --------------------------------------------------------
 
@@ -298,6 +299,7 @@ CREATE TABLE `solicitud_mantenimientos` (
   `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
+  `fecha_registro` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -459,7 +461,7 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `institucions`

@@ -48,7 +48,6 @@ export const useMenu = () => {
     const identificaDispositivo = () => {
         const value_mobile = getMobile();
         store.setMobile(value_mobile);
-        store.toggleRail(false);
         if (value_mobile) {
             store.toggleDrawer(false);
         } else {
@@ -61,6 +60,7 @@ export const useMenu = () => {
         const x = window.innerWidth;
         const y = window.innerHeight;
         if (x <= 960) {
+            store.toggleRail(false);
             store.setMobile(true);
         } else {
             store.setMobile(false);

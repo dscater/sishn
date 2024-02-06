@@ -143,6 +143,22 @@ const scrollActive = () => {
                 <span v-else>ADMINISTRACIÓN</span></v-list-item
             >
             <v-list-item
+                :class="[route_current == 'solicitud_mantenimientos.index' ? 'active' : '']"
+                v-if="oUser.permisos.includes('solicitud_mantenimientos.index')"
+                prepend-icon="mdi-list-box"
+                @click="cambiarUrl(route('solicitud_mantenimientos.index'))"
+                link
+            >
+                <v-list-item-title>Solicitud de Mantenimiento</v-list-item-title>
+                <v-tooltip
+                    v-if="rail && !mobile"
+                    color="white"
+                    activator="parent"
+                    location="end"
+                    >Solicitud de Mantenimiento</v-tooltip
+                >
+            </v-list-item>
+            <v-list-item
                 :class="[route_current == 'biometricos.index' ? 'active' : '']"
                 v-if="oUser.permisos.includes('biometricos.index')"
                 prepend-icon="mdi-list-box"

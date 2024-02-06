@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string("descripcion", 255);
             $table->date("fecha");
             $table->time("hora");
+            $table->date("fecha_registro")->nullable();
             $table->timestamps();
 
             $table->foreign("biometrico_id")->on("biometricos")->references("id");

@@ -5,6 +5,7 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RepuestoController;
+use App\Http\Controllers\SolicitudMantenimientoController;
 use App\Http\Controllers\UnidadAreaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsuarioController;
@@ -98,6 +99,13 @@ Route::middleware('auth')->group(function () {
     Route::get("/repuestos/paginado", [RepuestoController::class, 'paginado'])->name("repuestos.paginado");
     Route::get("/repuestos/listado", [RepuestoController::class, 'listado'])->name("repuestos.listado");
     Route::resource("repuestos", RepuestoController::class)->only(
+        ["index", "store", "show", "update", "destroy"]
+    );
+
+    // REPUESTOS
+    Route::get("/solicitud_mantenimientos/paginado", [SolicitudMantenimientoController::class, 'paginado'])->name("solicitud_mantenimientos.paginado");
+    Route::get("/solicitud_mantenimientos/listado", [SolicitudMantenimientoController::class, 'listado'])->name("solicitud_mantenimientos.listado");
+    Route::resource("solicitud_mantenimientos", SolicitudMantenimientoController::class)->only(
         ["index", "store", "show", "update", "destroy"]
     );
 

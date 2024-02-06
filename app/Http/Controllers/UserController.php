@@ -36,6 +36,11 @@ class UserController extends Controller
             "repuestos.edit",
             "repuestos.destroy",
 
+            "solicitud_mantenimientos.index",
+            "solicitud_mantenimientos.create",
+            "solicitud_mantenimientos.edit",
+            "solicitud_mantenimientos.destroy",
+
             "institucions.index",
             "institucions.create",
             "institucions.edit",
