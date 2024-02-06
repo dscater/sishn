@@ -143,6 +143,22 @@ const scrollActive = () => {
                 <span v-else>ADMINISTRACIÓN</span></v-list-item
             >
             <v-list-item
+                :class="[route_current == 'biometricos.index' ? 'active' : '']"
+                v-if="oUser.permisos.includes('biometricos.index')"
+                prepend-icon="mdi-list-box"
+                @click="cambiarUrl(route('biometricos.index'))"
+                link
+            >
+                <v-list-item-title>Equipos Biométricos</v-list-item-title>
+                <v-tooltip
+                    v-if="rail && !mobile"
+                    color="white"
+                    activator="parent"
+                    location="end"
+                    >Equipos Biométricos</v-tooltip
+                >
+            </v-list-item>
+            <v-list-item
                 :class="[route_current == 'empresas.index' ? 'active' : '']"
                 v-if="oUser.permisos.includes('empresas.index')"
                 prepend-icon="mdi-list-box"
@@ -158,7 +174,6 @@ const scrollActive = () => {
                     >Empresas</v-tooltip
                 >
             </v-list-item>
-            
             <v-list-item
                 :class="[route_current == 'unidad_areas.index' ? 'active' : '']"
                 v-if="oUser.permisos.includes('unidad_areas.index')"

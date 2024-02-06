@@ -147,7 +147,9 @@ const eliminarEmpresa = (item) => {
             <v-col cols="12">
                 <v-card flat>
                     <v-card-title>
-                        <v-row class="bg-grey-darken-3 d-flex align-center pa-3">
+                        <v-row
+                            class="bg-grey-darken-3 d-flex align-center pa-3"
+                        >
                             <v-col cols="12" sm="6" md="4"> Empresas </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field
@@ -210,7 +212,11 @@ const eliminarEmpresa = (item) => {
                                                 cover
                                             ></v-img>
                                         </v-card>
-                                        <v-avatar v-else color="yellow-lighten-1" size="45">
+                                        <v-avatar
+                                            v-else
+                                            color="yellow-lighten-1"
+                                            size="45"
+                                        >
                                             <span class="text-body-1">{{
                                                 item.iniciales_nombre
                                             }}</span>
@@ -287,9 +293,30 @@ const eliminarEmpresa = (item) => {
                                             </li>
                                             <li
                                                 class="flex-item"
-                                                data-label="Tipo"
+                                                data-label="Logo"
                                             >
-                                                {{ item.logo }}
+                                                <v-card
+                                                    class="my-2"
+                                                    elevation="2"
+                                                    rounded
+                                                    v-if="item.url_logo"
+                                                    width="120"
+                                                >
+                                                    <v-img
+                                                        :src="item.url_logo"
+                                                        height="64"
+                                                        cover
+                                                    ></v-img>
+                                                </v-card>
+                                                <v-avatar
+                                                    v-else
+                                                    color="yellow-lighten-1"
+                                                    size="45"
+                                                >
+                                                    <span class="text-body-1">{{
+                                                        item.iniciales_nombre
+                                                    }}</span>
+                                                </v-avatar>
                                             </li>
                                             <li
                                                 class="flex-item"

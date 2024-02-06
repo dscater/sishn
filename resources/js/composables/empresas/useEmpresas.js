@@ -57,30 +57,6 @@ export const useEmpresas = () => {
         }
     };
 
-    const getItemsForSelect = async (tipo = "") => {
-        try {
-            const response = await axios.get(route("empresas.byTipo"), {
-                headers: { Accept: "application/json" },
-                params: {
-                    tipo,
-                },
-            });
-
-            let listItems = response.data.empresas;
-            let listSelect = [];
-            listItems.forEach((elem) => {
-                listSelect.push({
-                    value: elem.id,
-                    label: elem.full_name,
-                });
-            });
-            return listSelect;
-        } catch (error) {
-            console.error("Error:", error);
-            throw error; // Puedes manejar el error según tus necesidades
-        }
-    };
-
     const getEmpresasApi = async (data) => {
         try {
             const response = await axios.get(route("empresas.paginado", data), {
@@ -209,6 +185,5 @@ export const useEmpresas = () => {
         setEmpresa,
         limpiarEmpresa,
         getEmpresasByTipo,
-        getItemsForSelect,
     };
 };

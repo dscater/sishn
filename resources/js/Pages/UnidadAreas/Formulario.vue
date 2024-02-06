@@ -24,7 +24,7 @@ watch(
         dialog.value = newValue;
         if (dialog.value) {
             form = useForm(oUnidadArea.value);
-            getUsuarios();
+            cargarUsuarios();
         }
     }
 );
@@ -37,7 +37,7 @@ watch(
 
 const { flash } = usePage().props;
 
-const { getItemsForSelect } = useUsuarios();
+const { getUsuariosByTipo } = useUsuarios();
 const listUsuarios = ref([]);
 
 const tituloDialog = computed(() => {
@@ -94,12 +94,12 @@ const cerrarDialog = () => {
     dialog.value = false;
 };
 
-const getUsuarios = async () => {
-    listUsuarios.value = await getItemsForSelect("JEFE DE ÁREA");
+const cargarUsuarios = async () => {
+    listUsuarios.value = await getUsuariosByTipo("JEFE DE ÁREA");
 };
 
 onMounted(async () => {
-    // getUsuarios();
+    // cargarUsuarios();
 });
 </script>
 
@@ -185,8 +185,8 @@ onMounted(async () => {
                                         variant="outlined"
                                         clearable
                                         :items="listUsuarios"
-                                        item-value="value"
-                                        item-title="label"
+                                        item-value="id"
+                                        item-title="full_name"
                                         label="Responsable*"
                                         v-model="form.user_id"
                                         required

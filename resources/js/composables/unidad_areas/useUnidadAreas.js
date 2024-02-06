@@ -39,27 +39,6 @@ export const useUnidadAreas = () => {
         }
     };
 
-    const getItemsForSelect = async () => {
-        try {
-            const response = await axios.get(route("unidad_areas.listado"), {
-                headers: { Accept: "application/json" },
-            });
-
-            let listItems = response.data.unidad_areas;
-            let listSelect = [];
-            listItems.forEach((elem) => {
-                listSelect.push({
-                    value: elem.id,
-                    label: elem.nombre,
-                });
-            });
-            return listSelect;
-        } catch (error) {
-            console.error("Error:", error);
-            throw error; // Puedes manejar el error según tus necesidades
-        }
-    };
-
     const getUnidadAreasApi = async (data) => {
         try {
             const response = await axios.get(
@@ -189,6 +168,5 @@ export const useUnidadAreas = () => {
         deleteUnidadArea,
         setUnidadArea,
         limpiarUnidadArea,
-        getItemsForSelect,
     };
 };

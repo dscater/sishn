@@ -277,7 +277,7 @@ const cerrarDialog = () => {
                                         "
                                         density="compact"
                                         variant="outlined"
-                                        accept="image/png, image/jpeg, image/bmp"
+                                        accept="image/png, image/jpeg, image/bmp, image/webp"
                                         placeholder="Logo"
                                         prepend-icon="mdi-camera"
                                         label="Logo"

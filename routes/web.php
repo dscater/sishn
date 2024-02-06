@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BiometricoController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\ProfileController;
@@ -56,7 +57,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profile/update_foto', [ProfileController::class, 'update_foto'])->name('profile.update_foto');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     Route::get("/getUser", [UserController::class, 'getUser'])->name('users.getUser');
     Route::get("/permisos", [UserController::class, 'permisos']);
     Route::get("/menu_user", [UserController::class, 'permisos']);
@@ -83,6 +83,13 @@ Route::middleware('auth')->group(function () {
     Route::get("/empresas/paginado", [EmpresaController::class, 'paginado'])->name("empresas.paginado");
     Route::get("/empresas/listado", [EmpresaController::class, 'listado'])->name("empresas.listado");
     Route::resource("empresas", EmpresaController::class)->only(
+        ["index", "store", "show", "update", "destroy"]
+    );
+
+    // BIOMETRICOS
+    Route::get("/biometricos/paginado", [BiometricoController::class, 'paginado'])->name("biometricos.paginado");
+    Route::get("/biometricos/listado", [BiometricoController::class, 'listado'])->name("biometricos.listado");
+    Route::resource("biometricos", BiometricoController::class)->only(
         ["index", "store", "show", "update", "destroy"]
     );
 

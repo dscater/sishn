@@ -2,30 +2,32 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 import { usePage } from "@inertiajs/vue3";
 
-const oUsuario = ref({
+const oBiometrico = ref({
     id: 0,
     nombre: "",
-    paterno: "",
-    materno: "",
-    ci: "",
-    ci_exp: "",
-    dir: "",
-    email: "",
-    fono: "",
-    tipo: "",
+    estado: "",
+    marca: "",
+    serie: "",
+    modelo: "",
+    fecha_ingreso: "",
+    garantia: "",
+    cod_hdn: "",
+    manual_usuario: "",
+    manual_servicio: "",
+    unidad_area_id: "",
+    empresa_id: "",
     foto: "",
-    acceso: 0 + "",
     _method: "POST",
 });
 
-export const useUsuarios = () => {
+export const useBiometricos = () => {
     const { flash } = usePage().props;
-    const getUsuarios = async () => {
+    const getBiometricos = async () => {
         try {
-            const response = await axios.get(route("usuarios.listado"), {
+            const response = await axios.get(route("biometricos.listado"), {
                 headers: { Accept: "application/json" },
             });
-            return response.data.usuarios;
+            return response.data.biometricos;
         } catch (err) {
             Swal.fire({
                 icon: "info",
@@ -45,27 +47,30 @@ export const useUsuarios = () => {
         }
     };
 
-    const getUsuariosByTipo = async (tipo) => {
+    const getBiometricosByTipo = async (tipo) => {
         try {
-            const response = await axios.get(route("usuarios.byTipo"), {
+            const response = await axios.get(route("biometricos.byTipo"), {
                 headers: { Accept: "application/json" },
                 params: {
                     tipo,
                 },
             });
-            return response.data.usuarios;
+            return response.data.biometricos;
         } catch (error) {
             console.error("Error:", error);
             throw error; // Puedes manejar el error según tus necesidades
         }
     };
 
-    const getUsuariosApi = async (data) => {
+    const getBiometricosApi = async (data) => {
         try {
-            const response = await axios.get(route("usuarios.paginado", data), {
-                headers: { Accept: "application/json" },
-            });
-            return response.data.usuarios;
+            const response = await axios.get(
+                route("biometricos.paginado", data),
+                {
+                    headers: { Accept: "application/json" },
+                }
+            );
+            return response.data.biometricos;
         } catch (err) {
             Swal.fire({
                 icon: "info",
@@ -84,11 +89,14 @@ export const useUsuarios = () => {
             throw err; // Puedes manejar el error según tus necesidades
         }
     };
-    const saveUsuario = async (data) => {
+    const saveBiometrico = async (data) => {
         try {
-            const response = await axios.post(route("usuarios.store", data), {
-                headers: { Accept: "application/json" },
-            });
+            const response = await axios.post(
+                route("biometricos.store", data),
+                {
+                    headers: { Accept: "application/json" },
+                }
+            );
             Swal.fire({
                 icon: "success",
                 title: "Correcto",
@@ -116,11 +124,14 @@ export const useUsuarios = () => {
         }
     };
 
-    const deleteUsuario = async (id) => {
+    const deleteBiometrico = async (id) => {
         try {
-            const response = await axios.delete(route("usuarios.destroy", id), {
-                headers: { Accept: "application/json" },
-            });
+            const response = await axios.delete(
+                route("biometricos.destroy", id),
+                {
+                    headers: { Accept: "application/json" },
+                }
+            );
             Swal.fire({
                 icon: "success",
                 title: "Correcto",
@@ -148,52 +159,56 @@ export const useUsuarios = () => {
         }
     };
 
-    const setUsuario = (item = null) => {
+    const setBiometrico = (item = null) => {
         if (item) {
-            oUsuario.value.id = item.id;
-            oUsuario.value.nombre = item.nombre;
-            oUsuario.value.paterno = item.paterno;
-            oUsuario.value.materno = item.materno;
-            oUsuario.value.ci = item.ci;
-            oUsuario.value.ci_exp = item.ci_exp;
-            oUsuario.value.dir = item.dir;
-            oUsuario.value.email = item.email;
-            oUsuario.value.fono = item.fono;
-            oUsuario.value.tipo = item.tipo;
-            oUsuario.value.foto = item.foto;
-            oUsuario.value.acceso = item.acceso + "";
-            oUsuario.value._method = "PUT";
-            return oUsuario;
+            oBiometrico.value.id = item.id;
+            oBiometrico.value.nombre = item.nombre;
+            oBiometrico.value.estado = item.estado;
+            oBiometrico.value.marca = item.marca;
+            oBiometrico.value.serie = item.serie;
+            oBiometrico.value.modelo = item.modelo;
+            oBiometrico.value.fecha_ingreso = item.fecha_ingreso;
+            oBiometrico.value.garantia = item.garantia;
+            oBiometrico.value.cod_hdn = item.cod_hdn;
+            oBiometrico.value.manual_usuario = item.manual_usuario;
+            oBiometrico.value.manual_servicio = item.manual_servicio;
+            oBiometrico.value.unidad_area_id = item.unidad_area_id;
+            oBiometrico.value.empresa_id = item.empresa_id;
+            oBiometrico.value.foto = item.foto;
+            oBiometrico.value._method = "PUT";
+            return oBiometrico;
         }
         return false;
     };
 
-    const limpiarUsuario = () => {
-        oUsuario.value.id = 0;
-        oUsuario.value.nombre = "";
-        oUsuario.value.paterno = "";
-        oUsuario.value.materno = "";
-        oUsuario.value.ci = "";
-        oUsuario.value.ci_exp = "";
-        oUsuario.value.dir = "";
-        oUsuario.value.email = "";
-        oUsuario.value.fono = "";
-        oUsuario.value.tipo = "";
-        oUsuario.value.foto = "";
-        oUsuario.value.acceso = 0 + "";
-        oUsuario.value._method = "POST";
+    const limpiarBiometrico = () => {
+        oBiometrico.value.id = 0;
+        oBiometrico.value.nombre = "";
+        oBiometrico.value.estado = "";
+        oBiometrico.value.marca = "";
+        oBiometrico.value.serie = "";
+        oBiometrico.value.modelo = "";
+        oBiometrico.value.fecha_ingreso = "";
+        oBiometrico.value.garantia = "";
+        oBiometrico.value.cod_hdn = "";
+        oBiometrico.value.manual_usuario = "";
+        oBiometrico.value.manual_servicio = "";
+        oBiometrico.value.unidad_area_id = "";
+        oBiometrico.value.empresa_id = "";
+        oBiometrico.value.foto = "";
+        oBiometrico.value._method = "POST";
     };
 
     onMounted(() => {});
 
     return {
-        oUsuario,
-        getUsuarios,
-        getUsuariosApi,
-        saveUsuario,
-        deleteUsuario,
-        setUsuario,
-        limpiarUsuario,
-        getUsuariosByTipo,
+        oBiometrico,
+        getBiometricos,
+        getBiometricosApi,
+        saveBiometrico,
+        deleteBiometrico,
+        setBiometrico,
+        limpiarBiometrico,
+        getBiometricosByTipo,
     };
 };

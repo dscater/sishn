@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 05-02-2024 a las 22:25:39
+-- Tiempo de generación: 06-02-2024 a las 16:48:12
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -46,6 +46,13 @@ CREATE TABLE `biometricos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `biometricos`
+--
+
+INSERT INTO `biometricos` (`id`, `nombre`, `estado`, `marca`, `serie`, `modelo`, `fecha_ingreso`, `garantia`, `cod_hdn`, `manual_usuario`, `manual_servicio`, `unidad_area_id`, `empresa_id`, `foto`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(1, 'EQUIPO #1', 'REGULAR', 'M0001', 'S-001', 'M-001', '2024-01-01', '2 AÑOS', 'HDN-001', '1707238084_1.pdf', '1707238084_1.pdf', 1, 1, '1707238084_1.png', '2024-02-06', '2024-02-06 16:48:04', '2024-02-06 16:48:04');
 
 -- --------------------------------------------------------
 
@@ -120,7 +127,17 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (16, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UNA EMPRESA', 'id: 1<br/>nombre: EMPRESA #1<br/>nit: 111111<br/>fono: 7777777<br/>fecha_ini: 2024-01-01<br/>fecha_fin: 2024-09-03<br/>correo: EMPRESA1@GMAIL.COM<br/>dir: LOS OLIVOS<br/>logo: 1707171817_1.jpg<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:23:37<br/>updated_at: 2024-02-05 18:23:37<br/>', NULL, 'EMPRESAS', '2024-02-05', '18:23:37', '2024-02-05 22:23:37', '2024-02-05 22:23:37'),
 (17, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UNA EMPRESA', 'id: 2<br/>nombre: EMPRESA #2<br/>nit: <br/>fono: <br/>fecha_ini: <br/>fecha_fin: <br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:23:45<br/>updated_at: 2024-02-05 18:23:45<br/>', NULL, 'EMPRESAS', '2024-02-05', '18:23:45', '2024-02-05 22:23:45', '2024-02-05 22:23:45'),
 (18, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UNA EMPRESA', 'id: 3<br/>nombre: EMPRESA 3<br/>nit: 33<br/>fono: 33<br/>fecha_ini: 2024-03-03<br/>fecha_fin: 2024-02-06<br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:24:32<br/>updated_at: 2024-02-05 18:24:32<br/>', NULL, 'EMPRESAS', '2024-02-05', '18:24:32', '2024-02-05 22:24:32', '2024-02-05 22:24:32'),
-(19, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UNA EMPRESA', 'id: 2<br/>nombre: EMPRESA #2<br/>nit: <br/>fono: <br/>fecha_ini: <br/>fecha_fin: <br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:23:45<br/>updated_at: 2024-02-05 18:23:45<br/>', 'id: 2<br/>nombre: EMPRESA #2<br/>nit: <br/>fono: <br/>fecha_ini: <br/>fecha_fin: <br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:23:45<br/>updated_at: 2024-02-05 18:23:45<br/>', 'EMPRESAS', '2024-02-05', '18:25:01', '2024-02-05 22:25:01', '2024-02-05 22:25:01');
+(19, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UNA EMPRESA', 'id: 2<br/>nombre: EMPRESA #2<br/>nit: <br/>fono: <br/>fecha_ini: <br/>fecha_fin: <br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:23:45<br/>updated_at: 2024-02-05 18:23:45<br/>', 'id: 2<br/>nombre: EMPRESA #2<br/>nit: <br/>fono: <br/>fecha_ini: <br/>fecha_fin: <br/>correo: <br/>dir: <br/>logo: <br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 18:23:45<br/>updated_at: 2024-02-05 18:23:45<br/>', 'EMPRESAS', '2024-02-05', '18:25:01', '2024-02-05 22:25:01', '2024-02-05 22:25:01'),
+(20, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN BIOMETRICO', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: 00-E2B<br/>serie: S001-E<br/>modelo: M001-4<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: <br/>manual_usuario: 1707234795_1.pdf<br/>manual_servicio: 1707234795_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707234795_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 11:53:15<br/>updated_at: 2024-02-06 11:53:15<br/>', NULL, 'BIOMETRICOS', '2024-02-06', '11:53:15', '2024-02-06 15:53:15', '2024-02-06 15:53:15'),
+(21, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BIOMETRICO', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: 00-E2B<br/>serie: S001-E<br/>modelo: M001-4<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: <br/>manual_usuario: 1707234795_1.pdf<br/>manual_servicio: 1707234795_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707234795_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 11:53:15<br/>updated_at: 2024-02-06 11:53:15<br/>', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: 00-E2B<br/>serie: S001-E<br/>modelo: M001-4<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: HDN-001<br/>manual_usuario: 1707234795_1.pdf<br/>manual_servicio: 1707234795_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707234795_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 11:53:15<br/>updated_at: 2024-02-06 11:54:37<br/>', 'BIOMETRICOS', '2024-02-06', '11:54:37', '2024-02-06 15:54:37', '2024-02-06 15:54:37'),
+(22, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BIOMETRICO', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: 00-E2B<br/>serie: S001-E<br/>modelo: M001-4<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: HDN-001<br/>manual_usuario: 1707234795_1.pdf<br/>manual_servicio: 1707234795_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707234795_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 11:53:15<br/>updated_at: 2024-02-06 11:54:37<br/>', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: 00-E2B<br/>serie: S001-E<br/>modelo: M001-4<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: HDN-001<br/>manual_usuario: 1707234795_1.pdf<br/>manual_servicio: 1707237952_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707234795_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 11:53:15<br/>updated_at: 2024-02-06 12:45:52<br/>', 'BIOMETRICOS', '2024-02-06', '12:45:52', '2024-02-06 16:45:52', '2024-02-06 16:45:52'),
+(23, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BIOMETRICO', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: 00-E2B<br/>serie: S001-E<br/>modelo: M001-4<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: HDN-001<br/>manual_usuario: 1707234795_1.pdf<br/>manual_servicio: 1707237952_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707234795_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 11:53:15<br/>updated_at: 2024-02-06 12:45:52<br/>', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: 00-E2B<br/>serie: S001-E<br/>modelo: M001-4<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: HDN-001<br/>manual_usuario: 1707237964_1.pdf<br/>manual_servicio: 1707237952_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707234795_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 11:53:15<br/>updated_at: 2024-02-06 12:46:04<br/>', 'BIOMETRICOS', '2024-02-06', '12:46:04', '2024-02-06 16:46:04', '2024-02-06 16:46:04'),
+(24, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BIOMETRICO', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: 00-E2B<br/>serie: S001-E<br/>modelo: M001-4<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: HDN-001<br/>manual_usuario: 1707237964_1.pdf<br/>manual_servicio: 1707237952_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707234795_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 11:53:15<br/>updated_at: 2024-02-06 12:46:04<br/>', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: 00-E2B<br/>serie: S001-E<br/>modelo: M001-4<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: HDN-001<br/>manual_usuario: 1707237976_1.pdf<br/>manual_servicio: 1707237976_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707234795_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 11:53:15<br/>updated_at: 2024-02-06 12:46:16<br/>', 'BIOMETRICOS', '2024-02-06', '12:46:16', '2024-02-06 16:46:16', '2024-02-06 16:46:16'),
+(25, 1, 'ELIMINACIÓN', 'EL USUARIO admin ELIMINÓ UN BIOMETRICO', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: 00-E2B<br/>serie: S001-E<br/>modelo: M001-4<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: HDN-001<br/>manual_usuario: 1707237976_1.pdf<br/>manual_servicio: 1707237976_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707234795_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 11:53:15<br/>updated_at: 2024-02-06 12:46:16<br/>', NULL, 'BIOMETRICOS', '2024-02-06', '12:46:23', '2024-02-06 16:46:23', '2024-02-06 16:46:23'),
+(26, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN BIOMETRICO', 'id: 2<br/>nombre: EQUIPO #1<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2023-01-01<br/>garantia: <br/>cod_hdn: <br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: <br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 12:47:00<br/>updated_at: 2024-02-06 12:47:00<br/>', NULL, 'BIOMETRICOS', '2024-02-06', '12:47:00', '2024-02-06 16:47:00', '2024-02-06 16:47:00'),
+(27, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BIOMETRICO', 'id: 2<br/>nombre: EQUIPO #1<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2023-01-01<br/>garantia: <br/>cod_hdn: <br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: <br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 12:47:00<br/>updated_at: 2024-02-06 12:47:00<br/>', 'id: 2<br/>nombre: EQUIPO #1<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2023-01-01<br/>garantia: <br/>cod_hdn: ASD<br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: <br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 12:47:00<br/>updated_at: 2024-02-06 12:47:19<br/>', 'BIOMETRICOS', '2024-02-06', '12:47:19', '2024-02-06 16:47:19', '2024-02-06 16:47:19'),
+(28, 1, 'ELIMINACIÓN', 'EL USUARIO admin ELIMINÓ UN BIOMETRICO', 'id: 2<br/>nombre: EQUIPO #1<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2023-01-01<br/>garantia: <br/>cod_hdn: ASD<br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: <br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 12:47:00<br/>updated_at: 2024-02-06 12:47:19<br/>', NULL, 'BIOMETRICOS', '2024-02-06', '12:47:24', '2024-02-06 16:47:24', '2024-02-06 16:47:24'),
+(29, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN BIOMETRICO', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: M0001<br/>serie: S-001<br/>modelo: M-001<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: HDN-001<br/>manual_usuario: 1707238084_1.pdf<br/>manual_servicio: 1707238084_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707238084_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 12:48:04<br/>updated_at: 2024-02-06 12:48:04<br/>', NULL, 'BIOMETRICOS', '2024-02-06', '12:48:04', '2024-02-06 16:48:04', '2024-02-06 16:48:04');
 
 -- --------------------------------------------------------
 
@@ -417,7 +434,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `biometricos`
 --
 ALTER TABLE `biometricos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `empresas`
@@ -429,7 +446,7 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `institucions`
