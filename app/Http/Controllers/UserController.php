@@ -31,6 +31,11 @@ class UserController extends Controller
             "biometricos.edit",
             "biometricos.destroy",
 
+            "repuestos.index",
+            "repuestos.create",
+            "repuestos.edit",
+            "repuestos.destroy",
+
             "institucions.index",
             "institucions.create",
             "institucions.edit",

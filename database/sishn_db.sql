@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 06-02-2024 a las 16:48:12
+-- Tiempo de generación: 06-02-2024 a las 17:00:00
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -137,7 +137,12 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (26, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN BIOMETRICO', 'id: 2<br/>nombre: EQUIPO #1<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2023-01-01<br/>garantia: <br/>cod_hdn: <br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: <br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 12:47:00<br/>updated_at: 2024-02-06 12:47:00<br/>', NULL, 'BIOMETRICOS', '2024-02-06', '12:47:00', '2024-02-06 16:47:00', '2024-02-06 16:47:00'),
 (27, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BIOMETRICO', 'id: 2<br/>nombre: EQUIPO #1<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2023-01-01<br/>garantia: <br/>cod_hdn: <br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: <br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 12:47:00<br/>updated_at: 2024-02-06 12:47:00<br/>', 'id: 2<br/>nombre: EQUIPO #1<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2023-01-01<br/>garantia: <br/>cod_hdn: ASD<br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: <br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 12:47:00<br/>updated_at: 2024-02-06 12:47:19<br/>', 'BIOMETRICOS', '2024-02-06', '12:47:19', '2024-02-06 16:47:19', '2024-02-06 16:47:19'),
 (28, 1, 'ELIMINACIÓN', 'EL USUARIO admin ELIMINÓ UN BIOMETRICO', 'id: 2<br/>nombre: EQUIPO #1<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2023-01-01<br/>garantia: <br/>cod_hdn: ASD<br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: <br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 12:47:00<br/>updated_at: 2024-02-06 12:47:19<br/>', NULL, 'BIOMETRICOS', '2024-02-06', '12:47:24', '2024-02-06 16:47:24', '2024-02-06 16:47:24'),
-(29, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN BIOMETRICO', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: M0001<br/>serie: S-001<br/>modelo: M-001<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: HDN-001<br/>manual_usuario: 1707238084_1.pdf<br/>manual_servicio: 1707238084_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707238084_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 12:48:04<br/>updated_at: 2024-02-06 12:48:04<br/>', NULL, 'BIOMETRICOS', '2024-02-06', '12:48:04', '2024-02-06 16:48:04', '2024-02-06 16:48:04');
+(29, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN BIOMETRICO', 'id: 1<br/>nombre: EQUIPO #1<br/>estado: REGULAR<br/>marca: M0001<br/>serie: S-001<br/>modelo: M-001<br/>fecha_ingreso: 2024-01-01<br/>garantia: 2 AÑOS<br/>cod_hdn: HDN-001<br/>manual_usuario: 1707238084_1.pdf<br/>manual_servicio: 1707238084_1.pdf<br/>unidad_area_id: 1<br/>empresa_id: 1<br/>foto: 1707238084_1.png<br/>fecha_registro: 2024-02-06<br/>created_at: 2024-02-06 12:48:04<br/>updated_at: 2024-02-06 12:48:04<br/>', NULL, 'BIOMETRICOS', '2024-02-06', '12:48:04', '2024-02-06 16:48:04', '2024-02-06 16:48:04'),
+(30, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 1<br/>nombre: REPUESTO #1<br/>created_at: 2024-02-06 12:57:55<br/>updated_at: 2024-02-06 12:57:55<br/>', NULL, 'REPUESTOS', '2024-02-06', '12:57:55', '2024-02-06 16:57:55', '2024-02-06 16:57:55'),
+(31, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>nombre: REPUESTO #1<br/>created_at: 2024-02-06 12:57:55<br/>updated_at: 2024-02-06 12:57:55<br/>', 'id: 1<br/>nombre: REPUESTO #1ASD<br/>created_at: 2024-02-06 12:57:55<br/>updated_at: 2024-02-06 12:58:46<br/>', 'REPUESTOS', '2024-02-06', '12:58:46', '2024-02-06 16:58:46', '2024-02-06 16:58:46'),
+(32, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN REPUESTO', 'id: 1<br/>nombre: REPUESTO #1ASD<br/>created_at: 2024-02-06 12:57:55<br/>updated_at: 2024-02-06 12:58:46<br/>', NULL, 'REPUESTOS', '2024-02-06', '12:58:55', '2024-02-06 16:58:55', '2024-02-06 16:58:55'),
+(33, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 1<br/>nombre: REPUESTO #1<br/>created_at: 2024-02-06 12:59:34<br/>updated_at: 2024-02-06 12:59:34<br/>', NULL, 'REPUESTOS', '2024-02-06', '12:59:34', '2024-02-06 16:59:34', '2024-02-06 16:59:34'),
+(34, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 2<br/>nombre: REPUESTO #2<br/>created_at: 2024-02-06 12:59:50<br/>updated_at: 2024-02-06 12:59:50<br/>', NULL, 'REPUESTOS', '2024-02-06', '12:59:50', '2024-02-06 16:59:50', '2024-02-06 16:59:50');
 
 -- --------------------------------------------------------
 
@@ -239,6 +244,14 @@ CREATE TABLE `repuestos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `repuestos`
+--
+
+INSERT INTO `repuestos` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
+(1, 'REPUESTO #1', '2024-02-06 16:59:34', '2024-02-06 16:59:34'),
+(2, 'REPUESTO #2', '2024-02-06 16:59:50', '2024-02-06 16:59:50');
 
 -- --------------------------------------------------------
 
@@ -446,7 +459,7 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `institucions`
@@ -470,7 +483,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de la tabla `repuestos`
 --
 ALTER TABLE `repuestos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `servicios`

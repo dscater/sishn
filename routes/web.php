@@ -4,6 +4,7 @@ use App\Http\Controllers\BiometricoController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RepuestoController;
 use App\Http\Controllers\UnidadAreaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsuarioController;
@@ -90,6 +91,13 @@ Route::middleware('auth')->group(function () {
     Route::get("/biometricos/paginado", [BiometricoController::class, 'paginado'])->name("biometricos.paginado");
     Route::get("/biometricos/listado", [BiometricoController::class, 'listado'])->name("biometricos.listado");
     Route::resource("biometricos", BiometricoController::class)->only(
+        ["index", "store", "show", "update", "destroy"]
+    );
+
+    // REPUESTOS
+    Route::get("/repuestos/paginado", [RepuestoController::class, 'paginado'])->name("repuestos.paginado");
+    Route::get("/repuestos/listado", [RepuestoController::class, 'listado'])->name("repuestos.listado");
+    Route::resource("repuestos", RepuestoController::class)->only(
         ["index", "store", "show", "update", "destroy"]
     );
 

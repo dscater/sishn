@@ -273,6 +273,22 @@ const scrollActive = () => {
                 <span v-else>OTROS</span></v-list-item
             >
             <v-list-item
+                :class="[route_current == 'repuestos.index' ? 'active' : '']"
+                v-if="oUser.permisos.includes('repuestos.index')"
+                prepend-icon="mdi-list-box"
+                @click="cambiarUrl(route('repuestos.index'))"
+                link
+            >
+                <v-list-item-title>Repuestos</v-list-item-title>
+                <v-tooltip
+                    v-if="rail && !mobile"
+                    color="white"
+                    activator="parent"
+                    location="end"
+                    >Repuestos</v-tooltip
+                >
+            </v-list-item>
+            <v-list-item
                 v-if="oUser.permisos.includes('institucions.index')"
                 prepend-icon="mdi-cog-outline"
                 :class="[route_current == 'institucions.index' ? 'active' : '']"
