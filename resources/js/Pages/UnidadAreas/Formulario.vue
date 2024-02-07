@@ -41,7 +41,7 @@ const { getUsuariosByTipo } = useUsuarios();
 const listUsuarios = ref([]);
 
 const tituloDialog = computed(() => {
-    return accion.value == 0 ? `Agregar UnidadArea` : `Editar UnidadArea`;
+    return accion.value == 0 ? `Agregar Unidad/Área` : `Editar Unidad/Área`;
 });
 
 const enviarFormulario = () => {

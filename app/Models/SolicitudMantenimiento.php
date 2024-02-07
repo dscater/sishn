@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class SolicitudMantenimiento extends Model
 {
@@ -11,6 +12,7 @@ class SolicitudMantenimiento extends Model
 
     protected $fillable = [
         "codigo",
+        "nro",
         "nombre_responsable",
         "ci_responsable",
         "nombre_tecnico",
@@ -20,30 +22,78 @@ class SolicitudMantenimiento extends Model
         "diagnostico",
         "otros",
         "fecha_solicitud",
+        "fecha_entrega",
         "biometrico_id",
         "repuestos",
-        "descripcion",
-        "fecha",
-        "hora",
         "fecha_registro"
     ];
 
-    protected $appends = ["fecha_registro_t", "fecha_solicitud_t"];
+    protected $appends = ["fecha_registro_t", "fecha_solicitud_t", "fecha_entrega_t", "array_repuestos", "repuestos_txt", "array_repuestos_txt", "mas"];
 
 
     public function getFechaSolicitudTAttribute()
     {
-        return date("d/m/Y", strtotime($this->fecha_solicitud));
+        if ($this->fecha_solicitud) {
+            return date("d/m/Y", strtotime($this->fecha_solicitud));
+        }
+        return "";
+    }
+
+    public function getFechaEntregaTAttribute()
+    {
+        if ($this->fecha_entrega) {
+            return date("d/m/Y", strtotime($this->fecha_entrega));
+        }
+        return "";
     }
 
     public function getFechaRegistroTAttribute()
     {
-        return date("d/m/Y", strtotime($this->fecha_registro));
+        if ($this->fecha_registro) {
+            return date("d/m/Y", strtotime($this->fecha_registro));
+        }
+        return "";
+    }
+    public function getRepuestosTxtAttribute()
+    {
+        $repuestos = Repuesto::whereIn("id", $this->array_repuestos)->pluck("nombre")->toARray();
+        return implode(", ", $repuestos);
+    }
+    public function getArrayRepuestosTxtAttribute()
+    {
+        $repuestos = Repuesto::whereIn("id", $this->array_repuestos)->pluck("nombre")->toARray();
+        return $repuestos;
+    }
+
+    public function getArrayRepuestosAttribute()
+    {
+        return explode(",", $this->repuestos);
+    }
+
+
+
+    public function getMasAttribute()
+    {
+        return false;
+    }
+
+    public static function getNroCodigo()
+    {
+        $ultimo = SolicitudMantenimiento::orderBy("nro", "desc")->first();
+        if ($ultimo) {
+            return (int)$ultimo + 1;
+        }
+        return 1;
     }
 
     // relaciones
     public function biometrico()
     {
         return $this->belongsTo(Biometrico::class, 'biometrico_id');
+    }
+
+    public function cronogramas()
+    {
+        return $this->hasMany(Cronograma::class, 'solicitud_mantenimiento_id');
     }
 }

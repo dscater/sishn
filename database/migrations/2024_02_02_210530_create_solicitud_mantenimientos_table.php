@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('solicitud_mantenimientos', function (Blueprint $table) {
             $table->id();
             $table->string("codigo", 255)->unique();
+            $table->bigInteger("nro", 255)->unsigned();
             $table->string("nombre_responsable", 300);
             $table->string("ci_responsable", 255)->nullable();
             $table->string("nombre_tecnico", 255)->nullable();
@@ -23,11 +24,9 @@ return new class extends Migration
             $table->text("diagnostico")->nullable();
             $table->text("otros")->nullable();
             $table->date("fecha_solicitud");
+            $table->date("fecha_entrega")->nullable();
             $table->unsignedBigInteger("biometrico_id");
             $table->string("repuestos", 255);
-            $table->string("descripcion", 255);
-            $table->date("fecha");
-            $table->time("hora");
             $table->date("fecha_registro")->nullable();
             $table->timestamps();
 

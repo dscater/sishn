@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 06-02-2024 a las 17:03:20
+-- Tiempo de generación: 07-02-2024 a las 23:57:13
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -53,6 +53,30 @@ CREATE TABLE `biometricos` (
 
 INSERT INTO `biometricos` (`id`, `nombre`, `estado`, `marca`, `serie`, `modelo`, `fecha_ingreso`, `garantia`, `cod_hdn`, `manual_usuario`, `manual_servicio`, `unidad_area_id`, `empresa_id`, `foto`, `fecha_registro`, `created_at`, `updated_at`) VALUES
 (1, 'EQUIPO #1', 'REGULAR', 'M0001', 'S-001', 'M-001', '2024-01-01', '2 AÑOS', 'HDN-001', '1707238084_1.pdf', '1707238084_1.pdf', 1, 1, '1707238084_1.png', '2024-02-06', '2024-02-06 16:48:04', '2024-02-06 16:48:04');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cronogramas`
+--
+
+CREATE TABLE `cronogramas` (
+  `id` bigint UNSIGNED NOT NULL,
+  `solicitud_mantenimiento_id` bigint UNSIGNED NOT NULL,
+  `descripcion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `cronogramas`
+--
+
+INSERT INTO `cronogramas` (`id`, `solicitud_mantenimiento_id`, `descripcion`, `date`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 'INICIO', '2024-02-12', 1, '2024-02-07 23:57:02', '2024-02-07 23:57:02'),
+(2, 1, 'FIN', '2024-02-13', 1, '2024-02-07 23:57:02', '2024-02-07 23:57:02');
 
 -- --------------------------------------------------------
 
@@ -143,7 +167,30 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (32, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN REPUESTO', 'id: 1<br/>nombre: REPUESTO #1ASD<br/>created_at: 2024-02-06 12:57:55<br/>updated_at: 2024-02-06 12:58:46<br/>', NULL, 'REPUESTOS', '2024-02-06', '12:58:55', '2024-02-06 16:58:55', '2024-02-06 16:58:55'),
 (33, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 1<br/>nombre: REPUESTO #1<br/>created_at: 2024-02-06 12:59:34<br/>updated_at: 2024-02-06 12:59:34<br/>', NULL, 'REPUESTOS', '2024-02-06', '12:59:34', '2024-02-06 16:59:34', '2024-02-06 16:59:34'),
 (34, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 2<br/>nombre: REPUESTO #2<br/>created_at: 2024-02-06 12:59:50<br/>updated_at: 2024-02-06 12:59:50<br/>', NULL, 'REPUESTOS', '2024-02-06', '12:59:50', '2024-02-06 16:59:50', '2024-02-06 16:59:50'),
-(35, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN USUARIO', 'id: 2<br/>usuario: JPERES<br/>password: $2y$12$K9AOPb12uULsg1TRY3QPseyxasLnvrLYkisBXai3aU3gdfQowza5K<br/>nombre: JUAN<br/>paterno: PERES<br/>materno: MAMANI<br/>ci: 1234<br/>ci_exp: LP<br/>dir: LOS OLIVOS<br/>email: JUAN@GMAIL.COM<br/>fono: 777777<br/>tipo: JEFE DE ÁREA<br/>foto: 1707167967_JPERES.jpg<br/>acceso: 1<br/>fecha_registro: 2024-02-05 00:00:00<br/>created_at: 2024-02-05 17:19:27<br/>updated_at: 2024-02-05 17:19:27<br/>', 'id: 2<br/>usuario: JPERES<br/>password: $2y$12$K9AOPb12uULsg1TRY3QPseyxasLnvrLYkisBXai3aU3gdfQowza5K<br/>nombre: JUAN<br/>paterno: PERES<br/>materno: MAMANI<br/>ci: 1234<br/>ci_exp: LP<br/>dir: LOS OLIVOS<br/>email: JUAN@GMAIL.COM<br/>fono: 777777<br/>tipo: JEFE DE ÁREA<br/>foto: 1707167967_JPERES.jpg<br/>acceso: 1<br/>fecha_registro: 2024-02-05 00:00:00<br/>created_at: 2024-02-05 17:19:27<br/>updated_at: 2024-02-05 17:19:27<br/>', 'USUARIOS', '2024-02-06', '13:01:24', '2024-02-06 17:01:24', '2024-02-06 17:01:24');
+(35, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN USUARIO', 'id: 2<br/>usuario: JPERES<br/>password: $2y$12$K9AOPb12uULsg1TRY3QPseyxasLnvrLYkisBXai3aU3gdfQowza5K<br/>nombre: JUAN<br/>paterno: PERES<br/>materno: MAMANI<br/>ci: 1234<br/>ci_exp: LP<br/>dir: LOS OLIVOS<br/>email: JUAN@GMAIL.COM<br/>fono: 777777<br/>tipo: JEFE DE ÁREA<br/>foto: 1707167967_JPERES.jpg<br/>acceso: 1<br/>fecha_registro: 2024-02-05 00:00:00<br/>created_at: 2024-02-05 17:19:27<br/>updated_at: 2024-02-05 17:19:27<br/>', 'id: 2<br/>usuario: JPERES<br/>password: $2y$12$K9AOPb12uULsg1TRY3QPseyxasLnvrLYkisBXai3aU3gdfQowza5K<br/>nombre: JUAN<br/>paterno: PERES<br/>materno: MAMANI<br/>ci: 1234<br/>ci_exp: LP<br/>dir: LOS OLIVOS<br/>email: JUAN@GMAIL.COM<br/>fono: 777777<br/>tipo: JEFE DE ÁREA<br/>foto: 1707167967_JPERES.jpg<br/>acceso: 1<br/>fecha_registro: 2024-02-05 00:00:00<br/>created_at: 2024-02-05 17:19:27<br/>updated_at: 2024-02-05 17:19:27<br/>', 'USUARIOS', '2024-02-06', '13:01:24', '2024-02-06 17:01:24', '2024-02-06 17:01:24'),
+(36, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 1<br/>codigo: <br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: <br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', NULL, 'REPUESTOS', '2024-02-07', '18:15:43', '2024-02-07 22:15:43', '2024-02-07 22:15:43'),
+(37, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:28:23', '2024-02-07 23:28:23', '2024-02-07 23:28:23'),
+(38, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:29:13', '2024-02-07 23:29:13', '2024-02-07 23:29:13'),
+(39, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:30:16', '2024-02-07 23:30:16', '2024-02-07 23:30:16'),
+(40, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:31:07', '2024-02-07 23:31:07', '2024-02-07 23:31:07'),
+(41, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:32:37', '2024-02-07 23:32:37', '2024-02-07 23:32:37'),
+(42, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:33:44', '2024-02-07 23:33:44', '2024-02-07 23:33:44'),
+(43, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:34:06', '2024-02-07 23:34:06', '2024-02-07 23:34:06'),
+(44, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:34:24', '2024-02-07 23:34:24', '2024-02-07 23:34:24'),
+(45, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:36:46', '2024-02-07 23:36:46', '2024-02-07 23:36:46'),
+(46, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:38:48', '2024-02-07 23:38:48', '2024-02-07 23:38:48'),
+(47, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:42:22', '2024-02-07 23:42:22', '2024-02-07 23:42:22'),
+(48, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'REPUESTOS', '2024-02-07', '19:42:40', '2024-02-07 23:42:40', '2024-02-07 23:42:40'),
+(49, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN<br/>ci_responsable: <br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 18:15:42<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO MAMANI<br/>ci_tecnico: 4444<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: DIAGNOSTICO<br/>otros: OTROS<br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 19:51:00<br/>', 'REPUESTOS', '2024-02-07', '19:51:00', '2024-02-07 23:51:00', '2024-02-07 23:51:00'),
+(50, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO MAMANI<br/>ci_tecnico: 4444<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: DIAGNOSTICO<br/>otros: OTROS<br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 19:51:00<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO MAMANI<br/>ci_tecnico: 4444<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: DIAGNOSTICO<br/>otros: OTROS<br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 19:51:00<br/>', 'REPUESTOS', '2024-02-07', '19:51:08', '2024-02-07 23:51:08', '2024-02-07 23:51:08'),
+(51, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO MAMANI<br/>ci_tecnico: 4444<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: DIAGNOSTICO<br/>otros: OTROS<br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 19:51:00<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO MAMANI<br/>ci_tecnico: 4444<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: DIAGNOSTICO<br/>otros: OTROS<br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 19:51:00<br/>', 'REPUESTOS', '2024-02-07', '19:51:34', '2024-02-07 23:51:34', '2024-02-07 23:51:34'),
+(52, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO MAMANI<br/>ci_tecnico: 4444<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: DIAGNOSTICO<br/>otros: OTROS<br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 19:51:00<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO MAMANI<br/>ci_tecnico: 4444<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: DIAGNOSTICO<br/>otros: OTROS<br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 19:52:17<br/>', 'REPUESTOS', '2024-02-07', '19:52:17', '2024-02-07 23:52:17', '2024-02-07 23:52:17'),
+(53, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO MAMANI<br/>ci_tecnico: 4444<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: DIAGNOSTICO<br/>otros: OTROS<br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 18:15:42<br/>updated_at: 2024-02-07 19:52:17<br/>', NULL, 'REPUESTOS', '2024-02-07', '19:53:02', '2024-02-07 23:53:02', '2024-02-07 23:53:02'),
+(54, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 2<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: ASD<br/>ci_responsable: 123<br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 19:54:20<br/>updated_at: 2024-02-07 19:54:20<br/>', NULL, 'REPUESTOS', '2024-02-07', '19:54:20', '2024-02-07 23:54:20', '2024-02-07 23:54:20'),
+(55, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN REPUESTO', 'id: 2<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: ASD<br/>ci_responsable: 123<br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 19:54:20<br/>updated_at: 2024-02-07 19:54:20<br/>', NULL, 'REPUESTOS', '2024-02-07', '19:54:25', '2024-02-07 23:54:25', '2024-02-07 23:54:25'),
+(56, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 3<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: ASD<br/>ci_responsable: 123<br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: ASD<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 19:55:20<br/>updated_at: 2024-02-07 19:55:20<br/>', NULL, 'REPUESTOS', '2024-02-07', '19:55:20', '2024-02-07 23:55:20', '2024-02-07 23:55:20'),
+(57, 1, 'ELIMINACIÓN', 'EL USUARIO  ELIMINÓ UN REPUESTO', 'id: 3<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: ASD<br/>ci_responsable: 123<br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: ASD<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 19:55:20<br/>updated_at: 2024-02-07 19:55:20<br/>', NULL, 'REPUESTOS', '2024-02-07', '19:55:25', '2024-02-07 23:55:25', '2024-02-07 23:55:25'),
+(58, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO TAPIA<br/>ci_tecnico: 4444<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO #1<br/>diagnostico: DIAGNOSTICO #1<br/>otros: OTROS #1<br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: <br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 19:57:02<br/>updated_at: 2024-02-07 19:57:02<br/>', NULL, 'REPUESTOS', '2024-02-07', '19:57:02', '2024-02-07 23:57:02', '2024-02-07 23:57:02');
 
 -- --------------------------------------------------------
 
@@ -212,7 +259,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (11, '2024_02_02_210509_create_biometricos_table', 2),
 (12, '2024_02_02_210529_create_repuestos_table', 2),
 (13, '2024_02_02_210530_create_solicitud_mantenimientos_table', 2),
-(14, '2024_02_02_211435_create_servicios_table', 2);
+(14, '2024_02_02_211435_create_servicios_table', 2),
+(16, '2024_02_07_112134_create_cronogramas_table', 3);
 
 -- --------------------------------------------------------
 
@@ -285,6 +333,7 @@ CREATE TABLE `servicios` (
 CREATE TABLE `solicitud_mantenimientos` (
   `id` bigint UNSIGNED NOT NULL,
   `codigo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nro` bigint UNSIGNED NOT NULL,
   `nombre_responsable` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ci_responsable` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nombre_tecnico` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -294,15 +343,20 @@ CREATE TABLE `solicitud_mantenimientos` (
   `diagnostico` text COLLATE utf8mb4_unicode_ci,
   `otros` text COLLATE utf8mb4_unicode_ci,
   `fecha_solicitud` date NOT NULL,
+  `fecha_entrega` date DEFAULT NULL,
   `biometrico_id` bigint UNSIGNED NOT NULL,
   `repuestos` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `descripcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fecha` date NOT NULL,
-  `hora` time NOT NULL,
   `fecha_registro` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `solicitud_mantenimientos`
+--
+
+INSERT INTO `solicitud_mantenimientos` (`id`, `codigo`, `nro`, `nombre_responsable`, `ci_responsable`, `nombre_tecnico`, `ci_tecnico`, `tipo_mantenimiento`, `motivo_mantenimiento`, `diagnostico`, `otros`, `fecha_solicitud`, `fecha_entrega`, `biometrico_id`, `repuestos`, `fecha_registro`, `created_at`, `updated_at`) VALUES
+(1, 'SOL.MAT.1', 1, 'JUAN PERES', '1234', 'FERNANDO TAPIA', '4444', '', 'MOTIVO MANTENIMIENTO #1', 'DIAGNOSTICO #1', 'OTROS #1', '2024-02-07', NULL, 1, '1,2', '2024-02-07', '2024-02-07 23:57:02', '2024-02-07 23:57:02');
 
 -- --------------------------------------------------------
 
@@ -373,6 +427,14 @@ ALTER TABLE `biometricos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `biometricos_unidad_area_id_foreign` (`unidad_area_id`),
   ADD KEY `biometricos_empresa_id_foreign` (`empresa_id`);
+
+--
+-- Indices de la tabla `cronogramas`
+--
+ALTER TABLE `cronogramas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cronogramas_solicitud_mantenimiento_id_foreign` (`solicitud_mantenimiento_id`),
+  ADD KEY `cronogramas_user_id_foreign` (`user_id`);
 
 --
 -- Indices de la tabla `empresas`
@@ -452,6 +514,12 @@ ALTER TABLE `biometricos`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `cronogramas`
+--
+ALTER TABLE `cronogramas`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
@@ -461,7 +529,7 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `institucions`
@@ -473,7 +541,7 @@ ALTER TABLE `institucions`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `personal_access_tokens`
@@ -497,7 +565,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `solicitud_mantenimientos`
 --
 ALTER TABLE `solicitud_mantenimientos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `unidad_areas`
@@ -521,6 +589,13 @@ ALTER TABLE `users`
 ALTER TABLE `biometricos`
   ADD CONSTRAINT `biometricos_empresa_id_foreign` FOREIGN KEY (`empresa_id`) REFERENCES `empresas` (`id`),
   ADD CONSTRAINT `biometricos_unidad_area_id_foreign` FOREIGN KEY (`unidad_area_id`) REFERENCES `unidad_areas` (`id`);
+
+--
+-- Filtros para la tabla `cronogramas`
+--
+ALTER TABLE `cronogramas`
+  ADD CONSTRAINT `cronogramas_solicitud_mantenimiento_id_foreign` FOREIGN KEY (`solicitud_mantenimiento_id`) REFERENCES `solicitud_mantenimientos` (`id`),
+  ADD CONSTRAINT `cronogramas_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Filtros para la tabla `servicios`

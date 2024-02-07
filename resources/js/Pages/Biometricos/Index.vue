@@ -53,10 +53,6 @@ const headers = ref([
     { title: "Serie", align: "start" },
     { title: "Modelo", align: "start" },
     { title: "Fecha de Ingreso", align: "start" },
-    // { title: "Garantía", align: "start", sortable: false },
-    // { title: "Código H.D.N.", align: "start" },
-    // { title: "Manual de usuario", align: "start" },
-    // { title: "Manual del servicio", align: "start" },
     { title: "Unidad/Área", align: "start" },
     { title: "Empresa", align: "start" },
     { title: "Imagen", align: "start" },
@@ -235,10 +231,6 @@ const eliminarBiometrico = (item) => {
                                         <td>{{ item.serie }}</td>
                                         <td>{{ item.modelo }}</td>
                                         <td>{{ item.fecha_ingreso_t }}</td>
-                                        <!-- <td>{{ item.garantia }}</td>
-                                        <td>{{ item.cod_hdn }}</td>
-                                        <td>{{ item.manual_usuario }}</td>
-                                        <td>{{ item.manual_servicio }}</td> -->
                                         <td>{{ item.unidad_area.nombre }}</td>
                                         <td>{{ item.empresa.nombre }}</td>
                                         <td>

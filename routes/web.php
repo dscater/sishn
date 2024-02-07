@@ -102,11 +102,11 @@ Route::middleware('auth')->group(function () {
         ["index", "store", "show", "update", "destroy"]
     );
 
-    // REPUESTOS
+    // SOLICITUD DE MANTENIMIENTOS
     Route::get("/solicitud_mantenimientos/paginado", [SolicitudMantenimientoController::class, 'paginado'])->name("solicitud_mantenimientos.paginado");
     Route::get("/solicitud_mantenimientos/listado", [SolicitudMantenimientoController::class, 'listado'])->name("solicitud_mantenimientos.listado");
     Route::resource("solicitud_mantenimientos", SolicitudMantenimientoController::class)->only(
-        ["index", "store", "show", "update", "destroy"]
+        ["index", "create", "edit", "store", "show", "update", "destroy"]
     );
 
     // INSTITUCION

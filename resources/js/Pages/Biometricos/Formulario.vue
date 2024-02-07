@@ -59,7 +59,7 @@ function cargaArchivo(e, key) {
 }
 
 const tituloDialog = computed(() => {
-    return accion.value == 0 ? `Agregar Biometrico` : `Editar Biometrico`;
+    return accion.value == 0 ? `Agregar Equipo Biométrico` : `Editar Equipo Biométrico`;
 });
 
 const enviarFormulario = () => {

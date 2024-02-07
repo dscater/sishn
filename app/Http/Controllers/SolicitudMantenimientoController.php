@@ -2,23 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cronograma;
 use App\Models\HistorialAccion;
 use App\Models\SolicitudMantenimiento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class SolicitudMantenimientoController extends Controller
 {
-    public $validacion = [
-        "nombre" => "required|min:1",
-    ];
+    public $validacion = [];
 
     public $mensajes = [
-        "nombre.required" => "Este campo es obligatorio",
-        "nombre.min" => "Debes ingresar al menos :min caracteres",
+        "biometrico_id.required" => "Este campo es obligatorio",
+        "nombre_responsable.required" => "Este campo es obligatorio",
+        "nombre_responsable.min" => "Debes ingresar al menos :min caracteres",
+        "motivo_mantenimiento.required" => "Este campo es obligatorio",
+        "motivo_mantenimiento.min" => "Debes ingresar al menos :min caracteres",
+        "array_repuestos.required" => "Debes seleccionar al menos un repuesto",
+        "cronogramas" => "Debes ingresar algo en el cronograma",
     ];
 
     public function index()
@@ -37,7 +42,8 @@ class SolicitudMantenimientoController extends Controller
     public function paginado(Request $request)
     {
         $search = $request->search;
-        $solicitud_mantenimientos = SolicitudMantenimiento::select("solicitud_mantenimientos.*");
+        $solicitud_mantenimientos = SolicitudMantenimiento::select("solicitud_mantenimientos.*")
+            ->with("biometrico");
 
         if (trim($search) != "") {
             $solicitud_mantenimientos->where("nombre", "LIKE", "%$search%");
@@ -49,14 +55,55 @@ class SolicitudMantenimientoController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return Inertia::render('SolicitudMantenimientos/Create');
+    }
+
     public function store(Request $request)
     {
+        if (Auth::user()->tipo == 'JEFE DE ÁREA' || Auth::user()->tipo == 'ADMINISTRADOR') {
+            $this->validacion["biometrico_id"] = "required";
+            $this->validacion["nombre_responsable"] = "required|min:1";
+            $this->validacion["motivo_mantenimiento"] = "required|min:1";
+            $this->validacion["fecha_solicitud"] = "required|min:1";
+            $this->validacion["array_repuestos"] = "required|min:1";
+            $this->validacion["cronogramas"] = "required|min:1";
+
+            if (!$request->fecha_entrega) {
+                unset($request["fecha_entrega"]);
+            }
+        }
+        if (Auth::user()->tipo == 'TÉCNICO') {
+        }
+        if (!$request->cronogramas || count($request->cronogramas) <= 0) {
+            throw ValidationException::withMessages([
+                "cronogramas" => "Debes completar el cronograma",
+                "error" => "Debes completar el cronograma",
+            ]);
+        }
+
         $request->validate($this->validacion, $this->mensajes);
+
         DB::beginTransaction();
         try {
+            $request["fecha_registro"] = date("Y-m-d");
             // crear el SolicitudMantenimiento
-            $nuevo_solicitud_mantenimiento = SolicitudMantenimiento::create(array_map('mb_strtoupper', $request->all()));
-            $datos_original = HistorialAccion::getDetalleRegistro($nuevo_solicitud_mantenimiento, "solicitud_mantenimientos");
+            $nro_codigo = SolicitudMantenimiento::getNroCodigo();
+            $request["codigo"] = "SOL.MAT." . $nro_codigo;
+            $request["nro"] = $nro_codigo;
+            $repuestos = implode(",", $request->array_repuestos);
+            $request["repuestos"] = $repuestos;
+            $nueva_solicitud_mantenimiento = SolicitudMantenimiento::create(array_map('mb_strtoupper', $request->except("cronogramas", "array_repuestos", "eliminados")));
+            $cronogramas = $request->cronogramas;
+            foreach ($cronogramas as $c) {
+                $nueva_solicitud_mantenimiento->cronogramas()->create([
+                    "descripcion" => mb_strtoupper($c["descripcion"]),
+                    "date" => $c["date"],
+                    "user_id" => Auth::user()->id,
+                ]);
+            }
+            $datos_original = HistorialAccion::getDetalleRegistro($nueva_solicitud_mantenimiento, "solicitud_mantenimientos");
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'CREACIÓN',
@@ -81,13 +128,65 @@ class SolicitudMantenimientoController extends Controller
     {
     }
 
+    public function edit(SolicitudMantenimiento $solicitud_mantenimiento)
+    {
+        $solicitud_mantenimiento = $solicitud_mantenimiento->load(["cronogramas"]);
+        return Inertia::render('SolicitudMantenimientos/Edit', compact('solicitud_mantenimiento'));
+    }
+
     public function update(SolicitudMantenimiento $solicitud_mantenimiento, Request $request)
     {
+        if (Auth::user()->tipo == 'JEFE DE ÁREA' || Auth::user()->tipo == 'ADMINISTRADOR') {
+            $this->validacion["biometrico_id"] = "required";
+            $this->validacion["nombre_responsable"] = "required|min:1";
+            $this->validacion["motivo_mantenimiento"] = "required|min:1";
+            $this->validacion["fecha_solicitud"] = "required|min:1";
+            $this->validacion["array_repuestos"] = "required|min:1";
+            $this->validacion["cronogramas"] = "required|min:1";
+
+            if (!$request->fecha_entrega) {
+                unset($request["fecha_entrega"]);
+            }
+        }
+        if (Auth::user()->tipo == 'TÉCNICO') {
+        }
+        if (!$request->cronogramas || count($request->cronogramas) <= 0) {
+            throw ValidationException::withMessages([
+                "cronogramas" => "Debes completar el cronograma",
+                "error" => "Debes completar el cronograma",
+            ]);
+        }
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($solicitud_mantenimiento, "solicitud_mantenimientos");
-            $solicitud_mantenimiento->update(array_map('mb_strtoupper', $request->all()));
+            $repuestos = implode(",", $request->array_repuestos);
+            $request["repuestos"] = $repuestos;
+            $solicitud_mantenimiento->update(array_map('mb_strtoupper', $request->except("cronogramas", "array_repuestos", "eliminados")));
+            $eliminados = $request->eliminados;
+            if ($eliminados && count($eliminados) > 0) {
+                foreach ($eliminados as $e) {
+                    $cronograma = Cronograma::find($e);
+                    $cronograma->delete();
+                }
+            }
+            $cronogramas = $request->cronogramas;
+            foreach ($cronogramas as $c) {
+                if (strpos($c["id"], "n-") > -1) {
+                    $solicitud_mantenimiento->cronogramas()->create([
+                        "descripcion" => mb_strtoupper($c["descripcion"]),
+                        "date" => $c["date"],
+                        "user_id" => Auth::user()->id,
+                    ]);
+                } else {
+                    $cronograma = Cronograma::find($c["id"]);
+                    $cronograma->update([
+                        "descripcion" => mb_strtoupper($c["descripcion"]),
+                        "date" => $c["date"],
+                    ]);
+                }
+            }
+
             $datos_nuevo = HistorialAccion::getDetalleRegistro($solicitud_mantenimiento, "solicitud_mantenimientos");
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
@@ -114,6 +213,7 @@ class SolicitudMantenimientoController extends Controller
     {
         DB::beginTransaction();
         try {
+            $solicitud_mantenimiento->cronogramas()->delete();
             $datos_original = HistorialAccion::getDetalleRegistro($solicitud_mantenimiento, "solicitud_mantenimientos");
             $solicitud_mantenimiento->delete();
             HistorialAccion::create([
