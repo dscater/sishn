@@ -41,13 +41,30 @@ class UserController extends Controller
             "solicitud_mantenimientos.edit",
             "solicitud_mantenimientos.destroy",
 
+            "servicios.index",
+            "servicios.create",
+            "servicios.edit",
+            "servicios.destroy",
+
             "institucions.index",
             "institucions.create",
             "institucions.edit",
             "institucions.destroy",
+
+            "reportes.usuarios",
+            "reportes.solicitud_mantenimiento"
         ],
-        "AUXILIAR" => [
-            "vuetify",
+        "JEFE DE ÁREA" => [
+            "solicitud_mantenimientos.index",
+            "solicitud_mantenimientos.create",
+            "solicitud_mantenimientos.edit",
+            "solicitud_mantenimientos.destroy",
+        ],
+        "TÉCNICO" => [
+            "solicitud_mantenimientos.index",
+            "solicitud_mantenimientos.create",
+            "solicitud_mantenimientos.edit",
+            "solicitud_mantenimientos.destroy",
         ],
     ];
 

@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string("estado_equipo", 300)->nullable();
             $table->text("trabajo_realizado");
             $table->string("capacitacion", 20);
+            $table->text("descripcion")->nullable();
+            $table->date("fecha_ini")->nullable();
+            $table->date("fecha_fin")->nullable();
             $table->date("fecha_registro");
             $table->timestamps();
 

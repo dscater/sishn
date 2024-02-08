@@ -15,6 +15,17 @@ class Cronograma extends Model
         "user_id",
     ];
 
+    protected $appends = ["backgroundColor"];
+
+    public function getBackgroundColorAttribute()
+    {
+        $fecha_actual = date("Y-m-d");
+        if ($this->date < $fecha_actual) {
+            return "red";
+        }
+        return "green";
+    }
+
     public function solicitud_mantenimiento()
     {
         return $this->belongsTo(SolicitudMantenimiento::class, 'solicitud_mantenimiento_id');

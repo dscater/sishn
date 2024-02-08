@@ -49,9 +49,8 @@ class BiometricoController extends Controller
         $biometricos = Biometrico::select("biometricos.*")->with(["unidad_area", "empresa"]);
         if (trim($search) != "") {
             $biometricos->where("nombre", "LIKE", "%$search%");
-            $biometricos->orWhere("nit", "LIKE", "%$search%");
         }
-        $biometricos = $biometricos->paginate(5);
+        $biometricos = $biometricos->paginate($request->itemsPerPage);
         return response()->JSON([
             "biometricos" => $biometricos
         ]);

@@ -42,7 +42,7 @@ class EmpresaController extends Controller
             $empresas->where("nombre", "LIKE", "%$search%");
             $empresas->orWhere("nit", "LIKE", "%$search%");
         }
-        $empresas = $empresas->paginate(5);
+        $empresas = $empresas->paginate($request->itemsPerPage);
         return response()->JSON([
             "empresas" => $empresas
         ]);

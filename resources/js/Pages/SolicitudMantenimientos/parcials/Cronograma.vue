@@ -26,6 +26,8 @@ const actualizarCronograma = async () => {
                 oCronograma.value.descripcion;
             oSolicitudMantenimiento.cronogramas[index].date =
                 oCronograma.value.date;
+            oSolicitudMantenimiento.cronogramas[index].backgroundColor =
+                validarFecha(oCronograma.value.date);
         }
     } else {
         // agregar el cronograma a la solicitud
@@ -39,6 +41,7 @@ const actualizarCronograma = async () => {
             solicitud_mantenimiento_id: "",
             descripcion: oCronograma.value.descripcion,
             date: oCronograma.value.date,
+            backgroundColor: validarFecha(oCronograma.value.date),
             user_id: "",
         });
         index_nuevos++;
@@ -81,6 +84,29 @@ const handleEventClick = (arg) => {
     oCronograma.value.user_id = arg.event.extendedProps.user_id;
     evento.value = arg;
 };
+
+function validarFecha(fecha) {
+    var fechaActual = new Date();
+
+    var fechaActualCorta = new Date(
+        fechaActual.getFullYear(),
+        fechaActual.getMonth(),
+        fechaActual.getDate()
+    );
+
+    var fechaProporcionada = new Date(fecha);
+    var fechaProporcionadaCorta = new Date(
+        fechaProporcionada.getFullYear(),
+        fechaProporcionada.getMonth(),
+        fechaProporcionada.getDate()
+    );
+
+    if (fechaProporcionadaCorta < fechaActualCorta) {
+        return "red";
+    } else {
+        return "green";
+    }
+}
 
 const calendarOptions = reactive({
     plugins: [dayGridPlugin, interactionPlugin],

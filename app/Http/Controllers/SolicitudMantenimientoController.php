@@ -31,9 +31,13 @@ class SolicitudMantenimientoController extends Controller
         return Inertia::render("SolicitudMantenimientos/Index");
     }
 
-    public function listado()
+    public function listado(Request $request)
     {
-        $solicitud_mantenimientos = SolicitudMantenimiento::all();
+        if ($request->order && $request->order == "desc") {
+            $solicitud_mantenimientos = SolicitudMantenimiento::orderBy("id", "desc")->get();
+        } else {
+            $solicitud_mantenimientos = SolicitudMantenimiento::all();
+        }
         return response()->JSON([
             "solicitud_mantenimientos" => $solicitud_mantenimientos
         ]);
@@ -46,10 +50,10 @@ class SolicitudMantenimientoController extends Controller
             ->with("biometrico");
 
         if (trim($search) != "") {
-            $solicitud_mantenimientos->where("nombre", "LIKE", "%$search%");
+            $solicitud_mantenimientos->where("codigo", "LIKE", "%$search%");
         }
 
-        $solicitud_mantenimientos = $solicitud_mantenimientos->paginate(5);
+        $solicitud_mantenimientos = $solicitud_mantenimientos->paginate($request->itemsPerPage);
         return response()->JSON([
             "solicitud_mantenimientos" => $solicitud_mantenimientos
         ]);
@@ -66,15 +70,22 @@ class SolicitudMantenimientoController extends Controller
             $this->validacion["biometrico_id"] = "required";
             $this->validacion["nombre_responsable"] = "required|min:1";
             $this->validacion["motivo_mantenimiento"] = "required|min:1";
-            $this->validacion["fecha_solicitud"] = "required|min:1";
+            $this->validacion["fecha_solicitud"] = "required|date";
             $this->validacion["array_repuestos"] = "required|min:1";
             $this->validacion["cronogramas"] = "required|min:1";
-
-            if (!$request->fecha_entrega) {
-                unset($request["fecha_entrega"]);
-            }
         }
         if (Auth::user()->tipo == 'TÉCNICO') {
+            $this->validacion["biometrico_id"] = "required";
+            $this->validacion["nombre_responsable"] = "required|min:1";
+            $this->validacion["motivo_mantenimiento"] = "required|min:1";
+            $this->validacion["fecha_solicitud"] = "required|date";
+            $this->validacion["fecha_entrega"] = "required|date";
+            $this->validacion["array_repuestos"] = "required|min:1";
+            $this->validacion["cronogramas"] = "required|min:1";
+        }
+
+        if (!$request->fecha_entrega) {
+            unset($request["fecha_entrega"]);
         }
         if (!$request->cronogramas || count($request->cronogramas) <= 0) {
             throw ValidationException::withMessages([
@@ -84,7 +95,6 @@ class SolicitudMantenimientoController extends Controller
         }
 
         $request->validate($this->validacion, $this->mensajes);
-
         DB::beginTransaction();
         try {
             $request["fecha_registro"] = date("Y-m-d");
@@ -128,6 +138,13 @@ class SolicitudMantenimientoController extends Controller
     {
     }
 
+    public function getById(SolicitudMantenimiento $solicitud_mantenimiento)
+    {
+        return response()->JSON([
+            "solicitud_mantenimiento" => $solicitud_mantenimiento->load(["cronogramas", "biometrico.unidad_area.user"])
+        ]);
+    }
+
     public function edit(SolicitudMantenimiento $solicitud_mantenimiento)
     {
         $solicitud_mantenimiento = $solicitud_mantenimiento->load(["cronogramas"]);
@@ -143,12 +160,20 @@ class SolicitudMantenimientoController extends Controller
             $this->validacion["fecha_solicitud"] = "required|min:1";
             $this->validacion["array_repuestos"] = "required|min:1";
             $this->validacion["cronogramas"] = "required|min:1";
-
-            if (!$request->fecha_entrega) {
-                unset($request["fecha_entrega"]);
-            }
         }
         if (Auth::user()->tipo == 'TÉCNICO') {
+            $this->validacion["biometrico_id"] = "required";
+            $this->validacion["tipo_mantenimiento"] = "required";
+            $this->validacion["nombre_responsable"] = "required|min:1";
+            $this->validacion["motivo_mantenimiento"] = "required|min:1";
+            $this->validacion["fecha_solicitud"] = "required|date";
+            // $this->validacion["fecha_entrega"] = "required|date";
+            $this->validacion["array_repuestos"] = "required|min:1";
+            $this->validacion["cronogramas"] = "required|min:1";
+        }
+
+        if (!$request->fecha_entrega) {
+            unset($request["fecha_entrega"]);
         }
         if (!$request->cronogramas || count($request->cronogramas) <= 0) {
             throw ValidationException::withMessages([

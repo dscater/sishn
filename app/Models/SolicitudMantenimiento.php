@@ -70,8 +70,6 @@ class SolicitudMantenimiento extends Model
         return explode(",", $this->repuestos);
     }
 
-
-
     public function getMasAttribute()
     {
         return false;
@@ -81,7 +79,7 @@ class SolicitudMantenimiento extends Model
     {
         $ultimo = SolicitudMantenimiento::orderBy("nro", "desc")->first();
         if ($ultimo) {
-            return (int)$ultimo + 1;
+            return (int)$ultimo->nro + 1;
         }
         return 1;
     }

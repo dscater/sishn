@@ -7,10 +7,10 @@ const breadbrums = [
         name_url: "inicio",
     },
     {
-        title: "Solicitud de Mantenimiento",
+        title: "Servicio",
         disabled: false,
-        url: route("solicitud_mantenimientos.index"),
-        name_url: "solicitud_mantenimientos.index",
+        url: route("servicios.index"),
+        name_url: "servicios.index",
     },
     {
         title: "Nuevo",
@@ -26,13 +26,19 @@ import { useApp } from "@/composables/useApp";
 import { Head } from "@inertiajs/vue3";
 import { onMounted } from "vue";
 import { useMenu } from "@/composables/useMenu";
-import { useSolicitudMantenimientos } from "@/composables/solicitud_mantenimientos/useSolicitudMantenimientos";
+import { useServicios } from "@/composables/servicios/useServicios";
 import Formulario from "./parcials/Formulario.vue";
 const { mobile, identificaDispositivo } = useMenu();
 const { setLoading } = useApp();
-const { oSolicitudMantenimiento, limpiarSolicitudMantenimiento } =
-    useSolicitudMantenimientos();
-limpiarSolicitudMantenimiento();
+const { oServicio, setServicio } = useServicios();
+
+const props = defineProps({
+    servicio: {
+        type: Object,
+    },
+});
+setServicio(props.servicio);
+
 onMounted(() => {
     setTimeout(() => {
         setLoading(false);
@@ -40,7 +46,7 @@ onMounted(() => {
 });
 </script>
 <template>
-    <Head title="Solicitud de Mantenimientos"></Head>
+    <Head title="Servicios"></Head>
     <v-container>
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
         <v-row class="mt-0">

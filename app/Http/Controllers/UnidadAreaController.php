@@ -45,7 +45,7 @@ class UnidadAreaController extends Controller
             $unidad_areas->where("nombre", "LIKE", "%$search%");
         }
 
-        $unidad_areas = $unidad_areas->paginate(5);
+        $unidad_areas = $unidad_areas->paginate($request->itemsPerPage);
         return response()->JSON([
             "unidad_areas" => $unidad_areas
         ]);

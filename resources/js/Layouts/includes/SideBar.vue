@@ -22,8 +22,8 @@ const user_logeado = ref({
 });
 
 const submenus = {
-    vuetify: "Multinivel1",
-    vuetify2: "Multinivel1",
+    "reportes.usuarios": "Reportes",
+    "reportes.solicitud_mantenimiento": "Reportes",
 };
 
 const route_current = ref("");
@@ -144,6 +144,28 @@ const scrollActive = () => {
             >
             <v-list-item
                 :class="[
+                    route_current == 'servicios.index' ||
+                    route_current == 'servicios.create' ||
+                    route_current == 'servicios.edit'
+                        ? 'active'
+                        : '',
+                ]"
+                v-if="oUser.permisos.includes('servicios.index')"
+                prepend-icon="mdi-list-box"
+                @click="cambiarUrl(route('servicios.index'))"
+                link
+            >
+                <v-list-item-title>Servicios</v-list-item-title>
+                <v-tooltip
+                    v-if="rail && !mobile"
+                    color="white"
+                    activator="parent"
+                    location="end"
+                    >Servicios</v-tooltip
+                >
+            </v-list-item>
+            <v-list-item
+                :class="[
                     route_current == 'solicitud_mantenimientos.index' ||
                     route_current == 'solicitud_mantenimientos.create' ||
                     route_current == 'solicitud_mantenimientos.edit'
@@ -151,7 +173,7 @@ const scrollActive = () => {
                         : '',
                 ]"
                 v-if="oUser.permisos.includes('solicitud_mantenimientos.index')"
-                prepend-icon="mdi-list-box"
+                prepend-icon="mdi-clipboard-list"
                 @click="cambiarUrl(route('solicitud_mantenimientos.index'))"
                 link
             >
@@ -185,7 +207,7 @@ const scrollActive = () => {
             <v-list-item
                 :class="[route_current == 'empresas.index' ? 'active' : '']"
                 v-if="oUser.permisos.includes('empresas.index')"
-                prepend-icon="mdi-list-box"
+                prepend-icon="mdi-office-building"
                 @click="cambiarUrl(route('empresas.index'))"
                 link
             >
@@ -201,7 +223,7 @@ const scrollActive = () => {
             <v-list-item
                 :class="[route_current == 'unidad_areas.index' ? 'active' : '']"
                 v-if="oUser.permisos.includes('unidad_areas.index')"
-                prepend-icon="mdi-list-box"
+                prepend-icon="mdi-view-list"
                 @click="cambiarUrl(route('unidad_areas.index'))"
                 link
             >
@@ -232,22 +254,33 @@ const scrollActive = () => {
                 >
             </v-list-item>
 
-            <v-list-item class="text-caption"
+            <v-list-item
+                class="text-caption"
+                v-if="
+                    oUser.permisos.includes('reportes.usuarios') ||
+                    oUser.permisos.includes('reportes.solicitud_mantenimiento')
+                "
                 ><span v-if="rail && !mobile" class="text-center d-block"
                     ><v-icon>mdi-dots-horizontal</v-icon></span
                 >
-                <span v-else>MULTINIVEL</span></v-list-item
+                <span v-else>REPORTES</span></v-list-item
             >
             <!-- SUBGROUP -->
-            <v-list-group value="Multinivel1">
+            <v-list-group
+                value="Reportes"
+                v-if="
+                    oUser.permisos.includes('reportes.usuarios') ||
+                    oUser.permisos.includes('reportes.solicitud_mantenimiento')
+                "
+            >
                 <template v-slot:activator="{ props }">
                     <v-list-item
                         v-bind="props"
-                        prepend-icon="mdi-list-box"
-                        title="Multinivel 1"
+                        prepend-icon="mdi-file-document-multiple"
+                        title="Reportes"
                         :class="[
-                            route_current == 'vuetify' ||
-                            route_current == 'vuetify2'
+                            route_current == 'reportes.usuarios' ||
+                            route_current == 'reportes.solicitud_mantenimiento'
                                 ? 'active'
                                 : '',
                         ]"
@@ -257,15 +290,17 @@ const scrollActive = () => {
                             color="white"
                             activator="parent"
                             location="end"
-                            >Multinivel 1</v-tooltip
+                            >Reportes</v-tooltip
                         ></v-list-item
                     >
                 </template>
                 <v-list-item
                     prepend-icon="mdi-chevron-right"
-                    title="Vuetify"
-                    :class="[route_current == 'vuetify' ? 'active' : '']"
-                    @click="cambiarUrl(route('vuetify'))"
+                    title="Usuarios"
+                    :class="[
+                        route_current == 'reportes.usuarios' ? 'active' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.usuarios'))"
                     link
                 >
                     <v-tooltip
@@ -273,12 +308,20 @@ const scrollActive = () => {
                         color="white"
                         activator="parent"
                         location="end"
-                        >Vuetify</v-tooltip
+                        >Usuarios</v-tooltip
                     ></v-list-item
                 >
                 <v-list-item
                     prepend-icon="mdi-chevron-right"
-                    title="Vuetify 2"
+                    title="Solicitud de Mantenimiento"
+                    :class="[
+                        route_current == 'reportes.solicitud_mantenimiento'
+                            ? 'active'
+                            : '',
+                    ]"
+                    @click="
+                        cambiarUrl(route('reportes.solicitud_mantenimiento'))
+                    "
                     link
                 >
                     <v-tooltip
@@ -286,10 +329,11 @@ const scrollActive = () => {
                         color="white"
                         activator="parent"
                         location="end"
-                        >Vuetify 2</v-tooltip
+                        >Solicitud de Mantenimiento</v-tooltip
                     ></v-list-item
                 >
             </v-list-group>
+            <!-- ################################################ -->
             <v-list-item class="text-caption"
                 ><span v-if="rail && !mobile" class="text-center d-block"
                     ><v-icon>mdi-dots-horizontal</v-icon></span

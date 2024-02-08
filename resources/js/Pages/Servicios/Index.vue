@@ -7,7 +7,7 @@ const breadbrums = [
         name_url: "inicio",
     },
     {
-        title: "Solicitud de Mantenimiento",
+        title: "Servicios",
         disabled: false,
         url: "",
         name_url: "",
@@ -19,7 +19,7 @@ import BreadBrums from "@/Components/BreadBrums.vue";
 import { useApp } from "@/composables/useApp";
 import { useMenu } from "@/composables/useMenu";
 import { Head } from "@inertiajs/vue3";
-import { useSolicitudMantenimientos } from "@/composables/solicitud_mantenimientos/useSolicitudMantenimientos";
+import { useServicios } from "@/composables/servicios/useServicios";
 import { ref, onMounted } from "vue";
 const { mobile, identificaDispositivo, cambiarUrl } = useMenu();
 const { setLoading } = useApp();
@@ -30,26 +30,27 @@ onMounted(() => {
     }, 300);
 });
 
-const { getSolicitudMantenimientosApi, deleteSolicitudMantenimiento } =
-    useSolicitudMantenimientos();
-const responseSolicitudMantenimientos = ref([]);
-const listSolicitudMantenimientos = ref([]);
+const { getServiciosApi, deleteServicio } = useServicios();
+const responseServicios = ref([]);
+const listServicios = ref([]);
 const itemsPerPage = ref(5);
 const headers = ref([
+    {
+        title: "Id",
+        align: "start",
+        sortable: true,
+    },
     {
         title: "Código Solicitud",
         align: "start",
         sortable: true,
     },
-    { title: "Fecha de Solicitud", align: "start" },
     { title: "Fecha de Entrega", align: "start" },
-    { title: "Equipo", align: "start" },
-    { title: "Repuestos", align: "start" },
-    { title: "Nombre Responsable", align: "start" },
-    { title: "C.I. Responsable", align: "start" },
-    { title: "Nombre Técnico", align: "start" },
-    { title: "C.I. Técnico", align: "start" },
-    { title: "Tipo Mantenimiento", align: "start" },
+    { title: "Procedimientos", align: "start" },
+    { title: "Observaciones", align: "start" },
+    { title: "Diagnostico Previo", align: "start" },
+    { title: "Estado del Equipo", align: "start" },
+    { title: "Trabajo Realizado", align: "start" },
     { title: "Más", align: "start" },
     { title: "Acción", align: "end", sortable: false },
 ]);
@@ -77,36 +78,29 @@ const loadItems = async ({ page, itemsPerPage, sortBy }) => {
 
     clearInterval(setTimeOutLoadData);
     setTimeOutLoadData = setTimeout(async () => {
-        responseSolicitudMantenimientos.value =
-            await getSolicitudMantenimientosApi(options.value);
-        listSolicitudMantenimientos.value =
-            responseSolicitudMantenimientos.value.data;
-        totalItems.value = parseInt(
-            responseSolicitudMantenimientos.value.total
-        );
+        responseServicios.value = await getServiciosApi(options.value);
+        listServicios.value = responseServicios.value.data;
+        totalItems.value = parseInt(responseServicios.value.total);
         loading.value = false;
     }, 300);
 };
-const recargaSolicitudMantenimientos = async () => {
+const recargaServicios = async () => {
     loading.value = true;
-    listSolicitudMantenimientos.value = [];
+    listServicios.value = [];
     options.value.search = search.value;
-    responseSolicitudMantenimientos.value = await getSolicitudMantenimientosApi(
-        options.value
-    );
-    listSolicitudMantenimientos.value =
-        responseSolicitudMantenimientos.value.data;
-    totalItems.value = parseInt(responseSolicitudMantenimientos.value.total);
+    responseServicios.value = await getServiciosApi(options.value);
+    listServicios.value = responseServicios.value.data;
+    totalItems.value = parseInt(responseServicios.value.total);
     setTimeout(() => {
         loading.value = false;
     }, 300);
 };
 
-const editarSolicitudMantenimiento = (item) => {
-    cambiarUrl(route("solicitud_mantenimientos.edit", item.id));
+const editarServicio = (item) => {
+    cambiarUrl(route("servicios.edit", item.id));
 };
 
-const eliminarSolicitudMantenimiento = (item) => {
+const eliminarServicio = (item) => {
     Swal.fire({
         title: "¿Quierés eliminar este registro?",
         html: `<strong>${item.codigo}</strong>`,
@@ -118,16 +112,16 @@ const eliminarSolicitudMantenimiento = (item) => {
     }).then(async (result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            let respuesta = await deleteSolicitudMantenimiento(item.id);
+            let respuesta = await deleteServicio(item.id);
             if (respuesta && respuesta.sw) {
-                recargaSolicitudMantenimientos();
+                recargaServicios();
             }
         }
     });
 };
 </script>
 <template>
-    <Head title="Solicitud de Mantenimiento"></Head>
+    <Head title="Servicios"></Head>
     <v-container>
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
         <v-row class="mt-0">
@@ -135,9 +129,7 @@ const eliminarSolicitudMantenimiento = (item) => {
                 <v-btn
                     color="yellow-lighten-1"
                     prepend-icon="mdi-plus"
-                    @click="
-                        cambiarUrl(route('solicitud_mantenimientos.create'))
-                    "
+                    @click="cambiarUrl(route('servicios.create'))"
                 >
                     Agregar</v-btn
                 >
@@ -150,9 +142,7 @@ const eliminarSolicitudMantenimiento = (item) => {
                         <v-row
                             class="bg-grey-darken-3 d-flex align-center pa-3"
                         >
-                            <v-col cols="12" sm="6" md="4">
-                                Solicitud de Mantenimiento
-                            </v-col>
+                            <v-col cols="12" sm="6" md="4"> Servicios </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field
                                     v-model="search"
@@ -171,7 +161,7 @@ const eliminarSolicitudMantenimiento = (item) => {
                             :headers="!mobile ? headers : []"
                             :class="[mobile ? 'mobile' : '']"
                             :items-length="totalItems"
-                            :items="listSolicitudMantenimientos"
+                            :items="listServicios"
                             :loading="loading"
                             :search="search"
                             @update:options="loadItems"
@@ -194,16 +184,19 @@ const eliminarSolicitudMantenimiento = (item) => {
                             <template v-slot:item="{ item }">
                                 <template v-if="!mobile">
                                     <tr>
-                                        <td>{{ item.codigo }}</td>
-                                        <td>{{ item.fecha_solicitud_t }}</td>
+                                        <td>{{ item.id }}</td>
+                                        <td>
+                                            {{
+                                                item.solicitud_mantenimiento
+                                                    .codigo
+                                            }}
+                                        </td>
                                         <td>{{ item.fecha_entrega_t }}</td>
-                                        <td>{{ item.biometrico.nombre }}</td>
-                                        <td>{{ item.repuestos_txt }}</td>
-                                        <td>{{ item.nombre_responsable }}</td>
-                                        <td>{{ item.ci_responsable }}</td>
-                                        <td>{{ item.nombre_tecnico }}</td>
-                                        <td>{{ item.ci_tecnico }}</td>
-                                        <td>{{ item.tipo_mantenimiento }}</td>
+                                        <td>{{ item.procedimientos }}</td>
+                                        <td>{{ item.observaciones }}</td>
+                                        <td>{{ item.diagnostico_previo }}</td>
+                                        <td>{{ item.estado_equipo }}</td>
+                                        <td>{{ item.trabajo_realizado }}</td>
                                         <td>
                                             <v-btn
                                                 :icon="
@@ -219,22 +212,14 @@ const eliminarSolicitudMantenimiento = (item) => {
                                                 color="yellow"
                                                 size="small"
                                                 class="pa-1 ma-1"
-                                                @click="
-                                                    editarSolicitudMantenimiento(
-                                                        item
-                                                    )
-                                                "
+                                                @click="editarServicio(item)"
                                                 icon="mdi-pencil"
                                             ></v-btn>
                                             <v-btn
                                                 color="error"
                                                 size="small"
                                                 class="pa-1 ma-1"
-                                                @click="
-                                                    eliminarSolicitudMantenimiento(
-                                                        item
-                                                    )
-                                                "
+                                                @click="eliminarServicio(item)"
                                                 icon="mdi-trash-can"
                                             ></v-btn>
                                         </td>
@@ -253,10 +238,10 @@ const eliminarSolicitudMantenimiento = (item) => {
                                                         <v-col
                                                             cols="12"
                                                             class="pb-0 text-caption font-weight-black"
-                                                            >Motivo de Mantenimiento</v-col
+                                                            >Capacitación</v-col
                                                         >
                                                         <v-col cols="12">{{
-                                                            item.motivo_mantenimiento
+                                                            item.capacitacion
                                                         }}</v-col>
                                                     </v-row>
                                                 </v-col>
@@ -268,10 +253,10 @@ const eliminarSolicitudMantenimiento = (item) => {
                                                         <v-col
                                                             cols="12"
                                                             class="pb-0 text-caption font-weight-black"
-                                                            >Diagnostico</v-col
+                                                            >Descripción</v-col
                                                         >
                                                         <v-col cols="12">{{
-                                                            item.diagnostico
+                                                            item.descripcion
                                                         }}</v-col>
                                                     </v-row>
                                                 </v-col>
@@ -283,11 +268,18 @@ const eliminarSolicitudMantenimiento = (item) => {
                                                         <v-col
                                                             cols="12"
                                                             class="pb-0 text-caption font-weight-black"
-                                                            >Otros</v-col
+                                                            >Fecha Inicio -
+                                                            Fecha Fin</v-col
                                                         >
-                                                        <v-col cols="12">{{
-                                                            item.otros
-                                                        }}</v-col>
+                                                        <v-col cols="12"
+                                                            >{{
+                                                                item.fecha_ini_t
+                                                            }}
+                                                            -
+                                                            {{
+                                                                item.fecha_fin_t
+                                                            }}</v-col
+                                                        >
                                                     </v-row>
                                                 </v-col>
                                                 <v-col
@@ -407,9 +399,7 @@ const eliminarSolicitudMantenimiento = (item) => {
                                                         size="small"
                                                         class="pa-1 ma-1"
                                                         @click="
-                                                            editarSolicitudMantenimiento(
-                                                                item
-                                                            )
+                                                            editarServicio(item)
                                                         "
                                                         icon="mdi-pencil"
                                                     ></v-btn>
@@ -418,7 +408,7 @@ const eliminarSolicitudMantenimiento = (item) => {
                                                         size="small"
                                                         class="pa-1 ma-1"
                                                         @click="
-                                                            eliminarSolicitudMantenimiento(
+                                                            eliminarServicio(
                                                                 item
                                                             )
                                                         "

@@ -76,7 +76,6 @@ const cargarRepuestos = async () => {
 };
 
 onMounted(() => {
-    form = useForm(oSolicitudMantenimiento);
     cargarBiometricos();
     cargarRepuestos();
 });
@@ -354,13 +353,13 @@ onMounted(() => {
                                         "
                                         variant="outlined"
                                         type="date"
-                                        label="Fecha Solicitud"
+                                        label="Fecha Solicitud*"
                                         required
                                         density="compact"
                                         v-model="form.fecha_solicitud"
                                     ></v-text-field>
                                 </v-col>
-                                <v-col cols="12" sm="12" md="12" xl="6">
+                                <!-- <v-col cols="12" sm="12" md="12" xl="6">
                                     <v-text-field
                                         :hide-details="
                                             form.errors?.fecha_entrega
@@ -379,13 +378,12 @@ onMounted(() => {
                                         "
                                         variant="outlined"
                                         type="date"
-                                        label="Fecha Etnrega"
-                                        readonly
+                                        label="Fecha Entrega"
                                         required
                                         density="compact"
                                         v-model="form.fecha_entrega"
                                     ></v-text-field>
-                                </v-col>
+                                </v-col> -->
                                 <v-col cols="12" sm="12" md="12" xl="6">
                                     <v-select
                                         :hide-details="

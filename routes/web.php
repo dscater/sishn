@@ -4,7 +4,9 @@ use App\Http\Controllers\BiometricoController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\RepuestoController;
+use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\SolicitudMantenimientoController;
 use App\Http\Controllers\UnidadAreaController;
 use App\Http\Controllers\UserController;
@@ -44,15 +46,15 @@ Route::get('/', function () {
 Route::get("institucions/getInstitucion", [InstitucionController::class, 'getInstitucion'])->name("institucions.getInstitucion");
 
 Route::middleware('auth')->group(function () {
-    // BORRAR
-    Route::get('/vuetify', function () {
-        return Inertia::render('Vuetify/Index');
-    })->name("vuetify");
-
     // INICIO
     Route::get('/inicio', function () {
         return Inertia::render('Home');
     })->name('inicio');
+
+    // INSTITUCION
+    Route::resource("institucions", InstitucionController::class)->only(
+        ["index", "show", "update"]
+    );
 
     // USUARIO
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -103,16 +105,27 @@ Route::middleware('auth')->group(function () {
     );
 
     // SOLICITUD DE MANTENIMIENTOS
+    Route::get("/solicitud_mantenimientos/getById/{solicitud_mantenimiento}", [SolicitudMantenimientoController::class, 'getById'])->name("solicitud_mantenimientos.getById");
     Route::get("/solicitud_mantenimientos/paginado", [SolicitudMantenimientoController::class, 'paginado'])->name("solicitud_mantenimientos.paginado");
     Route::get("/solicitud_mantenimientos/listado", [SolicitudMantenimientoController::class, 'listado'])->name("solicitud_mantenimientos.listado");
     Route::resource("solicitud_mantenimientos", SolicitudMantenimientoController::class)->only(
         ["index", "create", "edit", "store", "show", "update", "destroy"]
     );
 
-    // INSTITUCION
-    Route::resource("institucions", InstitucionController::class)->only(
-        ["index", "show", "update"]
+    // SERVICIOS
+    Route::get("/servicios/paginado", [ServicioController::class, 'paginado'])->name("servicios.paginado");
+    Route::get("/servicios/listado", [ServicioController::class, 'listado'])->name("servicios.listado");
+    Route::resource("servicios", ServicioController::class)->only(
+        ["index", "create", "edit", "store", "show", "update", "destroy"]
     );
+
+
+    // REPORTES
+    Route::get('reportes/usuarios', [ReporteController::class, 'usuarios'])->name("reportes.usuarios");
+    Route::get('reportes/r_usuarios', [ReporteController::class, 'r_usuarios'])->name("reportes.r_usuarios");
+    
+    Route::get('reportes/solicitud_mantenimiento', [ReporteController::class, 'solicitud_mantenimiento'])->name("reportes.solicitud_mantenimiento");
+    Route::get('reportes/r_solicitud_mantenimiento', [ReporteController::class, 'r_solicitud_mantenimiento'])->name("reportes.r_solicitud_mantenimiento");
 });
 
 require __DIR__ . '/auth.php';

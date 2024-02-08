@@ -199,7 +199,7 @@ const eliminarUsuario = (item) => {
                                     <td>{{ item.email }}</td>
                                     <td>{{ item.fono }}</td>
                                     <td>
-                                        <v-avatar color="blue">
+                                        <v-avatar color="yellow-lighten-1">
                                             <v-img
                                                 v-if="item.url_foto"
                                                 :src="item.url_foto"

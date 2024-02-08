@@ -30,16 +30,20 @@ const oCronograma = ref({
     descripcion: "",
     date: "",
     user_id: "",
+    backgrounColor: "",
 });
 
 export const useSolicitudMantenimientos = () => {
     const { flash } = usePage().props;
-    const getSolicitudMantenimientos = async () => {
+    const getSolicitudMantenimientos = async (order = "") => {
         try {
             const response = await axios.get(
                 route("solicitud_mantenimientos.listado"),
                 {
                     headers: { Accept: "application/json" },
+                    params: {
+                        order: order,
+                    },
                 }
             );
             return response.data.solicitud_mantenimientos;
@@ -89,6 +93,36 @@ export const useSolicitudMantenimientos = () => {
             throw err; // Puedes manejar el error según tus necesidades
         }
     };
+
+    const getSolicitudMantenimientoById = async (id, params = {}) => {
+        try {
+            const response = await axios.get(
+                route("solicitud_mantenimientos.getById", id),
+                {
+                    headers: { Accept: "application/json" },
+                    params,
+                }
+            );
+            return response.data.solicitud_mantenimiento;
+        } catch (err) {
+            Swal.fire({
+                icon: "info",
+                title: "Error",
+                text: `${
+                    flash.error
+                        ? flash.error
+                        : err.error
+                        ? err.error
+                        : "Error al obtener los registros"
+                }`,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: `Aceptar`,
+            });
+            console.error("Error:", err);
+            throw err; // Puedes manejar el error según tus necesidades
+        }
+    };
+
     const saveSolicitudMantenimiento = async (data) => {
         try {
             const response = await axios.post(
@@ -177,7 +211,8 @@ export const useSolicitudMantenimientos = () => {
             oSolicitudMantenimiento.fecha_solicitud = item.fecha_solicitud;
             oSolicitudMantenimiento.fecha_entrega = item.fecha_entrega;
             oSolicitudMantenimiento.biometrico_id = item.biometrico_id;
-            oSolicitudMantenimiento.array_repuestos = item.array_repuestos.map(Number);
+            oSolicitudMantenimiento.array_repuestos =
+                item.array_repuestos.map(Number);
             oSolicitudMantenimiento.repuestos = item.repuestos;
             oSolicitudMantenimiento.cronogramas = reactive(item.cronogramas);
             oSolicitudMantenimiento.eliminados = reactive([]);
@@ -236,6 +271,7 @@ export const useSolicitudMantenimientos = () => {
         oCronograma,
         getSolicitudMantenimientos,
         getSolicitudMantenimientosApi,
+        getSolicitudMantenimientoById,
         saveSolicitudMantenimiento,
         deleteSolicitudMantenimiento,
         setSolicitudMantenimiento,

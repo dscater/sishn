@@ -229,7 +229,9 @@ const cerrarDialog = () => {
                                         :hide-details="
                                             form.errors?.correo ? false : true
                                         "
-                                        :error="form.errors?.correo ? true : false"
+                                        :error="
+                                            form.errors?.correo ? true : false
+                                        "
                                         :error-messages="
                                             form.errors?.correo
                                                 ? form.errors?.correo
@@ -247,9 +249,7 @@ const cerrarDialog = () => {
                                         :hide-details="
                                             form.errors?.dir ? false : true
                                         "
-                                        :error="
-                                            form.errors?.dir ? true : false
-                                        "
+                                        :error="form.errors?.dir ? true : false"
                                         :error-messages="
                                             form.errors?.dir
                                                 ? form.errors?.dir
