@@ -44,14 +44,34 @@ const headers = ref([
     {
         title: "Id",
         align: "start",
-        sortable: true,
         key: "id",
+        sortable: false,
     },
-    { title: "Nombre Unidad/Área", key: "nombre", align: "start" },
-    { title: "Descripción", key: "descripcion", align: "start" },
-    { title: "Responsable", key: "user.full_name", align: "start" },
-    { title: "Ubicación Área", key: "email", align: "start" },
-    { title: "Fecha de Registro", key: "fecha_registro_t", align: "start" },
+    {
+        title: "Nombre Unidad/Área",
+        key: "nombre",
+        align: "start",
+        sortable: false,
+    },
+    {
+        title: "Descripción",
+        key: "descripcion",
+        align: "start",
+        sortable: false,
+    },
+    {
+        title: "Responsable",
+        key: "user.full_name",
+        align: "start",
+        sortable: false,
+    },
+    { title: "Ubicación Área", key: "email", align: "start", sortable: false },
+    {
+        title: "Fecha de Registro",
+        key: "fecha_registro_t",
+        align: "start",
+        sortable: false,
+    },
     { title: "Acción", key: "accion", align: "end", sortable: false },
 ]);
 
@@ -147,7 +167,9 @@ const eliminarUnidadArea = (item) => {
             <v-col cols="12">
                 <v-card flat>
                     <v-card-title>
-                        <v-row class="bg-grey-darken-3 d-flex align-center pa-3">
+                        <v-row
+                            class="bg-grey-darken-3 d-flex align-center pa-3"
+                        >
                             <v-col cols="12" sm="6" md="4">
                                 Unidades/Áreas
                             </v-col>

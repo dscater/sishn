@@ -40,18 +40,18 @@ const headers = ref([
     {
         title: "Id",
         align: "start",
-        sortable: true,
         key: "id",
+        sortable: false,
     },
-    { title: "Usuario", key: "usuario", align: "start" },
-    { title: "Nombre", key: "full_name", align: "start" },
-    { title: "C.I.", key: "full_ci", align: "start" },
-    { title: "Dirección", key: "dir", align: "start" },
-    { title: "Correo", key: "email", align: "start" },
-    { title: "Teléfono/Celular", key: "fono", align: "start" },
+    { title: "Usuario", key: "usuario", align: "start", sortable: false },
+    { title: "Nombre", key: "full_name", align: "start", sortable: false },
+    { title: "C.I.", key: "full_ci", align: "start", sortable: false },
+    { title: "Dirección", key: "dir", align: "start", sortable: false },
+    { title: "Correo", key: "email", align: "start", sortable: false },
+    { title: "Teléfono/Celular", key: "fono", align: "start", sortable: false },
     { title: "Foto", key: "foto", align: "start", sortable: false },
-    { title: "Tipo", key: "tipo", align: "start" },
-    { title: "Acceso", key: "acceso", align: "start" },
+    { title: "Tipo", key: "tipo", align: "start", sortable: false },
+    { title: "Acceso", key: "acceso", align: "start", sortable: false },
     { title: "Acción", key: "accion", align: "end", sortable: false },
 ]);
 
@@ -147,7 +147,9 @@ const eliminarUsuario = (item) => {
             <v-col cols="12">
                 <v-card flat>
                     <v-card-title>
-                        <v-row class="bg-grey-darken-3 d-flex align-center pa-3">
+                        <v-row
+                            class="bg-grey-darken-3 d-flex align-center pa-3"
+                        >
                             <v-col cols="12" sm="6" md="4"> Usuarios </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field

@@ -34,6 +34,7 @@ const pinia = createPinia();
 import "./assets/css/config.css";
 import "./assets/css/datatables.css";
 import "./assets/css/form.css";
+import "./assets/css/fullCalendarConfig.css";
 
 // Default Layout
 import App from "@/Layouts/App.vue";

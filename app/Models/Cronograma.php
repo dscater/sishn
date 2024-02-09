@@ -15,7 +15,12 @@ class Cronograma extends Model
         "user_id",
     ];
 
-    protected $appends = ["backgroundColor"];
+    protected $appends = ["backgroundColor", "date_t"];
+
+    public function getDateTAttribute()
+    {
+        return date("d/m/Y", strtotime($this->date));
+    }
 
     public function getBackgroundColorAttribute()
     {

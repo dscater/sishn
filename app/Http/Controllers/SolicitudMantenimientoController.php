@@ -177,6 +177,11 @@ class SolicitudMantenimientoController extends Controller
     {
     }
 
+    public function cronogramas()
+    {
+        return Inertia::render(("SolicitudMantenimientos/Calendario"));
+    }
+
     public function getById(SolicitudMantenimiento $solicitud_mantenimiento)
     {
         return response()->JSON([

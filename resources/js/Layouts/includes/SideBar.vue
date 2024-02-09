@@ -24,6 +24,8 @@ const user_logeado = ref({
 const submenus = {
     "reportes.usuarios": "Reportes",
     "reportes.solicitud_mantenimiento": "Reportes",
+    "reportes.servicio": "Reportes",
+    "reportes.equipos": "Reportes",
 };
 
 const route_current = ref("");
@@ -135,7 +137,14 @@ const scrollActive = () => {
             </v-list-item>
             <v-list-item
                 class="text-caption"
-                v-if="oUser.permisos.includes('usuarios.index')"
+                v-if="
+                    oUser.permisos.includes('usuarios.index') ||
+                    oUser.permisos.includes('servicios.index') ||
+                    oUser.permisos.includes('solicitud_mantenimientos.index') ||
+                    oUser.permisos.includes('biometricos.index') ||
+                    oUser.permisos.includes('empresas.index') ||
+                    oUser.permisos.includes('unidad_areas.index')
+                "
             >
                 <span v-if="rail && !mobile" class="text-center d-block"
                     ><v-icon>mdi-dots-horizontal</v-icon></span
@@ -168,7 +177,8 @@ const scrollActive = () => {
                 :class="[
                     route_current == 'solicitud_mantenimientos.index' ||
                     route_current == 'solicitud_mantenimientos.create' ||
-                    route_current == 'solicitud_mantenimientos.edit'
+                    route_current == 'solicitud_mantenimientos.edit' ||
+                    route_current == 'solicitud_mantenimientos.cronogramas'
                         ? 'active'
                         : '',
                 ]"
@@ -258,7 +268,10 @@ const scrollActive = () => {
                 class="text-caption"
                 v-if="
                     oUser.permisos.includes('reportes.usuarios') ||
-                    oUser.permisos.includes('reportes.solicitud_mantenimiento')
+                    oUser.permisos.includes(
+                        'reportes.solicitud_mantenimiento'
+                    ) ||
+                    oUser.permisos.includes('reportes.servicio')
                 "
                 ><span v-if="rail && !mobile" class="text-center d-block"
                     ><v-icon>mdi-dots-horizontal</v-icon></span
@@ -270,7 +283,11 @@ const scrollActive = () => {
                 value="Reportes"
                 v-if="
                     oUser.permisos.includes('reportes.usuarios') ||
-                    oUser.permisos.includes('reportes.solicitud_mantenimiento')
+                    oUser.permisos.includes(
+                        'reportes.solicitud_mantenimiento'
+                    ) ||
+                    oUser.permisos.includes('reportes.servicio') ||
+                    oUser.permisos.includes('reportes.equipos')
                 "
             >
                 <template v-slot:activator="{ props }">
@@ -280,7 +297,10 @@ const scrollActive = () => {
                         title="Reportes"
                         :class="[
                             route_current == 'reportes.usuarios' ||
-                            route_current == 'reportes.solicitud_mantenimiento'
+                            route_current ==
+                                'reportes.solicitud_mantenimiento' ||
+                            route_current == 'reportes.servicio' ||
+                            route_current == 'reportes.equipos'
                                 ? 'active'
                                 : '',
                         ]"
@@ -313,7 +333,11 @@ const scrollActive = () => {
                     ></v-list-item
                 >
                 <v-list-item
-                    v-if="oUser.permisos.includes('reportes.solicitud_mantenimiento')"
+                    v-if="
+                        oUser.permisos.includes(
+                            'reportes.solicitud_mantenimiento'
+                        )
+                    "
                     prepend-icon="mdi-chevron-right"
                     title="Solicitud de Mantenimiento"
                     :class="[
@@ -332,6 +356,42 @@ const scrollActive = () => {
                         activator="parent"
                         location="end"
                         >Solicitud de Mantenimiento</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.servicio')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Informe de Servicio"
+                    :class="[
+                        route_current == 'reportes.servicio' ? 'active' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.servicio'))"
+                    link
+                >
+                    <v-tooltip
+                        v-if="rail && !mobile"
+                        color="white"
+                        activator="parent"
+                        location="end"
+                        >Informe de Servicio</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.equipos')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Lista de Equipos"
+                    :class="[
+                        route_current == 'reportes.equipos' ? 'active' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.equipos'))"
+                    link
+                >
+                    <v-tooltip
+                        v-if="rail && !mobile"
+                        color="white"
+                        activator="parent"
+                        location="end"
+                        >Lista de Equipos</v-tooltip
                     ></v-list-item
                 >
             </v-list-group>

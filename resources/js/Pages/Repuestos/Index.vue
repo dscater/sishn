@@ -40,9 +40,9 @@ const headers = ref([
     {
         title: "Id",
         align: "start",
-        sortable: true,
+        sortable: false,
     },
-    { title: "Nombre", align: "start", sortable: true },
+    { title: "Nombre", align: "start", sortable: false },
     { title: "Acción", align: "end", sortable: false },
 ]);
 
@@ -141,9 +141,7 @@ const eliminarRepuesto = (item) => {
                         <v-row
                             class="bg-grey-darken-3 d-flex align-center pa-3"
                         >
-                            <v-col cols="12" sm="6" md="4">
-                                Repuestos
-                            </v-col>
+                            <v-col cols="12" sm="6" md="4"> Repuestos </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field
                                     v-model="search"

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Biometrico;
+use App\Models\Servicio;
 use App\Models\SolicitudMantenimiento;
 use App\Models\UnidadArea;
 use App\Models\User;
@@ -64,5 +66,56 @@ class ReporteController extends Controller
         $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
 
         return $pdf->stream('solicitud_mantenimiento.pdf');
+    }
+
+    public function servicio()
+    {
+        return Inertia::render("Reportes/Servicio");
+    }
+
+    public function r_servicio(Request $request)
+    {
+        $unidad_area_id =  $request->unidad_area_id;
+        $solicitud_mantenimiento_id =  $request->solicitud_mantenimiento_id;
+        $unidad_area = UnidadArea::find($unidad_area_id);
+        $servicios = Servicio::where("solicitud_mantenimiento_id", $solicitud_mantenimiento_id)->get();
+        $pdf = PDF::loadView('reportes.servicio', compact('servicios', 'unidad_area'))->setPaper('letter', 'portrait');
+
+        // ENUMERAR LAS PÁGINAS USANDO CANVAS
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $alto = $canvas->get_height();
+        $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
+
+        return $pdf->stream('servicio.pdf');
+    }
+
+    public function equipos()
+    {
+        return Inertia::render("Reportes/Equipos");
+    }
+
+    public function r_equipos(Request $request)
+    {
+        $unidad_area_id =  $request->unidad_area_id;
+        $unidad_areas = [];
+        if ($unidad_area_id != 'todos') {
+            $unidad_areas = UnidadArea::where("id", $unidad_area_id)->get();
+        } else {
+            $unidad_areas = UnidadArea::all();
+        }
+        $pdf = PDF::loadView('reportes.equipos', compact('unidad_areas'))->setPaper('letter', 'portrait');
+
+        // ENUMERAR LAS PÁGINAS USANDO CANVAS
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $alto = $canvas->get_height();
+        $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
+
+        return $pdf->stream('equipos.pdf');
     }
 }

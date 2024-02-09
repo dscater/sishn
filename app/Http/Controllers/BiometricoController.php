@@ -37,7 +37,14 @@ class BiometricoController extends Controller
 
     public function listado()
     {
-        $biometricos = Biometrico::select("biometricos.*")->get();
+        $biometricos = Biometrico::select("biometricos.*");
+
+        if (Auth::user()->tipo == 'JEFE DE ÁREA') {
+            $unidad_area = Auth::user()->unidad_area;
+            $biometricos = $biometricos->where("unidad_area_id", $unidad_area->id);
+        }
+        $biometricos = $biometricos->get();
+
         return response()->JSON([
             "biometricos" => $biometricos
         ]);
@@ -47,6 +54,10 @@ class BiometricoController extends Controller
     {
         $search = $request->search;
         $biometricos = Biometrico::select("biometricos.*")->with(["unidad_area", "empresa"]);
+        if (Auth::user()->tipo == 'JEFE DE ÁREA') {
+            $unidad_area = Auth::user()->unidad_area;
+            $biometricos = $biometricos->where("unidad_area_id", $unidad_area->id);
+        }
         if (trim($search) != "") {
             $biometricos->where("nombre", "LIKE", "%$search%");
         }

@@ -1,5 +1,6 @@
 <script setup>
 import { useSolicitudMantenimientos } from "@/composables/solicitud_mantenimientos/useSolicitudMantenimientos";
+import { usePage } from "@inertiajs/vue3";
 import { watch, ref, computed, defineEmits, onMounted } from "vue";
 const props = defineProps({
     open_dialog: {
@@ -39,7 +40,10 @@ const txtBtnGuardar = computed(() => {
 });
 
 const agregarCronograma = () => {
-    if (oCronograma.value.date.trim() != "" && oCronograma.value.descripcion.trim() != "") {
+    if (
+        oCronograma.value.date.trim() != "" &&
+        oCronograma.value.descripcion.trim() != ""
+    ) {
         emits("envio-formulario");
     } else {
         Swal.fire({
@@ -72,6 +76,7 @@ const cerrarDialog = () => {
     dialog.value = false;
 };
 
+const user = usePage().props.auth.user;
 onMounted(async () => {});
 </script>
 
@@ -95,43 +100,66 @@ onMounted(async () => {});
                     <v-container>
                         <form>
                             <v-row>
-                                <v-col cols="12" sm="12" md="12">
-                                    <v-text-field
-                                        :hide-details="
-                                            errors?.date ? false : true
-                                        "
-                                        :error="errors?.date ? true : false"
-                                        :error-messages="
-                                            errors?.date ? errors?.date : ''
-                                        "
-                                        type="date"
-                                        variant="outlined"
-                                        label="Fecha"
-                                        density="compact"
-                                        v-model="oCronograma.date"
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="12">
-                                    <v-textarea
-                                        :hide-details="
-                                            errors?.descripcion ? false : true
-                                        "
-                                        :error="
-                                            errors?.descripcion ? true : false
-                                        "
-                                        :error-messages="
-                                            errors?.descripcion
-                                                ? errors?.descripcion
-                                                : ''
-                                        "
-                                        variant="outlined"
-                                        label="Descripción"
-                                        rows="1"
-                                        auto-grow
-                                        density="compact"
-                                        v-model="oCronograma.descripcion"
-                                    ></v-textarea>
-                                </v-col>
+                                <template
+                                    v-if="
+                                        oCronograma.id == '' ||
+                                        oCronograma.user_id == user.id
+                                    "
+                                >
+                                    <v-col cols="12" sm="12" md="12">
+                                        <v-text-field
+                                            :hide-details="
+                                                errors?.date ? false : true
+                                            "
+                                            :error="errors?.date ? true : false"
+                                            :error-messages="
+                                                errors?.date ? errors?.date : ''
+                                            "
+                                            type="date"
+                                            variant="outlined"
+                                            label="Fecha"
+                                            density="compact"
+                                            v-model="oCronograma.date"
+                                        ></v-text-field>
+                                    </v-col>
+                                    <v-col cols="12" sm="12" md="12">
+                                        <v-textarea
+                                            :hide-details="
+                                                errors?.descripcion
+                                                    ? false
+                                                    : true
+                                            "
+                                            :error="
+                                                errors?.descripcion
+                                                    ? true
+                                                    : false
+                                            "
+                                            :error-messages="
+                                                errors?.descripcion
+                                                    ? errors?.descripcion
+                                                    : ''
+                                            "
+                                            variant="outlined"
+                                            label="Descripción"
+                                            rows="1"
+                                            auto-grow
+                                            density="compact"
+                                            v-model="oCronograma.descripcion"
+                                        ></v-textarea>
+                                    </v-col>
+                                </template>
+                                <template v-else> 
+                                    <v-col cols="12">
+                                        <v-row>
+                                            <v-col cols="4" class="text-body-2 text-right">Fecha:</v-col>
+                                            <v-col cols="8">{{ oCronograma.date }}</v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col cols="4" class="text-body-2 text-right">Descripción:</v-col>
+                                            <v-col cols="8">{{ oCronograma.descripcion }}</v-col>
+                                        </v-row>
+                                    </v-col>
+                                </template>
                             </v-row>
                         </form>
                     </v-container>
@@ -143,10 +171,14 @@ onMounted(async () => {});
                         variant="text"
                         @click="cerrarDialog"
                     >
-                        Cancelar
+                        Cerrar
                     </v-btn>
                     <v-btn
-                        v-if="accion == 1"
+                        v-if="
+                            accion == 1 &&
+                            (oCronograma.id == '' ||
+                                oCronograma.user_id == user.id)
+                        "
                         class="bg-red-darken-3"
                         prepend-icon="mdi-trash-can"
                         @click="eliminarEvento"
@@ -154,6 +186,10 @@ onMounted(async () => {});
                         Eliminar
                     </v-btn>
                     <v-btn
+                        v-if="
+                            oCronograma.id == '' ||
+                            oCronograma.user_id == user.id
+                        "
                         class="bg-yellow-lighten-1"
                         :prepend-icon="
                             accion == 1 ? 'mdi-sync' : 'mdi-content-save'

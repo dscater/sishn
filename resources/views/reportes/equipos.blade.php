@@ -20,7 +20,7 @@
             width: 100%;
             border-collapse: collapse;
             table-layout: fixed;
-            margin-top: 20px;
+            margin-top: 40px;
             page-break-before: avoid;
         }
 
@@ -35,7 +35,7 @@
         }
 
         table tbody tr td {
-            font-size: 8pt;
+            font-size: 7pt;
         }
 
 
@@ -150,6 +150,26 @@
         .break_page {
             page-break-after: always;
         }
+
+        .border_top {
+            border-top: solid 1px black;
+        }
+
+        .border_bot {
+            border-bottom: solid 1px black;
+        }
+
+        .padding_top {
+            padding-top: 6px;
+        }
+
+        .padding_bot {
+            padding-bottom: 6px;
+        }
+
+        td.foto img{
+            width: 40px;
+        }
     </style>
 </head>
 
@@ -158,81 +178,67 @@
     @php
         $cont = 0;
     @endphp
-    @foreach ($solicitud_mantenimientos as $sm)
+    @foreach ($unidad_areas as $ua)
         <div class="encabezado">
             <div class="logo">
                 <img src="{{ $institucion->first()->url_logo }}">
             </div>
-            <div class="qr">
-                <img src="{{ $sm->qr }}" alt="">
-            </div>
             <h2 class="titulo">
                 {{ $institucion->first()->nombre }}
             </h2>
-            <h4 class="texto">SOLICITUD MANTENIMIENTO Y/O REPARACIÓN</h4>
-            <h4 class="texto">UNIDAD DE SERVICIOS GENERALES</h4>
+            <h4 class="texto">LISTA DE EQUIPOS BIOMÉTRICOS</h4>
         </div>
 
         <table border="1">
+            <thead>
+                <tr>
+                    <th colspan="9">{{ $ua->nombre }}</th>
+                </tr>
+                <tr>
+                    <th width="5%">N°</th>
+                    <th>NOMBRE</th>
+                    <th width="14%">EQUIPO</th>
+                    <th>FECHA INGRESO</th>
+                    <th>GARANTÍA</th>
+                    <th>CÓDIGO H.D.N.</th>
+                    <th>EMPRESA</th>
+                    <th>IMAGEN</th>
+                    <th>FECHA REGISTRO</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr>
-                    <td class="bold" width="20%">CÓDIGO: </td>
-                    <td colspan="3">{{ $sm->codigo }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">UNIDAD SOLICITANTE: </td>
-                    <td colspan="3">{{ $unidad_area->nombre }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">FECHA DE SOLICITUD: </td>
-                    <td>{{ $sm->fecha_solicitud_t }}</td>
-                    <td class="bold" width="20%">FECHA DE ENTREGA: </td>
-                    <td>{{ $sm->fecha_entrega_t }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">NOMBRE DEL RESPONSABLE: </td>
-                    <td>{{ $sm->nombre_responsable }}</td>
-                    <td class="bold" width="20%">C.I. RESPONSABLE: </td>
-                    <td>{{ $sm->ci_responsable }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">NOMBRE TÉCNICO: </td>
-                    <td>{{ $sm->nombre_tecnico }}</td>
-                    <td class="bold" width="20%">C.I. TÉCNICO: </td>
-                    <td>{{ $sm->ci_tecnico }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">TIPO DE MANTENIMIENTO: </td>
-                    <td colspan="3">{{ $sm->tipo_mantenimiento }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">MOTIVO MANTENIMIENTO: </td>
-                    <td colspan="3">{{ $sm->motivo_mantenimiento }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">DIAGNOSTICO: </td>
-                    <td colspan="3">{{ $sm->diagnostico }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">OTROS: </td>
-                    <td colspan="3">{{ $sm->otros }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">EQUIPO: </td>
-                    <td colspan="3">{{ $sm->biometrico->nombre }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">REPUESTOS: </td>
-                    <td colspan="3">
-                        {{ $sm->repuestos_txt }}
-                    </td>
-                </tr>
+                @php
+                    $nro_reg = 1;
+                @endphp
+                @foreach ($ua->biometricos as $biometrico)
+                    <tr>
+                        <td class="centreado">{{ $nro_reg++ }}</td>
+                        <td>{{ $biometrico->nombre }}</td>
+                        <td>
+                            MARCA: {{ $biometrico->marca }};<br />
+                            MODELO: {{ $biometrico->marca }};<br />
+                            SN: {{ $biometrico->marca }}<br />
+                        </td>
+                        <td>{{ $biometrico->fecha_ingreso_t }}</td>
+                        <td>{{ $biometrico->garantia }}</td>
+                        <td>{{ $biometrico->cod_hdn }}</td>
+                        <td>{{ $biometrico->empresa->nombre }}</td>
+                        <td class="centreado foto">
+                            @if ($biometrico->url_foto)
+                                <img src="{{ $biometrico->url_foto }}" alt="">
+                            @else
+                                S/I
+                            @endif
+                        </td>
+                        <td>{{ $biometrico->fecha_registro_t }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
         @php
             $cont++;
         @endphp
-        @if ($cont < count($solicitud_mantenimientos))
+        @if ($cont < count($unidad_areas))
             <div class="break_page"></div>
         @endif
     @endforeach

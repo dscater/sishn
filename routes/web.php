@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\BiometricoController;
+use App\Http\Controllers\CronogramaController;
 use App\Http\Controllers\EmpresaController;
+use App\Http\Controllers\InicioController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReporteController;
@@ -47,9 +49,7 @@ Route::get("institucions/getInstitucion", [InstitucionController::class, 'getIns
 
 Route::middleware('auth')->group(function () {
     // INICIO
-    Route::get('/inicio', function () {
-        return Inertia::render('Home');
-    })->name('inicio');
+    Route::get('/inicio', [InicioController::class, 'inicio'])->name('inicio');
 
     // INSTITUCION
     Route::resource("institucions", InstitucionController::class)->only(
@@ -105,6 +105,7 @@ Route::middleware('auth')->group(function () {
     );
 
     // SOLICITUD DE MANTENIMIENTOS
+    Route::get("/solicitud_mantenimientos/cronogramas", [SolicitudMantenimientoController::class, 'cronogramas'])->name("solicitud_mantenimientos.cronogramas");
     Route::get("/solicitud_mantenimientos/getByUnidadAreaId", [SolicitudMantenimientoController::class, 'getByUnidadAreaId'])->name("solicitud_mantenimientos.getByUnidadAreaId");
     Route::get("/solicitud_mantenimientos/getById/{solicitud_mantenimiento}", [SolicitudMantenimientoController::class, 'getById'])->name("solicitud_mantenimientos.getById");
     Route::get("/solicitud_mantenimientos/paginado", [SolicitudMantenimientoController::class, 'paginado'])->name("solicitud_mantenimientos.paginado");
@@ -120,13 +121,24 @@ Route::middleware('auth')->group(function () {
         ["index", "create", "edit", "store", "show", "update", "destroy"]
     );
 
+    // CRONOGRAMAS
+    Route::get("/cronogramas/listado", [CronogramaController::class, 'listado'])->name("cronogramas.listado");
+    // Route::resource("cronogramas", CronogramaController::class)->only(
+    //     ["index", "store", "show", "update", "destroy"]
+    // );
 
     // REPORTES
     Route::get('reportes/usuarios', [ReporteController::class, 'usuarios'])->name("reportes.usuarios");
     Route::get('reportes/r_usuarios', [ReporteController::class, 'r_usuarios'])->name("reportes.r_usuarios");
-    
+
     Route::get('reportes/solicitud_mantenimiento', [ReporteController::class, 'solicitud_mantenimiento'])->name("reportes.solicitud_mantenimiento");
     Route::get('reportes/r_solicitud_mantenimiento', [ReporteController::class, 'r_solicitud_mantenimiento'])->name("reportes.r_solicitud_mantenimiento");
+
+    Route::get('reportes/servicio', [ReporteController::class, 'servicio'])->name("reportes.servicio");
+    Route::get('reportes/r_servicio', [ReporteController::class, 'r_servicio'])->name("reportes.r_servicio");
+
+    Route::get('reportes/equipos', [ReporteController::class, 'equipos'])->name("reportes.equipos");
+    Route::get('reportes/r_equipos', [ReporteController::class, 'r_equipos'])->name("reportes.r_equipos");
 });
 
 require __DIR__ . '/auth.php';

@@ -39,18 +39,18 @@ const headers = ref([
     {
         title: "Código Solicitud",
         align: "start",
-        sortable: true,
+        sortable: false,
     },
-    { title: "Fecha de Solicitud", align: "start" },
-    { title: "Fecha de Entrega", align: "start" },
-    { title: "Equipo", align: "start" },
-    { title: "Repuestos", align: "start" },
-    { title: "Nombre Responsable", align: "start" },
-    { title: "C.I. Responsable", align: "start" },
-    { title: "Nombre Técnico", align: "start" },
-    { title: "C.I. Técnico", align: "start" },
-    { title: "Tipo Mantenimiento", align: "start" },
-    { title: "Más", align: "start" },
+    { title: "Fecha de Solicitud", align: "start", sortable: false },
+    { title: "Fecha de Entrega", align: "start", sortable: false },
+    { title: "Equipo", align: "start", sortable: false },
+    { title: "Repuestos", align: "start", sortable: false },
+    { title: "Nombre Responsable", align: "start", sortable: false },
+    { title: "C.I. Responsable", align: "start", sortable: false },
+    { title: "Nombre Técnico", align: "start", sortable: false },
+    { title: "C.I. Técnico", align: "start", sortable: false },
+    { title: "Tipo Mantenimiento", align: "start", sortable: false },
+    { title: "Más", align: "start", sortable: false },
     { title: "Acción", align: "end", sortable: false },
 ]);
 
@@ -132,6 +132,18 @@ const eliminarSolicitudMantenimiento = (item) => {
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
         <v-row class="mt-0">
             <v-col cols="12" class="d-flex justify-end">
+                <v-btn
+                    color="grey-darken-3"
+                    prepend-icon="mdi-calendar-month"
+                    class="mr-2"
+                    @click="
+                        cambiarUrl(
+                            route('solicitud_mantenimientos.cronogramas')
+                        )
+                    "
+                >
+                    Cronograma</v-btn
+                >
                 <v-btn
                     color="yellow-lighten-1"
                     prepend-icon="mdi-plus"
@@ -253,7 +265,8 @@ const eliminarSolicitudMantenimiento = (item) => {
                                                         <v-col
                                                             cols="12"
                                                             class="pb-0 text-caption font-weight-black"
-                                                            >Motivo de Mantenimiento</v-col
+                                                            >Motivo de
+                                                            Mantenimiento</v-col
                                                         >
                                                         <v-col cols="12">{{
                                                             item.motivo_mantenimiento

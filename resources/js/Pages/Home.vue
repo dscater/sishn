@@ -17,6 +17,13 @@ const breadbrums = [
         name_url: "inicio",
     },
 ];
+
+const props_page = defineProps({
+    array_infos: {
+        type: Array,
+    },
+});
+
 const { setLoading } = useApp();
 onMounted(() => {
     setTimeout(() => {
@@ -31,89 +38,37 @@ const { props } = usePage();
     <Head title="Inicio"></Head>
     <v-container>
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
-
         <v-row>
-            <v-col cols="12" sm="6" md="6" xl="4">
+            <v-col
+                cols="12"
+                sm="6"
+                md="6"
+                xl="4"
+                v-for="info_box in props_page.array_infos"
+            >
                 <v-card>
                     <v-card-text class="pa-1">
                         <v-row>
-                            <v-col cols="4" class="pa-2">
+                            <v-col cols="4" class="pa-3 bg-grey-darken-4">
                                 <v-img
-                                    src="/imgs/icon_users.png"
+                                    :src="info_box.icon"
                                     class="ma-auto ml-2"
                                 ></v-img>
                             </v-col>
                             <v-col
                                 cols="8"
-                                class="bg-blue text-white d-flex flex-column justify-center align-center"
+                                class="d-flex flex-column justify-center align-center"
+                                :class="info_box.color"
                             >
                                 <h4
                                     class="text-h5 text-center font-weight-black mb-3"
                                 >
-                                    Usuarios
+                                    {{ info_box.label }}
                                 </h4>
                                 <h4
                                     class="text-h4 text-center font-weight-black"
                                 >
-                                    20
-                                </h4>
-                            </v-col>
-                        </v-row>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-            <v-col cols="12" sm="6" md="6" xl="4">
-                <v-card>
-                    <v-card-text class="pa-1">
-                        <v-row>
-                            <v-col cols="4" class="pa-2">
-                                <v-img
-                                    src="/imgs/icon_users.png"
-                                    class="ma-auto ml-2"
-                                ></v-img>
-                            </v-col>
-                            <v-col
-                                cols="8"
-                                class="bg-teal text-white d-flex flex-column justify-center align-center"
-                            >
-                                <h4
-                                    class="text-h5 text-center font-weight-black mb-3"
-                                >
-                                    Usuarios
-                                </h4>
-                                <h4
-                                    class="text-h4 text-center font-weight-black"
-                                >
-                                    20
-                                </h4>
-                            </v-col>
-                        </v-row>
-                    </v-card-text>
-                </v-card>
-            </v-col>
-            <v-col cols="12" sm="6" md="6" xl="4">
-                <v-card>
-                    <v-card-text class="pa-1">
-                        <v-row>
-                            <v-col cols="4" class="pa-2">
-                                <v-img
-                                    src="/imgs/icon_users.png"
-                                    class="ma-auto ml-2"
-                                ></v-img>
-                            </v-col>
-                            <v-col
-                                cols="8"
-                                class="bg-amber text-white d-flex flex-column justify-center align-center"
-                            >
-                                <h4
-                                    class="text-h5 text-center font-weight-black mb-3"
-                                >
-                                    Usuarios
-                                </h4>
-                                <h4
-                                    class="text-h4 text-center font-weight-black"
-                                >
-                                    20
+                                    {{ info_box.cantidad }}
                                 </h4>
                             </v-col>
                         </v-row>

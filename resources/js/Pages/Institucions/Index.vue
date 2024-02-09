@@ -143,7 +143,7 @@ function limpiaRefs() {
                                                 ></v-img>
                                                 <v-avatar
                                                     v-else
-                                                    color="blue"
+                                                    color="grey"
                                                     size="100"
                                                 >
                                                     <span
@@ -517,7 +517,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Nombre Institución*"
                                                             v-model="
                                                                 form.nombre
@@ -554,7 +554,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Nombre Sistema*"
                                                             v-model="
                                                                 form.nombre_sistema
@@ -588,7 +588,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Nit*"
                                                             v-model="form.nit"
                                                             required
@@ -623,7 +623,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Nombre Completo Director*"
                                                             v-model="
                                                                 form.nombre_director
@@ -702,7 +702,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Nombre Completo Subirector"
                                                             v-model="
                                                                 form.nombre_subdirector
@@ -781,7 +781,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Teléfono 1"
                                                             v-model="form.fono1"
                                                             required
@@ -816,7 +816,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Teléfono 2"
                                                             v-model="form.fono2"
                                                             required
@@ -851,7 +851,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Correo 1"
                                                             v-model="
                                                                 form.correo1
@@ -888,7 +888,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Correo 2"
                                                             v-model="
                                                                 form.correo2
@@ -925,7 +925,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Facebook"
                                                             v-model="
                                                                 form.facebook
@@ -962,7 +962,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Youtube"
                                                             v-model="
                                                                 form.youtube
@@ -999,7 +999,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Twitter"
                                                             v-model="
                                                                 form.twitter
@@ -1033,7 +1033,7 @@ function limpiaRefs() {
                                                             "
                                                             density="compact"
                                                             variant="outlined"
-                                                            color="blue"
+                                                            color="grey"
                                                             label="Dirección"
                                                             v-model="form.dir"
                                                             required

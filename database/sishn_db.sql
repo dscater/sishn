@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 09-02-2024 a las 00:30:01
+-- Tiempo de generación: 09-02-2024 a las 19:01:37
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -82,7 +82,9 @@ INSERT INTO `cronogramas` (`id`, `solicitud_mantenimiento_id`, `descripcion`, `d
 (3, 1, 'OTRO', '2024-02-15', 3, '2024-02-08 15:19:47', '2024-02-08 15:19:47'),
 (4, 2, 'INICIO SOLICITUD', '2024-02-09', 1, '2024-02-08 15:30:04', '2024-02-08 15:30:04'),
 (5, 2, 'FIN SOLICITUD', '2024-02-10', 1, '2024-02-08 15:30:04', '2024-02-08 15:30:04'),
-(6, 3, 'INICIO', '2024-02-09', 1, '2024-02-09 00:21:16', '2024-02-09 00:21:16');
+(6, 3, 'INICIO', '2024-02-09', 1, '2024-02-09 00:21:16', '2024-02-09 00:21:16'),
+(7, 2, 'CRONOGRAMA USUARIO JEFE DE AREA', '2024-02-13', 4, '2024-02-09 18:46:55', '2024-02-09 18:46:55'),
+(8, 2, 'DESC. TENICO', '2024-02-14', 3, '2024-02-09 18:59:08', '2024-02-09 18:59:08');
 
 -- --------------------------------------------------------
 
@@ -211,7 +213,10 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `datos_original`, `datos_nuevo`, `modulo`, `fecha`, `hora`, `created_at`, `updated_at`) VALUES
 (70, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN SERVICIO', 'id: 1<br/>solicitud_mantenimiento_id: 1<br/>fecha_entrega: 2024-02-08<br/>procedimientos: PROCEDIMIENTOS SERVICIO #1<br/>observaciones: OBSERVACIONES SERVCIO #1<br/>recomendaciones: RECOMENDACIONE SERVICIO #1<br/>diagnostico_previo: DIAGNOSTICO PREVIO #1<br/>estado_equipo: ESTADO EQUIPO<br/>trabajo_realizado: TRABAJO REALIZADO SERVICIO #1<br/>capacitacion: SI<br/>descripcion: DESC. CAPACITACION<br/>fecha_ini: 2024-01-01<br/>fecha_fin: 2024-01-31<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 15:00:00<br/>updated_at: 2024-02-08 15:36:00<br/>', 'id: 1<br/>solicitud_mantenimiento_id: 1<br/>fecha_entrega: 2024-02-08<br/>procedimientos: PROCEDIMIENTOS SERVICIO #1<br/>observaciones: OBSERVACIONES SERVCIO #1<br/>recomendaciones: RECOMENDACIONE SERVICIO #1<br/>diagnostico_previo: DIAGNOSTICO PREVIO #1<br/>estado_equipo: ESTADO EQUIPO<br/>trabajo_realizado: TRABAJO REALIZADO SERVICIO #1<br/>capacitacion: SI<br/>descripcion: DESC. CAPACITACION<br/>fecha_ini: 2024-01-01<br/>fecha_fin: 2024-01-31<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 15:00:00<br/>updated_at: 2024-02-08 15:36:00<br/>', 'SERVICIOS', '2024-02-08', '19:51:06', '2024-02-08 23:51:06', '2024-02-08 23:51:06'),
 (71, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN BIOMETRICO', 'id: 3<br/>nombre: EQUIPO #3<br/>estado: REGULAR<br/>marca: MARCA-002<br/>serie: SER-003<br/>modelo: MOD-003<br/>fecha_ingreso: 2024-02-08<br/>garantia: <br/>cod_hdn: <br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 2<br/>empresa_id: 3<br/>foto: <br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 20:20:37<br/>updated_at: 2024-02-08 20:20:37<br/>', NULL, 'BIOMETRICOS', '2024-02-08', '20:20:37', '2024-02-09 00:20:37', '2024-02-09 00:20:37'),
-(72, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 3<br/>codigo: SOL.MAT.3<br/>nro: 3<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO CORTEZ<br/>ci_tecnico: 3333<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-08<br/>fecha_entrega: <br/>biometrico_id: 3<br/>repuestos: 2<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 20:21:16<br/>updated_at: 2024-02-08 20:21:16<br/>', NULL, 'REPUESTOS', '2024-02-08', '20:21:16', '2024-02-09 00:21:16', '2024-02-09 00:21:16');
+(72, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 3<br/>codigo: SOL.MAT.3<br/>nro: 3<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO CORTEZ<br/>ci_tecnico: 3333<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-08<br/>fecha_entrega: <br/>biometrico_id: 3<br/>repuestos: 2<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 20:21:16<br/>updated_at: 2024-02-08 20:21:16<br/>', NULL, 'REPUESTOS', '2024-02-08', '20:21:16', '2024-02-09 00:21:16', '2024-02-09 00:21:16'),
+(73, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN SERVICIO', 'id: 2<br/>solicitud_mantenimiento_id: 2<br/>fecha_entrega: 2024-02-09<br/>procedimientos: PROCEDIMIENTOS #2<br/>observaciones: OBSERVACIONES #2<br/>recomendaciones: <br/>diagnostico_previo: <br/>estado_equipo: <br/>trabajo_realizado: TRABAJO REALIZADO #2<br/>capacitacion: NO<br/>descripcion: <br/>fecha_ini: <br/>fecha_fin: <br/>fecha_registro: 2024-02-09<br/>created_at: 2024-02-09 14:35:42<br/>updated_at: 2024-02-09 14:35:42<br/>', NULL, 'SERVICIOS', '2024-02-09', '14:35:42', '2024-02-09 18:35:42', '2024-02-09 18:35:42'),
+(74, 4, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 2<br/>codigo: SOL.MAT.2<br/>nro: 2<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 2222<br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-08<br/>fecha_entrega: 2024-02-09<br/>biometrico_id: 2<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 11:30:04<br/>updated_at: 2024-02-09 14:35:42<br/>', 'id: 2<br/>codigo: SOL.MAT.2<br/>nro: 2<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 2222<br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-08<br/>fecha_entrega: 2024-02-09<br/>biometrico_id: 2<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 11:30:04<br/>updated_at: 2024-02-09 14:35:42<br/>', 'REPUESTOS', '2024-02-09', '14:46:55', '2024-02-09 18:46:55', '2024-02-09 18:46:55'),
+(75, 3, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 2<br/>codigo: SOL.MAT.2<br/>nro: 2<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 2222<br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-08<br/>fecha_entrega: 2024-02-09<br/>biometrico_id: 2<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 11:30:04<br/>updated_at: 2024-02-09 14:35:42<br/>', 'id: 2<br/>codigo: SOL.MAT.2<br/>nro: 2<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 2222<br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: CORRECTIVO<br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-08<br/>fecha_entrega: 2024-02-09<br/>biometrico_id: 2<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 11:30:04<br/>updated_at: 2024-02-09 14:59:08<br/>', 'REPUESTOS', '2024-02-09', '14:59:08', '2024-02-09 18:59:08', '2024-02-09 18:59:08');
 
 -- --------------------------------------------------------
 
@@ -252,7 +257,7 @@ CREATE TABLE `institucions` (
 --
 
 INSERT INTO `institucions` (`id`, `nombre`, `nombre_sistema`, `nit`, `historia`, `mision`, `vision`, `objetivo`, `nombre_director`, `foto_director`, `nombre_subdirector`, `foto_subdirector`, `fono1`, `fono2`, `correo1`, `correo2`, `facebook`, `youtube`, `twitter`, `dir`, `ubicacion_google`, `img_organigrama`, `logo`, `created_at`, `updated_at`) VALUES
-(1, 'INSTITUCIÓN S.A', 'NOMBRE SISTEMA', '111111111', 'LOREM IPSUM ES SIMPLEMENTE EL TEXTO DE RELLENO DE LAS IMPRENTAS Y ARCHIVOS DE TEXTO. LOREM IPSUM HA SIDO EL TEXTO DE RELLENO ESTÁNDAR DE LAS INDUSTRIAS DESDE EL AÑO 1500, CUANDO UN IMPRESOR (N. DEL T. PERSONA QUE SE DEDICA A LA IMPRENTA) DESCONOCIDO USÓ UNA GALERÍA DE TEXTOS Y LOS MEZCLÓ DE TAL MANERA QUE LOGRÓ HACER UN LIBRO DE TEXTOS ESPECIMEN. NO SÓLO SOBREVIVIÓ 500 AÑOS, SINO QUE TAMBIEN INGRESÓ COMO TEXTO DE RELLENO EN DOCUMENTOS ELECTRÓNICOS,', 'LOREM IPSUM ES SIMPLEMENTE EL TEXTO DE RELLENO DE LAS IMPRENTAS Y ARCHIVOS DE TEXTO. LOREM IPSUM HA SIDO EL TEXTO DE RELLENO ESTÁNDAR DE LAS INDUSTRIAS DESDE EL AÑO 1500, CUANDO UN IMPRESOR (N. DEL T. PERSONA QUE SE DEDICA A LA IMPRENTA) DESCONOCIDO USÓ UNA GALERÍA DE TEXTOS Y LOS MEZCLÓ DE TAL MANERA QUE LOGRÓ HACER UN LIBRO DE TEXTOS ESPECIMEN. NO SÓLO SOBREVIVIÓ 500 AÑOS, SINO QUE TAMBIEN INGRESÓ COMO TEXTO DE RELLENO EN DOCUMENTOS ELECTRÓNICOS', '', 'LOREM IPSUM ES SIMPLEMENTE EL TEXTO DE RELLENO DE LAS IMPRENTAS Y ARCHIVOS DE TEXTO. LOREM IPSUM HA SIDO EL TEXTO DE RELLENO ESTÁNDAR DE LAS INDUSTRIAS DESDE EL AÑO 1500, CUANDO UN IMPRESOR (N. DEL T. PERSONA QUE SE DEDICA A LA IMPRENTA) DESCONOCIDO USÓ UNA GALERÍA DE TEXTOS Y LOS MEZCLÓ DE TAL MANERA QUE LOGRÓ HACER UN LIBRO DE TEXTOS ESPECIMEN. NO SÓLO SOBREVIVIÓ 500 AÑOS, SINO QUE TAMBIEN INGRESÓ COMO TEXTO DE RELLENO EN DOCUMENTOS ELECTRÓNICOS', 'JUAN PERESSS', '1706834799_1.png', 'JOSE PAREDES', '1706834920_1.jpg', '777777', '666666', 'CORREO1@GMAIL.COM', 'CORREO2@GMAIL.COM', 'FACEBOOK', 'YOUTUBE', 'TWITTER', 'LOS OLIVOS', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d12143.389812786238!2d-68.08918332465664!3d-16.52975316867156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e0!4m0!4m3!3m2!1d-16.527973505058714!2d-68.08870645756463!5e0!3m2!1ses-419!2sbo!4v1706929714970!5m2!1ses-419!2sbo\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', '1706930367_1.WEBP', '1706995069_1.jpg', NULL, '2024-02-03 21:17:49');
+(1, 'INSTITUCIÓN S.A', 'SISTEMA SISHN', '111111111', 'LOREM IPSUM ES SIMPLEMENTE EL TEXTO DE RELLENO DE LAS IMPRENTAS Y ARCHIVOS DE TEXTO. LOREM IPSUM HA SIDO EL TEXTO DE RELLENO ESTÁNDAR DE LAS INDUSTRIAS DESDE EL AÑO 1500, CUANDO UN IMPRESOR (N. DEL T. PERSONA QUE SE DEDICA A LA IMPRENTA) DESCONOCIDO USÓ UNA GALERÍA DE TEXTOS Y LOS MEZCLÓ DE TAL MANERA QUE LOGRÓ HACER UN LIBRO DE TEXTOS ESPECIMEN. NO SÓLO SOBREVIVIÓ 500 AÑOS, SINO QUE TAMBIEN INGRESÓ COMO TEXTO DE RELLENO EN DOCUMENTOS ELECTRÓNICOS,', 'LOREM IPSUM ES SIMPLEMENTE EL TEXTO DE RELLENO DE LAS IMPRENTAS Y ARCHIVOS DE TEXTO. LOREM IPSUM HA SIDO EL TEXTO DE RELLENO ESTÁNDAR DE LAS INDUSTRIAS DESDE EL AÑO 1500, CUANDO UN IMPRESOR (N. DEL T. PERSONA QUE SE DEDICA A LA IMPRENTA) DESCONOCIDO USÓ UNA GALERÍA DE TEXTOS Y LOS MEZCLÓ DE TAL MANERA QUE LOGRÓ HACER UN LIBRO DE TEXTOS ESPECIMEN. NO SÓLO SOBREVIVIÓ 500 AÑOS, SINO QUE TAMBIEN INGRESÓ COMO TEXTO DE RELLENO EN DOCUMENTOS ELECTRÓNICOS', '', 'LOREM IPSUM ES SIMPLEMENTE EL TEXTO DE RELLENO DE LAS IMPRENTAS Y ARCHIVOS DE TEXTO. LOREM IPSUM HA SIDO EL TEXTO DE RELLENO ESTÁNDAR DE LAS INDUSTRIAS DESDE EL AÑO 1500, CUANDO UN IMPRESOR (N. DEL T. PERSONA QUE SE DEDICA A LA IMPRENTA) DESCONOCIDO USÓ UNA GALERÍA DE TEXTOS Y LOS MEZCLÓ DE TAL MANERA QUE LOGRÓ HACER UN LIBRO DE TEXTOS ESPECIMEN. NO SÓLO SOBREVIVIÓ 500 AÑOS, SINO QUE TAMBIEN INGRESÓ COMO TEXTO DE RELLENO EN DOCUMENTOS ELECTRÓNICOS', 'JUAN PERESSS', '1706834799_1.png', 'JOSE PAREDES', '1706834920_1.jpg', '777777', '666666', 'CORREO1@GMAIL.COM', 'CORREO2@GMAIL.COM', 'FACEBOOK', 'YOUTUBE', 'TWITTER', 'LOS OLIVOS', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d12143.389812786238!2d-68.08918332465664!3d-16.52975316867156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e0!4m0!4m3!3m2!1d-16.527973505058714!2d-68.08870645756463!5e0!3m2!1ses-419!2sbo!4v1706929714970!5m2!1ses-419!2sbo\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', '1706930367_1.WEBP', '1706995069_1.jpg', NULL, '2024-02-09 16:22:17');
 
 -- --------------------------------------------------------
 
@@ -353,7 +358,8 @@ CREATE TABLE `servicios` (
 --
 
 INSERT INTO `servicios` (`id`, `solicitud_mantenimiento_id`, `fecha_entrega`, `procedimientos`, `observaciones`, `recomendaciones`, `diagnostico_previo`, `estado_equipo`, `trabajo_realizado`, `capacitacion`, `descripcion`, `fecha_ini`, `fecha_fin`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 1, '2024-02-08', 'PROCEDIMIENTOS SERVICIO #1', 'OBSERVACIONES SERVCIO #1', 'RECOMENDACIONE SERVICIO #1', 'DIAGNOSTICO PREVIO #1', 'ESTADO EQUIPO', 'TRABAJO REALIZADO SERVICIO #1', 'SI', 'DESC. CAPACITACION', '2024-01-01', '2024-01-31', '2024-02-08', '2024-02-08 19:00:00', '2024-02-08 19:36:00');
+(1, 1, '2024-02-08', 'PROCEDIMIENTOS SERVICIO #1', 'OBSERVACIONES SERVCIO #1', 'RECOMENDACIONE SERVICIO #1', 'DIAGNOSTICO PREVIO #1', 'ESTADO EQUIPO', 'TRABAJO REALIZADO SERVICIO #1', 'SI', 'DESC. CAPACITACION', '2024-01-01', '2024-01-31', '2024-02-08', '2024-02-08 19:00:00', '2024-02-08 19:36:00'),
+(2, 2, '2024-02-09', 'PROCEDIMIENTOS #2', 'OBSERVACIONES #2', '', '', '', 'TRABAJO REALIZADO #2', 'NO', '', NULL, NULL, '2024-02-09', '2024-02-09 18:35:42', '2024-02-09 18:35:42');
 
 -- --------------------------------------------------------
 
@@ -388,7 +394,7 @@ CREATE TABLE `solicitud_mantenimientos` (
 
 INSERT INTO `solicitud_mantenimientos` (`id`, `codigo`, `nro`, `nombre_responsable`, `ci_responsable`, `nombre_tecnico`, `ci_tecnico`, `tipo_mantenimiento`, `motivo_mantenimiento`, `diagnostico`, `otros`, `fecha_solicitud`, `fecha_entrega`, `biometrico_id`, `repuestos`, `fecha_registro`, `created_at`, `updated_at`) VALUES
 (1, 'SOL.MAT.1', 1, 'JUAN PERES', '1234', 'FERNANDO TAPIA', '4444', 'PREVENTIVO', 'MOTIVO MANTENIMIENTO #1', 'DIAGNOSTICO #1', 'OTROS #1', '2024-02-07', '2024-02-08', 1, '1,2', '2024-02-07', '2024-02-07 23:57:02', '2024-02-08 23:51:06'),
-(2, 'SOL.MAT.2', 2, 'JUAN PERES', '2222', '', '', '', 'MOTIVO MANTENIMIENTO', '', '', '2024-02-08', NULL, 2, '1,2', '2024-02-08', '2024-02-08 15:30:04', '2024-02-08 19:36:45'),
+(2, 'SOL.MAT.2', 2, 'JUAN PERES', '2222', '', '', 'CORRECTIVO', 'MOTIVO MANTENIMIENTO', '', '', '2024-02-08', '2024-02-09', 2, '1,2', '2024-02-08', '2024-02-08 15:30:04', '2024-02-09 18:59:08'),
 (3, 'SOL.MAT.3', 3, 'JUAN PERES', '1234', 'FERNANDO CORTEZ', '3333', '', 'MOTIVO MANTENIMIENTO', '', '', '2024-02-08', NULL, 3, '2', '2024-02-08', '2024-02-09 00:21:16', '2024-02-09 00:21:16');
 
 -- --------------------------------------------------------
@@ -553,7 +559,7 @@ ALTER TABLE `biometricos`
 -- AUTO_INCREMENT de la tabla `cronogramas`
 --
 ALTER TABLE `cronogramas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `empresas`
@@ -565,7 +571,7 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT de la tabla `institucions`
@@ -595,7 +601,7 @@ ALTER TABLE `repuestos`
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `solicitud_mantenimientos`
