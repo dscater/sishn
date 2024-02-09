@@ -105,6 +105,7 @@ Route::middleware('auth')->group(function () {
     );
 
     // SOLICITUD DE MANTENIMIENTOS
+    Route::get("/solicitud_mantenimientos/getByUnidadAreaId", [SolicitudMantenimientoController::class, 'getByUnidadAreaId'])->name("solicitud_mantenimientos.getByUnidadAreaId");
     Route::get("/solicitud_mantenimientos/getById/{solicitud_mantenimiento}", [SolicitudMantenimientoController::class, 'getById'])->name("solicitud_mantenimientos.getById");
     Route::get("/solicitud_mantenimientos/paginado", [SolicitudMantenimientoController::class, 'paginado'])->name("solicitud_mantenimientos.paginado");
     Route::get("/solicitud_mantenimientos/listado", [SolicitudMantenimientoController::class, 'listado'])->name("solicitud_mantenimientos.listado");

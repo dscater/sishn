@@ -85,7 +85,8 @@ class ServicioController extends Controller
         try {
             // crear el Servicio
             $nuevo_servicio = Servicio::create(array_map('mb_strtoupper', $request->all()));
-
+            $nuevo_servicio->solicitud_mantenimiento->fecha_entrega = $nuevo_servicio->fecha_entrega;
+            $nuevo_servicio->solicitud_mantenimiento->save();
             $datos_original = HistorialAccion::getDetalleRegistro($nuevo_servicio, "servicios");
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
@@ -131,6 +132,8 @@ class ServicioController extends Controller
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($servicio, "servicios");
             $servicio->update(array_map('mb_strtoupper', $request->all()));
+            $servicio->solicitud_mantenimiento->fecha_entrega = $servicio->fecha_entrega;
+            $servicio->solicitud_mantenimiento->save();
             if ($servicio->capacitacion == "NO") {
                 $servicio->descripcion = NULL;
                 $servicio->fecha_ini = NULL;

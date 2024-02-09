@@ -33,11 +33,44 @@ class SolicitudMantenimientoController extends Controller
 
     public function listado(Request $request)
     {
-        if ($request->order && $request->order == "desc") {
-            $solicitud_mantenimientos = SolicitudMantenimiento::orderBy("id", "desc")->get();
-        } else {
-            $solicitud_mantenimientos = SolicitudMantenimiento::all();
+        $solicitud_mantenimientos = SolicitudMantenimiento::select("solicitud_mantenimientos.*");
+
+        if (Auth::user()->tipo == 'JEFE DE ÁREA') {
+            $unidad_area = Auth::user()->unidad_area;
+            $solicitud_mantenimientos->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
+            $solicitud_mantenimientos->where("biometricos.unidad_area_id", $unidad_area->id);
         }
+
+        if ($request->order && $request->order == "desc") {
+            $solicitud_mantenimientos->orderBy("solicitud_mantenimientos.id", "desc");
+        }
+
+        $solicitud_mantenimientos = $solicitud_mantenimientos->get();
+
+        return response()->JSON([
+            "solicitud_mantenimientos" => $solicitud_mantenimientos
+        ]);
+    }
+
+    public function getByUnidadAreaId(Request $request)
+    {
+        $solicitud_mantenimientos = SolicitudMantenimiento::select("solicitud_mantenimientos.*");
+
+        if (Auth::user()->tipo == 'JEFE DE ÁREA') {
+            $unidad_area = Auth::user()->unidad_area;
+            $solicitud_mantenimientos->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
+            $solicitud_mantenimientos->where("biometricos.unidad_area_id", $unidad_area->id);
+        } else {
+            $solicitud_mantenimientos->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
+            $solicitud_mantenimientos->where("biometricos.unidad_area_id", $request->unidad_area_id);
+        }
+
+        if ($request->order && $request->order == "desc") {
+            $solicitud_mantenimientos->orderBy("solicitud_mantenimientos.id", "desc");
+        }
+
+        $solicitud_mantenimientos = $solicitud_mantenimientos->get();
+
         return response()->JSON([
             "solicitud_mantenimientos" => $solicitud_mantenimientos
         ]);
@@ -51,6 +84,12 @@ class SolicitudMantenimientoController extends Controller
 
         if (trim($search) != "") {
             $solicitud_mantenimientos->where("codigo", "LIKE", "%$search%");
+        }
+
+        if (Auth::user()->tipo == 'JEFE DE ÁREA') {
+            $unidad_area = Auth::user()->unidad_area;
+            $solicitud_mantenimientos->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
+            $solicitud_mantenimientos->where("biometricos.unidad_area_id", $unidad_area->id);
         }
 
         $solicitud_mantenimientos = $solicitud_mantenimientos->paginate($request->itemsPerPage);

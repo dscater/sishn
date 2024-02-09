@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 08-02-2024 a las 20:45:23
+-- Tiempo de generación: 09-02-2024 a las 00:30:01
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -53,7 +53,8 @@ CREATE TABLE `biometricos` (
 
 INSERT INTO `biometricos` (`id`, `nombre`, `estado`, `marca`, `serie`, `modelo`, `fecha_ingreso`, `garantia`, `cod_hdn`, `manual_usuario`, `manual_servicio`, `unidad_area_id`, `empresa_id`, `foto`, `fecha_registro`, `created_at`, `updated_at`) VALUES
 (1, 'EQUIPO #1', 'REGULAR', 'M0001', 'S-001', 'M-001', '2024-01-01', '2 AÑOS', 'HDN-001', '1707238084_1.pdf', '1707238084_1.pdf', 1, 1, '1707238084_1.png', '2024-02-06', '2024-02-06 16:48:04', '2024-02-06 16:48:04'),
-(2, 'EQUIPO #2', 'BUENO', '', '', '', '2024-02-08', '', '', NULL, NULL, 2, 2, NULL, '2024-02-08', '2024-02-08 15:26:52', '2024-02-08 15:26:52');
+(2, 'EQUIPO #2', 'BUENO', '', '', '', '2024-02-08', '', '', NULL, NULL, 2, 2, NULL, '2024-02-08', '2024-02-08 15:26:52', '2024-02-08 15:26:52'),
+(3, 'EQUIPO #3', 'REGULAR', 'MARCA-002', 'SER-003', 'MOD-003', '2024-02-08', '', '', NULL, NULL, 2, 3, NULL, '2024-02-08', '2024-02-09 00:20:37', '2024-02-09 00:20:37');
 
 -- --------------------------------------------------------
 
@@ -80,7 +81,8 @@ INSERT INTO `cronogramas` (`id`, `solicitud_mantenimiento_id`, `descripcion`, `d
 (2, 1, 'FIN', '2024-02-14', 1, '2024-02-07 23:57:02', '2024-02-08 15:12:05'),
 (3, 1, 'OTRO', '2024-02-15', 3, '2024-02-08 15:19:47', '2024-02-08 15:19:47'),
 (4, 2, 'INICIO SOLICITUD', '2024-02-09', 1, '2024-02-08 15:30:04', '2024-02-08 15:30:04'),
-(5, 2, 'FIN SOLICITUD', '2024-02-10', 1, '2024-02-08 15:30:04', '2024-02-08 15:30:04');
+(5, 2, 'FIN SOLICITUD', '2024-02-10', 1, '2024-02-08 15:30:04', '2024-02-08 15:30:04'),
+(6, 3, 'INICIO', '2024-02-09', 1, '2024-02-09 00:21:16', '2024-02-09 00:21:16');
 
 -- --------------------------------------------------------
 
@@ -206,6 +208,10 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (67, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN SERVICIO', 'id: 1<br/>solicitud_mantenimiento_id: 1<br/>fecha_entrega: 2024-02-08<br/>procedimientos: PROCEDIMIENTOS SERVICIO #1<br/>observaciones: OBSERVACIONES SERVCIO #1<br/>recomendaciones: RECOMENDACIONE SERVICIO #1<br/>diagnostico_previo: DIAGNOSTICO PREVIO #1<br/>estado_equipo: ESTADO EQUIPO<br/>trabajo_realizado: TRABAJO REALIZADO SERVICIO #1<br/>capacitacion: SI<br/>descripcion: DESCRIPCION CAPACITCACION<br/>fecha_ini: 2024-01-01<br/>fecha_fin: 2024-01-10<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 15:00:00<br/>updated_at: 2024-02-08 15:00:00<br/>', 'id: 1<br/>solicitud_mantenimiento_id: 1<br/>fecha_entrega: 2024-02-08<br/>procedimientos: PROCEDIMIENTOS SERVICIO #1<br/>observaciones: OBSERVACIONES SERVCIO #1<br/>recomendaciones: RECOMENDACIONE SERVICIO #1<br/>diagnostico_previo: DIAGNOSTICO PREVIO #1<br/>estado_equipo: ESTADO EQUIPO<br/>trabajo_realizado: TRABAJO REALIZADO SERVICIO #1<br/>capacitacion: NO<br/>descripcion: <br/>fecha_ini: <br/>fecha_fin: <br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 15:00:00<br/>updated_at: 2024-02-08 15:35:13<br/>', 'SERVICIOS', '2024-02-08', '15:35:13', '2024-02-08 19:35:13', '2024-02-08 19:35:13'),
 (68, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN SERVICIO', 'id: 1<br/>solicitud_mantenimiento_id: 1<br/>fecha_entrega: 2024-02-08<br/>procedimientos: PROCEDIMIENTOS SERVICIO #1<br/>observaciones: OBSERVACIONES SERVCIO #1<br/>recomendaciones: RECOMENDACIONE SERVICIO #1<br/>diagnostico_previo: DIAGNOSTICO PREVIO #1<br/>estado_equipo: ESTADO EQUIPO<br/>trabajo_realizado: TRABAJO REALIZADO SERVICIO #1<br/>capacitacion: NO<br/>descripcion: <br/>fecha_ini: <br/>fecha_fin: <br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 15:00:00<br/>updated_at: 2024-02-08 15:35:13<br/>', 'id: 1<br/>solicitud_mantenimiento_id: 1<br/>fecha_entrega: 2024-02-08<br/>procedimientos: PROCEDIMIENTOS SERVICIO #1<br/>observaciones: OBSERVACIONES SERVCIO #1<br/>recomendaciones: RECOMENDACIONE SERVICIO #1<br/>diagnostico_previo: DIAGNOSTICO PREVIO #1<br/>estado_equipo: ESTADO EQUIPO<br/>trabajo_realizado: TRABAJO REALIZADO SERVICIO #1<br/>capacitacion: SI<br/>descripcion: DESC. CAPACITACION<br/>fecha_ini: 2024-01-01<br/>fecha_fin: 2024-01-31<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 15:00:00<br/>updated_at: 2024-02-08 15:36:00<br/>', 'SERVICIOS', '2024-02-08', '15:36:00', '2024-02-08 19:36:00', '2024-02-08 19:36:00'),
 (69, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 2<br/>codigo: SOL.MAT.2<br/>nro: 2<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 2222<br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-08<br/>fecha_entrega: <br/>biometrico_id: 2<br/>repuestos: 1<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 11:30:04<br/>updated_at: 2024-02-08 11:30:04<br/>', 'id: 2<br/>codigo: SOL.MAT.2<br/>nro: 2<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 2222<br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-08<br/>fecha_entrega: <br/>biometrico_id: 2<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 11:30:04<br/>updated_at: 2024-02-08 15:36:45<br/>', 'REPUESTOS', '2024-02-08', '15:36:45', '2024-02-08 19:36:45', '2024-02-08 19:36:45');
+INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `datos_original`, `datos_nuevo`, `modulo`, `fecha`, `hora`, `created_at`, `updated_at`) VALUES
+(70, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN SERVICIO', 'id: 1<br/>solicitud_mantenimiento_id: 1<br/>fecha_entrega: 2024-02-08<br/>procedimientos: PROCEDIMIENTOS SERVICIO #1<br/>observaciones: OBSERVACIONES SERVCIO #1<br/>recomendaciones: RECOMENDACIONE SERVICIO #1<br/>diagnostico_previo: DIAGNOSTICO PREVIO #1<br/>estado_equipo: ESTADO EQUIPO<br/>trabajo_realizado: TRABAJO REALIZADO SERVICIO #1<br/>capacitacion: SI<br/>descripcion: DESC. CAPACITACION<br/>fecha_ini: 2024-01-01<br/>fecha_fin: 2024-01-31<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 15:00:00<br/>updated_at: 2024-02-08 15:36:00<br/>', 'id: 1<br/>solicitud_mantenimiento_id: 1<br/>fecha_entrega: 2024-02-08<br/>procedimientos: PROCEDIMIENTOS SERVICIO #1<br/>observaciones: OBSERVACIONES SERVCIO #1<br/>recomendaciones: RECOMENDACIONE SERVICIO #1<br/>diagnostico_previo: DIAGNOSTICO PREVIO #1<br/>estado_equipo: ESTADO EQUIPO<br/>trabajo_realizado: TRABAJO REALIZADO SERVICIO #1<br/>capacitacion: SI<br/>descripcion: DESC. CAPACITACION<br/>fecha_ini: 2024-01-01<br/>fecha_fin: 2024-01-31<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 15:00:00<br/>updated_at: 2024-02-08 15:36:00<br/>', 'SERVICIOS', '2024-02-08', '19:51:06', '2024-02-08 23:51:06', '2024-02-08 23:51:06'),
+(71, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN BIOMETRICO', 'id: 3<br/>nombre: EQUIPO #3<br/>estado: REGULAR<br/>marca: MARCA-002<br/>serie: SER-003<br/>modelo: MOD-003<br/>fecha_ingreso: 2024-02-08<br/>garantia: <br/>cod_hdn: <br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 2<br/>empresa_id: 3<br/>foto: <br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 20:20:37<br/>updated_at: 2024-02-08 20:20:37<br/>', NULL, 'BIOMETRICOS', '2024-02-08', '20:20:37', '2024-02-09 00:20:37', '2024-02-09 00:20:37'),
+(72, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 3<br/>codigo: SOL.MAT.3<br/>nro: 3<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>nombre_tecnico: FERNANDO CORTEZ<br/>ci_tecnico: 3333<br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-02-08<br/>fecha_entrega: <br/>biometrico_id: 3<br/>repuestos: 2<br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 20:21:16<br/>updated_at: 2024-02-08 20:21:16<br/>', NULL, 'REPUESTOS', '2024-02-08', '20:21:16', '2024-02-09 00:21:16', '2024-02-09 00:21:16');
 
 -- --------------------------------------------------------
 
@@ -381,8 +387,9 @@ CREATE TABLE `solicitud_mantenimientos` (
 --
 
 INSERT INTO `solicitud_mantenimientos` (`id`, `codigo`, `nro`, `nombre_responsable`, `ci_responsable`, `nombre_tecnico`, `ci_tecnico`, `tipo_mantenimiento`, `motivo_mantenimiento`, `diagnostico`, `otros`, `fecha_solicitud`, `fecha_entrega`, `biometrico_id`, `repuestos`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 'SOL.MAT.1', 1, 'JUAN PERES', '1234', 'FERNANDO TAPIA', '4444', 'PREVENTIVO', 'MOTIVO MANTENIMIENTO #1', 'DIAGNOSTICO #1', 'OTROS #1', '2024-02-07', '2024-02-15', 1, '1,2', '2024-02-07', '2024-02-07 23:57:02', '2024-02-08 15:19:47'),
-(2, 'SOL.MAT.2', 2, 'JUAN PERES', '2222', '', '', '', 'MOTIVO MANTENIMIENTO', '', '', '2024-02-08', NULL, 2, '1,2', '2024-02-08', '2024-02-08 15:30:04', '2024-02-08 19:36:45');
+(1, 'SOL.MAT.1', 1, 'JUAN PERES', '1234', 'FERNANDO TAPIA', '4444', 'PREVENTIVO', 'MOTIVO MANTENIMIENTO #1', 'DIAGNOSTICO #1', 'OTROS #1', '2024-02-07', '2024-02-08', 1, '1,2', '2024-02-07', '2024-02-07 23:57:02', '2024-02-08 23:51:06'),
+(2, 'SOL.MAT.2', 2, 'JUAN PERES', '2222', '', '', '', 'MOTIVO MANTENIMIENTO', '', '', '2024-02-08', NULL, 2, '1,2', '2024-02-08', '2024-02-08 15:30:04', '2024-02-08 19:36:45'),
+(3, 'SOL.MAT.3', 3, 'JUAN PERES', '1234', 'FERNANDO CORTEZ', '3333', '', 'MOTIVO MANTENIMIENTO', '', '', '2024-02-08', NULL, 3, '2', '2024-02-08', '2024-02-09 00:21:16', '2024-02-09 00:21:16');
 
 -- --------------------------------------------------------
 
@@ -540,13 +547,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `biometricos`
 --
 ALTER TABLE `biometricos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `cronogramas`
 --
 ALTER TABLE `cronogramas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `empresas`
@@ -558,7 +565,7 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `institucions`
@@ -594,7 +601,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `solicitud_mantenimientos`
 --
 ALTER TABLE `solicitud_mantenimientos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `unidad_areas`

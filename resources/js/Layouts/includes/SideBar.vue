@@ -295,6 +295,7 @@ const scrollActive = () => {
                     >
                 </template>
                 <v-list-item
+                    v-if="oUser.permisos.includes('reportes.usuarios')"
                     prepend-icon="mdi-chevron-right"
                     title="Usuarios"
                     :class="[
@@ -312,6 +313,7 @@ const scrollActive = () => {
                     ></v-list-item
                 >
                 <v-list-item
+                    v-if="oUser.permisos.includes('reportes.solicitud_mantenimiento')"
                     prepend-icon="mdi-chevron-right"
                     title="Solicitud de Mantenimiento"
                     :class="[

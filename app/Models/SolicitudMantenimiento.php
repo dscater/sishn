@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class SolicitudMantenimiento extends Model
 {
@@ -28,8 +28,15 @@ class SolicitudMantenimiento extends Model
         "fecha_registro"
     ];
 
-    protected $appends = ["fecha_registro_t", "fecha_solicitud_t", "fecha_entrega_t", "array_repuestos", "repuestos_txt", "array_repuestos_txt", "mas"];
+    protected $appends = ["fecha_registro_t", "fecha_solicitud_t", "fecha_entrega_t", "array_repuestos", "repuestos_txt", "array_repuestos_txt", "mas", "qr"];
 
+    public function getQrAttribute()
+    {
+        $qr = "data:image/svg+xml;base64,";
+        $codigo = $this->biometrico->nombre . "|" . $this->biometrico->marca . "|" . $this->biometrico->modelo . "|" . $this->biometrico->serie . "|" . $this->biometrico->unidad_area->nombre;
+        $qr = $qr . base64_encode(QrCode::format('svg')->size(70)->generate($codigo));
+        return $qr;
+    }
 
     public function getFechaSolicitudTAttribute()
     {

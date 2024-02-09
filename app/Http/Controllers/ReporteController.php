@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\SolicitudMantenimiento;
+use App\Models\UnidadArea;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ReporteController extends Controller
 {
@@ -46,9 +49,11 @@ class ReporteController extends Controller
 
     public function r_solicitud_mantenimiento(Request $request)
     {
-        $tipo =  $request->tipo;
-
-        $pdf = PDF::loadView('reportes.solicitud_mantenimiento', compact('solicitud_mantenimiento'))->setPaper('legal', 'landscape');
+        $unidad_area_id =  $request->unidad_area_id;
+        $solicitud_mantenimiento_id =  $request->solicitud_mantenimiento_id;
+        $unidad_area = UnidadArea::find($unidad_area_id);
+        $solicitud_mantenimientos = SolicitudMantenimiento::where("id", $solicitud_mantenimiento_id)->get();
+        $pdf = PDF::loadView('reportes.solicitud_mantenimiento', compact('solicitud_mantenimientos', 'unidad_area'))->setPaper('letter', 'portrait');
 
         // ENUMERAR LAS PÁGINAS USANDO CANVAS
         $pdf->output();

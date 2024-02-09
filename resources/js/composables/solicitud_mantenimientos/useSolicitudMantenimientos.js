@@ -123,6 +123,41 @@ export const useSolicitudMantenimientos = () => {
         }
     };
 
+    const getSolicitudMantenimientoByUnidadAreaId = async (
+        id,
+        order = "asc"
+    ) => {
+        try {
+            const response = await axios.get(
+                route("solicitud_mantenimientos.getByUnidadAreaId"),
+                {
+                    headers: { Accept: "application/json" },
+                    params: {
+                        unidad_area_id: id,
+                        order,
+                    },
+                }
+            );
+            return response.data.solicitud_mantenimientos;
+        } catch (err) {
+            Swal.fire({
+                icon: "info",
+                title: "Error",
+                text: `${
+                    flash.error
+                        ? flash.error
+                        : err.error
+                        ? err.error
+                        : "Error al obtener los registros"
+                }`,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: `Aceptar`,
+            });
+            console.error("Error:", err);
+            throw err; // Puedes manejar el error según tus necesidades
+        }
+    };
+
     const saveSolicitudMantenimiento = async (data) => {
         try {
             const response = await axios.post(
@@ -272,6 +307,7 @@ export const useSolicitudMantenimientos = () => {
         getSolicitudMantenimientos,
         getSolicitudMantenimientosApi,
         getSolicitudMantenimientoById,
+        getSolicitudMantenimientoByUnidadAreaId,
         saveSolicitudMantenimiento,
         deleteSolicitudMantenimiento,
         setSolicitudMantenimiento,

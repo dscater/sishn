@@ -59,6 +59,8 @@ class UserController extends Controller
             "solicitud_mantenimientos.create",
             "solicitud_mantenimientos.edit",
             "solicitud_mantenimientos.destroy",
+            
+            "reportes.solicitud_mantenimiento"
         ],
         "TÉCNICO" => [
             "solicitud_mantenimientos.index",

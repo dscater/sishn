@@ -3,17 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Usuarios</title>
+    <title>Solicitud de Mantenimiento</title>
     <style type="text/css">
         * {
             font-family: sans-serif;
         }
 
         @page {
-            margin-top: 1.5cm;
-            margin-bottom: 0.3cm;
-            margin-left: 0.3cm;
-            margin-right: 0.3cm;
+            margin-top: 1cm;
+            margin-bottom: 1cm;
+            margin-left: 1.5cm;
+            margin-right: 1cm;
         }
 
         table {
@@ -31,11 +31,11 @@
         }
 
         table thead tr th {
-            font-size: 7pt;
+            font-size: 9pt;
         }
 
         table tbody tr td {
-            font-size: 6pt;
+            font-size: 8pt;
         }
 
 
@@ -45,10 +45,16 @@
 
         .logo img {
             position: absolute;
-            width: 200px;
             height: 90px;
             top: -20px;
-            left: 0px;
+            left: 20px;
+        }
+
+        .qr img {
+            position: absolute;
+            height: 90px;
+            top: -20px;
+            right: 20px;
         }
 
         h2.titulo {
@@ -61,12 +67,12 @@
         }
 
         .texto {
-            width: 250px;
+            width: 400px;
             text-align: center;
             margin: auto;
             margin-top: 15px;
             font-weight: bold;
-            font-size: 1.1em;
+            font-size: 1em;
         }
 
         .fecha {
@@ -76,12 +82,6 @@
             margin-top: 15px;
             font-weight: normal;
             font-size: 0.85em;
-        }
-
-        .total {
-            text-align: right;
-            padding-right: 15px;
-            font-weight: bold;
         }
 
         table {
@@ -114,6 +114,10 @@
             padding-right: 5px;
         }
 
+        .bold {
+            font-weight: bold;
+        }
+
         .txt_center {
             font-weight: bold;
             text-align: center;
@@ -139,55 +143,96 @@
             color: white;
         }
 
-        .txt_rojo {}
-
         .img_celda img {
             width: 45px;
+        }
+
+        .break_page {
+            page-break-after: always;
         }
     </style>
 </head>
 
 <body>
     @inject('institucion', 'App\Models\Institucion')
-    <div class="encabezado">
-        <div class="logo">
-            <img src="{{ $institucion->first()->url_logo }}">
+    @php
+        $cont = 0;
+    @endphp
+    @foreach ($solicitud_mantenimientos as $sm)
+        <div class="encabezado">
+            <div class="logo">
+                <img src="{{ $institucion->first()->url_logo }}">
+            </div>
+            <div class="qr">
+                <img src="{{ $sm->qr }}" alt="">
+            </div>
+            <h4 class="texto">SOLICITUD MANTENIMIENTO Y/O REPARACIÓN</h4>
+            <h4 class="texto">UNIDAD DE SERVICIOS GENERALES</h4>
         </div>
-        <h2 class="titulo">
-            {{ $institucion->first()->nombre }}
-        </h2>
-        <h4 class="texto">LISTA DE USUARIOS</h4>
-        <h4 class="fecha">Expedido: {{ date('d-m-Y') }}</h4>
-    </div>
-    <table border="1">
-        <thead class="bg-principal">
-            <tr>
-                <th width="3%">N°</th>
-                <th>USUARIO</th>
-                <th>PATERNO</th>
-                <th>MATERNO</th>
-                <th>NOMBRE(S)</th>
-                <th>C.I.</th>
-                <th>FEC. NAC.</th>
-                <th>GENERO</th>
-                <th width="9%">FECHA DE REGISTRO</th>
-            </tr>
-        </thead>
-        <tbody>
-            @php
-                $cont = 1;
-            @endphp
-            @foreach ($usuarios as $user)
-                <tr>
-                    <td class="centreado">{{ $cont++ }}</td>
-                    <td class="centreado">{{ $user->paterno }}</td>
-                    <td class="centreado">{{ $user->materno }}</td>
-                    <td class="centreado">{{ $user->nombre }}</td>
 
+        <table border="1">
+            <tbody>
+                <tr>
+                    <td class="bold" width="20%">CÓDIGO: </td>
+                    <td colspan="3">{{ $sm->codigo }}</td>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+                <tr>
+                    <td class="bold" width="20%">UNIDAD SOLICITANTE: </td>
+                    <td colspan="3">{{ $unidad_area->nombre }}</td>
+                </tr>
+                <tr>
+                    <td class="bold" width="20%">FECHA DE SOLICITUD: </td>
+                    <td>{{ $sm->fecha_solicitud_t }}</td>
+                    <td class="bold" width="20%">FECHA DE ENTREGA: </td>
+                    <td>{{ $sm->fecha_entrega_t }}</td>
+                </tr>
+                <tr>
+                    <td class="bold" width="20%">NOMBRE DEL RESPONSABLE: </td>
+                    <td>{{ $sm->nombre_responsable }}</td>
+                    <td class="bold" width="20%">C.I. RESPONSABLE: </td>
+                    <td>{{ $sm->ci_responsable }}</td>
+                </tr>
+                <tr>
+                    <td class="bold" width="20%">NOMBRE TÉCNICO: </td>
+                    <td>{{ $sm->nombre_tecnico }}</td>
+                    <td class="bold" width="20%">C.I. TÉCNICO: </td>
+                    <td>{{ $sm->ci_tecnico }}</td>
+                </tr>
+                <tr>
+                    <td class="bold" width="20%">TIPO DE MANTENIMIENTO: </td>
+                    <td colspan="3">{{ $sm->tipo_mantenimiento }}</td>
+                </tr>
+                <tr>
+                    <td class="bold" width="20%">MOTIVO MANTENIMIENTO: </td>
+                    <td colspan="3">{{ $sm->motivo_mantenimiento }}</td>
+                </tr>
+                <tr>
+                    <td class="bold" width="20%">DIAGNOSTICO: </td>
+                    <td colspan="3">{{ $sm->diagnostico }}</td>
+                </tr>
+                <tr>
+                    <td class="bold" width="20%">OTROS: </td>
+                    <td colspan="3">{{ $sm->otros }}</td>
+                </tr>
+                <tr>
+                    <td class="bold" width="20%">EQUIPO: </td>
+                    <td colspan="3">{{ $sm->biometrico->nombre }}</td>
+                </tr>
+                <tr>
+                    <td class="bold" width="20%">REPUESTOS: </td>
+                    <td colspan="3">
+                        {{ $sm->repuestos_txt }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        @php
+            $cont++;
+        @endphp
+        @if ($cont < count($solicitud_mantenimientos))
+            <div class="break_page"></div>
+        @endif
+    @endforeach
 </body>
 
 </html>

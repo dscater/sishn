@@ -36,6 +36,7 @@ class User extends Authenticatable
         "fecha_registro",
     ];
 
+    protected $with = ["unidad_area"];
 
     protected $appends = ["permisos", "url_foto", "full_ci", "full_name", "iniciales_nombre", "fecha_registro_t"];
 
@@ -93,6 +94,12 @@ class User extends Authenticatable
     {
         $iniciales = substr($this->nombre, 0, 1) . substr($this->paterno, 0, 1);
         return $iniciales;
+    }
+
+    // relaciones
+    public function unidad_area()
+    {
+        return $this->hasOne(UnidadArea::class, 'user_id');
     }
 
     // FUNCIONES

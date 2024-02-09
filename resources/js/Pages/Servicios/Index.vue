@@ -103,7 +103,7 @@ const editarServicio = (item) => {
 const eliminarServicio = (item) => {
     Swal.fire({
         title: "¿Quierés eliminar este registro?",
-        html: `<strong>${item.codigo}</strong>`,
+        html: `Id: <strong>${item.id}</strong>`,
         showCancelButton: true,
         confirmButtonColor: "#B61431",
         confirmButtonText: "Si, eliminar",
@@ -308,79 +308,76 @@ const eliminarServicio = (item) => {
                                             <ul class="flex-content">
                                                 <li
                                                     class="flex-item"
-                                                    data-label="Código"
+                                                    data-label="Id"
                                                 >
-                                                    {{ item.codigo }}
+                                                    {{ item.id }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="Fecha de Solicitud"
+                                                    data-label="Código de Solicitud"
                                                 >
-                                                    {{ item.fecha_solicitud_t }}
+                                                    {{
+                                                        item
+                                                            .solicitud_mantenimiento
+                                                            .codigo
+                                                    }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="Fecha de Entrega"
+                                                    data-label="Fecha de entrega"
                                                 >
                                                     {{ item.fecha_entrega_t }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="Equipo"
+                                                    data-label="Procedimientos"
                                                 >
-                                                    {{ item.biometrico.nombre }}
+                                                    {{ item.procedimientos }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="Repuestos"
+                                                    data-label="Observaciones"
                                                 >
-                                                    {{ item.repuestos_txt }}
+                                                    {{ item.observaciones }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="Nombre Responsable"
+                                                    data-label="Diagnóstico Previo"
                                                 >
                                                     {{
-                                                        item.nombre_responsable
+                                                        item.diagnostico_equipo
                                                     }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="C.I. Responsable"
+                                                    data-label="Estado del equipo"
                                                 >
-                                                    {{ item.ci_responsable }}
+                                                    {{ item.estado_equipo }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="Nombre Técnico"
+                                                    data-label="Trabajo realizado"
                                                 >
-                                                    {{ item.nombre_tecnico }}
+                                                    {{ item.trabajo_realizado }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="C.I. Técnico"
+                                                    data-label="Capacitación"
                                                 >
-                                                    {{ item.ci_tecnico }}
+                                                    {{ item.capacitacion }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="Tipo de Mantenimiento"
+                                                    data-label="Descripción"
                                                 >
-                                                    {{
-                                                        item.tipo_mantenimiento
-                                                    }}
+                                                    {{ item.descripcion }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="Diagnostico"
+                                                    data-label="Fecha Inicio - Fecha Fin"
                                                 >
-                                                    {{ item.diagnostico }}
-                                                </li>
-                                                <li
-                                                    class="flex-item"
-                                                    data-label="Otros"
-                                                >
-                                                    {{ item.otros }}
+                                                    {{ item.fecha_ini_t }} -
+                                                    {{ item.fecha_fin_t }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
