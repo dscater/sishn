@@ -22,6 +22,7 @@ import { useUsuarios } from "@/composables/usuarios/useUsuarios";
 import { ref, onMounted } from "vue";
 import { useMenu } from "@/composables/useMenu";
 import Formulario from "./Formulario.vue";
+import FormPassword from "./FormPassword.vue";
 const { mobile, identificaDispositivo } = useMenu();
 const { setLoading } = useApp();
 onMounted(() => {
@@ -98,6 +99,9 @@ const recargaUsuarios = async () => {
 };
 const accion_dialog = ref(0);
 const open_dialog = ref(false);
+const accion_dialog_pass = ref(0);
+const open_dialog_pass = ref(false);
+
 const agregarRegistro = () => {
     limpiarUsuario();
     accion_dialog.value = 0;
@@ -107,6 +111,11 @@ const editarUsuario = (item) => {
     setUsuario(item);
     accion_dialog.value = 1;
     open_dialog.value = true;
+};
+const updatePassword = (item) => {
+    setUsuario(item);
+    accion_dialog_pass.value = 1;
+    open_dialog_pass.value = true;
 };
 const eliminarUsuario = (item) => {
     Swal.fire({
@@ -240,6 +249,13 @@ const eliminarUsuario = (item) => {
                                     </td>
                                     <td class="text-right">
                                         <v-btn
+                                            color="blue"
+                                            size="small"
+                                            class="pa-1 ma-1"
+                                            @click="updatePassword(item)"
+                                            icon="mdi-key-variant"
+                                        ></v-btn>
+                                        <v-btn
                                             color="yellow"
                                             size="small"
                                             class="pa-1 ma-1"
@@ -356,6 +372,15 @@ const eliminarUsuario = (item) => {
                                                 class="text-center pa-5"
                                             >
                                                 <v-btn
+                                                    color="blue"
+                                                    size="small"
+                                                    class="pa-1 ma-1"
+                                                    @click="
+                                                        updatePassword(item)
+                                                    "
+                                                    icon="mdi-key-variant"
+                                                ></v-btn>
+                                                <v-btn
                                                     color="yellow"
                                                     size="small"
                                                     class="pa-1 ma-1"
@@ -387,5 +412,11 @@ const eliminarUsuario = (item) => {
             @envio-formulario="recargaUsuarios"
             @cerrar-dialog="open_dialog = false"
         ></Formulario>
+        <FormPassword
+            :open_dialog="open_dialog_pass"
+            :accion_dialog="accion_dialog_pass"
+            @envio-formulario="open_dialog_pass = false"
+            @cerrar-dialog="open_dialog_pass = false"
+        ></FormPassword>
     </v-container>
 </template>

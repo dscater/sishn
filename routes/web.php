@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::get("/menu_user", [UserController::class, 'permisos']);
 
     // USUARIOS
+    Route::put("/usuarios/password/{user}", [UsuarioController::class, 'actualizaPassword'])->name("usuarios.password");
     Route::get("/usuarios/paginado", [UsuarioController::class, 'paginado'])->name("usuarios.paginado");
     Route::get("/usuarios/listado", [UsuarioController::class, 'listado'])->name("usuarios.listado");
     Route::get("/usuarios/listado/byTipo", [UsuarioController::class, 'byTipo'])->name("usuarios.byTipo");

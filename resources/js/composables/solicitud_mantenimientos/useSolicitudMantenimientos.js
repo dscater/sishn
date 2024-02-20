@@ -35,7 +35,11 @@ const oCronograma = ref({
 
 export const useSolicitudMantenimientos = () => {
     const { flash } = usePage().props;
-    const getSolicitudMantenimientos = async (order = "") => {
+    const getSolicitudMantenimientos = async (
+        order = "",
+        sin_servicio = false,
+        id = null
+    ) => {
         try {
             const response = await axios.get(
                 route("solicitud_mantenimientos.listado"),
@@ -43,6 +47,8 @@ export const useSolicitudMantenimientos = () => {
                     headers: { Accept: "application/json" },
                     params: {
                         order: order,
+                        sin_servicio,
+                        id,
                     },
                 }
             );

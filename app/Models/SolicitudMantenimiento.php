@@ -101,4 +101,9 @@ class SolicitudMantenimiento extends Model
     {
         return $this->hasMany(Cronograma::class, 'solicitud_mantenimiento_id');
     }
+
+    public function servicio()
+    {
+        return $this->hasOne(Servicio::class, 'solicitud_mantenimiento_id');
+    }
 }

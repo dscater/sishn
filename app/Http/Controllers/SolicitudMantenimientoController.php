@@ -41,6 +41,24 @@ class SolicitudMantenimientoController extends Controller
             $solicitud_mantenimientos->where("biometricos.unidad_area_id", $unidad_area->id);
         }
 
+        if ($request->sin_servicio) {
+            if ($request->id && $request->id != '') {
+                $solicitud_mantenimientos = $solicitud_mantenimientos->whereNotExists(function ($query) use ($request) {
+                    $query->select(DB::raw(1))
+                        ->from('servicios')
+                        ->whereRaw('servicios.solicitud_mantenimiento_id = solicitud_mantenimientos.id');
+                })->orWhere(function ($subquery) use ($request) {
+                    $subquery->whereIn('solicitud_mantenimientos.id', [$request->id]);
+                });
+            } else {
+                $solicitud_mantenimientos = $solicitud_mantenimientos->whereNotExists(function ($query) {
+                    $query->select(DB::raw(1))
+                        ->from('servicios')
+                        ->whereRaw('servicios.solicitud_mantenimiento_id = solicitud_mantenimientos.id');
+                });
+            }
+        }
+
         if ($request->order && $request->order == "desc") {
             $solicitud_mantenimientos->orderBy("solicitud_mantenimientos.id", "desc");
         }

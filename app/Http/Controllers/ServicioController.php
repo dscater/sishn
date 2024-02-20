@@ -63,7 +63,7 @@ class ServicioController extends Controller
         }
 
         if (trim($search) != "") {
-            $servicios->where("solicitud_mantenimiento.codigo", "LIKE", "%$search%");
+            $servicios->where("solicitud_mantenimientos.codigo", "LIKE", "%$search%");
         }
         $servicios = $servicios->paginate($request->itemsPerPage);
         return response()->JSON([

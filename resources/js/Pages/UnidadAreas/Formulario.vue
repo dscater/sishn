@@ -32,6 +32,7 @@ watch(
     () => props.accion_dialog,
     (newValue) => {
         accion.value = newValue;
+        cargarUsuarios();
     }
 );
 
@@ -95,7 +96,15 @@ const cerrarDialog = () => {
 };
 
 const cargarUsuarios = async () => {
-    listUsuarios.value = await getUsuariosByTipo("JEFE DE ÁREA");
+    if (accion.value == 1) {
+        listUsuarios.value = await getUsuariosByTipo(
+            "JEFE DE ÁREA",
+            true,
+            oUnidadArea.value.user_id
+        );
+    } else {
+        listUsuarios.value = await getUsuariosByTipo("JEFE DE ÁREA", true);
+    }
 };
 
 onMounted(async () => {

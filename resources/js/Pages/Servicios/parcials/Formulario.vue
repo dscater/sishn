@@ -13,7 +13,7 @@ const { flash, auth } = usePage().props;
 const user = ref(auth.user);
 const { getSolicitudMantenimientos, getSolicitudMantenimientoById } =
     useSolicitudMantenimientos();
-const listBiometricos = ref([]);
+const listSolicitudMantenimientos = ref([]);
 
 const tituloDialog = computed(() => {
     return oServicio.id == 0 ? `Agregar Servicio` : `Editar Servicio`;
@@ -58,7 +58,17 @@ const enviarFormulario = () => {
 };
 
 const cargaSolicitudMantenimientos = async () => {
-    listBiometricos.value = await getSolicitudMantenimientos("desc");
+    if (form.id && form.id != 0 && form.id != "") {
+        listSolicitudMantenimientos.value= await getSolicitudMantenimientos(
+            "desc",
+            true,
+            form.id
+        );
+    } else {
+        listSolicitudMantenimientos.value = await getSolicitudMantenimientos(
+            "desc"
+        );
+    }
 };
 
 const solicitud_mantenimiento = ref(null);
@@ -155,7 +165,7 @@ onMounted(() => {
                                         clearable
                                         variant="outlined"
                                         label="Seleccionar Código de Solicitud de Mantenimiento*"
-                                        :items="listBiometricos"
+                                        :items="listSolicitudMantenimientos"
                                         item-value="id"
                                         item-title="codigo"
                                         required

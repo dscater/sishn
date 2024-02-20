@@ -58,6 +58,23 @@ class UsuarioController extends Controller
         $usuarios = User::where("id", "!=", 1);
         if (isset($request->tipo) && trim($request->tipo) != "") {
             $usuarios = $usuarios->where("tipo", $request->tipo);
+            if ($request->sin_area) {
+                if ($request->id && $request->id != '') {
+                    $usuarios = $usuarios->whereNotExists(function ($query) use ($request) {
+                        $query->select(DB::raw(1))
+                            ->from('unidad_areas')
+                            ->whereRaw('unidad_areas.user_id = users.id');
+                    })->orWhere(function ($subquery) use ($request) {
+                        $subquery->whereIn('users.id', [$request->id]);
+                    });
+                } else {
+                    $usuarios = $usuarios->whereNotExists(function ($query) {
+                        $query->select(DB::raw(1))
+                            ->from('unidad_areas')
+                            ->whereRaw('unidad_areas.user_id = users.id');
+                    });
+                }
+            }
         }
         $usuarios = $usuarios->get();
 
@@ -172,6 +189,41 @@ class UsuarioController extends Controller
                 'user_id' => Auth::user()->id,
                 'accion' => 'MODIFICACIÓN',
                 'descripcion' => 'EL USUARIO ' . Auth::user()->usuario . ' MODIFICÓ UN USUARIO',
+                'datos_original' => $datos_original,
+                'datos_nuevo' => $datos_nuevo,
+                'modulo' => 'USUARIOS',
+                'fecha' => date('Y-m-d'),
+                'hora' => date('H:i:s')
+            ]);
+
+
+            DB::commit();
+            return redirect()->route("usuarios.index")->with("bien", "Registro actualizado");
+        } catch (\Exception $e) {
+            DB::rollBack();
+            // Log::debug($e->getMessage());
+            throw ValidationException::withMessages([
+                'error' =>  $e->getMessage(),
+            ]);
+        }
+    }
+
+    public function actualizaPassword(User $user, Request $request)
+    {
+        $request->validate([
+            "password" => "required"
+        ]);
+        DB::beginTransaction();
+        try {
+            $datos_original = HistorialAccion::getDetalleRegistro($user, "users");
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            $datos_nuevo = HistorialAccion::getDetalleRegistro($user, "users");
+            HistorialAccion::create([
+                'user_id' => Auth::user()->id,
+                'accion' => 'MODIFICACIÓN',
+                'descripcion' => 'EL USUARIO ' . Auth::user()->usuario . ' MODIFICÓ UN LA CONTRASEÑA DE UN USUARIO',
                 'datos_original' => $datos_original,
                 'datos_nuevo' => $datos_nuevo,
                 'modulo' => 'USUARIOS',

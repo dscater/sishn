@@ -119,6 +119,13 @@ const eliminarServicio = (item) => {
         }
     });
 };
+const generarReporte = async (item) => {
+    const url = route("reportes.r_servicio", {
+        unidad_area_id: item.solicitud_mantenimiento.biometrico.unidad_area_id,
+        solicitud_mantenimiento_id: item.solicitud_mantenimiento.id,
+    });
+    window.open(url, "_blank");
+};
 </script>
 <template>
     <Head title="Servicios"></Head>
@@ -207,7 +214,14 @@ const eliminarServicio = (item) => {
                                                 @click="item.mas = !item.mas"
                                             ></v-btn>
                                         </td>
-                                        <td class="text-right">
+                                        <td class="text-right" width="5%">
+                                            <v-btn
+                                                color="blue"
+                                                size="small"
+                                                class="pa-1 ma-1"
+                                                @click="generarReporte(item)"
+                                                icon="mdi-file-document"
+                                            ></v-btn>
                                             <v-btn
                                                 color="yellow"
                                                 size="small"
@@ -391,6 +405,15 @@ const eliminarServicio = (item) => {
                                                     cols="12"
                                                     class="text-center pa-5"
                                                 >
+                                                    <v-btn
+                                                        color="blue"
+                                                        size="small"
+                                                        class="pa-1 ma-1"
+                                                        @click="
+                                                            generarReporte(item)
+                                                        "
+                                                        icon="mdi-file-document"
+                                                    ></v-btn>
                                                     <v-btn
                                                         color="yellow"
                                                         size="small"
