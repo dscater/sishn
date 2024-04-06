@@ -5,11 +5,13 @@ import { useBiometricos } from "@/composables/biometricos/useBiometricos";
 import { useRepuestos } from "@/composables/repuestos/useRepuestos";
 import { useMenu } from "@/composables/useMenu";
 import Cronograma from "./Cronograma.vue";
+import { useUsuarios } from "@/composables/usuarios/useUsuarios";
 import { watch, ref, computed, defineEmits, onMounted } from "vue";
 
 const { mobile, cambiarUrl } = useMenu();
 const { oSolicitudMantenimiento, limpiarSolicitudMantenimiento } =
     useSolicitudMantenimientos();
+const { getUsuariosByTipo } = useUsuarios();
 let form = useForm(oSolicitudMantenimiento);
 
 const { flash, auth } = usePage().props;
@@ -19,6 +21,8 @@ const { getBiometricos } = useBiometricos();
 const { getRepuestos } = useRepuestos();
 const listBiometricos = ref([]);
 const listRepuestos = ref([]);
+const listJefeArea = ref([]);
+const listTecnicos = ref([]);
 
 const tituloDialog = computed(() => {
     return oSolicitudMantenimiento.id == 0
@@ -75,9 +79,15 @@ const cargarRepuestos = async () => {
     listRepuestos.value = await getRepuestos();
 };
 
+const cargarUsuarios = async () => {
+    listJefeArea.value = await getUsuariosByTipo("JEFE DE ÁREA");
+    listTecnicos.value = await getUsuariosByTipo("TÉCNICO");
+};
+
 onMounted(() => {
     cargarBiometricos();
     cargarRepuestos();
+    cargarUsuarios();
 });
 </script>
 
@@ -133,102 +143,61 @@ onMounted(() => {
                     <v-container>
                         <form @submit.prevent="enviarFormulario">
                             <v-row>
-                                <v-col cols="12" sm="12" md="12" xl="6">
-                                    <v-text-field
+                                <v-col cols="12">
+                                    <v-select
                                         :hide-details="
-                                            form.errors?.nombre_responsable
+                                            form.errors?.responsable_id
                                                 ? false
                                                 : true
                                         "
                                         :error="
-                                            form.errors?.nombre_responsable
+                                            form.errors?.responsable_id
                                                 ? true
                                                 : false
                                         "
                                         :error-messages="
-                                            form.errors?.nombre_responsable
-                                                ? form.errors
-                                                      ?.nombre_responsable
+                                            form.errors?.responsable_id
+                                                ? form.errors?.responsable_id
                                                 : ''
                                         "
+                                        no-data-text="No se encontrarón registros"
                                         variant="outlined"
-                                        label="Nombre Completo Responsable*"
+                                        label="Seleccionar Responsable*"
+                                        :items="listJefeArea"
+                                        item-value="id"
+                                        item-title="full_name"
                                         required
                                         density="compact"
-                                        v-model="form.nombre_responsable"
-                                    ></v-text-field>
+                                        v-model="form.responsable_id"
+                                    ></v-select>
                                 </v-col>
-                                <v-col cols="12" sm="12" md="12" xl="6">
-                                    <v-text-field
+                                <v-col cols="12">
+                                    <v-select
                                         :hide-details="
-                                            form.errors?.ci_responsable
+                                            form.errors?.tecnico_id
                                                 ? false
                                                 : true
                                         "
                                         :error="
-                                            form.errors?.ci_responsable
+                                            form.errors?.tecnico_id
                                                 ? true
                                                 : false
                                         "
                                         :error-messages="
-                                            form.errors?.ci_responsable
-                                                ? form.errors?.ci_responsable
+                                            form.errors?.tecnico_id
+                                                ? form.errors?.tecnico_id
                                                 : ''
                                         "
+                                        no-data-text="No se encontrarón registros"
                                         variant="outlined"
-                                        label="C.I. Responsable"
+                                        label="Seleccionar Ténico*"
+                                        :items="listTecnicos"
+                                        item-value="id"
+                                        item-title="full_name"
                                         required
                                         density="compact"
-                                        v-model="form.ci_responsable"
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="12" xl="6">
-                                    <v-text-field
-                                        :hide-details="
-                                            form.errors?.nombre_tecnico
-                                                ? false
-                                                : true
-                                        "
-                                        :error="
-                                            form.errors?.nombre_tecnico
-                                                ? true
-                                                : false
-                                        "
-                                        :error-messages="
-                                            form.errors?.nombre_tecnico
-                                                ? form.errors?.nombre_tecnico
-                                                : ''
-                                        "
-                                        variant="outlined"
-                                        label="Nombre Completo Técnico"
-                                        required
-                                        density="compact"
-                                        v-model="form.nombre_tecnico"
-                                    ></v-text-field>
-                                </v-col>
-                                <v-col cols="12" sm="12" md="12" xl="6">
-                                    <v-text-field
-                                        :hide-details="
-                                            form.errors?.ci_tecnico
-                                                ? false
-                                                : true
-                                        "
-                                        :error="
-                                            form.errors?.ci_tecnico
-                                                ? true
-                                                : false
-                                        "
-                                        :error-messages="
-                                            form.errors?.ci_tecnico
-                                                ? form.errors?.ci_tecnico
-                                                : ''
-                                        "
-                                        variant="outlined"
-                                        label="C.I. Técnico"
-                                        required
-                                        density="compact"
-                                        v-model="form.ci_tecnico"
-                                    ></v-text-field>
+                                        v-model="form.tecnico_id"
+                                    ></v-select>
                                 </v-col>
                                 <v-col
                                     cols="12"
@@ -384,7 +353,7 @@ onMounted(() => {
                                         v-model="form.fecha_entrega"
                                     ></v-text-field>
                                 </v-col> -->
-                                <v-col cols="12" sm="12" md="12" xl="6">
+                                <v-col cols="12" sm="12" md="12" xl="12">
                                     <v-select
                                         :hide-details="
                                             form.errors?.biometrico_id
@@ -405,13 +374,26 @@ onMounted(() => {
                                         label="Seleccionar Equipo*"
                                         :items="listBiometricos"
                                         item-value="id"
-                                        item-title="nombre"
+                                        item-title="serie"
                                         required
                                         density="compact"
                                         v-model="form.biometrico_id"
-                                    ></v-select>
+                                    >
+                                        <template v-slot:item="{ props, item }">
+                                            <v-list-item
+                                                v-bind="props"
+                                                :subtitle="item.raw.nombre"
+                                            ></v-list-item>
+                                        </template>
+                                        <template v-slot:selection="{ item }">
+                                            <span>{{ item.raw.serie }}</span>&nbsp;
+                                            <span class="text-caption"
+                                                >( {{ item.raw.nombre }})</span
+                                            >
+                                        </template>
+                                    </v-select>
                                 </v-col>
-                                <v-col cols="12" sm="12" md="12" xl="6">
+                                <v-col cols="12" sm="12" md="12" xl="12">
                                     <v-select
                                         :hide-details="
                                             form.errors?.array_repuestos

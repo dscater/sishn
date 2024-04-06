@@ -40,29 +40,29 @@ const headers = ref([
     {
         title: "Id",
         align: "start",
-        key: "id",
         sortable: false,
     },
-    { title: "Nombre Empresa", key: "nombre", align: "start", sortable: false },
-    { title: "Nit", key: "nit", align: "start", sortable: false },
-    { title: "Teléfono", key: "fono", align: "start", sortable: false },
+    { title: "Nombre Empresa", align: "start", sortable: false },
+    { title: "Nit", align: "start", sortable: false },
+    { title: "Teléfono", align: "start", sortable: false },
     {
         title: "Fecha Inicio",
-        key: "fecha_ini_t",
+
         align: "start",
         sortable: false,
     },
-    { title: "Fecha Fin", key: "fecha_fin_t", align: "start", sortable: false },
-    { title: "Correo", key: "correo", align: "start", sortable: false },
-    { title: "Dirección", key: "dir", align: "start", sortable: false },
-    { title: "Logo", key: "logo", align: "start", sortable: false },
+    { title: "Fecha Fin", align: "start", sortable: false },
+    { title: "Correo", align: "start", sortable: false },
+    { title: "Dirección", align: "start", sortable: false },
+    { title: "País", align: "start", sortable: false },
+    { title: "Logo", align: "start", sortable: false },
     {
         title: "Fecha Registro",
-        key: "fecha_registro_t",
+
         align: "start",
         sortable: false,
     },
-    { title: "Acción", key: "accion", align: "end", sortable: false },
+    { title: "Acción", align: "end", sortable: false },
 ]);
 
 const search = ref("");
@@ -209,6 +209,7 @@ const eliminarEmpresa = (item) => {
                                     <td>{{ item.fecha_fin_t }}</td>
                                     <td>{{ item.correo }}</td>
                                     <td>{{ item.dir }}</td>
+                                    <td>{{ item.pais }}</td>
                                     <td>
                                         <v-card
                                             class="my-2"
@@ -300,6 +301,12 @@ const eliminarEmpresa = (item) => {
                                                 data-label="Dirección"
                                             >
                                                 {{ item.dir }}
+                                            </li>
+                                            <li
+                                                class="flex-item"
+                                                data-label="País"
+                                            >
+                                                {{ item.pais }}
                                             </li>
                                             <li
                                                 class="flex-item"

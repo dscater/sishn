@@ -18,7 +18,7 @@
 
         table {
             width: 100%;
-            border-collapse: separate;
+            border-collapse: collapse;
             table-layout: fixed;
             margin-top: 40px;
             border-spacing: 0px 5px;
@@ -51,17 +51,24 @@
             left: 20px;
         }
 
-        .qr img {
+        .logo2 img {
             position: absolute;
             height: 90px;
             top: -20px;
             right: 20px;
         }
 
+        .qr img {
+            position: absolute;
+            height: 65px;
+            top: 77px;
+            right: 20px;
+        }
+
         h2.titulo {
             width: 450px;
             margin: auto;
-            margin-top: 0PX;
+            margin-top: 30px;
             margin-bottom: 15px;
             text-align: center;
             font-size: 14pt;
@@ -136,7 +143,7 @@
         }
 
         .gray {
-            background: rgb(202, 202, 202);
+            background: rgb(236, 236, 236)
         }
 
         .bg-principal {
@@ -152,10 +159,6 @@
             page-break-after: always;
         }
 
-        .border_top {
-            border-top: solid 1px black;
-        }
-
         .border_bot {
             border-bottom: solid 1px black;
         }
@@ -166,6 +169,21 @@
 
         .padding_bot {
             padding-bottom: 6px;
+        }
+
+        .firma {
+            margin-top: 100px;
+            border-collapse: separate;
+            border-spacing: 40px 0px;
+        }
+
+        .firma tbody tr td {
+            text-align: center;
+            padding: 0px;
+        }
+
+        .firma tbody tr:nth-child(1) td {
+            border-bottom: dotted 2px black;
         }
     </style>
 </head>
@@ -180,6 +198,9 @@
             <div class="logo">
                 <img src="{{ $institucion->first()->url_logo }}">
             </div>
+            <div class="logo2">
+                <img src="{{ $institucion->first()->url_logo2 }}">
+            </div>
             <div class="qr">
                 <img src="{{ $s->solicitud_mantenimiento->qr }}" alt="">
             </div>
@@ -189,13 +210,13 @@
             <h4 class="texto">ORDEN DE SERVICIO TÉCNICO</h4>
         </div>
 
-        <table>
+        <table border="1" style="margin-top:60px;">
             <tbody>
                 <tr>
-                    <td class="bold border_top" colspan="6">DATOS DEL CLIENTE</td>
+                    <td class="bold gray" colspan="6">DATOS DEL CLIENTE</td>
                 </tr>
                 <tr>
-                    <td class="bold" width="20%">Nombre: </td>
+                    <td class="bold" width="16%">Nombre: </td>
                     <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->empresa->nombre }}</td>
                     <td class="bold">Unidad:</td>
                     <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->unidad_area->nombre }}</td>
@@ -207,8 +228,8 @@
                     <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->empresa->fono }}</td>
                 </tr>
                 <tr>
-                    <td class="bold border_top">DATOS DEL EQUIPO: </td>
-                    <td colspan="5" class="border_top">{{ $s->solicitud_mantenimiento->biometrico->nombre }}</td>
+                    <td class="bold ">DATOS DEL EQUIPO: </td>
+                    <td colspan="5" class="">{{ $s->solicitud_mantenimiento->biometrico->nombre }}</td>
                 </tr>
                 <tr>
                     <td class="bold" width="20%">Marca: </td>
@@ -219,16 +240,33 @@
                     <td>{{ $s->solicitud_mantenimiento->biometrico->serie }}</td>
                 </tr>
                 <tr>
-                    <td class="bold border_top" colspan="6">DATOS DEL PERSONAL TÉCNICO </td>
+                    <td class="bold gray" colspan="6">DATOS DEL REPONSABLE </td>
                 </tr>
                 <tr>
                     <td class="bold" width="20%">Nombre: </td>
-                    <td colspan="2">{{ $s->solicitud_mantenimiento->nombre_tecnico }}</td>
+                    <td colspan="2">
+                        {{ $s->solicitud_mantenimiento->responsable ? $s->solicitud_mantenimiento->responsable->full_name : '' }}
+                    </td>
                     <td class="bold">C.I.:</td>
-                    <td colspan="2">{{ $s->solicitud_mantenimiento->ci_tecnico }}</td>
+                    <td colspan="2">
+                        {{ $s->solicitud_mantenimiento->responsable ? $s->solicitud_mantenimiento->responsable->full_ci : '' }}
+                    </td>
                 </tr>
                 <tr>
-                    <td class="bold border_top" colspan="6">TIPO DE ASISTENCIA </td>
+                    <td class="bold gray" colspan="6">DATOS DEL PERSONAL TÉCNICO </td>
+                </tr>
+                <tr>
+                    <td class="bold" width="20%">Nombre: </td>
+                    <td colspan="2">
+                        {{ $s->solicitud_mantenimiento->tecnico ? $s->solicitud_mantenimiento->tecnico->full_name : '' }}
+                    </td>
+                    <td class="bold">C.I.:</td>
+                    <td colspan="2">
+                        {{ $s->solicitud_mantenimiento->tecnico ? $s->solicitud_mantenimiento->tecnico->full_ci : '' }}
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bold gray" colspan="6">TIPO DE ASISTENCIA </td>
                 </tr>
                 <tr>
                     <td class="bold" width="20%">Otros: </td>
@@ -247,7 +285,7 @@
                     <td colspan="2">{{ $s->fecha_fin_t }}</td>
                 </tr>
                 <tr>
-                    <td class="bold border_top" colspan="6">PROBLEMAS REPORTADOS POR EL CLIENTE </td>
+                    <td class="bold gray" colspan="6">PROBLEMAS REPORTADOS POR EL CLIENTE </td>
                 </tr>
                 <tr>
                     <td class="bold padding_top padding_bot">MOTIVO DE MANTENIMIENTO: </td>
@@ -266,7 +304,7 @@
                     <td colspan="5">{{ $s->solicitud_mantenimiento->tipo_mantenimiento }}</td>
                 </tr>
                 <tr>
-                    <td class="bold border_top" colspan="6">SERVICIO REALIZADO </td>
+                    <td class="bold gray" colspan="6">SERVICIO REALIZADO </td>
                 </tr>
                 <tr>
                     <td class="bold padding_top padding_bot">DIAGNOSTICO PREVIO: </td>
@@ -286,6 +324,22 @@
                 </tr>
             </tbody>
         </table>
+
+        <table class="firma">
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>JEFE DE ÁREA</td>
+                    <td>TÉCNICO</td>
+                    <td>RESPONSABLE DE MANTENIMIENTO</td>
+                </tr>
+            </tbody>
+        </table>
+
         @php
             $cont++;
         @endphp

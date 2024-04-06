@@ -52,6 +52,11 @@ class UserController extends Controller
             "servicios.edit",
             "servicios.destroy",
 
+            "documentos.index",
+            "documentos.create",
+            "documentos.edit",
+            "documentos.destroy",
+
             "institucions.index",
             "institucions.create",
             "institucions.edit",
@@ -60,29 +65,10 @@ class UserController extends Controller
             "reportes.usuarios",
             "reportes.solicitud_mantenimiento",
             "reportes.servicio",
-            "reportes.equipos"
+            "reportes.equipos",
+            "reportes.historial_mantenimientos"
         ],
         "JEFE DE ÁREA" => [
-            "solicitud_mantenimientos.index",
-            "solicitud_mantenimientos.create",
-            "solicitud_mantenimientos.edit",
-            "solicitud_mantenimientos.destroy",
-
-            "reportes.solicitud_mantenimiento",
-            "reportes.servicio",
-            "reportes.equipos"
-        ],
-        "TÉCNICO" => [
-            "empresas.index",
-            "empresas.create",
-            "empresas.edit",
-            "empresas.destroy",
-
-            "biometricos.index",
-            "biometricos.create",
-            "biometricos.edit",
-            "biometricos.destroy",
-
             "solicitud_mantenimientos.index",
             "solicitud_mantenimientos.create",
             "solicitud_mantenimientos.edit",
@@ -95,8 +81,61 @@ class UserController extends Controller
 
             "reportes.solicitud_mantenimiento",
             "reportes.servicio",
-            "reportes.equipos"
+            "reportes.equipos",
+            "reportes.historial_mantenimientos"
         ],
+        "TÉCNICO" => [
+            "unidad_areas.index",
+            "unidad_areas.create",
+            "unidad_areas.edit",
+            "unidad_areas.destroy",
+
+            "empresas.index",
+            "empresas.create",
+            "empresas.edit",
+            "empresas.destroy",
+
+            "biometricos.index",
+            "biometricos.create",
+            "biometricos.edit",
+            "biometricos.destroy",
+
+            "repuestos.index",
+            "repuestos.create",
+            "repuestos.edit",
+            "repuestos.destroy",
+
+            "solicitud_mantenimientos.index",
+            "solicitud_mantenimientos.create",
+            "solicitud_mantenimientos.edit",
+            "solicitud_mantenimientos.destroy",
+
+            "servicios.index",
+            "servicios.create",
+            "servicios.edit",
+            "servicios.destroy",
+
+            "documentos.index",
+            "documentos.create",
+            "documentos.edit",
+            "documentos.destroy",
+
+            "reportes.solicitud_mantenimiento",
+            "reportes.servicio",
+            "reportes.equipos",
+            "reportes.historial_mantenimientos"
+        ],
+        "DIRECTOR" => [
+            "documentos.index",
+            "documentos.create",
+            "documentos.edit",
+            "documentos.destroy",
+
+            "reportes.solicitud_mantenimiento",
+            "reportes.servicio",
+            "reportes.equipos",
+            "reportes.historial_mantenimientos"
+        ]
     ];
 
 

@@ -140,10 +140,12 @@ const scrollActive = () => {
                 v-if="
                     oUser.permisos.includes('usuarios.index') ||
                     oUser.permisos.includes('servicios.index') ||
+                    oUser.permisos.includes('repuestos.index') ||
                     oUser.permisos.includes('solicitud_mantenimientos.index') ||
                     oUser.permisos.includes('biometricos.index') ||
                     oUser.permisos.includes('empresas.index') ||
-                    oUser.permisos.includes('unidad_areas.index')
+                    oUser.permisos.includes('unidad_areas.index') ||
+                    oUser.permisos.includes('documentos.index')
                 "
             >
                 <span v-if="rail && !mobile" class="text-center d-block"
@@ -199,6 +201,22 @@ const scrollActive = () => {
                 >
             </v-list-item>
             <v-list-item
+                :class="[route_current == 'repuestos.index' ? 'active' : '']"
+                v-if="oUser.permisos.includes('repuestos.index')"
+                prepend-icon="mdi-list-box"
+                @click="cambiarUrl(route('repuestos.index'))"
+                link
+            >
+                <v-list-item-title>Repuestos</v-list-item-title>
+                <v-tooltip
+                    v-if="rail && !mobile"
+                    color="white"
+                    activator="parent"
+                    location="end"
+                    >Repuestos</v-tooltip
+                >
+            </v-list-item>
+            <v-list-item
                 :class="[route_current == 'biometricos.index' ? 'active' : '']"
                 v-if="oUser.permisos.includes('biometricos.index')"
                 prepend-icon="mdi-list-box"
@@ -237,13 +255,29 @@ const scrollActive = () => {
                 @click="cambiarUrl(route('unidad_areas.index'))"
                 link
             >
-                <v-list-item-title>Unidades/Áreas</v-list-item-title>
+                <v-list-item-title>Áreas</v-list-item-title>
                 <v-tooltip
                     v-if="rail && !mobile"
                     color="white"
                     activator="parent"
                     location="end"
-                    >Unidades/Áreas</v-tooltip
+                    >Áreas</v-tooltip
+                >
+            </v-list-item>
+            <v-list-item
+                :class="[route_current == 'documentos.index' ? 'active' : '']"
+                v-if="oUser.permisos.includes('documentos.index')"
+                prepend-icon="mdi-view-list"
+                @click="cambiarUrl(route('documentos.index'))"
+                link
+            >
+                <v-list-item-title>Documentos</v-list-item-title>
+                <v-tooltip
+                    v-if="rail && !mobile"
+                    color="white"
+                    activator="parent"
+                    location="end"
+                    >Documentos</v-tooltip
                 >
             </v-list-item>
 
@@ -377,6 +411,32 @@ const scrollActive = () => {
                     ></v-list-item
                 >
                 <v-list-item
+                    v-if="
+                        oUser.permisos.includes(
+                            'reportes.historial_mantenimientos'
+                        )
+                    "
+                    prepend-icon="mdi-chevron-right"
+                    title="Historial de Mantenimiento"
+                    :class="[
+                        route_current == 'reportes.historial_mantenimientos'
+                            ? 'active'
+                            : '',
+                    ]"
+                    @click="
+                        cambiarUrl(route('reportes.historial_mantenimientos'))
+                    "
+                    link
+                >
+                    <v-tooltip
+                        v-if="rail && !mobile"
+                        color="white"
+                        activator="parent"
+                        location="end"
+                        >Historial de Mantenimiento</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
                     v-if="oUser.permisos.includes('reportes.equipos')"
                     prepend-icon="mdi-chevron-right"
                     title="Lista de Equipos"
@@ -402,22 +462,6 @@ const scrollActive = () => {
                 >
                 <span v-else>OTROS</span></v-list-item
             >
-            <v-list-item
-                :class="[route_current == 'repuestos.index' ? 'active' : '']"
-                v-if="oUser.permisos.includes('repuestos.index')"
-                prepend-icon="mdi-list-box"
-                @click="cambiarUrl(route('repuestos.index'))"
-                link
-            >
-                <v-list-item-title>Repuestos</v-list-item-title>
-                <v-tooltip
-                    v-if="rail && !mobile"
-                    color="white"
-                    activator="parent"
-                    location="end"
-                    >Repuestos</v-tooltip
-                >
-            </v-list-item>
             <v-list-item
                 v-if="oUser.permisos.includes('institucions.index')"
                 prepend-icon="mdi-cog-outline"

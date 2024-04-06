@@ -17,6 +17,7 @@ class Empresa extends Model
         "correo",
         "dir",
         "logo",
+        "pais",
         "fecha_registro",
     ];
 

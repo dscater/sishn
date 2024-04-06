@@ -3,6 +3,7 @@ import { useForm, usePage } from "@inertiajs/vue3";
 import { useBiometricos } from "@/composables/biometricos/useBiometricos";
 import { useUnidadAreas } from "@/composables/unidad_areas/useUnidadAreas";
 import { useEmpresas } from "@/composables/empresas/useEmpresas";
+
 import { watch, ref, computed, defineEmits } from "vue";
 const props = defineProps({
     open_dialog: {
@@ -17,12 +18,6 @@ const props = defineProps({
 const { getUnidadAreas } = useUnidadAreas();
 const { getEmpresas } = useEmpresas();
 
-const listEstados = ref([
-    "BUENO",
-    "REGULAR",
-    "MAL ESTADO",
-    "SIN FUNCIONAMIENTO",
-]);
 const listEmpresas = ref([]);
 const listUnidadAreas = ref([]);
 
@@ -59,7 +54,9 @@ function cargaArchivo(e, key) {
 }
 
 const tituloDialog = computed(() => {
-    return accion.value == 0 ? `Agregar Equipo Biométrico` : `Editar Equipo Biométrico`;
+    return accion.value == 0
+        ? `Agregar Equipo Biométrico`
+        : `Editar Equipo Biométrico`;
 });
 
 const enviarFormulario = () => {
@@ -161,7 +158,7 @@ const cargarUnidadAreas = async () => {
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-select
+                                    <v-text-field
                                         :hide-details="
                                             form.errors?.estado ? false : true
                                         "
@@ -173,15 +170,12 @@ const cargarUnidadAreas = async () => {
                                                 ? form.errors?.estado
                                                 : ''
                                         "
-                                        no-data-text="Sin datos"
                                         density="compact"
                                         variant="outlined"
-                                        clearable
-                                        :items="listEstados"
                                         label="Estado"
                                         v-model="form.estado"
                                         required
-                                    ></v-select>
+                                    ></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field
@@ -269,7 +263,7 @@ const cargarUnidadAreas = async () => {
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field
+                                    <v-select
                                         :hide-details="
                                             form.errors?.garantia ? false : true
                                         "
@@ -281,24 +275,23 @@ const cargarUnidadAreas = async () => {
                                                 ? form.errors?.garantia
                                                 : ''
                                         "
+                                        no-data-text="Sin datos"
                                         density="compact"
                                         variant="outlined"
+                                        clearable
+                                        :items="['SI', 'NO']"
                                         label="Garantía"
                                         v-model="form.garantia"
                                         required
-                                    ></v-text-field>
+                                    ></v-select>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field
                                         :hide-details="
-                                            form.errors?.cod_hdn
-                                                ? false
-                                                : true
+                                            form.errors?.cod_hdn ? false : true
                                         "
                                         :error="
-                                            form.errors?.cod_hdn
-                                                ? true
-                                                : false
+                                            form.errors?.cod_hdn ? true : false
                                         "
                                         :error-messages="
                                             form.errors?.cod_hdn
@@ -401,7 +394,12 @@ const cargarUnidadAreas = async () => {
                                         required
                                     ></v-select>
                                 </v-col>
-                                <v-col cols="12" sm="6" md="4">
+                                <v-col
+                                    cols="12"
+                                    sm="6"
+                                    md="4"
+                                    v-if="form.garantia == 'SI'"
+                                >
                                     <v-select
                                         :hide-details="
                                             form.errors?.empresa_id

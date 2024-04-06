@@ -53,7 +53,7 @@ const headers = ref([
     { title: "Serie", align: "start", sortable: false },
     { title: "Modelo", align: "start", sortable: false },
     { title: "Fecha de Ingreso", align: "start", sortable: false },
-    { title: "Unidad/Área", align: "start", sortable: false },
+    { title: "Área", align: "start", sortable: false },
     { title: "Empresa", align: "start", sortable: false },
     { title: "Imagen", align: "start", sortable: false },
     { title: "Más", align: "start", sortable: false },
@@ -69,6 +69,7 @@ const options = ref({
     sortBy: "",
     sortOrder: "desc",
     search: "",
+    order: "desc",
 });
 
 const loading = ref(true);
@@ -232,7 +233,7 @@ const eliminarBiometrico = (item) => {
                                         <td>{{ item.modelo }}</td>
                                         <td>{{ item.fecha_ingreso_t }}</td>
                                         <td>{{ item.unidad_area.nombre }}</td>
-                                        <td>{{ item.empresa.nombre }}</td>
+                                        <td>{{ item.empresa?.nombre }}</td>
                                         <td>
                                             <v-card
                                                 class="my-2"
@@ -462,7 +463,7 @@ const eliminarBiometrico = (item) => {
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="Unidad/Área"
+                                                    data-label="Área"
                                                 >
                                                     {{
                                                         item.unidad_area.nombre
@@ -472,7 +473,7 @@ const eliminarBiometrico = (item) => {
                                                     class="flex-item"
                                                     data-label="Empresa"
                                                 >
-                                                    {{ item.empresa.nombre }}
+                                                    {{ item.empresa?.nombre }}
                                                 </li>
                                                 <li
                                                     class="flex-item"

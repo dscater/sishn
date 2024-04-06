@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("descripcion", 700)->nullable();
             $table->unsignedBigInteger("user_id");
             $table->string("ubicacion", 255)->nullable();
+            $table->string("unidad", 255)->nullable();
             $table->date("fecha_registro");
             $table->timestamps();
 

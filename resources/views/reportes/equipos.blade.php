@@ -50,6 +50,13 @@
             left: 20px;
         }
 
+        .logo2 img {
+            position: absolute;
+            height: 90px;
+            top: -20px;
+            right: 20px;
+        }
+
         .qr img {
             position: absolute;
             height: 90px;
@@ -167,7 +174,7 @@
             padding-bottom: 6px;
         }
 
-        td.foto img{
+        td.foto img {
             width: 40px;
         }
     </style>
@@ -182,6 +189,9 @@
         <div class="encabezado">
             <div class="logo">
                 <img src="{{ $institucion->first()->url_logo }}">
+            </div>
+            <div class="logo2">
+                <img src="{{ $institucion->first()->url_logo2 }}">
             </div>
             <h2 class="titulo">
                 {{ $institucion->first()->nombre }}
@@ -222,7 +232,7 @@
                         <td>{{ $biometrico->fecha_ingreso_t }}</td>
                         <td>{{ $biometrico->garantia }}</td>
                         <td>{{ $biometrico->cod_hdn }}</td>
-                        <td>{{ $biometrico->empresa->nombre }}</td>
+                        <td>{{ $biometrico->empresa ? $biometrico->empresa->nombre : '' }}</td>
                         <td class="centreado foto">
                             @if ($biometrico->url_foto)
                                 <img src="{{ $biometrico->url_foto }}" alt="">

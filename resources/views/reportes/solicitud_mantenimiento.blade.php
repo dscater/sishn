@@ -50,10 +50,17 @@
             left: 20px;
         }
 
-        .qr img {
+        .logo2 img {
             position: absolute;
             height: 90px;
             top: -20px;
+            right: 20px;
+        }
+
+        .qr img {
+            position: absolute;
+            height: 65px;
+            top: 77px;
             right: 20px;
         }
 
@@ -163,6 +170,9 @@
             <div class="logo">
                 <img src="{{ $institucion->first()->url_logo }}">
             </div>
+            <div class="logo2">
+                <img src="{{ $institucion->first()->url_logo2 }}">
+            </div>
             <div class="qr">
                 <img src="{{ $sm->qr }}" alt="">
             </div>
@@ -173,7 +183,7 @@
             <h4 class="texto">UNIDAD DE SERVICIOS GENERALES</h4>
         </div>
 
-        <table border="1">
+        <table border="1" style="margin-top:30px;">
             <tbody>
                 <tr>
                     <td class="bold" width="20%">CÓDIGO: </td>

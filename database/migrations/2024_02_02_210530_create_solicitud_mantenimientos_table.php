@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string("codigo", 255)->unique();
             $table->bigInteger("nro", 255)->unsigned();
+            $table->unsignedBigInteger("responsable_id");
             $table->string("nombre_responsable", 300);
             $table->string("ci_responsable", 255)->nullable();
+            $table->unsignedBigInteger("tecnico_id");
             $table->string("nombre_tecnico", 255)->nullable();
             $table->string("ci_tecnico", 255)->nullable();
             $table->string("tipo_mantenimiento", 255);
@@ -31,6 +33,8 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign("biometrico_id")->on("biometricos")->references("id");
+            $table->foreign("responsable_id")->on("users")->references("id");
+            $table->foreign("tecnico_id")->on("users")->references("id");
         });
     }
 

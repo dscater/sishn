@@ -32,11 +32,13 @@ class Institucion extends Model
         "ubicacion_google",
         "img_organigrama",
         "logo",
+        "logo2",
     ];
 
     protected $appends = [
         "iniciales_nombre",
         "url_logo",
+        "url_logo2",
         "url_foto_director",
         "url_foto_subdirector",
         "url_img_organigrama",
@@ -60,6 +62,14 @@ class Institucion extends Model
     {
         if ($this->logo && trim($this->logo) != "") {
             return asset("imgs/" . $this->logo);
+        }
+        return null;
+    }
+
+    public function getUrlLogo2Attribute()
+    {
+        if ($this->logo2 && trim($this->logo2) != "") {
+            return asset("imgs/" . $this->logo2);
         }
         return null;
     }

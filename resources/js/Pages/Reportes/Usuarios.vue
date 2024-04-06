@@ -45,6 +45,7 @@ const listTipos = ref([
     { value: "ADMINISTRADOR", label: "ADMINISTRADOR" },
     { value: "JEFE DE ÁREA", label: "JEFE DE ÁREA" },
     { value: "TÉCNICO", label: "TÉCNICO" },
+    { value: "DIRECTOR", label: "DIRECTOR" },
 ]);
 
 const generarReporte = () => {

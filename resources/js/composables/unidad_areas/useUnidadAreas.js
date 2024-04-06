@@ -9,6 +9,7 @@ const oUnidadArea = ref({
     descripcion: "",
     user_id: "",
     ubicacion: "",
+    unidad: "",
     _method: "POST",
 });
 
@@ -143,6 +144,7 @@ export const useUnidadAreas = () => {
             oUnidadArea.value.descripcion = item.descripcion;
             oUnidadArea.value.user_id = item.user_id;
             oUnidadArea.value.ubicacion = item.ubicacion;
+            oUnidadArea.value.unidad = item.unidad;
             oUnidadArea.value._method = "PUT";
             return oUnidadArea;
         }
@@ -155,6 +157,7 @@ export const useUnidadAreas = () => {
         oUnidadArea.value.descripcion = "";
         oUnidadArea.value.user_id = "";
         oUnidadArea.value.ubicacion = "";
+        oUnidadArea.value.unidad = "";
         oUnidadArea.value._method = "POST";
     };
 

@@ -6,8 +6,10 @@ import { usePage } from "@inertiajs/vue3";
 const oSolicitudMantenimiento = reactive({
     id: 0,
     codigo: "",
+    responsable_id: null,
     nombre_responsable: "",
     ci_responsable: "",
+    tecnico_id: null,
     nombre_tecnico: "",
     ci_tecnico: "",
     tipo_mantenimiento: null,
@@ -238,9 +240,11 @@ export const useSolicitudMantenimientos = () => {
         if (item) {
             oSolicitudMantenimiento.id = item.id;
             oSolicitudMantenimiento.codigo = item.codigo;
+            oSolicitudMantenimiento.responsable_id = item.responsable_id;
             oSolicitudMantenimiento.nombre_responsable =
                 item.nombre_responsable;
             oSolicitudMantenimiento.ci_responsable = item.ci_responsable;
+            oSolicitudMantenimiento.tecnico_id = item.tecnico_id;
             oSolicitudMantenimiento.nombre_tecnico = item.nombre_tecnico;
             oSolicitudMantenimiento.ci_tecnico = item.ci_tecnico;
             oSolicitudMantenimiento.tipo_mantenimiento =
@@ -266,8 +270,10 @@ export const useSolicitudMantenimientos = () => {
     const limpiarSolicitudMantenimiento = () => {
         oSolicitudMantenimiento.id = 0;
         oSolicitudMantenimiento.codigo = "";
+        oSolicitudMantenimiento.responsable_id = null;
         oSolicitudMantenimiento.nombre_responsable = "";
         oSolicitudMantenimiento.ci_responsable = "";
+        oSolicitudMantenimiento.tecnico_id = null;
         oSolicitudMantenimiento.nombre_tecnico = "";
         oSolicitudMantenimiento.ci_tecnico = "";
         oSolicitudMantenimiento.tipo_mantenimiento = null;

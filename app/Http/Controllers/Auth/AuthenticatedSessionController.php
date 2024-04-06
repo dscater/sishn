@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\BackupBD;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -33,6 +34,9 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+        // crear backup
+        $backup = new BackupBD();
+        $backup->crearBackup();
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
@@ -47,7 +51,10 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+        // crear backup
+        $backup = new BackupBD();
+        $backup->crearBackup();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

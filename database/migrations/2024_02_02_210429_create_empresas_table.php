@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string("correo", 255)->nullable();
             $table->string("dir", 255)->nullable();
             $table->string("logo", 255)->nullable();
+            $table->string("pais", 255)->nullable();
             $table->date("fecha_registro")->nullable();
             $table->timestamps();
         });

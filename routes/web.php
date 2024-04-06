@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BiometricoController;
 use App\Http\Controllers\CronogramaController;
+use App\Http\Controllers\DocumentoArchivoController;
+use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\InstitucionController;
@@ -39,6 +41,11 @@ use Inertia\Inertia;
 // });
 
 Route::get('/', function () {
+
+    return Inertia::render('Inicio');
+});
+
+Route::get('/login', function () {
     if (Auth::check()) {
         return redirect()->route('inicio');
     }
@@ -115,6 +122,16 @@ Route::middleware('auth')->group(function () {
         ["index", "create", "edit", "store", "show", "update", "destroy"]
     );
 
+    // DOCUMENTOS
+    Route::get("/documentos/paginado", [DocumentoController::class, 'paginado'])->name("documentos.paginado");
+    Route::get("/documentos/listado", [DocumentoController::class, 'listado'])->name("documentos.listado");
+    Route::resource("documentos", DocumentoController::class)->only(
+        ["index", "create", "store", "edit", "update", "show", "destroy"]
+    );
+
+    // DOCUMENTO ARCHIVOS
+    Route::delete("/documento_archivos/{documento_archivo}", [DocumentoArchivoController::class, 'destroy'])->name("documento_archivos.destroy");
+
     // SERVICIOS
     Route::get("/servicios/paginado", [ServicioController::class, 'paginado'])->name("servicios.paginado");
     Route::get("/servicios/listado", [ServicioController::class, 'listado'])->name("servicios.listado");
@@ -140,6 +157,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('reportes/equipos', [ReporteController::class, 'equipos'])->name("reportes.equipos");
     Route::get('reportes/r_equipos', [ReporteController::class, 'r_equipos'])->name("reportes.r_equipos");
+
+    Route::get('reportes/historial_mantenimientos', [ReporteController::class, 'historial_mantenimientos'])->name("reportes.historial_mantenimientos");
+    Route::get('reportes/r_historial_mantenimientos', [ReporteController::class, 'r_historial_mantenimientos'])->name("reportes.r_historial_mantenimientos");
 });
 
 require __DIR__ . '/auth.php';

@@ -45,9 +45,13 @@ const headers = ref([
         align: "start",
         sortable: false,
     },
+    {
+        title: "Equipo Biométrico",
+        align: "start",
+        sortable: false,
+    },
     { title: "Fecha de Entrega", align: "start", sortable: false },
     { title: "Procedimientos", align: "start", sortable: false },
-    { title: "Observaciones", align: "start", sortable: false },
     { title: "Diagnostico Previo", align: "start", sortable: false },
     { title: "Estado del Equipo", align: "start", sortable: false },
     { title: "Trabajo Realizado", align: "start", sortable: false },
@@ -198,9 +202,21 @@ const generarReporte = async (item) => {
                                                     .codigo
                                             }}
                                         </td>
+                                        <td>
+                                            {{
+                                                item.solicitud_mantenimiento
+                                                    .biometrico.serie
+                                            }}
+                                            <br />
+                                            <span class="text-caption"
+                                                >({{
+                                                    item.solicitud_mantenimiento
+                                                        .biometrico.nombre
+                                                }})</span
+                                            >
+                                        </td>
                                         <td>{{ item.fecha_entrega_t }}</td>
                                         <td>{{ item.procedimientos }}</td>
-                                        <td>{{ item.observaciones }}</td>
                                         <td>{{ item.diagnostico_previo }}</td>
                                         <td>{{ item.estado_equipo }}</td>
                                         <td>{{ item.trabajo_realizado }}</td>
@@ -338,6 +354,26 @@ const generarReporte = async (item) => {
                                                 </li>
                                                 <li
                                                     class="flex-item"
+                                                    data-label="Equipo Biométrico"
+                                                >
+                                                    {{
+                                                        item
+                                                            .solicitud_mantenimiento
+                                                            .biometrico.serie
+                                                    }}
+                                                    <br />
+                                                    <span class="text-caption"
+                                                        >({{
+                                                            item
+                                                                .solicitud_mantenimiento
+                                                                .biometrico
+                                                                .nombre
+                                                        }})</span
+                                                    >
+                                                </li>
+
+                                                <li
+                                                    class="flex-item"
                                                     data-label="Fecha de entrega"
                                                 >
                                                     {{ item.fecha_entrega_t }}
@@ -347,12 +383,6 @@ const generarReporte = async (item) => {
                                                     data-label="Procedimientos"
                                                 >
                                                     {{ item.procedimientos }}
-                                                </li>
-                                                <li
-                                                    class="flex-item"
-                                                    data-label="Observaciones"
-                                                >
-                                                    {{ item.observaciones }}
                                                 </li>
                                                 <li
                                                     class="flex-item"

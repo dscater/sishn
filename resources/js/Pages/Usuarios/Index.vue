@@ -51,6 +51,7 @@ const headers = ref([
     { title: "Correo", key: "email", align: "start", sortable: false },
     { title: "Teléfono/Celular", key: "fono", align: "start", sortable: false },
     { title: "Foto", key: "foto", align: "start", sortable: false },
+    { title: "Item", key: "item", align: "start", sortable: false },
     { title: "Tipo", key: "tipo", align: "start", sortable: false },
     { title: "Acceso", key: "acceso", align: "start", sortable: false },
     { title: "Acción", key: "accion", align: "end", sortable: false },
@@ -63,6 +64,7 @@ const options = ref({
     sortBy: "",
     sortOrder: "desc",
     search: "",
+    order: "desc",
 });
 
 const loading = ref(true);
@@ -223,6 +225,9 @@ const eliminarUsuario = (item) => {
                                         </v-avatar>
                                     </td>
                                     <td class="text-xs-right">
+                                        {{ item.item }}
+                                    </td>
+                                    <td class="text-xs-right">
                                         {{ item.tipo }}
                                     </td>
                                     <td>
@@ -262,13 +267,13 @@ const eliminarUsuario = (item) => {
                                             @click="editarUsuario(item)"
                                             icon="mdi-pencil"
                                         ></v-btn>
-                                        <v-btn
+                                        <!-- <v-btn
                                             color="error"
                                             size="small"
                                             class="pa-1 ma-1"
                                             @click="eliminarUsuario(item)"
                                             icon="mdi-trash-can"
-                                        ></v-btn>
+                                        ></v-btn> -->
                                     </td>
                                 </tr>
                                 <tr v-else>
@@ -336,6 +341,12 @@ const eliminarUsuario = (item) => {
                                             </li>
                                             <li
                                                 class="flex-item"
+                                                data-label="Item"
+                                            >
+                                                {{ item.item }}
+                                            </li>
+                                            <li
+                                                class="flex-item"
                                                 data-label="Tipo"
                                             >
                                                 {{ item.tipo }}
@@ -387,7 +398,7 @@ const eliminarUsuario = (item) => {
                                                     @click="editarUsuario(item)"
                                                     icon="mdi-pencil"
                                                 ></v-btn>
-                                                <v-btn
+                                                <!-- <v-btn
                                                     color="error"
                                                     size="small"
                                                     class="pa-1 ma-1"
@@ -395,7 +406,7 @@ const eliminarUsuario = (item) => {
                                                         eliminarUsuario(item)
                                                     "
                                                     icon="mdi-trash-can"
-                                                ></v-btn>
+                                                ></v-btn> -->
                                             </v-col>
                                         </v-row>
                                     </td>

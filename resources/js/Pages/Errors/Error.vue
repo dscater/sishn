@@ -1,5 +1,4 @@
 <script setup>
-import App from "@/Layouts/App.vue";
 import { router } from "@inertiajs/vue3";
 import { computed } from "vue";
 // componentes
@@ -54,29 +53,27 @@ const redirigirALogin = () => {
 };
 </script>
 <template>
-    <App>
-        <v-container>
-            <BreadBrums :breadbrums="breadbrums"></BreadBrums>
-            <v-row align="center" justify="center">
-                <v-col cols="12">
-                    <v-card>
-                        <v-card-title class="text-h5">
-                            {{ title }}
-                        </v-card-title>
+    <v-container>
+        <BreadBrums :breadbrums="breadbrums"></BreadBrums>
+        <v-row align="center" justify="center">
+            <v-col cols="12">
+                <v-card>
+                    <v-card-title class="text-h5">
+                        {{ title }}
+                    </v-card-title>
 
-                        <v-card-text>
-                            <p>
-                                {{ description }}
-                            </p>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-btn color="primary" @click="redirigirALogin"
-                                >Volver al inicio</v-btn
-                            >
-                        </v-card-actions>
-                    </v-card>
-                </v-col>
-            </v-row>
-        </v-container>
-    </App>
+                    <v-card-text>
+                        <p>
+                            {{ description }}
+                        </p>
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-btn color="primary" @click="redirigirALogin"
+                            >Volver al inicio</v-btn
+                        >
+                    </v-card-actions>
+                </v-card>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>

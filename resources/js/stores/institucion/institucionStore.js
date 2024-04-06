@@ -25,9 +25,11 @@ export const useInstitucionStore = defineStore("institucion", {
             ubicacion_google: "",
             img_organigrama: "",
             logo: "",
+            logo2: "",
             // appends
             iniciales_nombre: "",
             url_logo: "",
+            url_logo2: "",
             url_foto_director: "",
             url_foto_subdirector: "",
             url_img_organigrama: "",

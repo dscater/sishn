@@ -14,6 +14,7 @@ class UnidadArea extends Model
         "descripcion",
         "user_id",
         "ubicacion",
+        "unidad",
         "fecha_registro",
     ];
 

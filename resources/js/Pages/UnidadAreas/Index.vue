@@ -7,7 +7,7 @@ const breadbrums = [
         name_url: "inicio",
     },
     {
-        title: "UnidadAreas",
+        title: "Áreas",
         disabled: false,
         url: "",
         name_url: "",
@@ -44,28 +44,25 @@ const headers = ref([
     {
         title: "Id",
         align: "start",
-        key: "id",
         sortable: false,
     },
     {
         title: "Nombre Unidad/Área",
-        key: "nombre",
         align: "start",
         sortable: false,
     },
     {
         title: "Descripción",
-        key: "descripcion",
         align: "start",
         sortable: false,
     },
     {
         title: "Responsable",
-        key: "user.full_name",
         align: "start",
         sortable: false,
     },
-    { title: "Ubicación Área", key: "email", align: "start", sortable: false },
+    { title: "Ubicación Área", align: "start", sortable: false },
+    { title: "Unidad", align: "start", sortable: false },
     {
         title: "Fecha de Registro",
         key: "fecha_registro_t",
@@ -149,7 +146,7 @@ const eliminarUnidadArea = (item) => {
 };
 </script>
 <template>
-    <Head title="Unidades/Áreas"></Head>
+    <Head title="Áreas"></Head>
     <v-container>
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
         <v-row class="mt-0">
@@ -170,9 +167,7 @@ const eliminarUnidadArea = (item) => {
                         <v-row
                             class="bg-grey-darken-3 d-flex align-center pa-3"
                         >
-                            <v-col cols="12" sm="6" md="4">
-                                Unidades/Áreas
-                            </v-col>
+                            <v-col cols="12" sm="6" md="4"> Áreas </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field
                                     v-model="search"
@@ -218,6 +213,7 @@ const eliminarUnidadArea = (item) => {
                                     <td>{{ item.descripcion }}</td>
                                     <td>{{ item.user.full_name }}</td>
                                     <td>{{ item.ubicacion }}</td>
+                                    <td>{{ item.unidad }}</td>
                                     <td>
                                         {{ item.fecha_registro_t }}
                                     </td>
@@ -270,6 +266,12 @@ const eliminarUnidadArea = (item) => {
                                                 data-label="Ubicación Área"
                                             >
                                                 {{ item.ubicacion }}
+                                            </li>
+                                            <li
+                                                class="flex-item"
+                                                data-label="Unidad"
+                                            >
+                                                {{ item.unidad }}
                                             </li>
                                             <li
                                                 class="flex-item"

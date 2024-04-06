@@ -18,8 +18,9 @@ class SolicitudMantenimientoController extends Controller
 
     public $mensajes = [
         "biometrico_id.required" => "Este campo es obligatorio",
-        "nombre_responsable.required" => "Este campo es obligatorio",
-        "nombre_responsable.min" => "Debes ingresar al menos :min caracteres",
+        "responsable_id.required" => "Este campo es obligatorio",
+        "tecnico_id.required" => "Este campo es obligatorio",
+        // "nombre_responsable.min" => "Debes ingresar al menos :min caracteres",
         "motivo_mantenimiento.required" => "Este campo es obligatorio",
         "motivo_mantenimiento.min" => "Debes ingresar al menos :min caracteres",
         "array_repuestos.required" => "Debes seleccionar al menos un repuesto",
@@ -97,11 +98,13 @@ class SolicitudMantenimientoController extends Controller
     public function paginado(Request $request)
     {
         $search = $request->search;
-        $solicitud_mantenimientos = SolicitudMantenimiento::select("solicitud_mantenimientos.*")
-            ->with("biometrico");
+        $solicitud_mantenimientos = SolicitudMantenimiento::with(["responsable", "tecnico", "biometrico"])->select("solicitud_mantenimientos.*")
+            ->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
 
         if (trim($search) != "") {
-            $solicitud_mantenimientos->where("codigo", "LIKE", "%$search%");
+            $solicitud_mantenimientos->where("solicitud_mantenimientos.codigo", "LIKE", "%$search%");
+            $solicitud_mantenimientos->orWhere("biometricos.serie", "LIKE", "%$search%");
+            $solicitud_mantenimientos->orWhere("biometricos.nombre", "LIKE", "%$search%");
         }
 
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
@@ -125,7 +128,8 @@ class SolicitudMantenimientoController extends Controller
     {
         if (Auth::user()->tipo == 'JEFE DE ÁREA' || Auth::user()->tipo == 'ADMINISTRADOR') {
             $this->validacion["biometrico_id"] = "required";
-            $this->validacion["nombre_responsable"] = "required|min:1";
+            $this->validacion["responsable_id"] = "required";
+            $this->validacion["tecnico_id"] = "required";
             $this->validacion["motivo_mantenimiento"] = "required|min:1";
             $this->validacion["fecha_solicitud"] = "required|date";
             $this->validacion["array_repuestos"] = "required|min:1";
@@ -133,7 +137,8 @@ class SolicitudMantenimientoController extends Controller
         }
         if (Auth::user()->tipo == 'TÉCNICO') {
             $this->validacion["biometrico_id"] = "required";
-            $this->validacion["nombre_responsable"] = "required|min:1";
+            $this->validacion["responsable_id"] = "required";
+            $this->validacion["tecnico_id"] = "required";
             $this->validacion["motivo_mantenimiento"] = "required|min:1";
             $this->validacion["fecha_solicitud"] = "required|date";
             $this->validacion["fecha_entrega"] = "required|date";
@@ -217,7 +222,8 @@ class SolicitudMantenimientoController extends Controller
     {
         if (Auth::user()->tipo == 'JEFE DE ÁREA' || Auth::user()->tipo == 'ADMINISTRADOR') {
             $this->validacion["biometrico_id"] = "required";
-            $this->validacion["nombre_responsable"] = "required|min:1";
+            $this->validacion["responsable_id"] = "required";
+            $this->validacion["tecnico_id"] = "required";
             $this->validacion["motivo_mantenimiento"] = "required|min:1";
             $this->validacion["fecha_solicitud"] = "required|min:1";
             $this->validacion["array_repuestos"] = "required|min:1";
@@ -226,7 +232,8 @@ class SolicitudMantenimientoController extends Controller
         if (Auth::user()->tipo == 'TÉCNICO') {
             $this->validacion["biometrico_id"] = "required";
             $this->validacion["tipo_mantenimiento"] = "required";
-            $this->validacion["nombre_responsable"] = "required|min:1";
+            $this->validacion["responsable_id"] = "required";
+            $this->validacion["tecnico_id"] = "required";
             $this->validacion["motivo_mantenimiento"] = "required|min:1";
             $this->validacion["fecha_solicitud"] = "required|date";
             // $this->validacion["fecha_entrega"] = "required|date";

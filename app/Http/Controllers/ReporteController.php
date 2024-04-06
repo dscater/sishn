@@ -39,6 +39,7 @@ class ReporteController extends Controller
         $canvas = $dom_pdf->get_canvas();
         $alto = $canvas->get_height();
         $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 85, $alto - 35, date("d/m/Y"), null, 9, array(0, 0, 0));
         $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
 
         return $pdf->stream('Usuarios.pdf');
@@ -63,6 +64,7 @@ class ReporteController extends Controller
         $canvas = $dom_pdf->get_canvas();
         $alto = $canvas->get_height();
         $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 85, $alto - 35, date("d/m/Y"), null, 9, array(0, 0, 0));
         $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
 
         return $pdf->stream('solicitud_mantenimiento.pdf');
@@ -87,6 +89,7 @@ class ReporteController extends Controller
         $canvas = $dom_pdf->get_canvas();
         $alto = $canvas->get_height();
         $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 85, $alto - 35, date("d/m/Y"), null, 9, array(0, 0, 0));
         $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
 
         return $pdf->stream('servicio.pdf');
@@ -114,8 +117,37 @@ class ReporteController extends Controller
         $canvas = $dom_pdf->get_canvas();
         $alto = $canvas->get_height();
         $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 85, $alto - 35, date("d/m/Y"), null, 9, array(0, 0, 0));
         $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
 
         return $pdf->stream('equipos.pdf');
+    }
+
+    public function historial_mantenimientos()
+    {
+        return Inertia::render("Reportes/HistorialMantenimientos");
+    }
+
+    public function r_historial_mantenimientos(Request $request)
+    {
+        $biometrico_id =  $request->biometrico_id;
+        $biometricos = [];
+        if ($biometrico_id != 'todos') {
+            $biometricos = Biometrico::where("id", $biometrico_id)->get();
+        } else {
+            $biometricos = Biometrico::all();
+        }
+        $pdf = PDF::loadView('reportes.historial_mantenimientos', compact('biometricos'))->setPaper('legal', 'landscape');
+
+        // ENUMERAR LAS PÁGINAS USANDO CANVAS
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $alto = $canvas->get_height();
+        $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 85, $alto - 35, date("d/m/Y"), null, 9, array(0, 0, 0));
+        $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
+
+        return $pdf->stream('historial_mantenimientos.pdf');
     }
 }

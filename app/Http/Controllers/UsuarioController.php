@@ -15,9 +15,8 @@ use Illuminate\Validation\ValidationException;
 class UsuarioController extends Controller
 {
     public $validacion = [
-        "nombre" => "required|min:1",
-        "paterno" => "required|min:1",
-        "ci" => "required|min:1",
+        "nombre" => "required|min:1|regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/",
+        "paterno" => "required|min:1|regex:/^[a-zA-ZáéíóúÁÉÍÓÚüÜ\s]+$/",
         "ci_exp" => "required",
         "dir" => "required|min:1",
         "fono" => "required|min:1",
@@ -27,11 +26,16 @@ class UsuarioController extends Controller
     public $mensajes = [
         "nombre.required" => "Este campo es obligatorio",
         "nombre.min" => "Debes ingresar al menos :min caracteres",
+        "nombre.regex" => "Solo puedes ingresar texto",
         "paterno.required" => "Este campo es obligatorio",
         "paterno.min" => "Debes ingresar al menos :min caracteres",
+        "paterno.regex" => "Solo puedes ingresar texto",
+        "materno.min" => "Debes ingresar al menos :min caracteres",
+        "materno.regex" => "Solo puedes ingresar texto",
         "ci.required" => "Este campo es obligatorio",
         "ci.unique" => "Este C.I. ya fue registrado",
         "ci.min" => "Debes ingresar al menos :min caracteres",
+        "ci.regex" => "Solo puedes ingresar números, texto y guíon(-)",
         "ci_exp.required" => "Este campo es obligatorio",
         "dir.required" => "Este campo es obligatorio",
         "dir.min" => "Debes ingresar al menos :min caracteres",
@@ -58,7 +62,7 @@ class UsuarioController extends Controller
         $usuarios = User::where("id", "!=", 1);
         if (isset($request->tipo) && trim($request->tipo) != "") {
             $usuarios = $usuarios->where("tipo", $request->tipo);
-            if ($request->sin_area) {
+            if (isset($request->sin_area) && (string)$request->sin_area != "false") {
                 if ($request->id && $request->id != '') {
                     $usuarios = $usuarios->whereNotExists(function ($query) use ($request) {
                         $query->select(DB::raw(1))
@@ -96,6 +100,10 @@ class UsuarioController extends Controller
             $usuarios->orWhere("ci", "LIKE", "%$search%");
         }
 
+        if ($request->order) {
+            $usuarios->orderBy("id", $request->order);
+        }
+
         $usuarios = $usuarios->paginate($request->itemsPerPage);
         return response()->JSON([
             "usuarios" => $usuarios
@@ -104,7 +112,7 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-        $this->validacion['ci'] = 'required|min:4|numeric|unique:users,ci';
+        $this->validacion['ci'] = 'required|min:4|regex:/^[a-zA-Z0-9-]+$/|unique:users,ci';
         if ($request->hasFile('foto')) {
             $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png|max:2048';
         }
@@ -163,7 +171,7 @@ class UsuarioController extends Controller
 
     public function update(User $user, Request $request)
     {
-        $this->validacion['ci'] = 'required|min:4|numeric|unique:users,ci,' . $user->id;
+        $this->validacion['ci'] = 'required|min:4|regex:/^[a-zA-Z0-9-]+$/|unique:users,ci,' . $user->id;
         if ($request->hasFile('foto')) {
             $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png|max:2048';
         }

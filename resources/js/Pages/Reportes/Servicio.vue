@@ -121,7 +121,7 @@ onMounted(() => {
                                             :items="listUnidadAreas"
                                             item-value="id"
                                             item-title="nombre"
-                                            label="Unidad/Área*"
+                                            label="Área*"
                                             v-model="form.unidad_area_id"
                                             @update:model-value="
                                                 updateSelectUnidadArea

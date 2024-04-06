@@ -32,6 +32,7 @@ class User extends Authenticatable
         "fono",
         "tipo",
         "foto",
+        "item",
         "acceso",
         "fecha_registro",
     ];

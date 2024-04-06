@@ -12,6 +12,7 @@ const oEmpresa = ref({
     correo: "",
     dir: "",
     logo: "",
+    pais: "",
     _method: "POST",
 });
 
@@ -155,6 +156,7 @@ export const useEmpresas = () => {
             oEmpresa.value.fecha_fin = item.fecha_fin;
             oEmpresa.value.correo = item.correo;
             oEmpresa.value.dir = item.dir;
+            oEmpresa.value.pais = item.pais;
             oEmpresa.value._method = "PUT";
             return oEmpresa;
         }
@@ -171,6 +173,7 @@ export const useEmpresas = () => {
         oEmpresa.value.correo = "";
         oEmpresa.value.dir = "";
         oEmpresa.value.logo = "";
+        oEmpresa.value.pais = "";
         oEmpresa.value._method = "POST";
     };
 

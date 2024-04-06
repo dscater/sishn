@@ -77,12 +77,14 @@ function cargaArchivo(e, key) {
 const foto_director = ref(null);
 const foto_subdirector = ref(null);
 const logo = ref(null);
+const logo2 = ref(null);
 const img_organigrama = ref(null);
 
 function limpiaRefs() {
     foto_director.value.reset();
     foto_subdirector.value.reset();
     logo.value.reset();
+    logo2.value.reset();
     img_organigrama.value.reset();
 }
 </script>
@@ -139,6 +141,24 @@ function limpiaRefs() {
                                                     cover
                                                     v-if="institucion.url_logo"
                                                     :src="institucion.url_logo"
+                                                    class="w-75 mx-auto"
+                                                ></v-img>
+                                                <v-avatar
+                                                    v-else
+                                                    color="grey"
+                                                    size="100"
+                                                >
+                                                    <span
+                                                        class="text-h5"
+                                                        v-text="
+                                                            institucion.iniciales_nombre
+                                                        "
+                                                    ></span>
+                                                </v-avatar>
+                                                <v-img
+                                                    cover
+                                                    v-if="institucion.url_logo2"
+                                                    :src="institucion.url_logo2"
                                                     class="w-75 mx-auto"
                                                 ></v-img>
                                                 <v-avatar
@@ -1079,6 +1099,48 @@ function limpiaRefs() {
                                                                 )
                                                             "
                                                             ref="logo"
+                                                        ></v-file-input>
+                                                    </v-col>
+                                                    <v-col
+                                                        cols="12"
+                                                        sm="6"
+                                                        md="6"
+                                                        xl="4"
+                                                    >
+                                                        <v-file-input
+                                                            :hide-details="
+                                                                form.errors
+                                                                    ?.logo2
+                                                                    ? false
+                                                                    : true
+                                                            "
+                                                            :error="
+                                                                form.errors
+                                                                    ?.logo2
+                                                                    ? true
+                                                                    : false
+                                                            "
+                                                            :error-messages="
+                                                                form.errors
+                                                                    ?.logo2
+                                                                    ? form
+                                                                          .errors
+                                                                          ?.logo2
+                                                                    : ''
+                                                            "
+                                                            density="compact"
+                                                            variant="outlined"
+                                                            accept="image/png, image/jpeg, image/bmp, image/webp"
+                                                            placeholder="Logo 2"
+                                                            prepend-icon="mdi-camera"
+                                                            label="Logo 2"
+                                                            @change="
+                                                                cargaArchivo(
+                                                                    $event,
+                                                                    'logo2'
+                                                                )
+                                                            "
+                                                            ref="logo2"
                                                         ></v-file-input>
                                                     </v-col>
                                                     <v-col

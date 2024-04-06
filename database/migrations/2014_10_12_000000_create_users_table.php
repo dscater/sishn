@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('fono');
             $table->string('tipo', 255);
             $table->string('foto', 255)->nullable();
+            $table->string('item', 255)->nullable();
             $table->integer('acceso')->default(1);
             $table->date("fecha_registro");
             $table->timestamps();

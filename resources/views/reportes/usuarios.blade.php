@@ -45,10 +45,16 @@
 
         .logo img {
             position: absolute;
-            width: 200px;
             height: 90px;
             top: -20px;
             left: 0px;
+        }
+
+        .logo2 img {
+            position: absolute;
+            height: 90px;
+            top: -20px;
+            right: 20px;
         }
 
         h2.titulo {
@@ -153,6 +159,9 @@
         <div class="logo">
             <img src="{{ $institucion->first()->url_logo }}">
         </div>
+        <div class="logo2">
+            <img src="{{ $institucion->first()->url_logo2 }}">
+        </div>
         <h2 class="titulo">
             {{ $institucion->first()->nombre }}
         </h2>
@@ -172,6 +181,7 @@
                 <th>DIRECCIÓN</th>
                 <th>CORREO</th>
                 <th>TELÉFONO/CELULAR</th>
+                <th>ITEM</th>
                 <th>TIPO</th>
                 <th>ACCESO</th>
                 <th width="9%">FECHA DE REGISTRO</th>
@@ -199,6 +209,7 @@
                     <td class="">{{ $user->dir }}</td>
                     <td class="">{{ $user->email }}</td>
                     <td class="">{{ $user->fono }}</td>
+                    <td class="">{{ $user->item }}</td>
                     <td class="">{{ $user->tipo }}</td>
                     <td class="centreado">{{ $user->acceso == 1 ? 'HABILITADO' : 'DENEGADO' }}</td>
                     <td class="centreado">{{ $user->fecha_registro_t }}</td>

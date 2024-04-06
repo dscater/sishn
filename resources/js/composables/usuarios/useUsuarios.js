@@ -14,6 +14,7 @@ const oUsuario = ref({
     fono: "",
     tipo: "",
     foto: "",
+    item: "",
     acceso: 0 + "",
     _method: "POST",
 });
@@ -163,6 +164,7 @@ export const useUsuarios = () => {
             oUsuario.value.fono = item.fono;
             oUsuario.value.tipo = item.tipo;
             oUsuario.value.foto = item.foto;
+            oUsuario.value.item = item.item;
             oUsuario.value.acceso = item.acceso + "";
             oUsuario.value._method = "PUT";
             return oUsuario;
@@ -182,6 +184,7 @@ export const useUsuarios = () => {
         oUsuario.value.fono = "";
         oUsuario.value.tipo = "";
         oUsuario.value.foto = "";
+        oUsuario.value.item = "";
         oUsuario.value.acceso = 0 + "";
         oUsuario.value._method = "POST";
     };

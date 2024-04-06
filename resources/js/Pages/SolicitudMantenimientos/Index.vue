@@ -217,12 +217,21 @@ const generarReporte = async (item) => {
                                         <td>{{ item.codigo }}</td>
                                         <td>{{ item.fecha_solicitud_t }}</td>
                                         <td>{{ item.fecha_entrega_t }}</td>
-                                        <td>{{ item.biometrico.nombre }}</td>
+                                        <td>
+                                            {{ item.biometrico.serie }}
+                                            <span class="text-caption"
+                                                >({{
+                                                    item.biometrico.nombre
+                                                }})</span
+                                            >
+                                        </td>
                                         <td>{{ item.repuestos_txt }}</td>
-                                        <td>{{ item.nombre_responsable }}</td>
-                                        <td>{{ item.ci_responsable }}</td>
-                                        <td>{{ item.nombre_tecnico }}</td>
-                                        <td>{{ item.ci_tecnico }}</td>
+                                        <td>
+                                            {{ item.responsable?.full_name }}
+                                        </td>
+                                        <td>{{ item.responsable?.full_ci }}</td>
+                                        <td>{{ item.tecnico?.full_name }}</td>
+                                        <td>{{ item.tecnico?.full_ci }}</td>
                                         <td>{{ item.tipo_mantenimiento }}</td>
                                         <td>
                                             <v-btn
@@ -364,7 +373,13 @@ const generarReporte = async (item) => {
                                                     class="flex-item"
                                                     data-label="Equipo"
                                                 >
-                                                    {{ item.biometrico.nombre }}
+                                                    {{ item.biometrico.serie }}
+                                                    <span class="text-caption"
+                                                        >({{
+                                                            item.biometrico
+                                                                .nombre
+                                                        }})</span
+                                                    >
                                                 </li>
                                                 <li
                                                     class="flex-item"
@@ -377,26 +392,32 @@ const generarReporte = async (item) => {
                                                     data-label="Nombre Responsable"
                                                 >
                                                     {{
-                                                        item.nombre_responsable
+                                                        item.responsable
+                                                            ?.full_name
                                                     }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
                                                     data-label="C.I. Responsable"
                                                 >
-                                                    {{ item.ci_responsable }}
+                                                    {{
+                                                        item.responsable
+                                                            ?.full_ci
+                                                    }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
                                                     data-label="Nombre Técnico"
                                                 >
-                                                    {{ item.nombre_tecnico }}
+                                                    {{
+                                                        item.tecnico?.full_name
+                                                    }}
                                                 </li>
                                                 <li
                                                     class="flex-item"
                                                     data-label="C.I. Técnico"
                                                 >
-                                                    {{ item.ci_tecnico }}
+                                                    {{ item.tecnico?.full_ci }}
                                                 </li>
                                                 <li
                                                     class="flex-item"

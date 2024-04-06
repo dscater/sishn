@@ -87,4 +87,9 @@ class Biometrico extends Model
     {
         return $this->belongsTo(Empresa::class, 'empresa_id');
     }
+
+    public function solicitud_mantenimientos()
+    {
+        return $this->hasMany(SolicitudMantenimiento::class, 'biometrico_Id');
+    }
 }

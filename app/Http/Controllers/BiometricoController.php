@@ -16,7 +16,6 @@ class BiometricoController extends Controller
         "nombre" => "required|min:1",
         "fecha_ingreso" => "required|date",
         "unidad_area_id" => "required",
-        "empresa_id" => "required",
     ];
 
     public $mensajes = [
@@ -28,6 +27,7 @@ class BiometricoController extends Controller
         "empresa_id.required" => "Este campo es obligatorio",
         "manual_usuario.file" => "El archvo no puede superar los :max KB",
         "manual_servicio.file" => "El archvo no puede superar los :max KB",
+        "serie.unique" => "Esta serie ya fue registrada",
     ];
 
     public function index()
@@ -53,13 +53,18 @@ class BiometricoController extends Controller
     public function paginado(Request $request)
     {
         $search = $request->search;
-        $biometricos = Biometrico::select("biometricos.*")->with(["unidad_area", "empresa"]);
+        $biometricos = Biometrico::select("biometricos.*")->with(["unidad_area", "empresa"])
+            ->join("unidad_areas", "unidad_areas.id", "=", "biometricos.unidad_area_id");
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;
             $biometricos = $biometricos->where("unidad_area_id", $unidad_area->id);
         }
         if (trim($search) != "") {
-            $biometricos->where("nombre", "LIKE", "%$search%");
+            $biometricos->where("biometricos.nombre", "LIKE", "%$search%");
+            $biometricos->orWhere("unidad_areas.nombre", "LIKE", "%$search%");
+        }
+        if ($request->order) {
+            $biometricos->orderBy("id", $request->order);
         }
         $biometricos = $biometricos->paginate($request->itemsPerPage);
         return response()->JSON([
@@ -69,6 +74,10 @@ class BiometricoController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->serie && $request->serie != "") {
+            $this->validacion['serie'] = 'required|unique:biometricos,serie';
+        }
+
         if ($request->hasFile('foto')) {
             $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png|max:2048';
         }
@@ -77,6 +86,10 @@ class BiometricoController extends Controller
         }
         if ($request->hasFile('manual_servicio')) {
             $this->validacion['manual_servicio'] = 'file|max:4096';
+        }
+
+        if ($request->garantia == 'SI') {
+            $this->validacion['empresa_id'] = 'required';
         }
 
         $request->validate($this->validacion, $this->mensajes);
@@ -93,16 +106,21 @@ class BiometricoController extends Controller
             }
             if ($request->hasFile('manual_usuario')) {
                 $file = $request->manual_usuario;
-                $nom_manual_usuario = time() . '_' . $nuevo_biometrico->id . '.' . $file->getClientOriginalExtension();
+                $nom_manual_usuario = time() . '1_' . $nuevo_biometrico->id . '.' . $file->getClientOriginalExtension();
                 $nuevo_biometrico->manual_usuario = $nom_manual_usuario;
                 $file->move(public_path() . '/files/', $nom_manual_usuario);
             }
             if ($request->hasFile('manual_servicio')) {
                 $file = $request->manual_servicio;
-                $nom_manual_servicio = time() . '_' . $nuevo_biometrico->id . '.' . $file->getClientOriginalExtension();
+                $nom_manual_servicio = time() . '2_' . $nuevo_biometrico->id . '.' . $file->getClientOriginalExtension();
                 $nuevo_biometrico->manual_servicio = $nom_manual_servicio;
                 $file->move(public_path() . '/files/', $nom_manual_servicio);
             }
+
+            if ($request->garantia == 'NO') {
+                $nuevo_biometrico->empresa_id = null;
+            }
+
             $nuevo_biometrico->save();
 
             $datos_original = HistorialAccion::getDetalleRegistro($nuevo_biometrico, "biometricos");
@@ -132,6 +150,10 @@ class BiometricoController extends Controller
 
     public function update(Biometrico $biometrico, Request $request)
     {
+        if ($request->serie && $request->serie != "") {
+            $this->validacion['serie'] = 'required|unique:biometricos,serie,' . $biometrico->id;
+        }
+
         if ($request->hasFile('foto')) {
             $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png|max:2048';
         }
@@ -141,6 +163,13 @@ class BiometricoController extends Controller
         if ($request->hasFile('manual_servicio')) {
             $this->validacion['manual_servicio'] = 'file|max:4096';
         }
+
+        if ($request->garantia == 'SI') {
+            $this->validacion['empresa_id'] = 'required';
+        } else {
+            $request["empresa_id"] = 0;
+        }
+
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();
         try {
@@ -162,7 +191,7 @@ class BiometricoController extends Controller
                     \File::delete(public_path() . '/files/' . $antiguo);
                 }
                 $file = $request->manual_usuario;
-                $nom_manual_usuario = time() . '_' . $biometrico->id . '.' . $file->getClientOriginalExtension();
+                $nom_manual_usuario = time() . '_1' . $biometrico->id . '.' . $file->getClientOriginalExtension();
                 $biometrico->manual_usuario = $nom_manual_usuario;
                 $file->move(public_path() . '/files/', $nom_manual_usuario);
             }
@@ -172,9 +201,14 @@ class BiometricoController extends Controller
                     \File::delete(public_path() . '/files/' . $antiguo);
                 }
                 $file = $request->manual_servicio;
-                $nom_manual_servicio = time() . '_' . $biometrico->id . '.' . $file->getClientOriginalExtension();
+                $nom_manual_servicio = time() . '_2' . $biometrico->id . '.' . $file->getClientOriginalExtension();
                 $biometrico->manual_servicio = $nom_manual_servicio;
                 $file->move(public_path() . '/files/', $nom_manual_servicio);
+            }
+
+
+            if ($request->garantia == 'NO') {
+                $biometrico->empresa_id = null;
             }
             $biometrico->save();
 

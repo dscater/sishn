@@ -42,7 +42,7 @@ const { getUsuariosByTipo } = useUsuarios();
 const listUsuarios = ref([]);
 
 const tituloDialog = computed(() => {
-    return accion.value == 0 ? `Agregar Unidad/Área` : `Editar Unidad/Área`;
+    return accion.value == 0 ? `Agregar Área` : `Editar Área`;
 });
 
 const enviarFormulario = () => {
@@ -146,7 +146,7 @@ onMounted(async () => {
                                                 : ''
                                         "
                                         variant="outlined"
-                                        label="Nombre Unidad/Área*"
+                                        label="Nombre Área*"
                                         required
                                         density="compact"
                                         v-model="form.nombre"
@@ -222,6 +222,30 @@ onMounted(async () => {
                                         variant="outlined"
                                         label="Ubicación Área"
                                         v-model="form.ubicacion"
+                                        required
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field
+                                        :hide-details="
+                                            form.errors?.unidad
+                                                ? false
+                                                : true
+                                        "
+                                        :error="
+                                            form.errors?.unidad
+                                                ? true
+                                                : false
+                                        "
+                                        :error-messages="
+                                            form.errors?.unidad
+                                                ? form.errors?.unidad
+                                                : ''
+                                        "
+                                        density="compact"
+                                        variant="outlined"
+                                        label="Unidad"
+                                        v-model="form.unidad"
                                         required
                                     ></v-text-field>
                                 </v-col>

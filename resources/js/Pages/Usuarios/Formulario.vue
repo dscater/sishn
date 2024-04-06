@@ -35,7 +35,7 @@ watch(
 
 const { flash } = usePage().props;
 
-const listTipos = ["ADMINISTRADOR", "JEFE DE ÁREA","TÉCNICO"];
+const listTipos = ["ADMINISTRADOR", "JEFE DE ÁREA", "TÉCNICO", "DIRECTOR"];
 const listExpedido = [
     { value: "LP", label: "La Paz" },
     { value: "CB", label: "Cochabamba" },
@@ -114,7 +114,11 @@ const cerrarDialog = () => {
         <v-dialog v-model="dialog" width="1024" persistent scrollable>
             <v-card>
                 <v-card-title class="border-b bg-yellow-lighten-1 pa-5">
-                    <v-icon icon="mdi-close" class="float-right" @click="cerrarDialog"></v-icon>
+                    <v-icon
+                        icon="mdi-close"
+                        class="float-right"
+                        @click="cerrarDialog"
+                    ></v-icon>
 
                     <v-icon
                         :icon="accion == 0 ? 'mdi-plus' : 'mdi-pencil'"
@@ -329,6 +333,26 @@ const cerrarDialog = () => {
                                         @change="cargaArchivo($event, 'foto')"
                                         ref="foto"
                                     ></v-file-input>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field
+                                        :hide-details="
+                                            form.errors?.item ? false : true
+                                        "
+                                        :error="
+                                            form.errors?.item ? true : false
+                                        "
+                                        :error-messages="
+                                            form.errors?.item
+                                                ? form.errors?.item
+                                                : ''
+                                        "
+                                        density="compact"
+                                        variant="outlined"
+                                        label="Item"
+                                        v-model="form.item"
+                                        required
+                                    ></v-text-field>
                                 </v-col>
                                 <v-col
                                     cols="12"

@@ -91,6 +91,17 @@ class InstitucionController extends Controller
                 $file->move(public_path() . '/imgs/', $nom_logo);
             }
 
+            if ($request->hasFile('logo2')) {
+                $antiguo = $institucion->logo2;
+                if ($antiguo && $antiguo != 'default.png') {
+                    \File::delete(public_path() . '/imgs/' . $antiguo);
+                }
+                $file = $request->logo2;
+                $nom_logo2 = time() . '_' . $institucion->id . '.' . $file->getClientOriginalExtension();
+                $institucion->logo2 = $nom_logo2;
+                $file->move(public_path() . '/imgs/', $nom_logo2);
+            }
+
             if ($request->hasFile('img_organigrama')) {
                 $antiguo = $institucion->img_organigrama;
                 if ($antiguo && $antiguo != 'default.png') {

@@ -35,6 +35,7 @@ return new class extends Migration
             $table->text("ubicacion_google")->nullable();
             $table->string("img_organigrama")->nullable();
             $table->string("logo")->nullable();
+            $table->string("logo2")->nullable();
             $table->timestamps();
         });
     }

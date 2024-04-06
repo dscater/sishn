@@ -13,8 +13,10 @@ class SolicitudMantenimiento extends Model
     protected $fillable = [
         "codigo",
         "nro",
+        "responsable_id",
         "nombre_responsable",
         "ci_responsable",
+        "tecnico_id",
         "nombre_tecnico",
         "ci_tecnico",
         "tipo_mantenimiento",
@@ -34,7 +36,7 @@ class SolicitudMantenimiento extends Model
     {
         $qr = "data:image/svg+xml;base64,";
         $codigo = $this->biometrico->nombre . "|" . $this->biometrico->marca . "|" . $this->biometrico->modelo . "|" . $this->biometrico->serie . "|" . $this->biometrico->unidad_area->nombre;
-        $qr = $qr . base64_encode(QrCode::format('svg')->size(70)->generate($codigo));
+        $qr = $qr . base64_encode(QrCode::format('svg')->size(50)->generate($codigo));
         return $qr;
     }
 
@@ -95,6 +97,14 @@ class SolicitudMantenimiento extends Model
     public function biometrico()
     {
         return $this->belongsTo(Biometrico::class, 'biometrico_id');
+    }
+    public function responsable()
+    {
+        return $this->belongsTo(User::class, 'responsable_id');
+    }
+    public function tecnico()
+    {
+        return $this->belongsTo(User::class, 'tecnico_id');
     }
 
     public function cronogramas()

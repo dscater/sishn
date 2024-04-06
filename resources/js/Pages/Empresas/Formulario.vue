@@ -263,6 +263,26 @@ const cerrarDialog = () => {
                                     ></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
+                                    <v-text-field
+                                        :hide-details="
+                                            form.errors?.pais ? false : true
+                                        "
+                                        :error="
+                                            form.errors?.pais ? true : false
+                                        "
+                                        :error-messages="
+                                            form.errors?.pais
+                                                ? form.errors?.pais
+                                                : ''
+                                        "
+                                        density="compact"
+                                        variant="outlined"
+                                        label="País"
+                                        v-model="form.pais"
+                                        required
+                                    ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
                                     <v-file-input
                                         :hide-details="
                                             form.errors?.logo ? false : true

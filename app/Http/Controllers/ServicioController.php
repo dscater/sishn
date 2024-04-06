@@ -43,6 +43,7 @@ class ServicioController extends Controller
     public function listado()
     {
         $servicios = Servicio::with(["solicitud_mantenimiento.biometrico.unidad_area.user"])->select("servicios.*");
+
         $servicios->join("solicitud_mantenimientos", "solicitud_mantenimientos.id", "=", "servicios.solicitud_mantenimiento_id");
         $servicios = $servicios->get();
 
@@ -54,16 +55,18 @@ class ServicioController extends Controller
     public function paginado(Request $request)
     {
         $search = $request->search;
-        $servicios = Servicio::with(["solicitud_mantenimiento.biometrico.unidad_area.user"])->select("servicios.*");
-        $servicios->join("solicitud_mantenimientos", "solicitud_mantenimientos.id", "=", "servicios.solicitud_mantenimiento_id");
+        $servicios = Servicio::with(["solicitud_mantenimiento.biometrico.unidad_area.user"])->select("servicios.*")
+            ->join("solicitud_mantenimientos", "solicitud_mantenimientos.id", "=", "servicios.solicitud_mantenimiento_id")
+            ->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;
-            $servicios->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
             $servicios->where("biometricos.unidad_area_id", $unidad_area->id);
         }
 
         if (trim($search) != "") {
             $servicios->where("solicitud_mantenimientos.codigo", "LIKE", "%$search%");
+            $servicios->orWhere("biometricos.serie", "LIKE", "%$search%");
+            $servicios->orWhere("biometricos.nombre", "LIKE", "%$search%");
         }
         $servicios = $servicios->paginate($request->itemsPerPage);
         return response()->JSON([
