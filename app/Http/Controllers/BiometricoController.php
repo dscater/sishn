@@ -90,7 +90,10 @@ class BiometricoController extends Controller
 
         if ($request->garantia == 'SI') {
             $this->validacion['empresa_id'] = 'required';
+        } else {
+            $request["empresa_id"] = 0;
         }
+
 
         $request->validate($this->validacion, $this->mensajes);
         $request['fecha_registro'] = date('Y-m-d');
