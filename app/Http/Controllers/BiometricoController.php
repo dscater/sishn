@@ -14,6 +14,7 @@ class BiometricoController extends Controller
 {
     public $validacion = [
         "nombre" => "required|min:1",
+        "cod_hdn" => "required|min:1",
         "fecha_ingreso" => "required|date",
         "unidad_area_id" => "required",
     ];
@@ -21,6 +22,8 @@ class BiometricoController extends Controller
     public $mensajes = [
         "nombre.required" => "Este campo es obligatorio",
         "nombre.min" => "Debes ingresar al menos :min caracteres",
+        "cod_hdn.required" => "Este campo es obligatorio",
+        "cod_hdn.min" => "Debes ingresar al menos :min caracteres",
         "fecha_ingreso.required" => "Este campo es obligatorio",
         "fecha_ingreso.date" => "Debes ingresar una fecha valida",
         "unidad_area_id.required" => "Este campo es obligatorio",
@@ -35,13 +38,38 @@ class BiometricoController extends Controller
         return Inertia::render("Biometricos/Index");
     }
 
+    public function porArea(Request $request)
+    {
+        $id = $request->id;
+        $biometricos = Biometrico::select("biometricos.*");
+
+        if (Auth::user()->tipo == 'JEFE DE ÁREA') {
+            $unidad_area = Auth::user()->unidad_area;
+            if ($unidad_area) {
+                $biometricos = $biometricos->where("unidad_area_id", $id)->get();
+            } else {
+                $biometricos = [];
+            }
+        } else {
+            $biometricos = $biometricos->where("unidad_area_id", $id)->get();
+        }
+
+        return response()->JSON([
+            "biometricos" => $biometricos
+        ]);
+    }
+
     public function listado()
     {
         $biometricos = Biometrico::select("biometricos.*");
 
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;
-            $biometricos = $biometricos->where("unidad_area_id", $unidad_area->id);
+            if ($unidad_area) {
+                $biometricos = $biometricos->where("unidad_area_id", $unidad_area->id);
+            } else {
+                $biometricos = $biometricos->where("unidad_area_id", 0);
+            }
         }
         $biometricos = $biometricos->get();
 
@@ -79,13 +107,13 @@ class BiometricoController extends Controller
         }
 
         if ($request->hasFile('foto')) {
-            $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png|max:2048';
+            $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png,webp|max:2048';
         }
         if ($request->hasFile('manual_usuario')) {
-            $this->validacion['manual_usuario'] = 'file|max:4096';
+            $this->validacion['manual_usuario'] = 'file|max:4096|mimes:doc,docx,pdf,xlsx,xls';
         }
         if ($request->hasFile('manual_servicio')) {
-            $this->validacion['manual_servicio'] = 'file|max:4096';
+            $this->validacion['manual_servicio'] = 'file|max:4096|mimes:doc,docx,pdf,xlsx,xls';
         }
 
         if ($request->garantia == 'SI') {
@@ -156,15 +184,14 @@ class BiometricoController extends Controller
         if ($request->serie && $request->serie != "") {
             $this->validacion['serie'] = 'required|unique:biometricos,serie,' . $biometrico->id;
         }
-
         if ($request->hasFile('foto')) {
-            $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png|max:2048';
+            $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png,webp|max:2048';
         }
         if ($request->hasFile('manual_usuario')) {
-            $this->validacion['manual_usuario'] = 'file|max:4096';
+            $this->validacion['manual_usuario'] = 'file|max:4096|mimes:doc,docx,pdf,xlsx,xls';
         }
         if ($request->hasFile('manual_servicio')) {
-            $this->validacion['manual_servicio'] = 'file|max:4096';
+            $this->validacion['manual_servicio'] = 'file|max:4096|mimes:doc,docx,pdf,xlsx,xls';
         }
 
         if ($request->garantia == 'SI') {

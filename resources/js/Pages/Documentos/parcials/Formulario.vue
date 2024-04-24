@@ -157,6 +157,7 @@ onMounted(() => {});
                                 </v-col>
                                 <v-col cols="12">
                                     <MiDropZone
+                                        :files="[]"
                                         @UpdateFiles="detectaArchivos"
                                     ></MiDropZone>
                                 </v-col>

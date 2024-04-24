@@ -35,6 +35,7 @@ class UsuarioController extends Controller
         "ci.required" => "Este campo es obligatorio",
         "ci.unique" => "Este C.I. ya fue registrado",
         "ci.min" => "Debes ingresar al menos :min caracteres",
+        "ci.max" => "Debes ingresar como máximo :max caracteres",
         "ci.regex" => "Solo puedes ingresar números, texto y guíon(-)",
         "ci_exp.required" => "Este campo es obligatorio",
         "dir.required" => "Este campo es obligatorio",
@@ -79,6 +80,15 @@ class UsuarioController extends Controller
                     });
                 }
             }
+            if (isset($request->con_area) && (string)$request->con_area != "false") {
+                $usuarios = $usuarios->whereExists(function ($query) use ($request) {
+                    $query->select(DB::raw(1))
+                        ->from('unidad_areas')
+                        ->whereRaw('unidad_areas.user_id = users.id');
+                })->orWhere(function ($subquery) use ($request) {
+                    $subquery->whereIn('users.id', [$request->id]);
+                });
+            }
         }
         $usuarios = $usuarios->get();
 
@@ -112,9 +122,9 @@ class UsuarioController extends Controller
 
     public function store(Request $request)
     {
-        $this->validacion['ci'] = 'required|min:4|regex:/^[a-zA-Z0-9-]+$/|unique:users,ci';
+        $this->validacion['ci'] = 'required|min:4|max:12|regex:/^[a-zA-Z0-9-]+$/|unique:users,ci';
         if ($request->hasFile('foto')) {
-            $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png|max:2048';
+            $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png,webp|max:2048';
         }
         $request->validate($this->validacion, $this->mensajes);
 
@@ -171,9 +181,9 @@ class UsuarioController extends Controller
 
     public function update(User $user, Request $request)
     {
-        $this->validacion['ci'] = 'required|min:4|regex:/^[a-zA-Z0-9-]+$/|unique:users,ci,' . $user->id;
+        $this->validacion['ci'] = 'required|min:4|max:12|regex:/^[a-zA-Z0-9-]+$/|unique:users,ci,' . $user->id;
         if ($request->hasFile('foto')) {
-            $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png|max:2048';
+            $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png,webp|max:2048';
         }
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();

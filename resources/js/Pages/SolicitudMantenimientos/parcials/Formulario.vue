@@ -80,7 +80,12 @@ const cargarRepuestos = async () => {
 };
 
 const cargarUsuarios = async () => {
-    listJefeArea.value = await getUsuariosByTipo("JEFE DE ÁREA");
+    listJefeArea.value = await getUsuariosByTipo(
+        "JEFE DE ÁREA",
+        false,
+        null,
+        true
+    );
     listTecnicos.value = await getUsuariosByTipo("TÉCNICO");
 };
 
@@ -144,7 +149,7 @@ onMounted(() => {
                         <form @submit.prevent="enviarFormulario">
                             <v-row>
                                 <v-col cols="12">
-                                    <v-select
+                                    <v-autocomplete
                                         :hide-details="
                                             form.errors?.responsable_id
                                                 ? false
@@ -169,10 +174,10 @@ onMounted(() => {
                                         required
                                         density="compact"
                                         v-model="form.responsable_id"
-                                    ></v-select>
+                                    ></v-autocomplete>
                                 </v-col>
                                 <v-col cols="12">
-                                    <v-select
+                                    <v-autocomplete
                                         :hide-details="
                                             form.errors?.tecnico_id
                                                 ? false
@@ -197,7 +202,7 @@ onMounted(() => {
                                         required
                                         density="compact"
                                         v-model="form.tecnico_id"
-                                    ></v-select>
+                                    ></v-autocomplete>
                                 </v-col>
                                 <v-col
                                     cols="12"
@@ -354,7 +359,7 @@ onMounted(() => {
                                     ></v-text-field>
                                 </v-col> -->
                                 <v-col cols="12" sm="12" md="12" xl="12">
-                                    <v-select
+                                    <v-autocomplete
                                         :hide-details="
                                             form.errors?.biometrico_id
                                                 ? false
@@ -370,6 +375,7 @@ onMounted(() => {
                                                 ? form.errors?.biometrico_id
                                                 : ''
                                         "
+                                        no-data-text="Sin registros"
                                         variant="outlined"
                                         label="Seleccionar Equipo*"
                                         :items="listBiometricos"
@@ -386,12 +392,13 @@ onMounted(() => {
                                             ></v-list-item>
                                         </template>
                                         <template v-slot:selection="{ item }">
-                                            <span>{{ item.raw.serie }}</span>&nbsp;
+                                            <span>{{ item.raw.serie }}</span
+                                            >&nbsp;
                                             <span class="text-caption"
                                                 >( {{ item.raw.nombre }})</span
                                             >
                                         </template>
-                                    </v-select>
+                                    </v-autocomplete>
                                 </v-col>
                                 <v-col cols="12" sm="12" md="12" xl="12">
                                     <v-select
@@ -411,7 +418,7 @@ onMounted(() => {
                                                 : ''
                                         "
                                         variant="outlined"
-                                        label="Seleccionar Repuestos*"
+                                        label="Seleccionar Repuestos"
                                         :items="listRepuestos"
                                         item-value="id"
                                         item-title="nombre"

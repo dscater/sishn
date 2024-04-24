@@ -31,6 +31,15 @@ class UnidadAreaController extends Controller
     public function listado()
     {
         $unidad_areas = UnidadArea::all();
+
+        if (Auth::user()->tipo == 'JEFE DE ÁREA') {
+            $unidad_area = Auth::user()->unidad_area;
+            if ($unidad_area) {
+                $unidad_areas =  UnidadArea::where("id", $unidad_area->id);
+            } else {
+                $unidad_areas = [];
+            }
+        }
         return response()->JSON([
             "unidad_areas" => $unidad_areas
         ]);

@@ -7,6 +7,7 @@ use App\Models\HistorialAccion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class DocumentoController extends Controller
@@ -57,6 +58,20 @@ class DocumentoController extends Controller
     {
         $request->validate($this->validacion, $this->mensajes);
         $request['fecha_registro'] = date('Y-m-d');
+
+        if (!$request->file("documento_archivos")) {
+            throw ValidationException::withMessages([
+                "error" => "Debes seleccionar al menos un archivo"
+            ]);
+        } else {
+            $validacion = DocumentoController::validarArchivos($request->file("documento_archivos"));
+            if ($validacion[0]) {
+                throw ValidationException::withMessages([
+                    "error" => "Solo puedes registrar archivos de tipo: " . $validacion[1]
+                ]);
+            }
+        }
+
         DB::beginTransaction();
         try {
             // crear el Documento
@@ -106,6 +121,14 @@ class DocumentoController extends Controller
     public function update(Documento $documento, Request $request)
     {
         $request->validate($this->validacion, $this->mensajes);
+        if ($request->file("documento_archivos")) {
+            $validacion = DocumentoController::validarArchivos($request->file("documento_archivos"));
+            if ($validacion[0]) {
+                throw ValidationException::withMessages([
+                    "error" => "Solo puedes registrar archivos de tipo: " . $validacion[1]
+                ]);
+            }
+        }
         DB::beginTransaction();
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($documento, "documentos");
@@ -179,5 +202,20 @@ class DocumentoController extends Controller
                 'message' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    public static function validarArchivos($archivos)
+    {
+        $tipos = ["doc", "docx", "pdf", "xlsx", "xls"];
+        $error = false;
+        foreach ($archivos as $file) {
+            $ext = $file->getClientOriginalExtension();
+            if (!in_array($ext, $tipos)) {
+                $error = true;
+                break;
+            }
+        }
+
+        return [$error, implode(",", $tipos)];
     }
 }

@@ -24,6 +24,7 @@
         "@fullcalendar/interaction": "^6.1.10",
         "@fullcalendar/vue3": "^6.1.10",
         "@mdi/font": "^7.4.47",
+        "highcharts": "^11.4.1",
         "pinia": "^2.1.7",
         "sweetalert2": "^11.10.4",
         "vuetify": "^3.5.1"

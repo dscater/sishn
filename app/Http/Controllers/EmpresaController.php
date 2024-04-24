@@ -51,7 +51,7 @@ class EmpresaController extends Controller
     public function store(Request $request)
     {
         if ($request->hasFile('logo')) {
-            $this->validacion['logo'] = 'image|mimes:jpeg,jpg,png|max:2048';
+            $this->validacion['logo'] = 'image|mimes:jpeg,jpg,png,webp|max:2048';
         }
         if ($request->fecha_ini == "") {
             unset($request["fecha_ini"]);
@@ -103,7 +103,7 @@ class EmpresaController extends Controller
     public function update(Empresa $empresa, Request $request)
     {
         if ($request->hasFile('logo')) {
-            $this->validacion['logo'] = 'image|mimes:jpeg,jpg,png|max:2048';
+            $this->validacion['logo'] = 'image|mimes:jpeg,jpg,png,webp|max:2048';
         }
         if ($request->fecha_ini == "") {
             unset($request["fecha_ini"]);

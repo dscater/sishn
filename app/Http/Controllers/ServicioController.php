@@ -60,7 +60,11 @@ class ServicioController extends Controller
             ->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;
-            $servicios->where("biometricos.unidad_area_id", $unidad_area->id);
+            if ($unidad_area) {
+                $servicios->where("biometricos.unidad_area_id", $unidad_area->id);
+            } else {
+                $servicios->where("biometricos.unidad_area_id", 0);
+            }
         }
 
         if (trim($search) != "") {

@@ -26,6 +26,9 @@ const submenus = {
     "reportes.solicitud_mantenimiento": "Reportes",
     "reportes.servicio": "Reportes",
     "reportes.equipos": "Reportes",
+    "reportes.historial_mantenimientos": "Reportes",
+    "reportes.cantidad_mantenimiento_equipos": "Reportes",
+    "reportes.cantidad_mantenimiento_mes": "Reportes",
 };
 
 const route_current = ref("");
@@ -223,13 +226,13 @@ const scrollActive = () => {
                 @click="cambiarUrl(route('biometricos.index'))"
                 link
             >
-                <v-list-item-title>Equipos Biométricos</v-list-item-title>
+                <v-list-item-title>Equipos Biomédicos</v-list-item-title>
                 <v-tooltip
                     v-if="rail && !mobile"
                     color="white"
                     activator="parent"
                     location="end"
-                    >Equipos Biométricos</v-tooltip
+                    >Equipos Biomédicos</v-tooltip
                 >
             </v-list-item>
             <v-list-item
@@ -265,7 +268,13 @@ const scrollActive = () => {
                 >
             </v-list-item>
             <v-list-item
-                :class="[route_current == 'documentos.index' ? 'active' : '']"
+                :class="[
+                    route_current == 'documentos.index' ||
+                    route_current == 'documentos.create' ||
+                    route_current == 'documentos.edit'
+                        ? 'active'
+                        : '',
+                ]"
                 v-if="oUser.permisos.includes('documentos.index')"
                 prepend-icon="mdi-view-list"
                 @click="cambiarUrl(route('documentos.index'))"
@@ -452,6 +461,42 @@ const scrollActive = () => {
                         activator="parent"
                         location="end"
                         >Lista de Equipos</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.cantidad_mantenimiento_equipos')"
+                    prepend-icon="mdi-chevron-right"
+                    title="C. M. Equipos"
+                    :class="[
+                        route_current == 'reportes.cantidad_mantenimiento_equipos' ? 'active' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.cantidad_mantenimiento_equipos'))"
+                    link
+                >
+                    <v-tooltip
+                        v-if="rail && !mobile"
+                        color="white"
+                        activator="parent"
+                        location="end"
+                        >C. M. Equipos</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.cantidad_mantenimiento_mes')"
+                    prepend-icon="mdi-chevron-right"
+                    title="C. M. Equipos por Mes"
+                    :class="[
+                        route_current == 'reportes.cantidad_mantenimiento_mes' ? 'active' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.cantidad_mantenimiento_mes'))"
+                    link
+                >
+                    <v-tooltip
+                        v-if="rail && !mobile"
+                        color="white"
+                        activator="parent"
+                        location="end"
+                        >C. M. Equipos por Mes</v-tooltip
                     ></v-list-item
                 >
             </v-list-group>

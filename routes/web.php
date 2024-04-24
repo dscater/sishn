@@ -99,6 +99,7 @@ Route::middleware('auth')->group(function () {
     );
 
     // BIOMETRICOS
+    Route::get("/biometricos/porArea", [BiometricoController::class, 'porArea'])->name("biometricos.porArea");
     Route::get("/biometricos/paginado", [BiometricoController::class, 'paginado'])->name("biometricos.paginado");
     Route::get("/biometricos/listado", [BiometricoController::class, 'listado'])->name("biometricos.listado");
     Route::resource("biometricos", BiometricoController::class)->only(
@@ -160,6 +161,12 @@ Route::middleware('auth')->group(function () {
 
     Route::get('reportes/historial_mantenimientos', [ReporteController::class, 'historial_mantenimientos'])->name("reportes.historial_mantenimientos");
     Route::get('reportes/r_historial_mantenimientos', [ReporteController::class, 'r_historial_mantenimientos'])->name("reportes.r_historial_mantenimientos");
+
+    Route::get('reportes/cantidad_mantenimiento_equipos', [ReporteController::class, 'cantidad_mantenimiento_equipos'])->name("reportes.cantidad_mantenimiento_equipos");
+    Route::get('reportes/r_cantidad_mantenimiento_equipos', [ReporteController::class, 'r_cantidad_mantenimiento_equipos'])->name("reportes.r_cantidad_mantenimiento_equipos");
+
+    Route::get('reportes/cantidad_mantenimiento_mes', [ReporteController::class, 'cantidad_mantenimiento_mes'])->name("reportes.cantidad_mantenimiento_mes");
+    Route::get('reportes/r_cantidad_mantenimiento_mes', [ReporteController::class, 'r_cantidad_mantenimiento_mes'])->name("reportes.r_cantidad_mantenimiento_mes");
 });
 
 require __DIR__ . '/auth.php';

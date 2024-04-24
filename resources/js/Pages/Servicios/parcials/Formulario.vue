@@ -163,6 +163,7 @@ onMounted(() => {
                                                 : ''
                                         "
                                         clearable
+                                        no-data-text="Sin registros"
                                         variant="outlined"
                                         label="Seleccionar Código de Solicitud de Mantenimiento*"
                                         :items="listSolicitudMantenimientos"

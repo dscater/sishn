@@ -51,6 +51,7 @@
             style="display: none"
             ref="fileInput"
             id="fileInput"
+            accept=".doc, .docx, .pdf, .xlsx, .xls"
             @change="handleFiles"
         />
     </div>

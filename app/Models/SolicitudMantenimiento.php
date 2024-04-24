@@ -65,18 +65,28 @@ class SolicitudMantenimiento extends Model
     }
     public function getRepuestosTxtAttribute()
     {
-        $repuestos = Repuesto::whereIn("id", $this->array_repuestos)->pluck("nombre")->toARray();
-        return implode(", ", $repuestos);
+
+        if (count($this->array_repuestos) > 0) {
+            $repuestos = Repuesto::whereIn("id", $this->array_repuestos)->pluck("nombre")->toARray();
+            return implode(", ", $repuestos);
+        }
+        return "-";
     }
     public function getArrayRepuestosTxtAttribute()
     {
-        $repuestos = Repuesto::whereIn("id", $this->array_repuestos)->pluck("nombre")->toARray();
-        return $repuestos;
+        if (count($this->array_repuestos) > 0) {
+            $repuestos = Repuesto::whereIn("id", $this->array_repuestos)->pluck("nombre")->toARray();
+            return $repuestos;
+        }
+        return "";
     }
 
     public function getArrayRepuestosAttribute()
     {
-        return explode(",", $this->repuestos);
+        if (strlen($this->repuestos) > 0) {
+            return explode(",", $this->repuestos);
+        }
+        return [];
     }
 
     public function getMasAttribute()

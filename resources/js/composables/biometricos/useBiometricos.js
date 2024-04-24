@@ -46,6 +46,33 @@ export const useBiometricos = () => {
             throw err; // Puedes manejar el error según tus necesidades
         }
     };
+    const getBiometricosByArea = async (id) => {
+        try {
+            const response = await axios.get(route("biometricos.porArea"), {
+                headers: { Accept: "application/json" },
+                params: {
+                    id: id,
+                },
+            });
+            return response.data.biometricos;
+        } catch (err) {
+            Swal.fire({
+                icon: "info",
+                title: "Error",
+                text: `${
+                    flash.error
+                        ? flash.error
+                        : err.error
+                        ? err.error
+                        : "Error al obtener los registros"
+                }`,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: `Aceptar`,
+            });
+            console.error("Error:", err);
+            throw err; // Puedes manejar el error según tus necesidades
+        }
+    };
 
     const getBiometricosByTipo = async (tipo) => {
         try {
@@ -204,6 +231,7 @@ export const useBiometricos = () => {
     return {
         oBiometrico,
         getBiometricos,
+        getBiometricosByArea,
         getBiometricosApi,
         saveBiometrico,
         deleteBiometrico,

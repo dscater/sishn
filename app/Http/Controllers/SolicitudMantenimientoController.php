@@ -23,7 +23,7 @@ class SolicitudMantenimientoController extends Controller
         // "nombre_responsable.min" => "Debes ingresar al menos :min caracteres",
         "motivo_mantenimiento.required" => "Este campo es obligatorio",
         "motivo_mantenimiento.min" => "Debes ingresar al menos :min caracteres",
-        "array_repuestos.required" => "Debes seleccionar al menos un repuesto",
+        // "array_repuestos.required" => "Debes seleccionar al menos un repuesto",
         "cronogramas" => "Debes ingresar algo en el cronograma",
     ];
 
@@ -39,7 +39,11 @@ class SolicitudMantenimientoController extends Controller
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;
             $solicitud_mantenimientos->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
-            $solicitud_mantenimientos->where("biometricos.unidad_area_id", $unidad_area->id);
+            if ($unidad_area) {
+                $solicitud_mantenimientos->where("biometricos.unidad_area_id", $unidad_area->id);
+            } else {
+                $solicitud_mantenimientos->where("biometricos.unidad_area_id", 0);
+            }
         }
 
         if ($request->sin_servicio) {
@@ -109,8 +113,11 @@ class SolicitudMantenimientoController extends Controller
 
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;
-            $solicitud_mantenimientos->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
-            $solicitud_mantenimientos->where("biometricos.unidad_area_id", $unidad_area->id);
+            if ($unidad_area) {
+                $solicitud_mantenimientos->where("biometricos.unidad_area_id", $unidad_area->id);
+            } else {
+                $solicitud_mantenimientos->where("biometricos.unidad_area_id", 0);
+            }
         }
 
         $solicitud_mantenimientos = $solicitud_mantenimientos->paginate($request->itemsPerPage);
@@ -132,7 +139,7 @@ class SolicitudMantenimientoController extends Controller
             $this->validacion["tecnico_id"] = "required";
             $this->validacion["motivo_mantenimiento"] = "required|min:1";
             $this->validacion["fecha_solicitud"] = "required|date";
-            $this->validacion["array_repuestos"] = "required|min:1";
+            // $this->validacion["array_repuestos"] = "required|min:1";
             $this->validacion["cronogramas"] = "required|min:1";
         }
         if (Auth::user()->tipo == 'TÉCNICO') {
@@ -142,7 +149,7 @@ class SolicitudMantenimientoController extends Controller
             $this->validacion["motivo_mantenimiento"] = "required|min:1";
             $this->validacion["fecha_solicitud"] = "required|date";
             $this->validacion["fecha_entrega"] = "required|date";
-            $this->validacion["array_repuestos"] = "required|min:1";
+            // $this->validacion["array_repuestos"] = "required|min:1";
             $this->validacion["cronogramas"] = "required|min:1";
         }
 
@@ -164,7 +171,10 @@ class SolicitudMantenimientoController extends Controller
             $nro_codigo = SolicitudMantenimiento::getNroCodigo();
             $request["codigo"] = "SOL.MAT." . $nro_codigo;
             $request["nro"] = $nro_codigo;
-            $repuestos = implode(",", $request->array_repuestos);
+            $repuestos = "";
+            if (isset($request->array_repuestos) && count($request->array_repuestos) > 0) {
+                $repuestos = implode(",", $request->array_repuestos);
+            }
             $request["repuestos"] = $repuestos;
             $nueva_solicitud_mantenimiento = SolicitudMantenimiento::create(array_map('mb_strtoupper', $request->except("cronogramas", "array_repuestos", "eliminados")));
             $cronogramas = $request->cronogramas;
@@ -226,7 +236,7 @@ class SolicitudMantenimientoController extends Controller
             $this->validacion["tecnico_id"] = "required";
             $this->validacion["motivo_mantenimiento"] = "required|min:1";
             $this->validacion["fecha_solicitud"] = "required|min:1";
-            $this->validacion["array_repuestos"] = "required|min:1";
+            // $this->validacion["array_repuestos"] = "required|min:1";
             $this->validacion["cronogramas"] = "required|min:1";
         }
         if (Auth::user()->tipo == 'TÉCNICO') {
@@ -237,7 +247,7 @@ class SolicitudMantenimientoController extends Controller
             $this->validacion["motivo_mantenimiento"] = "required|min:1";
             $this->validacion["fecha_solicitud"] = "required|date";
             // $this->validacion["fecha_entrega"] = "required|date";
-            $this->validacion["array_repuestos"] = "required|min:1";
+            // $this->validacion["array_repuestos"] = "required|min:1";
             $this->validacion["cronogramas"] = "required|min:1";
         }
 
@@ -254,7 +264,10 @@ class SolicitudMantenimientoController extends Controller
         DB::beginTransaction();
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($solicitud_mantenimiento, "solicitud_mantenimientos");
-            $repuestos = implode(",", $request->array_repuestos);
+            $repuestos = "";
+            if (isset($request->array_repuestos) && count($request->array_repuestos) > 0) {
+                $repuestos = implode(",", $request->array_repuestos);
+            }
             $request["repuestos"] = $repuestos;
             $solicitud_mantenimiento->update(array_map('mb_strtoupper', $request->except("cronogramas", "array_repuestos", "eliminados")));
             $eliminados = $request->eliminados;

@@ -7,7 +7,7 @@ const breadbrums = [
         name_url: "inicio",
     },
     {
-        title: "Biometricos",
+        title: "Equipos Biomédicos",
         disabled: false,
         url: "",
         name_url: "",
@@ -137,7 +137,7 @@ const eliminarBiometrico = (item) => {
 };
 </script>
 <template>
-    <Head title="Biometricos"></Head>
+    <Head title="Equipos Biomédicos"></Head>
     <v-container>
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
         <v-row class="mt-0">
@@ -158,7 +158,7 @@ const eliminarBiometrico = (item) => {
                         <v-row
                             class="bg-grey-darken-3 d-flex align-center pa-3"
                         >
-                            <v-col cols="12" sm="6" md="4"> Biometricos </v-col>
+                            <v-col cols="12" sm="6" md="4">Equipos Biomédicos </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field
                                     v-model="search"

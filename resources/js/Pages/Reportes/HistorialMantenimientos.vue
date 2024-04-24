@@ -100,7 +100,7 @@ onMounted(() => {
                                         cols="12"
                                         v-if="user.tipo != 'JEFE DE ÁREA'"
                                     >
-                                        <v-select
+                                        <v-autocomplete
                                             :hide-details="!existe_validacion"
                                             no-data-text="Sin datos"
                                             variant="outlined"
@@ -108,7 +108,7 @@ onMounted(() => {
                                             :items="listBiometricos"
                                             item-value="id"
                                             item-title="serie"
-                                            label="Equipo Biométrico*"
+                                            label="Equipo Biomédico*"
                                             v-model="form.biometrico_id"
                                             :rules="rules"
                                         >
@@ -130,7 +130,7 @@ onMounted(() => {
                                                     {{ item.raw.nombre }})</span
                                                 >
                                             </template>
-                                        </v-select>
+                                        </v-autocomplete>
                                     </v-col>
                                     <v-col cols="12">
                                         <v-btn

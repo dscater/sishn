@@ -46,7 +46,7 @@ const headers = ref([
         sortable: false,
     },
     {
-        title: "Equipo Biométrico",
+        title: "Equipo Biomédico",
         align: "start",
         sortable: false,
     },
@@ -354,7 +354,7 @@ const generarReporte = async (item) => {
                                                 </li>
                                                 <li
                                                     class="flex-item"
-                                                    data-label="Equipo Biométrico"
+                                                    data-label="Equipo Biomédico"
                                                 >
                                                     {{
                                                         item

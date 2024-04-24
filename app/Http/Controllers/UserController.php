@@ -66,7 +66,9 @@ class UserController extends Controller
             "reportes.solicitud_mantenimiento",
             "reportes.servicio",
             "reportes.equipos",
-            "reportes.historial_mantenimientos"
+            "reportes.historial_mantenimientos",
+            "reportes.cantidad_mantenimiento_equipos",
+            "reportes.cantidad_mantenimiento_mes",
         ],
         "JEFE DE ÁREA" => [
             "solicitud_mantenimientos.index",
@@ -82,7 +84,9 @@ class UserController extends Controller
             "reportes.solicitud_mantenimiento",
             "reportes.servicio",
             "reportes.equipos",
-            "reportes.historial_mantenimientos"
+            "reportes.historial_mantenimientos",
+            "reportes.cantidad_mantenimiento_equipos",
+            "reportes.cantidad_mantenimiento_mes",
         ],
         "TÉCNICO" => [
             "unidad_areas.index",
@@ -123,7 +127,9 @@ class UserController extends Controller
             "reportes.solicitud_mantenimiento",
             "reportes.servicio",
             "reportes.equipos",
-            "reportes.historial_mantenimientos"
+            "reportes.historial_mantenimientos",
+            "reportes.cantidad_mantenimiento_equipos",
+            "reportes.cantidad_mantenimiento_mes",
         ],
         "DIRECTOR" => [
             "documentos.index",
@@ -134,7 +140,9 @@ class UserController extends Controller
             "reportes.solicitud_mantenimiento",
             "reportes.servicio",
             "reportes.equipos",
-            "reportes.historial_mantenimientos"
+            "reportes.historial_mantenimientos",
+            "reportes.cantidad_mantenimiento_equipos",
+            "reportes.cantidad_mantenimiento_mes",
         ]
     ];
 
@@ -190,7 +198,11 @@ class UserController extends Controller
             if (Auth::user()->tipo == 'JEFE DE ÁREA') {
                 $unidad_area = Auth::user()->unidad_area;
                 $solicitud_mantenimientos->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
-                $solicitud_mantenimientos->where("biometricos.unidad_area_id", $unidad_area->id);
+                if ($unidad_area) {
+                    $solicitud_mantenimientos->where("biometricos.unidad_area_id", $unidad_area->id);
+                } else {
+                    $solicitud_mantenimientos->where("biometricos.unidad_area_id", 0);
+                }
             }
             $solicitud_mantenimientos = $solicitud_mantenimientos->get();
             $array_infos[] = [
@@ -208,7 +220,11 @@ class UserController extends Controller
             if (Auth::user()->tipo == 'JEFE DE ÁREA') {
                 $unidad_area = Auth::user()->unidad_area;
                 $servicios->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
-                $servicios->where("biometricos.unidad_area_id", $unidad_area->id);
+                if ($unidad_area) {
+                    $servicios->where("biometricos.unidad_area_id", $unidad_area->id);
+                } else {
+                    $servicios->where("biometricos.unidad_area_id", 0);
+                }
             }
             $servicios = $servicios->get();
             $array_infos[] = [

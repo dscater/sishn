@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 06-04-2024 a las 20:44:42
+-- Tiempo de generación: 24-04-2024 a las 20:14:09
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -54,7 +54,8 @@ CREATE TABLE `biometricos` (
 INSERT INTO `biometricos` (`id`, `nombre`, `estado`, `marca`, `serie`, `modelo`, `fecha_ingreso`, `garantia`, `cod_hdn`, `manual_usuario`, `manual_servicio`, `unidad_area_id`, `empresa_id`, `foto`, `fecha_registro`, `created_at`, `updated_at`) VALUES
 (1, 'EQUIPO #1', 'REGULAR', 'M0001', 'S-001', 'M-001', '2024-01-01', 'SI', 'HDN-001', '1712417405_11.pdf', '1712417417_21.pdf', 1, 1, '1707238084_1.png', '2024-02-06', '2024-02-06 16:48:04', '2024-04-06 15:59:56'),
 (2, 'EQUIPO #2', 'BUENO', '', '', '', '2024-02-08', 'NO', '', NULL, NULL, 2, NULL, NULL, '2024-02-08', '2024-02-08 15:26:52', '2024-04-06 16:39:40'),
-(3, 'EQUIPO #3', 'REGULAR', 'MARCA-002', 'SER-003', 'MOD-003', '2024-02-08', 'SI', '', NULL, NULL, 2, 3, NULL, '2024-02-08', '2024-02-09 00:20:37', '2024-04-06 16:00:05');
+(3, 'EQUIPO #3', 'REGULAR', 'MARCA-002', 'SER-003', 'MOD-003', '2024-02-08', 'SI', 'COD-0002', NULL, NULL, 2, 3, NULL, '2024-02-08', '2024-02-09 00:20:37', '2024-04-24 17:38:08'),
+(4, 'EQUIPO #4', 'BUENO', 'MARCA #4', 'S000093D', '', '2024-04-22', 'NO', 'HDN', '1713976798_14.xlsx', NULL, 1, NULL, NULL, '2024-04-22', '2024-04-22 20:47:18', '2024-04-24 16:39:58');
 
 -- --------------------------------------------------------
 
@@ -85,7 +86,8 @@ INSERT INTO `cronogramas` (`id`, `solicitud_mantenimiento_id`, `descripcion`, `d
 (6, 3, 'INICIO', '2024-02-09', 1, '2024-02-09 00:21:16', '2024-02-09 00:21:16'),
 (7, 2, 'CRONOGRAMA USUARIO JEFE DE AREA', '2024-02-13', 4, '2024-02-09 18:46:55', '2024-02-09 18:46:55'),
 (8, 2, 'DESC. TENICO', '2024-02-14', 3, '2024-02-09 18:59:08', '2024-02-09 18:59:08'),
-(9, 4, 'MATENIMENTO', '2024-04-08', 1, '2024-04-06 16:27:33', '2024-04-06 16:27:33');
+(9, 4, 'MATENIMENTO', '2024-04-08', 1, '2024-04-06 16:27:33', '2024-04-06 16:27:33'),
+(10, 5, 'DESC', '2024-04-25', 1, '2024-04-24 17:33:39', '2024-04-24 17:33:39');
 
 -- --------------------------------------------------------
 
@@ -105,7 +107,8 @@ CREATE TABLE `documentos` (
 --
 
 INSERT INTO `documentos` (`id`, `descripcion`, `created_at`, `updated_at`) VALUES
-(1, 'DOCUMENTOS #1', '2024-04-06 18:53:15', '2024-04-06 18:53:15');
+(1, 'DOCUMENTOS #1', '2024-04-06 18:53:15', '2024-04-06 18:53:15'),
+(2, 'DOCUMENTOS  2', '2024-04-24 16:50:14', '2024-04-24 16:50:14');
 
 -- --------------------------------------------------------
 
@@ -130,7 +133,10 @@ INSERT INTO `documento_archivos` (`id`, `documento_id`, `archivo`, `created_at`,
 (3, 1, 'doc_1_17124295952.pdf', '2024-04-06 18:53:15', '2024-04-06 18:53:15'),
 (4, 1, 'doc_1_17124295953.pdf', '2024-04-06 18:53:15', '2024-04-06 18:53:15'),
 (5, 1, 'doc_1_17124295954.png', '2024-04-06 18:53:15', '2024-04-06 18:53:15'),
-(6, 1, 'doc_1_17124296570.png', '2024-04-06 18:54:17', '2024-04-06 18:54:17');
+(6, 1, 'doc_1_17124296570.png', '2024-04-06 18:54:17', '2024-04-06 18:54:17'),
+(7, 2, 'doc_2_17139774140.pdf', '2024-04-24 16:50:14', '2024-04-24 16:50:14'),
+(8, 2, 'doc_2_17139774141.docx', '2024-04-24 16:50:14', '2024-04-24 16:50:14'),
+(9, 2, 'doc_2_17139774350.pdf', '2024-04-24 16:50:35', '2024-04-24 16:50:35');
 
 -- --------------------------------------------------------
 
@@ -303,7 +309,20 @@ INSERT INTO `historial_accions` (`id`, `user_id`, `accion`, `descripcion`, `dato
 (111, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BIOMETRICO', 'id: 2<br/>nombre: EQUIPO #2<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2024-02-08<br/>garantia: NO<br/>cod_hdn: <br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 2<br/>empresa_id: <br/>foto: <br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 11:26:52<br/>updated_at: 2024-04-06 12:04:18<br/>', 'id: 2<br/>nombre: EQUIPO #2<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2024-02-08<br/>garantia: NO<br/>cod_hdn: <br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 2<br/>empresa_id: <br/>foto: <br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 11:26:52<br/>updated_at: 2024-04-06 12:39:01<br/>', 'BIOMETRICOS', '2024-04-06', '12:39:01', '2024-04-06 16:39:01', '2024-04-06 16:39:01'),
 (112, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BIOMETRICO', 'id: 2<br/>nombre: EQUIPO #2<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2024-02-08<br/>garantia: NO<br/>cod_hdn: <br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 2<br/>empresa_id: <br/>foto: <br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 11:26:52<br/>updated_at: 2024-04-06 12:39:01<br/>', 'id: 2<br/>nombre: EQUIPO #2<br/>estado: BUENO<br/>marca: <br/>serie: <br/>modelo: <br/>fecha_ingreso: 2024-02-08<br/>garantia: NO<br/>cod_hdn: <br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 2<br/>empresa_id: <br/>foto: <br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 11:26:52<br/>updated_at: 2024-04-06 12:39:40<br/>', 'BIOMETRICOS', '2024-04-06', '12:39:40', '2024-04-06 16:39:40', '2024-04-06 16:39:40'),
 (113, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN DOCUMENTO', 'id: 1<br/>descripcion: DOCUMENTOS #1<br/>created_at: 2024-04-06 14:53:15<br/>updated_at: 2024-04-06 14:53:15<br/>', NULL, 'DOCUMENTOS', '2024-04-06', '14:53:15', '2024-04-06 18:53:15', '2024-04-06 18:53:15'),
-(114, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN DOCUMENTO', 'id: 1<br/>descripcion: DOCUMENTOS #1<br/>created_at: 2024-04-06 14:53:15<br/>updated_at: 2024-04-06 14:53:15<br/>', 'id: 1<br/>descripcion: DOCUMENTOS #1<br/>created_at: 2024-04-06 14:53:15<br/>updated_at: 2024-04-06 14:53:15<br/>', 'DOCUMENTOS', '2024-04-06', '14:54:17', '2024-04-06 18:54:17', '2024-04-06 18:54:17');
+(114, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN DOCUMENTO', 'id: 1<br/>descripcion: DOCUMENTOS #1<br/>created_at: 2024-04-06 14:53:15<br/>updated_at: 2024-04-06 14:53:15<br/>', 'id: 1<br/>descripcion: DOCUMENTOS #1<br/>created_at: 2024-04-06 14:53:15<br/>updated_at: 2024-04-06 14:53:15<br/>', 'DOCUMENTOS', '2024-04-06', '14:54:17', '2024-04-06 18:54:17', '2024-04-06 18:54:17'),
+(115, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN BIOMETRICO', 'id: 4<br/>nombre: EQUIPO #4<br/>estado: BUENO<br/>marca: MARCA #4<br/>serie: S000093D<br/>modelo: <br/>fecha_ingreso: 2024-04-22<br/>garantia: NO<br/>cod_hdn: HDN<br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 1<br/>empresa_id: <br/>foto: <br/>fecha_registro: 2024-04-22<br/>created_at: 2024-04-22 16:47:18<br/>updated_at: 2024-04-22 16:47:18<br/>', NULL, 'BIOMETRICOS', '2024-04-22', '16:47:19', '2024-04-22 20:47:19', '2024-04-22 20:47:19'),
+(116, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BIOMETRICO', 'id: 4<br/>nombre: EQUIPO #4<br/>estado: BUENO<br/>marca: MARCA #4<br/>serie: S000093D<br/>modelo: <br/>fecha_ingreso: 2024-04-22<br/>garantia: NO<br/>cod_hdn: HDN<br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 1<br/>empresa_id: <br/>foto: <br/>fecha_registro: 2024-04-22<br/>created_at: 2024-04-22 16:47:18<br/>updated_at: 2024-04-22 16:47:18<br/>', 'id: 4<br/>nombre: EQUIPO #4<br/>estado: BUENO<br/>marca: MARCA #4<br/>serie: S000093D<br/>modelo: <br/>fecha_ingreso: 2024-04-22<br/>garantia: NO<br/>cod_hdn: HDN<br/>manual_usuario: 1713976798_14.xlsx<br/>manual_servicio: <br/>unidad_area_id: 1<br/>empresa_id: <br/>foto: <br/>fecha_registro: 2024-04-22<br/>created_at: 2024-04-22 16:47:18<br/>updated_at: 2024-04-24 12:39:58<br/>', 'BIOMETRICOS', '2024-04-24', '12:39:58', '2024-04-24 16:39:58', '2024-04-24 16:39:58'),
+(117, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN DOCUMENTO', 'id: 2<br/>descripcion: DOCUMENTOS  2<br/>created_at: 2024-04-24 12:50:14<br/>updated_at: 2024-04-24 12:50:14<br/>', NULL, 'DOCUMENTOS', '2024-04-24', '12:50:14', '2024-04-24 16:50:14', '2024-04-24 16:50:14'),
+(118, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN DOCUMENTO', 'id: 2<br/>descripcion: DOCUMENTOS  2<br/>created_at: 2024-04-24 12:50:14<br/>updated_at: 2024-04-24 12:50:14<br/>', 'id: 2<br/>descripcion: DOCUMENTOS  2<br/>created_at: 2024-04-24 12:50:14<br/>updated_at: 2024-04-24 12:50:14<br/>', 'DOCUMENTOS', '2024-04-24', '12:50:28', '2024-04-24 16:50:28', '2024-04-24 16:50:28'),
+(119, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN DOCUMENTO', 'id: 2<br/>descripcion: DOCUMENTOS  2<br/>created_at: 2024-04-24 12:50:14<br/>updated_at: 2024-04-24 12:50:14<br/>', 'id: 2<br/>descripcion: DOCUMENTOS  2<br/>created_at: 2024-04-24 12:50:14<br/>updated_at: 2024-04-24 12:50:14<br/>', 'DOCUMENTOS', '2024-04-24', '12:50:35', '2024-04-24 16:50:35', '2024-04-24 16:50:35'),
+(120, 1, 'CREACIÓN', 'EL USUARIO admin REGISTRO UN USUARIO', 'id: 7<br/>usuario: GCORTEZ<br/>password: $2y$12$gHpKic4izSCOCjoXz5KT6OA..fghymmKqi7SuG2dUbTvdQcunpO2S<br/>nombre: GEOVANA<br/>paterno: CORTEZ<br/>materno: <br/>ci: 7777<br/>ci_exp: CB<br/>dir: LOS OLIVOS<br/>email: <br/>fono: 6565656<br/>tipo: JEFE DE ÁREA<br/>foto: <br/>item: <br/>acceso: 1<br/>fecha_registro: 2024-04-24 00:00:00<br/>created_at: 2024-04-24 13:04:18<br/>updated_at: 2024-04-24 13:04:18<br/>', NULL, 'USUARIOS', '2024-04-24', '13:04:18', '2024-04-24 17:04:18', '2024-04-24 17:04:18'),
+(121, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA UNIDAD/ÁREA', 'id: 1<br/>nombre: AREA #1<br/>descripcion: DESC. #1<br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>unidad: UNIDAD #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:35:08<br/>updated_at: 2024-04-06 11:54:40<br/>', 'id: 1<br/>nombre: AREA #1<br/>descripcion: DESC. #1<br/>user_id: 7<br/>ubicacion: UBICACION #1<br/>unidad: UNIDAD #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:35:08<br/>updated_at: 2024-04-24 13:30:57<br/>', 'UNIDADES Y ÁREAS', '2024-04-24', '13:30:57', '2024-04-24 17:30:57', '2024-04-24 17:30:57'),
+(122, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UNA UNIDAD/ÁREA', 'id: 1<br/>nombre: AREA #1<br/>descripcion: DESC. #1<br/>user_id: 7<br/>ubicacion: UBICACION #1<br/>unidad: UNIDAD #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:35:08<br/>updated_at: 2024-04-24 13:30:57<br/>', 'id: 1<br/>nombre: AREA #1<br/>descripcion: DESC. #1<br/>user_id: 2<br/>ubicacion: UBICACION #1<br/>unidad: UNIDAD #1<br/>fecha_registro: 2024-02-05<br/>created_at: 2024-02-05 17:35:08<br/>updated_at: 2024-04-24 13:31:06<br/>', 'UNIDADES Y ÁREAS', '2024-04-24', '13:31:06', '2024-04-24 17:31:06', '2024-04-24 17:31:06'),
+(123, 1, 'MODIFICACIÓN', 'EL USUARIO  MODIFICÓ UN REPUESTO', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>responsable_id: 2<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>tecnico_id: 3<br/>nombre_tecnico: FERNANDO TAPIA<br/>ci_tecnico: 4444<br/>tipo_mantenimiento: PREVENTIVO<br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO #1<br/>diagnostico: DIAGNOSTICO #1<br/>otros: OTROS #1<br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: 2024-02-08<br/>biometrico_id: 1<br/>repuestos: 1,2<br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 19:57:02<br/>updated_at: 2024-04-06 12:23:59<br/>', 'id: 1<br/>codigo: SOL.MAT.1<br/>nro: 1<br/>responsable_id: 2<br/>nombre_responsable: JUAN PERES<br/>ci_responsable: 1234<br/>tecnico_id: 3<br/>nombre_tecnico: FERNANDO TAPIA<br/>ci_tecnico: 4444<br/>tipo_mantenimiento: PREVENTIVO<br/>motivo_mantenimiento: MOTIVO MANTENIMIENTO #1<br/>diagnostico: DIAGNOSTICO #1<br/>otros: OTROS #1<br/>fecha_solicitud: 2024-02-07<br/>fecha_entrega: 2024-02-08<br/>biometrico_id: 1<br/>repuestos: <br/>fecha_registro: 2024-02-07<br/>created_at: 2024-02-07 19:57:02<br/>updated_at: 2024-04-24 13:33:07<br/>', 'REPUESTOS', '2024-04-24', '13:33:07', '2024-04-24 17:33:07', '2024-04-24 17:33:07'),
+(124, 1, 'CREACIÓN', 'EL USUARIO  REGISTRO UN REPUESTO', 'id: 5<br/>codigo: SOL.MAT.5<br/>nro: 5<br/>responsable_id: 5<br/>nombre_responsable: <br/>ci_responsable: <br/>tecnico_id: 3<br/>nombre_tecnico: <br/>ci_tecnico: <br/>tipo_mantenimiento: <br/>motivo_mantenimiento: MOTIVO #5<br/>diagnostico: <br/>otros: <br/>fecha_solicitud: 2024-04-24<br/>fecha_entrega: <br/>biometrico_id: 3<br/>repuestos: <br/>fecha_registro: 2024-04-24<br/>created_at: 2024-04-24 13:33:39<br/>updated_at: 2024-04-24 13:33:39<br/>', NULL, 'REPUESTOS', '2024-04-24', '13:33:39', '2024-04-24 17:33:39', '2024-04-24 17:33:39'),
+(125, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN BIOMETRICO', 'id: 3<br/>nombre: EQUIPO #3<br/>estado: REGULAR<br/>marca: MARCA-002<br/>serie: SER-003<br/>modelo: MOD-003<br/>fecha_ingreso: 2024-02-08<br/>garantia: SI<br/>cod_hdn: <br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 2<br/>empresa_id: 3<br/>foto: <br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 20:20:37<br/>updated_at: 2024-04-06 12:00:05<br/>', 'id: 3<br/>nombre: EQUIPO #3<br/>estado: REGULAR<br/>marca: MARCA-002<br/>serie: SER-003<br/>modelo: MOD-003<br/>fecha_ingreso: 2024-02-08<br/>garantia: SI<br/>cod_hdn: COD-0002<br/>manual_usuario: <br/>manual_servicio: <br/>unidad_area_id: 2<br/>empresa_id: 3<br/>foto: <br/>fecha_registro: 2024-02-08<br/>created_at: 2024-02-08 20:20:37<br/>updated_at: 2024-04-24 13:38:08<br/>', 'BIOMETRICOS', '2024-04-24', '13:38:08', '2024-04-24 17:38:08', '2024-04-24 17:38:08'),
+(126, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN USUARIO', 'id: 7<br/>usuario: GCORTEZ<br/>password: $2y$12$gHpKic4izSCOCjoXz5KT6OA..fghymmKqi7SuG2dUbTvdQcunpO2S<br/>nombre: GEOVANA<br/>paterno: CORTEZ<br/>materno: <br/>ci: 7777<br/>ci_exp: CB<br/>dir: LOS OLIVOS<br/>email: <br/>fono: 6565656<br/>tipo: JEFE DE ÁREA<br/>foto: <br/>item: <br/>acceso: 1<br/>fecha_registro: 2024-04-24 00:00:00<br/>created_at: 2024-04-24 13:04:18<br/>updated_at: 2024-04-24 13:04:18<br/>', 'id: 7<br/>usuario: GCORTEZ<br/>password: $2y$12$gHpKic4izSCOCjoXz5KT6OA..fghymmKqi7SuG2dUbTvdQcunpO2S<br/>nombre: GEOVANA<br/>paterno: CORTEZ<br/>materno: <br/>ci: 777744444444<br/>ci_exp: CB<br/>dir: LOS OLIVOS<br/>email: <br/>fono: 6565656<br/>tipo: JEFE DE ÁREA<br/>foto: <br/>item: <br/>acceso: 1<br/>fecha_registro: 2024-04-24 00:00:00<br/>created_at: 2024-04-24 13:04:18<br/>updated_at: 2024-04-24 13:43:47<br/>', 'USUARIOS', '2024-04-24', '13:43:47', '2024-04-24 17:43:47', '2024-04-24 17:43:47'),
+(127, 1, 'MODIFICACIÓN', 'EL USUARIO admin MODIFICÓ UN USUARIO', 'id: 7<br/>usuario: GCORTEZ<br/>password: $2y$12$gHpKic4izSCOCjoXz5KT6OA..fghymmKqi7SuG2dUbTvdQcunpO2S<br/>nombre: GEOVANA<br/>paterno: CORTEZ<br/>materno: <br/>ci: 777744444444<br/>ci_exp: CB<br/>dir: LOS OLIVOS<br/>email: <br/>fono: 6565656<br/>tipo: JEFE DE ÁREA<br/>foto: <br/>item: <br/>acceso: 1<br/>fecha_registro: 2024-04-24 00:00:00<br/>created_at: 2024-04-24 13:04:18<br/>updated_at: 2024-04-24 13:43:47<br/>', 'id: 7<br/>usuario: GCORTEZ<br/>password: $2y$12$gHpKic4izSCOCjoXz5KT6OA..fghymmKqi7SuG2dUbTvdQcunpO2S<br/>nombre: GEOVANA<br/>paterno: CORTEZ<br/>materno: <br/>ci: 7777<br/>ci_exp: CB<br/>dir: LOS OLIVOS<br/>email: <br/>fono: 6565656<br/>tipo: JEFE DE ÁREA<br/>foto: <br/>item: <br/>acceso: 1<br/>fecha_registro: 2024-04-24 00:00:00<br/>created_at: 2024-04-24 13:04:18<br/>updated_at: 2024-04-24 13:43:56<br/>', 'USUARIOS', '2024-04-24', '13:43:56', '2024-04-24 17:43:56', '2024-04-24 17:43:56');
 
 -- --------------------------------------------------------
 
@@ -485,10 +504,11 @@ CREATE TABLE `solicitud_mantenimientos` (
 --
 
 INSERT INTO `solicitud_mantenimientos` (`id`, `codigo`, `nro`, `responsable_id`, `nombre_responsable`, `ci_responsable`, `tecnico_id`, `nombre_tecnico`, `ci_tecnico`, `tipo_mantenimiento`, `motivo_mantenimiento`, `diagnostico`, `otros`, `fecha_solicitud`, `fecha_entrega`, `biometrico_id`, `repuestos`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 'SOL.MAT.1', 1, 2, 'JUAN PERES', '1234', 3, 'FERNANDO TAPIA', '4444', 'PREVENTIVO', 'MOTIVO MANTENIMIENTO #1', 'DIAGNOSTICO #1', 'OTROS #1', '2024-02-07', '2024-02-08', 1, '1,2', '2024-02-07', '2024-02-07 23:57:02', '2024-04-06 16:23:59'),
+(1, 'SOL.MAT.1', 1, 2, 'JUAN PERES', '1234', 3, 'FERNANDO TAPIA', '4444', 'PREVENTIVO', 'MOTIVO MANTENIMIENTO #1', 'DIAGNOSTICO #1', 'OTROS #1', '2024-02-07', '2024-02-08', 1, '', '2024-02-07', '2024-02-07 23:57:02', '2024-04-24 17:33:07'),
 (2, 'SOL.MAT.2', 2, 5, 'JUAN PERES', '2222', 3, '', '', 'CORRECTIVO', 'MOTIVO MANTENIMIENTO', '', '', '2024-02-08', '2024-02-09', 2, '1,2', '2024-02-08', '2024-02-08 15:30:04', '2024-04-06 16:26:10'),
 (3, 'SOL.MAT.3', 3, 4, 'JUAN PERES', '1234', 3, 'FERNANDO CORTEZ', '3333', '', 'MOTIVO MANTENIMIENTO', '', '', '2024-02-08', NULL, 3, '2', '2024-02-08', '2024-02-09 00:21:16', '2024-04-06 16:24:14'),
-(4, 'SOL.MAT.4', 4, 2, '', '', 3, '', '', 'CORRECTIVO', 'MOTIVO MANT. #4', 'DIAGNOSTICO', '', '2024-04-06', NULL, 2, '1', '2024-04-06', '2024-04-06 16:27:33', '2024-04-06 16:28:01');
+(4, 'SOL.MAT.4', 4, 2, '', '', 3, '', '', 'CORRECTIVO', 'MOTIVO MANT. #4', 'DIAGNOSTICO', '', '2024-04-06', NULL, 2, '1', '2024-04-06', '2024-04-06 16:27:33', '2024-04-06 16:28:01'),
+(5, 'SOL.MAT.5', 5, 5, '', '', 3, '', '', '', 'MOTIVO #5', '', '', '2024-04-24', NULL, 3, '', '2024-04-24', '2024-04-24 17:33:39', '2024-04-24 17:33:39');
 
 -- --------------------------------------------------------
 
@@ -513,7 +533,7 @@ CREATE TABLE `unidad_areas` (
 --
 
 INSERT INTO `unidad_areas` (`id`, `nombre`, `descripcion`, `user_id`, `ubicacion`, `unidad`, `fecha_registro`, `created_at`, `updated_at`) VALUES
-(1, 'AREA #1', 'DESC. #1', 2, 'UBICACION #1', 'UNIDAD #1', '2024-02-05', '2024-02-05 21:35:08', '2024-04-06 15:54:40'),
+(1, 'AREA #1', 'DESC. #1', 2, 'UBICACION #1', 'UNIDAD #1', '2024-02-05', '2024-02-05 21:35:08', '2024-04-24 17:31:06'),
 (2, 'AREA #2', 'DESC', 4, 'UBICACION AREA #2', 'UNIDAD #2', '2024-02-08', '2024-02-08 15:26:35', '2024-04-06 15:53:43'),
 (3, 'AREA #3', '', 5, 'UBICACION AREA #3', 'UNIDAD #2', '2024-04-06', '2024-04-06 15:54:33', '2024-04-06 15:54:33');
 
@@ -554,7 +574,8 @@ INSERT INTO `users` (`id`, `usuario`, `password`, `nombre`, `paterno`, `materno`
 (3, 'FPAREDES', '$2y$12$jQnFeAHVj3iptVZQKnFPlebgMqFp9IccVui5FS6YGpjz9KLSvqVl.', 'FERNANDO', 'PAREDES', 'MAMANI', '2222', 'LP', 'LOS OLIVOS', '', '777777', 'TÉCNICO', NULL, NULL, 1, '2024-02-08', '2024-02-08 15:16:00', '2024-02-08 15:16:01'),
 (4, 'MMAMANI', '$2y$12$VJ37jS9TwD/ep6JTtJ0nnuKpHAgcgP.nJzHka.8knnKOiENrhp3Sq', 'MARIA', 'MAMANI', 'MAMANI', '3333', 'CB', 'LOS OLIVOS', '', '77777', 'JEFE DE ÁREA', NULL, NULL, 1, '2024-02-08', '2024-02-08 15:26:19', '2024-02-08 15:26:19'),
 (5, 'AMAMANI', '$2y$12$DbDh0axGVKOwwYdPlYUD4.PLEcqupIdP17jti8Kp0edHB3xpZjJcG', 'ALEXIS', 'MAMANI', 'MAMANI', '5555', 'LP', 'LOS OLIVOS', 'ALEX@GMAIL.COM', '77777', 'JEFE DE ÁREA', NULL, NULL, 1, '2024-02-20', '2024-02-20 19:49:05', '2024-02-20 19:49:05'),
-(6, 'RCONTRERAS', '$2y$12$pgYF5E0.wogTKnvRE7x7A.MtYqHOuRi7By431ljqeW5kseTABqc5W', 'RAMIRO', 'CONTRERAS', '', '6666', 'LP', 'LOS OLIVOS', '', '77777777', 'DIRECTOR', NULL, 'I-003333', 1, '2024-04-06', '2024-04-06 15:44:01', '2024-04-06 15:44:01');
+(6, 'RCONTRERAS', '$2y$12$pgYF5E0.wogTKnvRE7x7A.MtYqHOuRi7By431ljqeW5kseTABqc5W', 'RAMIRO', 'CONTRERAS', '', '6666', 'LP', 'LOS OLIVOS', '', '77777777', 'DIRECTOR', NULL, 'I-003333', 1, '2024-04-06', '2024-04-06 15:44:01', '2024-04-06 15:44:01'),
+(7, 'GCORTEZ', '$2y$12$gHpKic4izSCOCjoXz5KT6OA..fghymmKqi7SuG2dUbTvdQcunpO2S', 'GEOVANA', 'CORTEZ', '', '7777', 'CB', 'LOS OLIVOS', '', '6565656', 'JEFE DE ÁREA', NULL, '', 1, '2024-04-24', '2024-04-24 17:04:18', '2024-04-24 17:43:56');
 
 --
 -- Índices para tablas volcadas
@@ -664,25 +685,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `biometricos`
 --
 ALTER TABLE `biometricos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `cronogramas`
 --
 ALTER TABLE `cronogramas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `documentos`
 --
 ALTER TABLE `documentos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `documento_archivos`
 --
 ALTER TABLE `documento_archivos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `empresas`
@@ -694,7 +715,7 @@ ALTER TABLE `empresas`
 -- AUTO_INCREMENT de la tabla `historial_accions`
 --
 ALTER TABLE `historial_accions`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT de la tabla `institucions`
@@ -730,7 +751,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `solicitud_mantenimientos`
 --
 ALTER TABLE `solicitud_mantenimientos`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `unidad_areas`
@@ -742,7 +763,7 @@ ALTER TABLE `unidad_areas`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas

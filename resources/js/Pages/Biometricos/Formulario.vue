@@ -55,8 +55,8 @@ function cargaArchivo(e, key) {
 
 const tituloDialog = computed(() => {
     return accion.value == 0
-        ? `Agregar Equipo Biométrico`
-        : `Editar Equipo Biométrico`;
+        ? `Agregar Equipo Biomédico`
+        : `Editar Equipo Biomédico`;
 });
 
 const enviarFormulario = () => {
@@ -300,7 +300,7 @@ const cargarUnidadAreas = async () => {
                                         "
                                         density="compact"
                                         variant="outlined"
-                                        label="Código H.D.N."
+                                        label="Código H.D.N.*"
                                         v-model="form.cod_hdn"
                                         required
                                     ></v-text-field>
@@ -326,6 +326,7 @@ const cargarUnidadAreas = async () => {
                                         variant="outlined"
                                         placeholder="Manual de usuario"
                                         label="Manual de usuario"
+                                        accept=".doc, .docx, .pdf, .xlsx, .xls"
                                         @change="
                                             cargaArchivo(
                                                 $event,
@@ -356,6 +357,7 @@ const cargarUnidadAreas = async () => {
                                         variant="outlined"
                                         placeholder="Manual de servicio"
                                         label="Manual de servicio"
+                                        accept=".doc, .docx, .pdf, .xlsx, .xls"
                                         @change="
                                             cargaArchivo(
                                                 $event,

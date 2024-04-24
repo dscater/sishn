@@ -30,6 +30,7 @@ onMounted(() => {
 
 const form = ref({
     tipo: "TODOS",
+    acceso: "TODOS",
 });
 
 const generando = ref(false);
@@ -46,6 +47,12 @@ const listTipos = ref([
     { value: "JEFE DE ÁREA", label: "JEFE DE ÁREA" },
     { value: "TÉCNICO", label: "TÉCNICO" },
     { value: "DIRECTOR", label: "DIRECTOR" },
+]);
+
+const listAccesos = ref([
+    { value: "TODOS", label: "TODOS" },
+    { value: "1", label: "HABILITADOS" },
+    { value: "0", label: "DESHABILITADOS" },
 ]);
 
 const generarReporte = () => {
@@ -89,6 +96,29 @@ const generarReporte = () => {
                                             item-title="label"
                                             label="Tipo*"
                                             v-model="form.tipo"
+                                        ></v-select>
+                                    </v-col>
+                                    <v-col cols="12">
+                                        <v-select
+                                            :hide-details="
+                                                form.errors?.acceso ? false : true
+                                            "
+                                            :error="
+                                                form.errors?.acceso ? true : false
+                                            "
+                                            :error-messages="
+                                                form.errors?.acceso
+                                                    ? form.errors?.acceso
+                                                    : ''
+                                            "
+                                            variant="outlined"
+                                            density="compact"
+                                            required
+                                            :items="listAccesos"
+                                            item-value="value"
+                                            item-title="label"
+                                            label="Acceso*"
+                                            v-model="form.acceso"
                                         ></v-select>
                                     </v-col>
                                     <v-col cols="12">

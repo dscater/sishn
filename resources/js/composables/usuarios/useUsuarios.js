@@ -46,13 +46,19 @@ export const useUsuarios = () => {
         }
     };
 
-    const getUsuariosByTipo = async (tipo, sin_area = false, id = null) => {
+    const getUsuariosByTipo = async (
+        tipo,
+        sin_area = false,
+        id = null,
+        con_area = false
+    ) => {
         try {
             const response = await axios.get(route("usuarios.byTipo"), {
                 headers: { Accept: "application/json" },
                 params: {
                     tipo,
                     sin_area,
+                    con_area,
                     id,
                 },
             });
