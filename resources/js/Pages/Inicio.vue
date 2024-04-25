@@ -22,7 +22,7 @@ onMounted(() => {
 <template>
     <Head title="Inicio" />
     <v-container>
-        <v-card class="mb-4">
+        <v-card class="mb-4 elevation-5">
             <v-card-text class="bg-grey-darken-3">
                 <v-row>
                     <v-col
@@ -54,166 +54,156 @@ onMounted(() => {
                         ></v-img>
                     </v-col>
                 </v-row>
+                <v-row>
+                    <v-col cols="12" md="4">
+                        <h2
+                            class="text-h5 text-center font-weight-bold text-white"
+                        >
+                            Misión
+                        </h2>
+                        <v-card
+                            variant="tonal"
+                            color="yellow-lighten-2"
+                            class="elevation-2"
+                        >
+                            <v-row>
+                                <v-col cols="12" sm="12">
+                                    <v-card-text>
+                                        <v-row>
+                                            <v-col cols="12">
+                                                <p
+                                                    class="text-caption text-justify text-capitalize text-capitalize"
+                                                    v-text="oInstitucion.mision"
+                                                ></p>
+                                            </v-col>
+                                        </v-row>
+                                    </v-card-text>
+                                </v-col>
+                            </v-row>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                        <h2
+                            class="text-h5 text-center font-weight-bold text-white"
+                        >
+                            Objetivo
+                        </h2>
+                        <v-card
+                            variant="tonal"
+                            color="yellow-lighten-2"
+                            class="elevation-2"
+                        >
+                            <v-row>
+                                <v-col cols="12" sm="12">
+                                    <v-card-text>
+                                        <v-row>
+                                            <v-col cols="12">
+                                                <p
+                                                    class="text-caption text-justify text-capitalize text-capitalize"
+                                                    v-text="
+                                                        oInstitucion.objetivo
+                                                    "
+                                                ></p>
+                                            </v-col>
+                                        </v-row>
+                                    </v-card-text>
+                                </v-col>
+                            </v-row>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" md="4">
+                        <h2
+                            class="text-h5 text-center font-weight-bold text-white"
+                        >
+                            Historia
+                        </h2>
+                        <v-card
+                            variant="tonal"
+                            color="yellow-lighten-2"
+                            class="elevation-2"
+                        >
+                            <v-row>
+                                <v-col cols="12" sm="12">
+                                    <v-card-text>
+                                        <v-row>
+                                            <v-col cols="12">
+                                                <p
+                                                    class="text-caption text-justify text-capitalize text-capitalize"
+                                                    v-text="
+                                                        oInstitucion.historia
+                                                    "
+                                                ></p>
+                                            </v-col>
+                                        </v-row>
+                                    </v-card-text>
+                                </v-col>
+                            </v-row>
+                        </v-card>
+                    </v-col>
+                </v-row>
             </v-card-text>
         </v-card>
+
         <v-row>
-            <v-col cols="12" md="4">
+            <v-col cols="12" md="6" xl="6" class="mx-auto">
                 <h2
-                    class="text-h5 text-center font-weight-bold text-grey-darken-3"
-                >
-                    Misión
-                </h2>
-                <v-card
-                    variant="flat"
-                    color="yellow-lighten-2"
-                    class="elevation-2"
-                >
-                    <v-row>
-                        <v-col cols="12" sm="12">
-                            <v-card-text>
-                                <v-row>
-                                    <v-col cols="12">
-                                        <p
-                                            class="text-caption text-justify text-capitalize text-capitalize"
-                                            v-text="oInstitucion.mision"
-                                        ></p>
-                                    </v-col>
-                                </v-row>
-                            </v-card-text>
-                        </v-col>
-                    </v-row>
-                </v-card>
-            </v-col>
-            <v-col cols="12" md="4">
-                <h2
-                    class="text-h5 text-center font-weight-bold text-grey-darken-3"
-                >
-                    Objetivo
-                </h2>
-                <v-card
-                    variant="flat"
-                    color="yellow-lighten-2"
-                    class="elevation-2"
-                >
-                    <v-row>
-                        <v-col cols="12" sm="12">
-                            <v-card-text>
-                                <v-row>
-                                    <v-col cols="12">
-                                        <p
-                                            class="text-caption text-justify text-capitalize text-capitalize"
-                                            v-text="oInstitucion.objetivo"
-                                        ></p>
-                                    </v-col>
-                                </v-row>
-                            </v-card-text>
-                        </v-col>
-                    </v-row>
-                </v-card>
-            </v-col>
-            <v-col cols="12" md="4">
-                <h2
-                    class="text-h5 text-center font-weight-bold text-grey-darken-3"
-                >
-                    Historia
-                </h2>
-                <v-card
-                    variant="flat"
-                    color="yellow-lighten-2"
-                    class="elevation-2"
-                >
-                    <v-row>
-                        <v-col cols="12" sm="12">
-                            <v-card-text>
-                                <v-row>
-                                    <v-col cols="12">
-                                        <p
-                                            class="text-caption text-justify text-capitalize text-capitalize"
-                                            v-text="oInstitucion.historia"
-                                        ></p>
-                                    </v-col>
-                                </v-row>
-                            </v-card-text>
-                        </v-col>
-                    </v-row>
-                </v-card>
-            </v-col>
-            <v-col cols="12" md="6">
-                <h2
-                    class="text-h5 text-center font-weight-bold text-grey-darken-3"
+                    class="text-h5 text-center font-weight-bold text-grey-lighten-4"
                 >
                     Director y Subdirector
                 </h2>
-                <v-card
-                    variant="flat"
-                    color="primary"
-                    class="elevation-2"
-                >
-                    <v-row>
-                        <v-col cols="12" sm="12">
+                <v-row>
+                    <v-col cols="12" md="6" class="text-center">
+                        <v-card>
                             <v-card-text>
-                                <v-row>
-                                    <v-col cols="12" md="6" class="text-center">
-                                        <v-avatar size="150" color="yellow">
-                                            <v-img
-                                                v-if="
-                                                    oInstitucion.url_foto_director
-                                                "
-                                                cover
-                                                :src="
-                                                    oInstitucion.url_foto_director
-                                                "
-                                            ></v-img>
-                                            <span v-else class="">
-                                                {{
-                                                    oInstitucion.iniciales_director
-                                                }}
-                                            </span>
-                                        </v-avatar>
-                                        <p class="text-body-2">
-                                            {{ oInstitucion.nombre_director }}
-                                        </p>
-                                        <p class="text-caption">DIRECTOR</p>
-                                    </v-col>
-                                    <v-col cols="12" md="6" class="text-center">
-                                        <v-avatar size="150" color="yellow">
-                                            <v-img
-                                                v-if="
-                                                    oInstitucion.url_foto_subdirector
-                                                "
-                                                cover
-                                                :src="
-                                                    oInstitucion.url_foto_subdirector
-                                                "
-                                            ></v-img>
-                                            <span v-else class="">
-                                                {{
-                                                    oInstitucion.iniciales_subdirector
-                                                }}
-                                            </span>
-                                        </v-avatar>
-                                        <p class="text-body-2">
-                                            {{
-                                                oInstitucion.nombre_subdirector
-                                            }}
-                                        </p>
-                                        <p class="text-caption">SUBDIRECTOR</p>
-                                    </v-col>
-                                </v-row>
+                                <v-avatar size="150" color="yellow">
+                                    <v-img
+                                        v-if="oInstitucion.url_foto_director"
+                                        cover
+                                        :src="oInstitucion.url_foto_director"
+                                    ></v-img>
+                                    <span v-else class="">
+                                        {{ oInstitucion.iniciales_director }}
+                                    </span>
+                                </v-avatar>
+                                <p class="text-body-2">
+                                    {{ oInstitucion.nombre_director }}
+                                </p>
+                                <p class="text-caption">DIRECTOR</p>
                             </v-card-text>
-                        </v-col>
-                    </v-row>
-                </v-card>
+                        </v-card>
+                    </v-col>
+                    <v-col cols="12" md="6" class="text-center">
+                        <v-card>
+                            <v-card-text>
+                                <v-avatar size="150" color="yellow">
+                                    <v-img
+                                        v-if="oInstitucion.url_foto_subdirector"
+                                        cover
+                                        :src="oInstitucion.url_foto_subdirector"
+                                    ></v-img>
+                                    <span v-else class="">
+                                        {{ oInstitucion.iniciales_subdirector }}
+                                    </span>
+                                </v-avatar>
+                                <p class="text-body-2">
+                                    {{ oInstitucion.nombre_subdirector }}
+                                </p>
+                                <p class="text-caption">SUBDIRECTOR</p>
+                            </v-card-text>
+                        </v-card>
+                    </v-col>
+                </v-row>
             </v-col>
-            <v-col cols="12" md="6">
+        </v-row>
+
+        <v-row>
+            <v-col cols="12" md="6" xl="6" class="mx-auto">
                 <h2
-                    class="text-h5 text-center font-weight-bold text-grey-darken-3"
+                    class="text-h5 text-center font-weight-bold text-grey-lighten-4"
                 >
                     Organigrama
                 </h2>
-                <v-card
-                    class="elevation-5"
-                >
+                <v-card class="elevation-5">
                     <v-row>
                         <v-col cols="12" sm="12">
                             <v-card-text>
@@ -232,9 +222,12 @@ onMounted(() => {
                     </v-row>
                 </v-card>
             </v-col>
+        </v-row>
+
+        <v-row>
             <v-col cols="12">
                 <h2
-                    class="text-h5 text-center font-weight-bold text-grey-darken-3"
+                    class="text-h5 text-center font-weight-bold text-grey-lighten-4"
                 >
                     Ubicación
                 </h2>

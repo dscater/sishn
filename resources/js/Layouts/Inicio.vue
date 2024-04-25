@@ -15,7 +15,7 @@ onMounted(() => {
 </script>
 <template>
     <v-app id="inspire">
-        <v-app-bar color="yellow" density="compact">
+        <v-app-bar color="yellow">
             <v-app-bar-title>{{ oInstitucion.nombre }}</v-app-bar-title>
 
             <template v-slot:append>
@@ -90,6 +90,6 @@ onMounted(() => {
 </template>
 <style scoped>
 .v-main {
-    background: #e5e5e5 !important;
+    background: #1b1b1b !important;
 }
 </style>
