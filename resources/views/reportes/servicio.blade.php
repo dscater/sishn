@@ -217,15 +217,15 @@
                 </tr>
                 <tr>
                     <td class="bold" width="16%">Nombre: </td>
-                    <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->empresa->nombre }}</td>
+                    <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->empresa? $s->solicitud_mantenimiento->biometrico->empresa->nombre:'' }}</td>
                     <td class="bold">Unidad:</td>
                     <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->unidad_area->nombre }}</td>
                 </tr>
                 <tr>
                     <td class="bold" width="20%">Dirección: </td>
-                    <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->empresa->dir }}</td>
+                    <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->empresa? $s->solicitud_mantenimiento->biometrico->empresa->dir:'' }}</td>
                     <td class="bold">Teléfono:</td>
-                    <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->empresa->fono }}</td>
+                    <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->empresa? $s->solicitud_mantenimiento->biometrico->empresa->fono:'' }}</td>
                 </tr>
                 <tr>
                     <td class="bold ">DATOS DEL EQUIPO: </td>
