@@ -201,13 +201,13 @@
                 </tr>
                 <tr>
                     <td class="bold" width="20%">NOMBRE DEL RESPONSABLE: </td>
-                    <td>{{ $sm->nombre_responsable }}</td>
+                    <td>{{ $sm->responsable ? $sm->responsable->full_name : '' }}</td>
                     <td class="bold" width="20%">C.I. RESPONSABLE: </td>
                     <td>{{ $sm->ci_responsable }}</td>
                 </tr>
                 <tr>
                     <td class="bold" width="20%">NOMBRE TÉCNICO: </td>
-                    <td>{{ $sm->nombre_tecnico }}</td>
+                    <td>{{ $sm->tecnico ? $sm->tecnico->full_name : '' }}</td>
                     <td class="bold" width="20%">C.I. TÉCNICO: </td>
                     <td>{{ $sm->ci_tecnico }}</td>
                 </tr>

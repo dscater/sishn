@@ -218,7 +218,7 @@ class SolicitudMantenimientoController extends Controller
     public function getById(SolicitudMantenimiento $solicitud_mantenimiento)
     {
         return response()->JSON([
-            "solicitud_mantenimiento" => $solicitud_mantenimiento->load(["cronogramas", "biometrico.unidad_area.user"])
+            "solicitud_mantenimiento" => $solicitud_mantenimiento->load(["cronogramas", "biometrico.unidad_area.user", "responsable", "tecnico"])
         ]);
     }
 

@@ -59,7 +59,7 @@ const enviarFormulario = () => {
 
 const cargaSolicitudMantenimientos = async () => {
     if (form.id && form.id != 0 && form.id != "") {
-        listSolicitudMantenimientos.value= await getSolicitudMantenimientos(
+        listSolicitudMantenimientos.value = await getSolicitudMantenimientos(
             "desc",
             true,
             form.id
@@ -631,7 +631,8 @@ onMounted(() => {
                                     >
                                 </v-col>
                                 <v-col cols="8">{{
-                                    solicitud_mantenimiento.nombre_responsable
+                                    solicitud_mantenimiento.responsable
+                                        ?.full_name
                                 }}</v-col>
                             </v-row>
                             <v-row class="mb-0 mt-0">
@@ -642,7 +643,7 @@ onMounted(() => {
                                     >
                                 </v-col>
                                 <v-col cols="8">{{
-                                    solicitud_mantenimiento.nombre_tecnico
+                                    solicitud_mantenimiento.tecnico?.full_name
                                 }}</v-col>
                             </v-row>
                             <v-row class="mb-0 mt-0">
