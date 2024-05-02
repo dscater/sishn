@@ -44,12 +44,12 @@ const headers = ref([
     { title: "Fecha de Solicitud", align: "start", sortable: false },
     { title: "Fecha de Entrega", align: "start", sortable: false },
     { title: "Equipo", align: "start", sortable: false },
-    { title: "Repuestos", align: "start", sortable: false },
+    // { title: "Repuestos", align: "start", sortable: false },
     { title: "Nombre Responsable", align: "start", sortable: false },
     { title: "C.I. Responsable", align: "start", sortable: false },
     { title: "Nombre Técnico", align: "start", sortable: false },
     { title: "C.I. Técnico", align: "start", sortable: false },
-    { title: "Tipo Mantenimiento", align: "start", sortable: false },
+    // { title: "Tipo Mantenimiento", align: "start", sortable: false },
     { title: "Más", align: "start", sortable: false },
     { title: "Acción", align: "end", sortable: false },
 ]);
@@ -225,14 +225,14 @@ const generarReporte = async (item) => {
                                                 }})</span
                                             >
                                         </td>
-                                        <td>{{ item.repuestos_txt }}</td>
+                                        <!-- <td>{{ item.repuestos_txt }}</td> -->
                                         <td>
                                             {{ item.responsable?.full_name }}
                                         </td>
                                         <td>{{ item.responsable?.full_ci }}</td>
                                         <td>{{ item.tecnico?.full_name }}</td>
                                         <td>{{ item.tecnico?.full_ci }}</td>
-                                        <td>{{ item.tipo_mantenimiento }}</td>
+                                        <!-- <td>{{ item.tipo_mantenimiento }}</td> -->
                                         <td>
                                             <v-btn
                                                 :icon="
@@ -297,7 +297,7 @@ const generarReporte = async (item) => {
                                                         }}</v-col>
                                                     </v-row>
                                                 </v-col>
-                                                <v-col
+                                                <!-- <v-col
                                                     cols="3"
                                                     class="text-center"
                                                 >
@@ -311,7 +311,7 @@ const generarReporte = async (item) => {
                                                             item.diagnostico
                                                         }}</v-col>
                                                     </v-row>
-                                                </v-col>
+                                                </v-col> -->
                                                 <v-col
                                                     cols="3"
                                                     class="text-center"
@@ -381,12 +381,12 @@ const generarReporte = async (item) => {
                                                         }})</span
                                                     >
                                                 </li>
-                                                <li
+                                                <!-- <li
                                                     class="flex-item"
                                                     data-label="Repuestos"
                                                 >
                                                     {{ item.repuestos_txt }}
-                                                </li>
+                                                </li> -->
                                                 <li
                                                     class="flex-item"
                                                     data-label="Nombre Responsable"
@@ -419,20 +419,20 @@ const generarReporte = async (item) => {
                                                 >
                                                     {{ item.tecnico?.full_ci }}
                                                 </li>
-                                                <li
+                                                <!-- <li
                                                     class="flex-item"
                                                     data-label="Tipo de Mantenimiento"
                                                 >
                                                     {{
                                                         item.tipo_mantenimiento
                                                     }}
-                                                </li>
-                                                <li
+                                                </li> -->
+                                                <!-- <li
                                                     class="flex-item"
                                                     data-label="Diagnostico"
                                                 >
                                                     {{ item.diagnostico }}
-                                                </li>
+                                                </li> -->
                                                 <li
                                                     class="flex-item"
                                                     data-label="Otros"

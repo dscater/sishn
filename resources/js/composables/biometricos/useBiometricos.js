@@ -17,6 +17,8 @@ const oBiometrico = ref({
     unidad_area_id: "",
     empresa_id: "",
     foto: "",
+    accesorios: "",
+    estado_equipo: "",
     _method: "POST",
 });
 
@@ -202,6 +204,8 @@ export const useBiometricos = () => {
             oBiometrico.value.unidad_area_id = item.unidad_area_id;
             oBiometrico.value.empresa_id = item.empresa_id;
             oBiometrico.value.foto = item.foto;
+            oBiometrico.value.accesorios = item.accesorios;
+            oBiometrico.value.estado_equipo = item.estado_equipo;
             oBiometrico.value._method = "PUT";
             return oBiometrico;
         }
@@ -223,6 +227,8 @@ export const useBiometricos = () => {
         oBiometrico.value.unidad_area_id = "";
         oBiometrico.value.empresa_id = "";
         oBiometrico.value.foto = "";
+        oBiometrico.value.accesorios = "";
+        oBiometrico.value.estado_equipo = "";
         oBiometrico.value._method = "POST";
     };
 

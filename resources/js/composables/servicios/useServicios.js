@@ -17,6 +17,8 @@ const oServicio = reactive({
     descripcion: "",
     fecha_ini: "",
     fecha_fin: "",
+    array_repuestos: [],
+    repuestos: null,
     _method: "POST",
 });
 
@@ -155,6 +157,8 @@ export const useServicios = () => {
             oServicio.trabajo_realizado = item.trabajo_realizado;
             oServicio.capacitacion = item.capacitacion;
             oServicio.descripcion = item.descripcion;
+            oServicio.array_repuestos = item.array_repuestos.map(Number);
+            oServicio.repuestos = item.repuestos;
             oServicio.fecha_ini = item.fecha_ini;
             oServicio.fecha_fin = item.fecha_fin;
             oServicio._method = "PUT";
@@ -175,6 +179,8 @@ export const useServicios = () => {
         oServicio.trabajo_realizado = "";
         oServicio.capacitacion = "NO";
         oServicio.descripcion = "";
+        oServicio.array_repuestos = [];
+        oServicio.repuestos = null;
         oServicio.fecha_ini = "";
         oServicio.fecha_fin = "";
         oServicio._method = "POST";

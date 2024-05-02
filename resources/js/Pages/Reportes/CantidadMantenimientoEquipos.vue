@@ -170,7 +170,7 @@ onMounted(() => {
                             <form @submit.prevent="generarReporte">
                                 <v-row>
                                     <v-col cols="12">
-                                        <v-select
+                                        <v-autocomplete
                                             :hide-details="
                                                 form.errors?.unidad_area_id
                                                     ? false
@@ -211,7 +211,7 @@ onMounted(() => {
                                                 <span>{{
                                                     item.raw.nombre
                                                 }}</span>
-                                            </template></v-select
+                                            </template></v-autocomplete
                                         >
                                     </v-col>
                                     <v-col

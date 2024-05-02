@@ -193,8 +193,8 @@ const scrollActive = () => {
                 link
             >
                 <v-list-item-title
-                    >Solicitud de Mantenimiento</v-list-item-title
-                >
+                    >Solicitud de Mantenimiento
+                </v-list-item-title>
                 <v-tooltip
                     v-if="rail && !mobile"
                     color="white"
@@ -464,13 +464,24 @@ const scrollActive = () => {
                     ></v-list-item
                 >
                 <v-list-item
-                    v-if="oUser.permisos.includes('reportes.cantidad_mantenimiento_equipos')"
+                    v-if="
+                        oUser.permisos.includes(
+                            'reportes.cantidad_mantenimiento_equipos'
+                        )
+                    "
                     prepend-icon="mdi-chevron-right"
                     title="C. M. Equipos"
                     :class="[
-                        route_current == 'reportes.cantidad_mantenimiento_equipos' ? 'active' : '',
+                        route_current ==
+                        'reportes.cantidad_mantenimiento_equipos'
+                            ? 'active'
+                            : '',
                     ]"
-                    @click="cambiarUrl(route('reportes.cantidad_mantenimiento_equipos'))"
+                    @click="
+                        cambiarUrl(
+                            route('reportes.cantidad_mantenimiento_equipos')
+                        )
+                    "
                     link
                 >
                     <v-tooltip
@@ -482,13 +493,21 @@ const scrollActive = () => {
                     ></v-list-item
                 >
                 <v-list-item
-                    v-if="oUser.permisos.includes('reportes.cantidad_mantenimiento_mes')"
+                    v-if="
+                        oUser.permisos.includes(
+                            'reportes.cantidad_mantenimiento_mes'
+                        )
+                    "
                     prepend-icon="mdi-chevron-right"
                     title="C. M. Equipos por Mes"
                     :class="[
-                        route_current == 'reportes.cantidad_mantenimiento_mes' ? 'active' : '',
+                        route_current == 'reportes.cantidad_mantenimiento_mes'
+                            ? 'active'
+                            : '',
                     ]"
-                    @click="cambiarUrl(route('reportes.cantidad_mantenimiento_mes'))"
+                    @click="
+                        cambiarUrl(route('reportes.cantidad_mantenimiento_mes'))
+                    "
                     link
                 >
                     <v-tooltip

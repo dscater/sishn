@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -34,6 +35,15 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        if (Auth::user()->status == 0) {
+            Auth::logout();
+
+            throw ValidationException::withMessages([
+                'usuario' =>  "Esta cuenta fue dada de baja"
+            ]);
+        }
+
         // crear backup
         $backup = new BackupBD();
         $backup->crearBackup();

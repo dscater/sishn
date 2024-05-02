@@ -35,7 +35,7 @@ class UnidadAreaController extends Controller
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;
             if ($unidad_area) {
-                $unidad_areas =  UnidadArea::where("id", $unidad_area->id);
+                $unidad_areas =  UnidadArea::where("id", $unidad_area->id)->where("status", 1)->get();
             } else {
                 $unidad_areas = [];
             }
@@ -54,7 +54,7 @@ class UnidadAreaController extends Controller
             $unidad_areas->where("nombre", "LIKE", "%$search%");
         }
 
-        $unidad_areas = $unidad_areas->paginate($request->itemsPerPage);
+        $unidad_areas = $unidad_areas->where("status", 1)->paginate($request->itemsPerPage);
         return response()->JSON([
             "unidad_areas" => $unidad_areas
         ]);
@@ -147,7 +147,8 @@ class UnidadAreaController extends Controller
         DB::beginTransaction();
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($unidad_area, "unidad_areas");
-            $unidad_area->delete();
+            $unidad_area->status = 0;
+            $unidad_area->save();
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'ELIMINACIÓN',

@@ -35,6 +35,7 @@ class User extends Authenticatable
         "item",
         "acceso",
         "fecha_registro",
+        "status",
     ];
 
     protected $with = ["unidad_area"];

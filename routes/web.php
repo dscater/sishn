@@ -7,6 +7,7 @@ use App\Http\Controllers\DocumentoController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\InstitucionController;
+use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\RepuestoController;
@@ -40,17 +41,15 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get('/', function () {
 
-    return Inertia::render('Inicio');
-});
+Route::get('/', [PortalController::class, 'index'])->name("portal.inicio");
 
 Route::get('/login', function () {
     if (Auth::check()) {
         return redirect()->route('inicio');
     }
     return Inertia::render('Auth/Login');
-});
+})->name("login");
 
 Route::get("institucions/getInstitucion", [InstitucionController::class, 'getInstitucion'])->name("institucions.getInstitucion");
 
@@ -114,6 +113,7 @@ Route::middleware('auth')->group(function () {
     // REPUESTOS
     Route::get("/EeuprOaoRu/ZB4q5vQdEUv2h3j3iad47wSoU3/9OCZI=", [RepuestoController::class, 'paginado'])->name("repuestos.paginado");
     Route::get("/GsixF9n5Qy+ciDBozHPm3FX4U7rczwirGoFRHEGBM7k=", [RepuestoController::class, 'listado'])->name("repuestos.listado");
+    Route::get("/GsixF9n5Qy+ciDBozHPm3FX4U7rczwirGEByRAHREAGBM7k=", [RepuestoController::class, 'byArea'])->name("repuestos.byArea");
     Route::get("/Co91OCBx39qiugGTNrBlTg==", [RepuestoController::class, 'index'])->name("repuestos.index");
     Route::post("/E/m7M6t65TxbKupOBR2Q8g==", [RepuestoController::class, 'store'])->name("repuestos.store");
     Route::get("/n/J7aHGDEJgYpoQfl3UJ6w=={repuesto}", [RepuestoController::class, 'show'])->name("repuestos.show");

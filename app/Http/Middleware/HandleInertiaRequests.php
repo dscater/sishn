@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -13,6 +14,15 @@ class HandleInertiaRequests extends Middleware
      * @var string
      */
     protected $rootView = 'app';
+
+    public function rootView(Request $request)
+    {
+        if ($request->route()->getName() == 'portal.inicio') {
+            return 'portal';
+        }
+
+        return 'app';
+    }
 
     /**
      * Determine the current asset version.
@@ -34,6 +44,8 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'url_assets' => asset(''),
+            'url_principal' => url(''),
             'flash' => [
                 'bien' => fn () => $request->session()->get('bien'),
                 'error' => fn () => $request->session()->get('error'),

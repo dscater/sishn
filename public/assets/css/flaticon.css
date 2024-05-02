@@ -1,0 +1,105 @@
+@font-face {
+    font-family: "flaticon";
+    src: url("../fonts/flaticond6fe.ttf?44740fc84ad3efaeead39a897f9d6614") format("truetype"),
+url("../fonts/flaticond6fe.woff?44740fc84ad3efaeead39a897f9d6614") format("woff"),
+url("../fonts/flaticond6fe.woff2?44740fc84ad3efaeead39a897f9d6614") format("woff2"),
+url("../fonts/flaticond6fe.html?44740fc84ad3efaeead39a897f9d6614#iefix") format("embedded-opentype"),
+url("../fonts/flaticond6fe.svg?44740fc84ad3efaeead39a897f9d6614#flaticon") format("svg");
+}
+
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-arrow-point-to-down:before {
+    content: "\f101";
+}
+.flaticon-phone-call:before {
+    content: "\f102";
+}
+.flaticon-checked:before {
+    content: "\f103";
+}
+.flaticon-idea:before {
+    content: "\f104";
+}
+.flaticon-quote:before {
+    content: "\f105";
+}
+.flaticon-map:before {
+    content: "\f106";
+}
+.flaticon-like:before {
+    content: "\f107";
+}
+.flaticon-shopping-cart:before {
+    content: "\f108";
+}
+.flaticon-rocket:before {
+    content: "\f109";
+}
+.flaticon-trophy:before {
+    content: "\f10a";
+}
+.flaticon-coding:before {
+    content: "\f10b";
+}
+.flaticon-cup:before {
+    content: "\f10c";
+}
+.flaticon-call:before {
+    content: "\f10d";
+}
+.flaticon-solution:before {
+    content: "\f10e";
+}
+.flaticon-magnifying-glass:before {
+    content: "\f10f";
+}
+.flaticon-member:before {
+    content: "\f110";
+}
+.flaticon-more:before {
+    content: "\f111";
+}
+.flaticon-medal:before {
+    content: "\f112";
+}
+.flaticon-live-chat:before {
+    content: "\f113";
+}
+.flaticon-graphic-design:before {
+    content: "\f114";
+}
+.flaticon-right-arrows:before {
+    content: "\f115";
+}
+.flaticon-follower:before {
+    content: "\f116";
+}
+.flaticon-top-right:before {
+    content: "\f117";
+}
+.flaticon-trophy-1:before {
+    content: "\f118";
+}
+.flaticon-play:before {
+    content: "\f119";
+}
+.flaticon-maintenance:before {
+    content: "\f11a";
+}
+.flaticon-achievement:before {
+    content: "\f11b";
+}
+.flaticon-add:before {
+    content: "\f11c";
+}

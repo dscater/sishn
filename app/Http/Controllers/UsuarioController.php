@@ -52,7 +52,7 @@ class UsuarioController extends Controller
 
     public function listado()
     {
-        $usuarios = User::where("id", "!=", 1)->get();
+        $usuarios = User::where("id", "!=", 1)->where("status", 1)->get();
         return response()->JSON([
             "usuarios" => $usuarios
         ]);
@@ -90,7 +90,7 @@ class UsuarioController extends Controller
                 });
             }
         }
-        $usuarios = $usuarios->get();
+        $usuarios = $usuarios->where("status", 1)->get();
 
         return response()->JSON([
             "usuarios" => $usuarios
@@ -102,7 +102,7 @@ class UsuarioController extends Controller
 
         $search = $request->search;
 
-        $usuarios = User::where("id", "!=", 1);
+        $usuarios = User::where("id", "!=", 1)->where("status", 1);
 
         if (trim($search) != "") {
             $usuarios->where("usuario", "LIKE", "%$search%");
@@ -265,12 +265,13 @@ class UsuarioController extends Controller
     {
         DB::beginTransaction();
         try {
-            $antiguo = $user->foto;
-            if ($antiguo != 'default.png') {
-                \File::delete(public_path() . '/imgs/users/' . $antiguo);
-            }
+            // $antiguo = $user->foto;
+            // if ($antiguo != 'default.png') {
+            //     \File::delete(public_path() . '/imgs/users/' . $antiguo);
+            // }
             $datos_original = HistorialAccion::getDetalleRegistro($user, "users");
-            $user->delete();
+            $user->status = 0;
+            $user->save();
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'ELIMINACIÓN',

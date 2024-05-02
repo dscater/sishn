@@ -10,7 +10,7 @@ class CronogramaController extends Controller
 {
     public function listado()
     {
-        $cronogramas = Cronograma::with(["solicitud_mantenimiento.biometrico.unidad_area", "solicitud_mantenimiento.biometrico.empresa"])->select("cronogramas.*");
+        $cronogramas = Cronograma::with(["solicitud_mantenimiento.biometrico.unidad_area", "solicitud_mantenimiento.biometrico.empresa", "solicitud_mantenimiento.responsable", "solicitud_mantenimiento.tecnico"])->select("cronogramas.*");
 
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;

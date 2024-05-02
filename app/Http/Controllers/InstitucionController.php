@@ -64,7 +64,7 @@ class InstitucionController extends Controller
                     \File::delete(public_path() . '/imgs/' . $antiguo);
                 }
                 $file = $request->foto_director;
-                $nom_foto_director = time() . '_' . $institucion->id . '.' . $file->getClientOriginalExtension();
+                $nom_foto_director = time() . 'd_' . $institucion->id . '.' . $file->getClientOriginalExtension();
                 $institucion->foto_director = $nom_foto_director;
                 $file->move(public_path() . '/imgs/', $nom_foto_director);
             }
@@ -75,7 +75,7 @@ class InstitucionController extends Controller
                     \File::delete(public_path() . '/imgs/' . $antiguo);
                 }
                 $file = $request->foto_subdirector;
-                $nom_foto_subdirector = time() . '_' . $institucion->id . '.' . $file->getClientOriginalExtension();
+                $nom_foto_subdirector = time() . 'sd_' . $institucion->id . '.' . $file->getClientOriginalExtension();
                 $institucion->foto_subdirector = $nom_foto_subdirector;
                 $file->move(public_path() . '/imgs/', $nom_foto_subdirector);
             }

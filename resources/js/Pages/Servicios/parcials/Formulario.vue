@@ -2,6 +2,7 @@
 import { useForm, usePage } from "@inertiajs/vue3";
 import { useServicios } from "@/composables/servicios/useServicios";
 import { useSolicitudMantenimientos } from "@/composables/solicitud_mantenimientos/useSolicitudMantenimientos";
+import { useRepuestos } from "@/composables/repuestos/useRepuestos";
 import { useMenu } from "@/composables/useMenu";
 import { watch, ref, reactive, computed, onMounted } from "vue";
 
@@ -13,7 +14,9 @@ const { flash, auth } = usePage().props;
 const user = ref(auth.user);
 const { getSolicitudMantenimientos, getSolicitudMantenimientoById } =
     useSolicitudMantenimientos();
+const { getRepuestosByArea } = useRepuestos();
 const listSolicitudMantenimientos = ref([]);
+const listRepuestos = ref([]);
 
 const tituloDialog = computed(() => {
     return oServicio.id == 0 ? `Agregar Servicio` : `Editar Servicio`;
@@ -57,7 +60,7 @@ const enviarFormulario = () => {
     });
 };
 
-const cargaSolicitudMantenimientos = async () => {
+const cargaListas = async () => {
     if (form.id && form.id != 0 && form.id != "") {
         listSolicitudMantenimientos.value = await getSolicitudMantenimientos(
             "desc",
@@ -78,6 +81,9 @@ const obtenerSolicitudMantenimiento = async (value) => {
         solicitud_mantenimiento.value = await getSolicitudMantenimientoById(
             value
         );
+        listRepuestos.value = await getRepuestosByArea({
+            id: solicitud_mantenimiento.value.responsable.unidad_area?.id,
+        });
     } else {
         solicitud_mantenimiento.value = null;
     }
@@ -87,7 +93,7 @@ onMounted(() => {
     if (form.id && form.id != "") {
         obtenerSolicitudMantenimiento(form.solicitud_mantenimiento_id);
     }
-    cargaSolicitudMantenimientos();
+    cargaListas();
 });
 </script>
 
@@ -488,6 +494,52 @@ onMounted(() => {
                                         density="compact"
                                         v-model="form.fecha_fin"
                                     ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="12" md="12" xl="12">
+                                    <v-select
+                                        :hide-details="
+                                            form.errors?.array_repuestos
+                                                ? false
+                                                : true
+                                        "
+                                        :error="
+                                            form.errors?.array_repuestos
+                                                ? true
+                                                : false
+                                        "
+                                        :error-messages="
+                                            form.errors?.array_repuestos
+                                                ? form.errors?.array_repuestos
+                                                : ''
+                                        "
+                                        variant="outlined"
+                                        label="Seleccionar Repuestos"
+                                        :items="listRepuestos"
+                                        item-value="id"
+                                        item-title="nombre"
+                                        multiple
+                                        required
+                                        density="compact"
+                                        v-model="form.array_repuestos"
+                                    >
+                                        <template
+                                            v-slot:selection="{ item, index }"
+                                        >
+                                            <v-chip v-if="index < 2">
+                                                <span>{{ item.title }}</span>
+                                            </v-chip>
+                                            <span
+                                                v-if="index === 2"
+                                                class="text-grey text-caption align-self-center"
+                                            >
+                                                (+{{
+                                                    form.array_repuestos
+                                                        .length - 2
+                                                }}
+                                                más)
+                                            </span>
+                                        </template>
+                                    </v-select>
                                 </v-col>
                             </v-row>
                         </form>

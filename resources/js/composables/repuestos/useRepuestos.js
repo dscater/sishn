@@ -6,6 +6,7 @@ import { usePage } from "@inertiajs/vue3";
 const oRepuesto = ref({
     id: 0,
     nombre: "",
+    unidad_area_id: null,
     _method: "POST",
 });
 
@@ -15,6 +16,31 @@ export const useRepuestos = () => {
         try {
             const response = await axios.get(route("repuestos.listado"), {
                 headers: { Accept: "application/json" },
+            });
+            return response.data.repuestos;
+        } catch (err) {
+            Swal.fire({
+                icon: "info",
+                title: "Error",
+                text: `${
+                    flash.error
+                        ? flash.error
+                        : err.error
+                        ? err.error
+                        : "Error al obtener los registros"
+                }`,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: `Aceptar`,
+            });
+            console.error("Error:", err);
+            throw err; // Puedes manejar el error según tus necesidades
+        }
+    };
+    const getRepuestosByArea = async (data) => {
+        try {
+            const response = await axios.get(route("repuestos.byArea"), {
+                headers: { Accept: "application/json" },
+                params: data,
             });
             return response.data.repuestos;
         } catch (err) {
@@ -65,12 +91,9 @@ export const useRepuestos = () => {
     };
     const saveRepuesto = async (data) => {
         try {
-            const response = await axios.post(
-                route("repuestos.store", data),
-                {
-                    headers: { Accept: "application/json" },
-                }
-            );
+            const response = await axios.post(route("repuestos.store", data), {
+                headers: { Accept: "application/json" },
+            });
             Swal.fire({
                 icon: "success",
                 title: "Correcto",
@@ -137,6 +160,7 @@ export const useRepuestos = () => {
         if (item) {
             oRepuesto.value.id = item.id;
             oRepuesto.value.nombre = item.nombre;
+            oRepuesto.value.unidad_area_id = item.unidad_area_id;
             oRepuesto.value._method = "PUT";
             return oRepuesto;
         }
@@ -146,6 +170,7 @@ export const useRepuestos = () => {
     const limpiarRepuesto = () => {
         oRepuesto.value.id = 0;
         oRepuesto.value.nombre = "";
+        oRepuesto.value.unidad_area_id = null;
         oRepuesto.value._method = "POST";
     };
 
@@ -154,6 +179,7 @@ export const useRepuestos = () => {
     return {
         oRepuesto,
         getRepuestos,
+        getRepuestosByArea,
         getRepuestosApi,
         saveRepuesto,
         deleteRepuesto,

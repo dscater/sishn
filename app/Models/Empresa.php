@@ -19,6 +19,7 @@ class Empresa extends Model
         "logo",
         "pais",
         "fecha_registro",
+        "status",
     ];
 
     protected $appends = ["url_logo", "iniciales_nombre", "fecha_registro_t", "fecha_ini_t", "fecha_fin_t"];

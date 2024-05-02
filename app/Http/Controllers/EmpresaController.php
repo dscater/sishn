@@ -28,7 +28,7 @@ class EmpresaController extends Controller
 
     public function listado()
     {
-        $empresas = Empresa::select("empresas.*")->get();
+        $empresas = Empresa::select("empresas.*")->where("empresas.status", 1)->get();
         return response()->JSON([
             "empresas" => $empresas
         ]);
@@ -37,11 +37,12 @@ class EmpresaController extends Controller
     public function paginado(Request $request)
     {
         $search = $request->search;
-        $empresas = Empresa::select("empresas.*");
+        $empresas = Empresa::select("empresas.*")->where("empresas.status", 1);
         if (trim($search) != "") {
             $empresas->where("nombre", "LIKE", "%$search%");
             $empresas->orWhere("nit", "LIKE", "%$search%");
         }
+        $empresas->orderBy("id", "desc");
         $empresas = $empresas->paginate($request->itemsPerPage);
         return response()->JSON([
             "empresas" => $empresas
@@ -156,12 +157,13 @@ class EmpresaController extends Controller
     {
         DB::beginTransaction();
         try {
-            $antiguo = $empresa->logo;
-            if ($antiguo != 'default.png') {
-                \File::delete(public_path() . '/imgs/empresas/' . $antiguo);
-            }
+            // $antiguo = $empresa->logo;
+            // if ($antiguo != 'default.png') {
+            //     \File::delete(public_path() . '/imgs/empresas/' . $antiguo);
+            // }
             $datos_original = HistorialAccion::getDetalleRegistro($empresa, "empresas");
-            $empresa->delete();
+            $empresa->status = 0;
+            $empresa->save();
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'ELIMINACIÓN',

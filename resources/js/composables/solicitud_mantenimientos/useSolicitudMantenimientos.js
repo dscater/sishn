@@ -14,13 +14,13 @@ const oSolicitudMantenimiento = reactive({
     ci_tecnico: "",
     tipo_mantenimiento: null,
     motivo_mantenimiento: "",
-    diagnostico: "",
+    // diagnostico: "",
     otros: "",
     fecha_solicitud: "",
     fecha_entrega: "",
     biometrico_id: "",
-    array_repuestos: [],
-    repuestos: null,
+    // array_repuestos: [],
+    // repuestos: null,
     cronogramas: reactive([]),
     eliminados: reactive([]),
     _method: "POST",
@@ -251,14 +251,14 @@ export const useSolicitudMantenimientos = () => {
                 item.tipo_mantenimiento;
             oSolicitudMantenimiento.motivo_mantenimiento =
                 item.motivo_mantenimiento;
-            oSolicitudMantenimiento.diagnostico = item.diagnostico;
+            // oSolicitudMantenimiento.diagnostico = item.diagnostico;
             oSolicitudMantenimiento.otros = item.otros;
             oSolicitudMantenimiento.fecha_solicitud = item.fecha_solicitud;
             oSolicitudMantenimiento.fecha_entrega = item.fecha_entrega;
             oSolicitudMantenimiento.biometrico_id = item.biometrico_id;
-            oSolicitudMantenimiento.array_repuestos =
-                item.array_repuestos.map(Number);
-            oSolicitudMantenimiento.repuestos = item.repuestos;
+            // oSolicitudMantenimiento.array_repuestos =
+            //     item.array_repuestos.map(Number);
+            // oSolicitudMantenimiento.repuestos = item.repuestos;
             oSolicitudMantenimiento.cronogramas = reactive(item.cronogramas);
             oSolicitudMantenimiento.eliminados = reactive([]);
             oSolicitudMantenimiento._method = "PUT";
@@ -278,13 +278,13 @@ export const useSolicitudMantenimientos = () => {
         oSolicitudMantenimiento.ci_tecnico = "";
         oSolicitudMantenimiento.tipo_mantenimiento = null;
         oSolicitudMantenimiento.motivo_mantenimiento = "";
-        oSolicitudMantenimiento.diagnostico = "";
+        // oSolicitudMantenimiento.diagnostico = "";
         oSolicitudMantenimiento.otros = "";
         oSolicitudMantenimiento.fecha_solicitud = "";
         oSolicitudMantenimiento.fecha_entrega = "";
         oSolicitudMantenimiento.biometrico_id = "";
-        oSolicitudMantenimiento.array_repuestos = [];
-        oSolicitudMantenimiento.repuestos = null;
+        // oSolicitudMantenimiento.array_repuestos = [];
+        // oSolicitudMantenimiento.repuestos = null;
         oSolicitudMantenimiento.cronogramas = reactive([]);
         oSolicitudMantenimiento.eliminados = reactive([]);
         oSolicitudMantenimiento._method = "POST";

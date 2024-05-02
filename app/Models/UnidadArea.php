@@ -16,6 +16,7 @@ class UnidadArea extends Model
         "ubicacion",
         "unidad",
         "fecha_registro",
+        "status",
     ];
 
 

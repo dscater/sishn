@@ -56,8 +56,9 @@ const headers = ref([
     { title: "Área", align: "start", sortable: false },
     { title: "Empresa", align: "start", sortable: false },
     { title: "Imagen", align: "start", sortable: false },
+    { title: "Accesorios", align: "start", sortable: false },
+    { title: "Estado Equipo", align: "start", sortable: false },
     { title: "Más", align: "start", sortable: false },
-    { title: "Fecha Registro", align: "start", sortable: false },
     { title: "Acción", align: "end", sortable: false },
 ]);
 
@@ -158,7 +159,9 @@ const eliminarBiometrico = (item) => {
                         <v-row
                             class="bg-grey-darken-3 d-flex align-center pa-3"
                         >
-                            <v-col cols="12" sm="6" md="4">Equipos Biomédicos </v-col>
+                            <v-col cols="12" sm="6" md="4"
+                                >Equipos Biomédicos
+                            </v-col>
                             <v-col cols="12" sm="6" md="4" offset-md="4">
                                 <v-text-field
                                     v-model="search"
@@ -257,6 +260,8 @@ const eliminarBiometrico = (item) => {
                                                 }}</span>
                                             </v-avatar>
                                         </td>
+                                        <td>{{ item.accesorios }}</td>
+                                        <td>{{ item.estado_equipo }}</td>
                                         <td>
                                             <v-btn
                                                 :icon="
@@ -267,7 +272,6 @@ const eliminarBiometrico = (item) => {
                                                 @click="item.mas = !item.mas"
                                             ></v-btn>
                                         </td>
-                                        <td>{{ item.fecha_registro_t }}</td>
                                         <td class="text-right">
                                             <v-btn
                                                 color="yellow"
@@ -368,6 +372,21 @@ const eliminarBiometrico = (item) => {
                                                                     item.manual_servicio
                                                                 }}</a
                                                             >
+                                                        </v-col>
+                                                    </v-row>
+                                                </v-col>
+                                                <v-col
+                                                    cols="3"
+                                                    class="text-center"
+                                                >
+                                                    <v-row>
+                                                        <v-col
+                                                            cols="12"
+                                                            class="pb-0 text-caption font-weight-black"
+                                                            >Fecha de Registro</v-col
+                                                        >
+                                                        <v-col cols="12">
+                                                            {{ item.fecha_registro_t }}
                                                         </v-col>
                                                     </v-row>
                                                 </v-col>
@@ -504,6 +523,18 @@ const eliminarBiometrico = (item) => {
                                                             }}</span
                                                         >
                                                     </v-avatar>
+                                                </li>
+                                                <li
+                                                    class="flex-item"
+                                                    data-label="Fecha Registro"
+                                                >
+                                                    {{ item.accesorios }}
+                                                </li>
+                                                <li
+                                                    class="flex-item"
+                                                    data-label="Fecha Registro"
+                                                >
+                                                    {{ item.estado_equipo }}
                                                 </li>
                                                 <li
                                                     class="flex-item"

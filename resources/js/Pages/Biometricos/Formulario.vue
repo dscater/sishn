@@ -453,6 +453,58 @@ const cargarUnidadAreas = async () => {
                                         ref="foto"
                                     ></v-file-input>
                                 </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-textarea
+                                        :hide-details="
+                                            form.errors?.accesorios
+                                                ? false
+                                                : true
+                                        "
+                                        :error="
+                                            form.errors?.accesorios
+                                                ? true
+                                                : false
+                                        "
+                                        :error-messages="
+                                            form.errors?.accesorios
+                                                ? form.errors?.accesorios
+                                                : ''
+                                        "
+                                        density="compact"
+                                        variant="outlined"
+                                        label="Accesorios"
+                                        rows="1"
+                                        auto-grow
+                                        v-model="form.accesorios"
+                                    ></v-textarea>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-select
+                                        :hide-details="
+                                            form.errors?.estado_equipo
+                                                ? false
+                                                : true
+                                        "
+                                        :error="
+                                            form.errors?.estado_equipo
+                                                ? true
+                                                : false
+                                        "
+                                        :error-messages="
+                                            form.errors?.estado_equipo
+                                                ? form.errors?.estado_equipo
+                                                : ''
+                                        "
+                                        no-data-text="Sin datos"
+                                        density="compact"
+                                        variant="outlined"
+                                        clearable
+                                        :items="['ACTIVO', 'INACTIVO']"
+                                        label="Seleccionar Estado Equipo*"
+                                        v-model="form.estado_equipo"
+                                        required
+                                    ></v-select>
+                                </v-col>
                             </v-row>
                         </form>
                     </v-container>

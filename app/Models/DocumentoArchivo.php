@@ -12,6 +12,7 @@ class DocumentoArchivo extends Model
     protected $fillable = [
         "documento_id",
         "archivo",
+        "status",
     ];
 
     protected $appends = ["url_archivo", "thumb"];

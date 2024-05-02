@@ -45,7 +45,7 @@ class ServicioController extends Controller
         $servicios = Servicio::with(["solicitud_mantenimiento.biometrico.unidad_area.user"])->select("servicios.*");
 
         $servicios->join("solicitud_mantenimientos", "solicitud_mantenimientos.id", "=", "servicios.solicitud_mantenimiento_id");
-        $servicios = $servicios->get();
+        $servicios = $servicios->where("servicios.status", 1)->get();
 
         return response()->JSON([
             "servicios" => $servicios
@@ -57,7 +57,8 @@ class ServicioController extends Controller
         $search = $request->search;
         $servicios = Servicio::with(["solicitud_mantenimiento.biometrico.unidad_area.user"])->select("servicios.*")
             ->join("solicitud_mantenimientos", "solicitud_mantenimientos.id", "=", "servicios.solicitud_mantenimiento_id")
-            ->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
+            ->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id")
+            ->where("servicios.status", 1);
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;
             if ($unidad_area) {
@@ -97,8 +98,14 @@ class ServicioController extends Controller
         $request['fecha_registro'] = date('Y-m-d');
         DB::beginTransaction();
         try {
+            $repuestos = "";
+            if (isset($request->array_repuestos) && count($request->array_repuestos) > 0) {
+                $repuestos = implode(",", $request->array_repuestos);
+            }
+            $request["repuestos"] = $repuestos;
+
             // crear el Servicio
-            $nuevo_servicio = Servicio::create(array_map('mb_strtoupper', $request->all()));
+            $nuevo_servicio = Servicio::create(array_map('mb_strtoupper', $request->except("array_repuestos")));
             $nuevo_servicio->solicitud_mantenimiento->fecha_entrega = $nuevo_servicio->fecha_entrega;
             $nuevo_servicio->solicitud_mantenimiento->save();
             $datos_original = HistorialAccion::getDetalleRegistro($nuevo_servicio, "servicios");
@@ -144,8 +151,14 @@ class ServicioController extends Controller
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();
         try {
+            $repuestos = "";
+            if (isset($request->array_repuestos) && count($request->array_repuestos) > 0) {
+                $repuestos = implode(",", $request->array_repuestos);
+            }
+            $request["repuestos"] = $repuestos;
+
             $datos_original = HistorialAccion::getDetalleRegistro($servicio, "servicios");
-            $servicio->update(array_map('mb_strtoupper', $request->all()));
+            $servicio->update(array_map('mb_strtoupper', $request->except("array_repuestos")));
             $servicio->solicitud_mantenimiento->fecha_entrega = $servicio->fecha_entrega;
             $servicio->solicitud_mantenimiento->save();
             if ($servicio->capacitacion == "NO") {
@@ -181,7 +194,8 @@ class ServicioController extends Controller
         DB::beginTransaction();
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($servicio, "servicios");
-            $servicio->delete();
+            $servicio->status = 0;
+            $servicio->save();
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'ELIMINACIÓN',

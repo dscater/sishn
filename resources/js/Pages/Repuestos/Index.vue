@@ -43,6 +43,7 @@ const headers = ref([
         sortable: false,
     },
     { title: "Nombre", align: "start", sortable: false },
+    { title: "Área", align: "start", sortable: false },
     { title: "Acción", align: "end", sortable: false },
 ]);
 
@@ -184,6 +185,7 @@ const eliminarRepuesto = (item) => {
                                 <tr v-if="!mobile">
                                     <td>{{ item.id }}</td>
                                     <td>{{ item.nombre }}</td>
+                                    <td>{{ item.unidad_area?.nombre }}</td>
                                     <td class="text-right">
                                         <v-btn
                                             color="yellow"
@@ -215,6 +217,12 @@ const eliminarRepuesto = (item) => {
                                                 data-label="Nombre"
                                             >
                                                 {{ item.nombre }}
+                                            </li>
+                                            <li
+                                                class="flex-item"
+                                                data-label="Área"
+                                            >
+                                                {{ item.unidad_area?.nombre }}
                                             </li>
                                         </ul>
                                         <v-row>

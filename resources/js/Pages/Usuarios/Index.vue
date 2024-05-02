@@ -267,13 +267,13 @@ const eliminarUsuario = (item) => {
                                             @click="editarUsuario(item)"
                                             icon="mdi-pencil"
                                         ></v-btn>
-                                        <!-- <v-btn
+                                        <v-btn
                                             color="error"
                                             size="small"
                                             class="pa-1 ma-1"
                                             @click="eliminarUsuario(item)"
                                             icon="mdi-trash-can"
-                                        ></v-btn> -->
+                                        ></v-btn>
                                     </td>
                                 </tr>
                                 <tr v-else>

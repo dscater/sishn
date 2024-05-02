@@ -100,7 +100,7 @@ onMounted(() => {
                                         cols="12"
                                         v-if="user.tipo != 'JEFE DE ÁREA'"
                                     >
-                                        <v-select
+                                        <v-autocomplete
                                             :hide-details="!existe_validacion"
                                             no-data-text="Sin datos"
                                             variant="outlined"
@@ -111,7 +111,7 @@ onMounted(() => {
                                             label="Área*"
                                             v-model="form.unidad_area_id"
                                             :rules="rules"
-                                        ></v-select>
+                                        ></v-autocomplete>
                                     </v-col>
                                     <v-col cols="12">
                                         <v-btn

@@ -28,7 +28,7 @@ class DocumentoController extends Controller
 
     public function listado()
     {
-        $documentos = Documento::select("documentos.*")->get();
+        $documentos = Documento::select("documentos.*")->where("documentos.status", 1)->get();
         return response()->JSON([
             "documentos" => $documentos
         ]);
@@ -37,7 +37,7 @@ class DocumentoController extends Controller
     public function paginado(Request $request)
     {
         $search = $request->search;
-        $documentos = Documento::with(["documento_archivos"])->select("documentos.*");
+        $documentos = Documento::with(["documento_archivos"])->select("documentos.*")->where("documentos.status", 1);
 
         if (trim($search) != "") {
             $documentos->where("descripcion", "LIKE", "%$search%");
@@ -172,15 +172,16 @@ class DocumentoController extends Controller
     {
         DB::beginTransaction();
         try {
-            foreach ($documento->documento_archivos as $item) {
-                if (file_exists(public_path("files/" . $item->archivo))) {
-                    \File::delete(public_path("files/" . $item->archivo));
-                }
-                $item->delete();
-            }
+            // foreach ($documento->documento_archivos as $item) {
+            //     if (file_exists(public_path("files/" . $item->archivo))) {
+            //         \File::delete(public_path("files/" . $item->archivo));
+            //     }
+            //     $item->delete();
+            // }
 
             $datos_original = HistorialAccion::getDetalleRegistro($documento, "documentos");
-            $documento->delete();
+            $documento->status = 0;
+            $documento->save();
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'ELIMINACIÓN',

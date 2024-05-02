@@ -21,13 +21,14 @@ class SolicitudMantenimiento extends Model
         "ci_tecnico",
         "tipo_mantenimiento",
         "motivo_mantenimiento",
-        "diagnostico",
+        // "diagnostico",
         "otros",
         "fecha_solicitud",
         "fecha_entrega",
         "biometrico_id",
-        "repuestos",
-        "fecha_registro"
+        // "repuestos",
+        "fecha_registro",
+        "status",
     ];
 
     protected $appends = ["fecha_registro_t", "fecha_solicitud_t", "fecha_entrega_t", "array_repuestos", "repuestos_txt", "array_repuestos_txt", "mas", "qr"];

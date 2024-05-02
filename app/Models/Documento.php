@@ -10,7 +10,8 @@ class Documento extends Model
     use HasFactory;
 
     protected $fillable = [
-        "descripcion"
+        "descripcion",
+        "status",
     ];
 
     public function documento_archivos()

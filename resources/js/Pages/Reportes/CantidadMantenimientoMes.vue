@@ -44,6 +44,7 @@ const { getBiometricosByArea } = useBiometricos();
 
 const form = ref({
     gestion: "",
+    mes: "todos",
     unidad_area_id: "todos",
     biometrico_id: "todos",
 });
@@ -54,6 +55,60 @@ const getAnioActual = () => {
 };
 const listUnidadAreas = ref([]);
 const listBiometricos = ref([]);
+const listMeses = ref([
+    {
+        value: "todos",
+        label: "TODOS",
+    },
+    {
+        value: 1,
+        label: "ENERO",
+    },
+    {
+        value: 2,
+        label: "FEBRERO",
+    },
+    {
+        value: 3,
+        label: "MARZO",
+    },
+    {
+        value: 4,
+        label: "ABRIL",
+    },
+    {
+        value: 5,
+        label: "MAYO",
+    },
+    {
+        value: 6,
+        label: "JUNIO",
+    },
+    {
+        value: 7,
+        label: "JULIO",
+    },
+    {
+        value: 8,
+        label: "AGOSTO",
+    },
+    {
+        value: 9,
+        label: "SEPTIEMBRE",
+    },
+    {
+        value: 10,
+        label: "OCTUBRE",
+    },
+    {
+        value: 11,
+        label: "NOVIEMBRE",
+    },
+    {
+        value: 12,
+        label: "DICIEMBRE",
+    },
+]);
 
 const generando = ref(false);
 const txtBtn = computed(() => {
@@ -202,7 +257,31 @@ onMounted(() => {
                                         ></v-text-field>
                                     </v-col>
                                     <v-col cols="12">
-                                        <v-select
+                                        <v-autocomplete
+                                            :hide-details="
+                                                form.errors?.mes ? false : true
+                                            "
+                                            :error="
+                                                form.errors?.mes ? true : false
+                                            "
+                                            :error-messages="
+                                                form.errors?.mes
+                                                    ? form.errors?.mes
+                                                    : ''
+                                            "
+                                            variant="outlined"
+                                            density="compact"
+                                            required
+                                            :items="listMeses"
+                                            item-value="value"
+                                            item-title="label"
+                                            label="Seleccionar Mes*"
+                                            v-model="form.mes"
+                                            @update:modelValue="cambiaArea"
+                                        ></v-autocomplete>
+                                    </v-col>
+                                    <v-col cols="12">
+                                        <v-autocomplete
                                             :hide-details="
                                                 form.errors?.unidad_area_id
                                                     ? false
@@ -243,7 +322,7 @@ onMounted(() => {
                                                 <span>{{
                                                     item.raw.nombre
                                                 }}</span>
-                                            </template></v-select
+                                            </template></v-autocomplete
                                         >
                                     </v-col>
                                     <v-col

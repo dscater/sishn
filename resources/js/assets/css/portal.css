@@ -1,0 +1,15 @@
+nav {
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: black;
+    color: white;
+}
+
+nav .menu {
+    display: flex;
+    gap: 20px;
+}
+
+nav .menu li a {
+    color: white;
+}

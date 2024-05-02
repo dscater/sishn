@@ -34,7 +34,7 @@ class SolicitudMantenimientoController extends Controller
 
     public function listado(Request $request)
     {
-        $solicitud_mantenimientos = SolicitudMantenimiento::select("solicitud_mantenimientos.*");
+        $solicitud_mantenimientos = SolicitudMantenimiento::select("solicitud_mantenimientos.*")->where("solicitud_mantenimientos.status", 1);
 
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;
@@ -77,7 +77,8 @@ class SolicitudMantenimientoController extends Controller
 
     public function getByUnidadAreaId(Request $request)
     {
-        $solicitud_mantenimientos = SolicitudMantenimiento::select("solicitud_mantenimientos.*");
+        $solicitud_mantenimientos = SolicitudMantenimiento::select("solicitud_mantenimientos.*")
+            ->where("solicitud_mantenimientos.status", 1);
 
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;
@@ -103,7 +104,8 @@ class SolicitudMantenimientoController extends Controller
     {
         $search = $request->search;
         $solicitud_mantenimientos = SolicitudMantenimiento::with(["responsable", "tecnico", "biometrico"])->select("solicitud_mantenimientos.*")
-            ->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id");
+            ->join("biometricos", "biometricos.id", "=", "solicitud_mantenimientos.biometrico_id")
+            ->where("solicitud_mantenimientos.status", 1);
 
         if (trim($search) != "") {
             $solicitud_mantenimientos->where("solicitud_mantenimientos.codigo", "LIKE", "%$search%");
@@ -120,6 +122,7 @@ class SolicitudMantenimientoController extends Controller
             }
         }
 
+        $solicitud_mantenimientos->orderBy("id", "desc");
         $solicitud_mantenimientos = $solicitud_mantenimientos->paginate($request->itemsPerPage);
         return response()->JSON([
             "solicitud_mantenimientos" => $solicitud_mantenimientos
@@ -189,9 +192,9 @@ class SolicitudMantenimientoController extends Controller
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'CREACIÓN',
-                'descripcion' => 'EL USUARIO ' . Auth::user()->solicitud_mantenimiento . ' REGISTRO UN REPUESTO',
+                'descripcion' => 'EL USUARIO ' . Auth::user()->solicitud_mantenimiento . ' REGISTRO UN SOLICITUD DE MANTENIMIENTO',
                 'datos_original' => $datos_original,
-                'modulo' => 'REPUESTOS',
+                'modulo' => 'SOLICITUD DE MANTENIMIENTOS',
                 'fecha' => date('Y-m-d'),
                 'hora' => date('H:i:s')
             ]);
@@ -298,10 +301,10 @@ class SolicitudMantenimientoController extends Controller
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'MODIFICACIÓN',
-                'descripcion' => 'EL USUARIO ' . Auth::user()->solicitud_mantenimiento . ' MODIFICÓ UN REPUESTO',
+                'descripcion' => 'EL USUARIO ' . Auth::user()->solicitud_mantenimiento . ' MODIFICÓ UN SOLICITUD DE MANTENIMIENTO',
                 'datos_original' => $datos_original,
                 'datos_nuevo' => $datos_nuevo,
-                'modulo' => 'REPUESTOS',
+                'modulo' => 'SOLICITUD DE MANTENIMIENTOS',
                 'fecha' => date('Y-m-d'),
                 'hora' => date('H:i:s')
             ]);
@@ -320,15 +323,16 @@ class SolicitudMantenimientoController extends Controller
     {
         DB::beginTransaction();
         try {
-            $solicitud_mantenimiento->cronogramas()->delete();
+            // $solicitud_mantenimiento->cronogramas()->delete();
             $datos_original = HistorialAccion::getDetalleRegistro($solicitud_mantenimiento, "solicitud_mantenimientos");
-            $solicitud_mantenimiento->delete();
+            $solicitud_mantenimiento->status = 0;
+            $solicitud_mantenimiento->save();
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'ELIMINACIÓN',
-                'descripcion' => 'EL USUARIO ' . Auth::user()->solicitud_mantenimiento . ' ELIMINÓ UN REPUESTO',
+                'descripcion' => 'EL USUARIO ' . Auth::user()->solicitud_mantenimiento . ' ELIMINÓ UN SOLICITUD DE MANTENIMIENTO',
                 'datos_original' => $datos_original,
-                'modulo' => 'REPUESTOS',
+                'modulo' => 'SOLICITUD DE MANTENIMIENTOS',
                 'fecha' => date('Y-m-d'),
                 'hora' => date('H:i:s')
             ]);

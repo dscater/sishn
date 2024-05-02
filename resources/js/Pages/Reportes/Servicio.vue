@@ -113,7 +113,7 @@ onMounted(() => {
                                         cols="12"
                                         v-if="user.tipo != 'JEFE DE ÁREA'"
                                     >
-                                        <v-select
+                                        <v-autocomplete
                                             :hide-details="!existe_validacion"
                                             no-data-text="Sin datos"
                                             variant="outlined"
@@ -127,11 +127,11 @@ onMounted(() => {
                                                 updateSelectUnidadArea
                                             "
                                             :rules="rules"
-                                        ></v-select>
+                                        ></v-autocomplete>
                                     </v-col>
 
                                     <v-col cols="12">
-                                        <v-select
+                                        <v-autocomplete
                                             :hide-details="!existe_validacion"
                                             no-data-text="Sin datos"
                                             variant="outlined"
@@ -144,7 +144,7 @@ onMounted(() => {
                                                 form.solicitud_mantenimiento_id
                                             "
                                             :rules="rules"
-                                        ></v-select>
+                                        ></v-autocomplete>
                                     </v-col>
                                     <v-col cols="12">
                                         <v-btn

@@ -2,6 +2,7 @@
 import { useForm, usePage } from "@inertiajs/vue3";
 import { useRepuestos } from "@/composables/repuestos/useRepuestos";
 import { useUsuarios } from "@/composables/usuarios/useUsuarios";
+import { useUnidadAreas } from "@/composables/unidad_areas/useUnidadAreas";
 import { watch, ref, computed, defineEmits, onMounted } from "vue";
 const props = defineProps({
     open_dialog: {
@@ -24,7 +25,7 @@ watch(
         dialog.value = newValue;
         if (dialog.value) {
             form = useForm(oRepuesto.value);
-            cargarUsuarios();
+            cargarListas();
         }
     }
 );
@@ -38,7 +39,9 @@ watch(
 const { flash } = usePage().props;
 
 const { getUsuariosByTipo } = useUsuarios();
+const { getUnidadAreas } = useUnidadAreas();
 const listUsuarios = ref([]);
+const listUnidadAreas = ref([]);
 
 const tituloDialog = computed(() => {
     return accion.value == 0 ? `Agregar Repuesto` : `Editar Repuesto`;
@@ -94,12 +97,13 @@ const cerrarDialog = () => {
     dialog.value = false;
 };
 
-const cargarUsuarios = async () => {
+const cargarListas = async () => {
+    listUnidadAreas.value = await getUnidadAreas();
     listUsuarios.value = await getUsuariosByTipo("JEFE DE ÁREA");
 };
 
 onMounted(async () => {
-    // cargarUsuarios();
+    // cargarListas();
 });
 </script>
 
@@ -123,7 +127,7 @@ onMounted(async () => {
                     <v-container>
                         <form @submit.prevent="enviarFormulario">
                             <v-row>
-                                <v-col cols="12" sm="12" md="12">
+                                <v-col cols="12" sm="6" md="6">
                                     <v-text-field
                                         :hide-details="
                                             form.errors?.nombre ? false : true
@@ -142,6 +146,35 @@ onMounted(async () => {
                                         density="compact"
                                         v-model="form.nombre"
                                     ></v-text-field>
+                                </v-col>
+                                <v-col cols="12" sm="6" md="6">
+                                    <v-select
+                                        :hide-details="
+                                            form.errors?.unidad_area_id
+                                                ? false
+                                                : true
+                                        "
+                                        :error="
+                                            form.errors?.unidad_area_id
+                                                ? true
+                                                : false
+                                        "
+                                        :error-messages="
+                                            form.errors?.unidad_area_id
+                                                ? form.errors?.unidad_area_id
+                                                : ''
+                                        "
+                                        no-data-text="No se encontrarón registros"
+                                        density="compact"
+                                        variant="outlined"
+                                        clearable
+                                        :items="listUnidadAreas"
+                                        item-value="id"
+                                        item-title="nombre"
+                                        label="Seleccionar Área*"
+                                        v-model="form.unidad_area_id"
+                                        required
+                                    ></v-select>
                                 </v-col>
                             </v-row>
                         </form>

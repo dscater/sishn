@@ -20,13 +20,40 @@ class Servicio extends Model
         "trabajo_realizado",
         "capacitacion",
         "descripcion",
+        "repuestos",
         "fecha_ini",
         "fecha_fin",
         "fecha_registro",
+        "status",
     ];
 
-    protected $appends = ["fecha_registro_t", "fecha_entrega_t", "fecha_ini_t", "fecha_fin_t", "mas"];
+    protected $appends = ["fecha_registro_t", "fecha_entrega_t", "fecha_ini_t", "fecha_fin_t", "array_repuestos", "repuestos_txt", "array_repuestos_txt", "mas"];
 
+    public function getRepuestosTxtAttribute()
+    {
+
+        if (count($this->array_repuestos) > 0) {
+            $repuestos = Repuesto::whereIn("id", $this->array_repuestos)->pluck("nombre")->toARray();
+            return implode(", ", $repuestos);
+        }
+        return "-";
+    }
+    public function getArrayRepuestosTxtAttribute()
+    {
+        if (count($this->array_repuestos) > 0) {
+            $repuestos = Repuesto::whereIn("id", $this->array_repuestos)->pluck("nombre")->toARray();
+            return $repuestos;
+        }
+        return "";
+    }
+
+    public function getArrayRepuestosAttribute()
+    {
+        if (strlen($this->repuestos) > 0) {
+            return explode(",", $this->repuestos);
+        }
+        return [];
+    }
 
     public function getFechaEntregaTAttribute()
     {

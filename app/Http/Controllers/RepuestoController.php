@@ -14,11 +14,13 @@ class RepuestoController extends Controller
 {
     public $validacion = [
         "nombre" => "required|min:1",
+        "unidad_area_id" => "required",
     ];
 
     public $mensajes = [
         "nombre.required" => "Este campo es obligatorio",
         "nombre.min" => "Debes ingresar al menos :min caracteres",
+        "unidad_area_id.required" => "Este campo es obligatorio",
     ];
 
     public function index()
@@ -28,16 +30,25 @@ class RepuestoController extends Controller
 
     public function listado()
     {
-        $repuestos = Repuesto::all();
+        $repuestos = Repuesto::where("status", 1)->get();
         return response()->JSON([
             "repuestos" => $repuestos
         ]);
     }
 
+    public function byArea(Request $request)
+    {
+        $repuestos = Repuesto::where("unidad_area_id", $request->id)->where("repuestos.status", 1)->get();
+        return response()->JSON([
+            "repuestos" => $repuestos
+        ]);
+    }
+
+
     public function paginado(Request $request)
     {
         $search = $request->search;
-        $repuestos = Repuesto::select("repuestos.*");
+        $repuestos = Repuesto::with(["unidad_area"])->select("repuestos.*")->where("repuestos.status", 1);
 
         if (trim($search) != "") {
             $repuestos->where("nombre", "LIKE", "%$search%");
@@ -82,7 +93,7 @@ class RepuestoController extends Controller
     }
 
     public function update(Repuesto $repuesto, Request $request)
-    {      
+    {
         $request->validate($this->validacion, $this->mensajes);
         DB::beginTransaction();
         try {
@@ -115,7 +126,8 @@ class RepuestoController extends Controller
         DB::beginTransaction();
         try {
             $datos_original = HistorialAccion::getDetalleRegistro($repuesto, "repuestos");
-            $repuesto->delete();
+            $repuesto->status = 0;
+            $repuesto->save();
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'ELIMINACIÓN',

@@ -216,7 +216,7 @@ onMounted(() => {
                                 </v-col>
                                 <v-col cols="8">{{
                                     cronograma.solicitud_mantenimiento
-                                        .nombre_responsable
+                                        .responsable.full_name
                                 }}</v-col>
                             </v-row>
                             <v-row>
@@ -227,7 +227,7 @@ onMounted(() => {
                                 </v-col>
                                 <v-col cols="8">{{
                                     cronograma.solicitud_mantenimiento
-                                        .ci_responsable
+                                        .responsable.full_ci
                                 }}</v-col>
                             </v-row>
                             <v-row>
@@ -237,8 +237,8 @@ onMounted(() => {
                                     >Nombre Técnico:
                                 </v-col>
                                 <v-col cols="8">{{
-                                    cronograma.solicitud_mantenimiento
-                                        .nombre_tecnico
+                                    cronograma.solicitud_mantenimiento.tecnico
+                                        .full_name
                                 }}</v-col>
                             </v-row>
                             <v-row>
@@ -248,8 +248,8 @@ onMounted(() => {
                                     >C.I. Técnico:
                                 </v-col>
                                 <v-col cols="8">{{
-                                    cronograma.solicitud_mantenimiento
-                                        .ci_tecnico
+                                    cronograma.solicitud_mantenimiento.tecnico
+                                        .full_ci
                                 }}</v-col>
                             </v-row>
                             <v-row>

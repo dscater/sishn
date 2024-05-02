@@ -55,6 +55,8 @@ const headers = ref([
     { title: "Diagnostico Previo", align: "start", sortable: false },
     { title: "Estado del Equipo", align: "start", sortable: false },
     { title: "Trabajo Realizado", align: "start", sortable: false },
+    { title: "Repuestos", align: "start", sortable: false },
+    { title: "Tipo Mantenimiento", align: "start", sortable: false },
     { title: "Más", align: "start", sortable: false },
     { title: "Acción", align: "end", sortable: false },
 ]);
@@ -138,6 +140,18 @@ const generarReporte = async (item) => {
         <v-row class="mt-0">
             <v-col cols="12" class="d-flex justify-end">
                 <v-btn
+                    color="grey-darken-3"
+                    prepend-icon="mdi-calendar-month"
+                    class="mr-2"
+                    @click="
+                        cambiarUrl(
+                            route('solicitud_mantenimientos.cronogramas')
+                        )
+                    "
+                >
+                    Cronograma</v-btn
+                >
+                <v-btn
                     color="yellow-lighten-1"
                     prepend-icon="mdi-plus"
                     @click="cambiarUrl(route('servicios.create'))"
@@ -220,6 +234,13 @@ const generarReporte = async (item) => {
                                         <td>{{ item.diagnostico_previo }}</td>
                                         <td>{{ item.estado_equipo }}</td>
                                         <td>{{ item.trabajo_realizado }}</td>
+                                        <td>{{ item.repuestos_txt }}</td>
+                                        <td>
+                                            {{
+                                                item.solicitud_mantenimiento
+                                                    ?.tipo_mantenimiento
+                                            }}
+                                        </td>
                                         <td>
                                             <v-btn
                                                 :icon="
@@ -403,6 +424,22 @@ const generarReporte = async (item) => {
                                                     data-label="Trabajo realizado"
                                                 >
                                                     {{ item.trabajo_realizado }}
+                                                </li>
+                                                <li
+                                                    class="flex-item"
+                                                    data-label="Repuestos"
+                                                >
+                                                    {{ item.repuestos_txt }}
+                                                </li>
+                                                <li
+                                                    class="flex-item"
+                                                    data-label="Tipo de Mantenimiento"
+                                                >
+                                                    {{
+                                                        item
+                                                            .solicitud_mantenimiento
+                                                            ?.tipo_mantenimiento
+                                                    }}
                                                 </li>
                                                 <li
                                                     class="flex-item"

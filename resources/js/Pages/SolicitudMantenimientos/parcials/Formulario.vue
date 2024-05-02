@@ -262,7 +262,7 @@ onMounted(() => {
                                         v-model="form.motivo_mantenimiento"
                                     ></v-textarea>
                                 </v-col>
-                                <v-col cols="12" sm="12" md="12" xl="6">
+                                <!-- <v-col cols="12" sm="12" md="12" xl="6">
                                     <v-textarea
                                         :hide-details="
                                             form.errors?.diagnostico
@@ -286,7 +286,7 @@ onMounted(() => {
                                         density="compact"
                                         v-model="form.diagnostico"
                                     ></v-textarea>
-                                </v-col>
+                                </v-col> -->
                                 <v-col cols="12" sm="12" md="12" xl="6">
                                     <v-textarea
                                         :hide-details="
@@ -400,7 +400,7 @@ onMounted(() => {
                                         </template>
                                     </v-autocomplete>
                                 </v-col>
-                                <v-col cols="12" sm="12" md="12" xl="12">
+                                <!-- <v-col cols="12" sm="12" md="12" xl="12">
                                     <v-select
                                         :hide-details="
                                             form.errors?.array_repuestos
@@ -445,7 +445,7 @@ onMounted(() => {
                                             </span>
                                         </template>
                                     </v-select>
-                                </v-col>
+                                </v-col> -->
                             </v-row>
                         </form>
                     </v-container>

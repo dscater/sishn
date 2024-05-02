@@ -22,8 +22,11 @@ class Biometrico extends Model
         "manual_servicio",
         "unidad_area_id",
         "empresa_id",
+        "accesorios",
+        "estado_equipo",
         "foto",
         "fecha_registro",
+        "status",
     ];
 
     protected $appends = ["url_foto", "iniciales_nombre", "fecha_registro_t", "fecha_ingreso_t",  "url_manual_usuario", "url_manual_servicio", "mas"];

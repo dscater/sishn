@@ -17,6 +17,7 @@ class BiometricoController extends Controller
         "cod_hdn" => "required|min:1",
         "fecha_ingreso" => "required|date",
         "unidad_area_id" => "required",
+        "estado_equipo" => "required"
     ];
 
     public $mensajes = [
@@ -31,6 +32,7 @@ class BiometricoController extends Controller
         "manual_usuario.file" => "El archvo no puede superar los :max KB",
         "manual_servicio.file" => "El archvo no puede superar los :max KB",
         "serie.unique" => "Esta serie ya fue registrada",
+        "estado_equipo.required" => "Este campo es obligatorio",
     ];
 
     public function index()
@@ -46,12 +48,14 @@ class BiometricoController extends Controller
         if (Auth::user()->tipo == 'JEFE DE ÁREA') {
             $unidad_area = Auth::user()->unidad_area;
             if ($unidad_area) {
-                $biometricos = $biometricos->where("unidad_area_id", $id)->get();
+                $biometricos = $biometricos->where("unidad_area_id", $id)
+                    ->where("status", 1)->get();
             } else {
                 $biometricos = [];
             }
         } else {
-            $biometricos = $biometricos->where("unidad_area_id", $id)->get();
+            $biometricos = $biometricos->where("unidad_area_id", $id)
+                ->where("status", 1)->get();
         }
 
         return response()->JSON([
@@ -71,7 +75,7 @@ class BiometricoController extends Controller
                 $biometricos = $biometricos->where("unidad_area_id", 0);
             }
         }
-        $biometricos = $biometricos->get();
+        $biometricos = $biometricos->where("biometricos.status", 1)->get();
 
         return response()->JSON([
             "biometricos" => $biometricos
@@ -94,7 +98,7 @@ class BiometricoController extends Controller
         if ($request->order) {
             $biometricos->orderBy("id", $request->order);
         }
-        $biometricos = $biometricos->paginate($request->itemsPerPage);
+        $biometricos = $biometricos->where("biometricos.status", 1)->paginate($request->itemsPerPage);
         return response()->JSON([
             "biometricos" => $biometricos
         ]);
@@ -121,7 +125,6 @@ class BiometricoController extends Controller
         } else {
             $request["empresa_id"] = 0;
         }
-
 
         $request->validate($this->validacion, $this->mensajes);
         $request['fecha_registro'] = date('Y-m-d');
@@ -270,20 +273,21 @@ class BiometricoController extends Controller
     {
         DB::beginTransaction();
         try {
-            $antiguo = $biometrico->foto;
-            if ($antiguo != 'default.png') {
-                \File::delete(public_path() . '/imgs/biometricos/' . $antiguo);
-            }
-            $antiguo = $biometrico->manual_usuario;
-            if ($antiguo) {
-                \File::delete(public_path() . '/files/' . $antiguo);
-            }
-            $antiguo = $biometrico->manual_servicio;
-            if ($antiguo) {
-                \File::delete(public_path() . '/files/' . $antiguo);
-            }
+            // $antiguo = $biometrico->foto;
+            // if ($antiguo != 'default.png') {
+            //     \File::delete(public_path() . '/imgs/biometricos/' . $antiguo);
+            // }
+            // $antiguo = $biometrico->manual_usuario;
+            // if ($antiguo) {
+            //     \File::delete(public_path() . '/files/' . $antiguo);
+            // }
+            // $antiguo = $biometrico->manual_servicio;
+            // if ($antiguo) {
+            //     \File::delete(public_path() . '/files/' . $antiguo);
+            // }
             $datos_original = HistorialAccion::getDetalleRegistro($biometrico, "biometricos");
-            $biometrico->delete();
+            $biometrico->status = 0;
+            $biometrico->save();
             HistorialAccion::create([
                 'user_id' => Auth::user()->id,
                 'accion' => 'ELIMINACIÓN',

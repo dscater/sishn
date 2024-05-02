@@ -76,7 +76,7 @@ const generarReporte = () => {
                             <form @submit.prevent="generarReporte">
                                 <v-row>
                                     <v-col cols="12">
-                                        <v-select
+                                        <v-autocomplete
                                             :hide-details="
                                                 form.errors?.tipo ? false : true
                                             "
@@ -96,10 +96,10 @@ const generarReporte = () => {
                                             item-title="label"
                                             label="Tipo*"
                                             v-model="form.tipo"
-                                        ></v-select>
+                                        ></v-autocomplete>
                                     </v-col>
                                     <v-col cols="12">
-                                        <v-select
+                                        <v-autocomplete
                                             :hide-details="
                                                 form.errors?.acceso ? false : true
                                             "
@@ -119,7 +119,7 @@ const generarReporte = () => {
                                             item-title="label"
                                             label="Acceso*"
                                             v-model="form.acceso"
-                                        ></v-select>
+                                        ></v-autocomplete>
                                     </v-col>
                                     <v-col cols="12">
                                         <v-btn
