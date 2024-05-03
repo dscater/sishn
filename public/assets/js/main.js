@@ -1,13 +1,6 @@
 (function ($) {
 	"use strict";
 
-	// preloader
-
-	$(window).on('load', function(){
-		$('#ct-loadding').fadeOut('slow',function(){$(this).remove();});
-	})
-	
-
 	//=======================
 	// header search
 	$(".header-search-btn").on("click", function (e) {

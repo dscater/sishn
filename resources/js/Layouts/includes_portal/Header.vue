@@ -28,6 +28,12 @@ onMounted(() => {
     url_principal = props.url_principal;
 
     $(document).ready(function () {
+        // loading
+        $("#ct-loadding").fadeOut("slow", function () {
+            $(this).remove();
+        });
+
+        // progress path
         var progressPath = document.querySelector(".progress-wrap path");
         var pathLength = progressPath.getTotalLength();
         progressPath.style.transition = progressPath.style.WebkitTransition =
@@ -142,7 +148,9 @@ onMounted(() => {
             </div>
             <ul class="menu">
                 <li v-if="user">
-                    <a href="/inicio"><i class="fa fa-user"></i> {{ user.full_name }}</a>
+                    <a href="/inicio"
+                        ><i class="fa fa-user"></i> {{ user.full_name }}</a
+                    >
                 </li>
                 <li v-else>
                     <a href="/login"><i class="fa fa-sign-in"></i> Acceder</a>
