@@ -66,6 +66,7 @@ class UserController extends Controller
             "reportes.solicitud_mantenimiento",
             "reportes.servicio",
             "reportes.equipos",
+            "reportes.repuestos",
             "reportes.historial_mantenimientos",
             "reportes.cantidad_mantenimiento_equipos",
             "reportes.cantidad_mantenimiento_mes",
@@ -84,6 +85,7 @@ class UserController extends Controller
             "reportes.solicitud_mantenimiento",
             "reportes.servicio",
             "reportes.equipos",
+            "reportes.repuestos",
             "reportes.historial_mantenimientos",
             "reportes.cantidad_mantenimiento_equipos",
             "reportes.cantidad_mantenimiento_mes",
@@ -127,6 +129,7 @@ class UserController extends Controller
             "reportes.solicitud_mantenimiento",
             "reportes.servicio",
             "reportes.equipos",
+            "reportes.repuestos",
             "reportes.historial_mantenimientos",
             "reportes.cantidad_mantenimiento_equipos",
             "reportes.cantidad_mantenimiento_mes",
@@ -140,6 +143,7 @@ class UserController extends Controller
             "reportes.solicitud_mantenimiento",
             "reportes.servicio",
             "reportes.equipos",
+            "reportes.repuestos",
             "reportes.historial_mantenimientos",
             "reportes.cantidad_mantenimiento_equipos",
             "reportes.cantidad_mantenimiento_mes",
@@ -187,7 +191,7 @@ class UserController extends Controller
             $array_infos[] = [
                 'label' => 'Usuarios',
                 'cantidad' => count(User::where('id', '!=', 1)->get()),
-                'color' => 'bg-grey-darken-3',
+                'color' => 'bg-blue-darken-4',
                 'icon' => asset("imgs/icon_users.png"),
                 "url" => "usuarios.index"
             ];
@@ -208,7 +212,7 @@ class UserController extends Controller
             $array_infos[] = [
                 'label' => 'Solicitud de Mantenimientos',
                 'cantidad' => count($solicitud_mantenimientos),
-                'color' => 'bg-grey-darken-3',
+                'color' => 'bg-blue-darken-4',
                 'icon' => asset("imgs/documents.png"),
                 "url" => "usuarios.index"
             ];
@@ -230,7 +234,7 @@ class UserController extends Controller
             $array_infos[] = [
                 'label' => 'Servicios',
                 'cantidad' => count($servicios),
-                'color' => 'bg-grey-darken-3',
+                'color' => 'bg-blue-darken-4',
                 'icon' => asset("imgs/checklist.png"),
                 "url" => "usuarios.index"
             ];
@@ -239,9 +243,9 @@ class UserController extends Controller
         if (in_array('biometricos.index', self::$permisos[$tipo])) {
             $biometricos = Biometrico::all();
             $array_infos[] = [
-                'label' => 'Equipos Biométricos',
+                'label' => 'Equipos Biomédicos',
                 'cantidad' => count($biometricos),
-                'color' => 'bg-grey-darken-3',
+                'color' => 'bg-blue-darken-4',
                 'icon' => asset("imgs/boxes.png"),
                 "url" => "usuarios.index"
             ];
@@ -252,7 +256,7 @@ class UserController extends Controller
             $array_infos[] = [
                 'label' => 'Empresas',
                 'cantidad' => count($empresas),
-                'color' => 'bg-grey-darken-3',
+                'color' => 'bg-blue-darken-4',
                 'icon' => asset("imgs/enterprise.png"),
                 "url" => "usuarios.index"
             ];
@@ -263,7 +267,7 @@ class UserController extends Controller
             $array_infos[] = [
                 'label' => 'Unidad/Áreas',
                 'cantidad' => count($unidad_areas),
-                'color' => 'bg-grey-darken-3',
+                'color' => 'bg-blue-darken-4',
                 'icon' => asset("imgs/icon_solicitud.png"),
                 "url" => "usuarios.index"
             ];

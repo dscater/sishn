@@ -105,7 +105,7 @@ onMounted(() => {
                     class="mr-2"
                     @click="cambiarUrl(route('solicitud_mantenimientos.index'))"
                 ></v-btn>
-                <v-btn icon="mdi-content-save" color="yellow-lighten-1"></v-btn>
+                <v-btn icon="mdi-content-save" color="indigo-darken-4"></v-btn>
             </template>
             <template v-if="!mobile">
                 <v-btn
@@ -121,7 +121,7 @@ onMounted(() => {
                             ? 'mdi-sync'
                             : 'mdi-content-save'
                     "
-                    color="yellow-lighten-1"
+                    color="indigo-darken-4"
                     @click="enviarFormulario"
                 >
                     <span
@@ -138,7 +138,7 @@ onMounted(() => {
     <v-row>
         <v-col cols="12" sm="12" md="4" xl="5">
             <v-card>
-                <v-card-title class="border-b bg-yellow-lighten-1 pa-5">
+                <v-card-title class="border-b bg-indigo-darken-4 pa-5">
                     <v-icon
                         :icon="form.id == 0 ? 'mdi-plus' : 'mdi-pencil'"
                     ></v-icon>
@@ -454,7 +454,7 @@ onMounted(() => {
         </v-col>
         <v-col cols="12" sm="12" md="8" xl="7">
             <v-card>
-                <v-card-title class="bg-yellow-lighten-1 pa-5">
+                <v-card-title class="bg-indigo-darken-4 pa-5">
                     <span class="text-h5">Cronograma</span>
                 </v-card-title>
                 <v-card-item class="pa-0">

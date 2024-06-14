@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Solicitud de Mantenimiento</title>
+    <title>Lista de Equipos</title>
     <style type="text/css">
         * {
             font-family: sans-serif;
@@ -196,7 +196,7 @@
             <h2 class="titulo">
                 {{ $institucion->first()->nombre }}
             </h2>
-            <h4 class="texto">LISTA DE EQUIPOS BIOMÉTRICOS</h4>
+            <h4 class="texto">LISTA DE EQUIPOS BIOMÉDICOS</h4>
         </div>
 
         <table border="1">
@@ -226,8 +226,8 @@
                         <td>{{ $biometrico->nombre }}</td>
                         <td>
                             MARCA: {{ $biometrico->marca }};<br />
-                            MODELO: {{ $biometrico->marca }};<br />
-                            SN: {{ $biometrico->marca }}<br />
+                            MODELO: {{ $biometrico->modelo }};<br />
+                            SN: {{ $biometrico->serie }}<br />
                         </td>
                         <td>{{ $biometrico->fecha_ingreso_t }}</td>
                         <td>{{ $biometrico->garantia }}</td>

@@ -135,7 +135,7 @@ const enviaFormulario = () => {
                         <v-container>
                             <v-row>
                                 <v-col cols="12 text-center">
-                                    <v-avatar color="grey-darken-3" size="80">
+                                    <v-avatar color="blue-darken-4" size="80">
                                         <v-img
                                             cover
                                             v-if="user.url_foto"
@@ -149,7 +149,7 @@ const enviaFormulario = () => {
                                     <h4 class="mt-1 mb-3">{{ user.tipo }}</h4>
                                     <label
                                         v-if="!imagen_cargada"
-                                        class="btn_principal"
+                                        class="btn_principal text-white"
                                         for="file_foto"
                                         ><b>Cambiar foto</b
                                         ><input
@@ -237,7 +237,7 @@ const enviaFormulario = () => {
             </v-col>
             <v-col cols="12" sm="12" md="8">
                 <v-card>
-                    <v-card-title class="bg-grey-darken-3 ma-0">Cambiar contraseña </v-card-title>
+                    <v-card-title class="bg-indigo-darken-4 ma-0">Cambiar contraseña </v-card-title>
                     <v-card-item class="px-8">
                         <form>
                             <v-row class="mt-2">
@@ -322,7 +322,7 @@ const enviaFormulario = () => {
                         </form>
                     </v-card-item>
                     <v-card-actions class="px-7 pb-3">
-                        <v-btn class="bg-yellow-lighten-1" @click="enviaFormulario"
+                        <v-btn class="bg-indigo-darken-4" @click="enviaFormulario"
                             >Guardar cambios</v-btn
                         >
                     </v-card-actions>

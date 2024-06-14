@@ -18,7 +18,7 @@ onMounted(() => {
     >
         <div class="container">
             <div class="row pb-65 mt-none-30">
-                <div class="col-12 mt-30">
+                <div class="col-md-8 mt-30">
                     <div class="footer__widget">
                         <h3 class="widget-title">Contactanos:</h3>
                         <div class="row">
@@ -62,7 +62,10 @@ onMounted(() => {
                                     </li>
                                     <li>
                                         <div class="social-links mt-20">
-                                            <a :href="oInstitucion.facebook" target="_blank">
+                                            <a
+                                                :href="oInstitucion.facebook"
+                                                target="_blank"
+                                            >
                                                 <i
                                                     class="fab fa-facebook-f"
                                                 ></i>
@@ -70,15 +73,37 @@ onMounted(() => {
                                                     class="fab fa-facebook-f"
                                                 ></i>
                                             </a>
-                                            <a :href="oInstitucion.youtube" target="_blank">
+                                            <a
+                                                :href="oInstitucion.youtube"
+                                                target="_blank"
+                                            >
                                                 <i class="fab fa-youtube"></i>
                                                 <i class="fab fa-youtube"></i>
                                             </a>
-                                            <a :href="oInstitucion.twitter" target="_blank">
+                                            <a
+                                                :href="oInstitucion.twitter"
+                                                target="_blank"
+                                            >
                                                 <i class="fab fa-twitter"></i>
                                                 <i class="fab fa-twitter"></i>
                                             </a>
                                         </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-30">
+                    <div class="footer__widget">
+                        <h3 class="widget-title">Nuestra Historia:</h3>
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="footer__info list-unstyled">
+                                    <li>
+                                        <p class="text-white">
+                                            {{ oInstitucion.historia }}
+                                        </p>
                                     </li>
                                 </ul>
                             </div>

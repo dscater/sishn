@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Solicitud de Mantenimiento</title>
+    <title>Lista de Repuestos</title>
     <style type="text/css">
         * {
             font-family: sans-serif;
@@ -20,7 +20,7 @@
             width: 100%;
             border-collapse: collapse;
             table-layout: fixed;
-            margin-top: 20px;
+            margin-top: 40px;
             page-break-before: avoid;
         }
 
@@ -35,7 +35,7 @@
         }
 
         table tbody tr td {
-            font-size: 8pt;
+            font-size: 7pt;
         }
 
 
@@ -59,8 +59,8 @@
 
         .qr img {
             position: absolute;
-            height: 65px;
-            top: 77px;
+            height: 90px;
+            top: -20px;
             right: 20px;
         }
 
@@ -157,6 +157,26 @@
         .break_page {
             page-break-after: always;
         }
+
+        .border_top {
+            border-top: solid 1px black;
+        }
+
+        .border_bot {
+            border-bottom: solid 1px black;
+        }
+
+        .padding_top {
+            padding-top: 6px;
+        }
+
+        .padding_bot {
+            padding-bottom: 6px;
+        }
+
+        td.foto img {
+            width: 40px;
+        }
     </style>
 </head>
 
@@ -165,7 +185,7 @@
     @php
         $cont = 0;
     @endphp
-    @foreach ($solicitud_mantenimientos as $sm)
+    @foreach ($unidad_areas as $ua)
         <div class="encabezado">
             <div class="logo">
                 <img src="{{ $institucion->first()->url_logo }}">
@@ -173,76 +193,38 @@
             <div class="logo2">
                 <img src="{{ $institucion->first()->url_logo2 }}">
             </div>
-            <div class="qr">
-                <img src="{{ $sm->qr }}" alt="">
-            </div>
             <h2 class="titulo">
                 {{ $institucion->first()->nombre }}
             </h2>
-            <h4 class="texto">SOLICITUD MANTENIMIENTO Y/O REPARACIÓN</h4>
-            <h4 class="texto">UNIDAD DE SERVICIOS GENERALES</h4>
+            <h4 class="texto">LISTA DE REPUESTOS</h4>
         </div>
 
-        <table border="1" style="margin-top:60px;">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th colspan="2">{{ $ua->nombre }}</th>
+                </tr>
+                <tr>
+                    <th width="5%">N°</th>
+                    <th>NOMBRE</th>
+                </tr>
+            </thead>
             <tbody>
-                <tr>
-                    <td class="bold" width="20%">CÓDIGO: </td>
-                    <td colspan="3">{{ $sm->codigo }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">UNIDAD SOLICITANTE: </td>
-                    <td colspan="3">{{ $unidad_area->nombre }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">FECHA DE SOLICITUD: </td>
-                    <td>{{ $sm->fecha_solicitud_t }}</td>
-                    <td class="bold" width="20%">FECHA DE ENTREGA: </td>
-                    <td>{{ $sm->fecha_entrega_t }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">NOMBRE DEL RESPONSABLE: </td>
-                    <td>{{ $sm->responsable ? $sm->responsable->full_name : '' }}</td>
-                    <td class="bold" width="20%">C.I. RESPONSABLE: </td>
-                    <td>{{ $sm->responsable->ci }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">NOMBRE TÉCNICO: </td>
-                    <td>{{ $sm->tecnico ? $sm->tecnico->full_name : '' }}</td>
-                    <td class="bold" width="20%">C.I. TÉCNICO: </td>
-                    <td>{{ $sm->tecnico->ci }}</td>
-                </tr>
-                {{-- <tr>
-                    <td class="bold" width="20%">TIPO DE MANTENIMIENTO: </td>
-                    <td colspan="3">{{ $sm->tipo_mantenimiento }}</td>
-                </tr> --}}
-                <tr>
-                    <td class="bold" width="20%">MOTIVO MANTENIMIENTO: </td>
-                    <td colspan="3">{{ $sm->motivo_mantenimiento }}</td>
-                </tr>
-                {{-- <tr>
-                    <td class="bold" width="20%">DIAGNOSTICO: </td>
-                    <td colspan="3">{{ $sm->diagnostico }}</td>
-                </tr> --}}
-                <tr>
-                    <td class="bold" width="20%">OTROS: </td>
-                    <td colspan="3">{{ $sm->otros }}</td>
-                </tr>
-                <tr>
-                    <td class="bold" width="20%">EQUIPO: </td>
-                    <td colspan="3">{{ $sm->biometrico->nombre }}</td>
-                </tr>
-                {{-- <tr>
-                    <td class="bold" width="20%">REPUESTOS: </td>
-                    <td colspan="3">
-                        {{ $sm->repuestos_txt }}
-                    </td>
-                </tr> --}}
+                @php
+                    $nro_reg = 1;
+                @endphp
+                @foreach ($ua->biometricos as $biometrico)
+                    <tr>
+                        <td class="centreado">{{ $nro_reg++ }}</td>
+                        <td>{{ $biometrico->nombre }}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
         @php
             $cont++;
         @endphp
-        @if ($cont < count($solicitud_mantenimientos))
+        @if ($cont < count($unidad_areas))
             <div class="break_page"></div>
         @endif
     @endforeach

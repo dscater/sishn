@@ -104,7 +104,7 @@ onMounted(() => {
             "
         ></div>
         <div class="container">
-            <div class="row clearfix">
+            <div class="row clearfix" id="inicio">
                 <!-- Banner One Content -->
                 <div class="banner-one_content col-lg-6 col-md-12 col-sm-12">
                     <div class="banner-one_content-inner">
@@ -192,49 +192,30 @@ onMounted(() => {
             "
         ></div>
         <div class="container">
-            <div class="row clearfix">
+            <div class="row clearfix" id="sobre_nosotros">
+                <div class="col-12">
+                    <h2 class="w-100 text-center">SOBRE NOSOTROS</h2>
+                </div>
                 <!-- Content Column -->
                 <div class="content-column col-sm-12 col-md-6">
                     <div class="inner-column">
                         <div class="sec-title">
-                            <div class="title">Sobre nuestra empresa</div>
-                            <template v-if="oInstitucion.mision">
-                                <h2>Nuestra Misión</h2>
-                                <div class="text">
-                                    {{ oInstitucion.mision }}
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                </div>
-                <!-- Content Column -->
-                <div
-                    class="content-column col-sm-12 col-md-6"
-                    v-if="oInstitucion.vision"
-                >
-                    <div class="inner-column">
-                        <div class="sec-title">
-                            <div class="title">Sobre nuestra empresa</div>
-                            <template>
-                                <h2>Nuestra Visión</h2>
-                                <div class="text">
-                                    {{ oInstitucion.vision }}
-                                </div>
-                            </template>
-                        </div>
-                    </div>
-                </div>
-                <!-- Content Column -->
-                <div
-                    class="content-column col-sm-12 col-md-6"
-                    v-if="oInstitucion.historia"
-                >
-                    <div class="inner-column">
-                        <div class="sec-title">
-                            <div class="title">Sobre nuestra empresa</div>
-                            <h2>Nuestra Historia</h2>
+                            <!-- <div class="title">Sobre nuestra empresa</div> -->
+                            <h3>Nuestra Misión</h3>
                             <div class="text">
-                                {{ oInstitucion.historia }}
+                                {{ oInstitucion.mision }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Content Column -->
+                <div class="content-column col-sm-12 col-md-6">
+                    <div class="inner-column">
+                        <div class="sec-title">
+                            <!-- <div class="title">Sobre nuestra empresa</div> -->
+                            <h3>Nuestra Visión</h3>
+                            <div class="text">
+                                {{ oInstitucion.vision }}asdas
                             </div>
                         </div>
                     </div>
@@ -290,9 +271,7 @@ onMounted(() => {
             </div>
             <div class="row">
                 <!-- Case Block One -->
-                <div
-                    class="case-block_one masonry-item col-md-4 offset-md-2"
-                >
+                <div class="case-block_one masonry-item col-md-4 offset-md-2">
                     <div class="case-block_one-inner">
                         <div class="case-block_one-image">
                             <img :src="oInstitucion.url_foto_director" alt="" />
@@ -310,9 +289,7 @@ onMounted(() => {
                     </div>
                 </div>
                 <!-- Case Block One -->
-                <div
-                    class="case-block_one masonry-item col-md-4"
-                >
+                <div class="case-block_one masonry-item col-md-4">
                     <div class="case-block_one-inner">
                         <div class="case-block_one-image">
                             <img
@@ -326,7 +303,9 @@ onMounted(() => {
                                             oInstitucion.nombre_subdirector
                                         }}</span>
                                     </h5>
-                                    <div class="designation">Sub Director</div>
+                                    <div class="designation">
+                                        Jefe de Mantenimiento
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -338,16 +317,93 @@ onMounted(() => {
     <!-- End Case One -->
 
     <section
-        class="fluid-one px-5 mb-0 pb-0"
-        style="background-image: url(assets/img/bg/fluid-bg.jpg)"
+        class="fluid-one"
     >
-        <div class="container text-center pt-3">
-            <div class="sec-title light mt-3">
-                <div class="title">Nuestra ubicación</div>
+        <div
+            class="fluid-one_pattern"
+            style="background-image: url(assets/img/bg/pattern-1.png)"
+        ></div>
+        <div class="outer-container">
+            <!-- Fluid One Left -->
+            <div class="fluid-one_left">
+                <div class="fluid-one_left-inner" id="servicios">
+                    <!-- Sec Title -->
+                    <div class="sec-title light">
+                        <h2>
+                            NUESTROS SERVICIOS
+                        </h2>
+                        <!-- <div class="text">
+                            There are many variations of passages of Lorem Ipsum
+                            available, but the majority have suffered alteration
+                            in some form, by injected humour, or randomised
+                            words which don't look.
+                        </div> -->
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <ul class="fluid-list">
+                                <li>Instalación</li>
+                                <li>Capacitación</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <ul class="fluid-list">
+                                <li>Mantenimiento Preventivo</li>
+                                <li>Mantenimiento Correctivo</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- <div class="fluid-progress">
+                        <div class="tx-skill-progress-bar">
+                            <div class="skill-set-percent headline-2">
+                                <h4>Web Development</h4>
+                                <div class="progress">
+                                    <div
+                                        class="progress-bar appeared"
+                                        data-percent="95"
+                                        style="width: 95%"
+                                    ></div>
+                                    <span>95%</span>
+                                </div>
+                            </div>
+                            <div class="skill-set-percent headline-2">
+                                <h4>Digital Marketing</h4>
+                                <div class="progress">
+                                    <div
+                                        class="progress-bar appeared"
+                                        data-percent="80"
+                                        style="width: 80%"
+                                    ></div>
+                                    <span>80%</span>
+                                </div>
+                            </div>
+                            <div class="skill-set-percent headline-2">
+                                <h4>Web Design</h4>
+                                <div class="progress">
+                                    <div
+                                        class="progress-bar appeared"
+                                        data-percent="65"
+                                        style="width: 65%"
+                                    ></div>
+                                    <span>65%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- Fluid One Right -->
+            <div
+                class="fluid-one_right"
+                style="background-image: url(assets/img/services/fluid.jpg);background-size: contain;background-repeat: no-repeat;"
+            >
             </div>
         </div>
     </section>
-    <div v-html="oInstitucion.ubicacion_google" class="col-12 w-100"></div>
+
+
+    <div v-html="oInstitucion.ubicacion_google" id="contactos" class="col-12 w-100"></div>
 </template>
 
 <style>

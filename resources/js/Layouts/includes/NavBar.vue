@@ -37,7 +37,7 @@ const { oInstitucion } = useInstitucion();
                         />
                         <v-avatar
                             v-else
-                            color="grey-darken-3"
+                            color="blue-darken-4"
                             class="text-center d-block"
                         >
                             <span class="text-h5 d-block text-center">{{
@@ -45,13 +45,13 @@ const { oInstitucion } = useInstitucion();
                             }}</span>
                         </v-avatar>
                     </div>
-                    <div v-show="!rail && !mobile" class="text-grey-darken-4">
+                    <div v-show="!rail && !mobile" class="text-white">
                         {{ oInstitucion.nombre }}
                     </div>
                 </div>
                 <div class="acciones">
                     <v-app-bar-nav-icon
-                        color="grey-darken-3"
+                        color="text-white"
                         @click="toggleDrawer(!drawer)"
                     ></v-app-bar-nav-icon>
                 </div>
@@ -60,7 +60,7 @@ const { oInstitucion } = useInstitucion();
                 <v-menu :width="mobile ? '50%' : '13%'" rounded>
                     <template v-slot:activator="{ props }">
                         <v-btn icon v-bind="props">
-                            <v-avatar color="grey-darken-3">
+                            <v-avatar color="blue-darken-4">
                                 <v-img
                                     cover
                                     v-if="oUser.url_foto"
@@ -76,7 +76,7 @@ const { oInstitucion } = useInstitucion();
                     <v-card>
                         <v-card-text class="pa-0 pt-4">
                             <div class="mx-auto text-center">
-                                <v-avatar color="grey-darken-3">
+                                <v-avatar color="blue-darken-4">
                                     <v-img
                                         cover
                                         v-if="oUser.url_foto"

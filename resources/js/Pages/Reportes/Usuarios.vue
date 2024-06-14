@@ -123,7 +123,7 @@ const generarReporte = () => {
                                     </v-col>
                                     <v-col cols="12">
                                         <v-btn
-                                            color="yellow-lighten-1"
+                                            color="indigo-darken-4"
                                             block
                                             @click="generarReporte"
                                             :disabled="generando"

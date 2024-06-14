@@ -151,7 +151,7 @@ class SolicitudMantenimientoController extends Controller
             $this->validacion["tecnico_id"] = "required";
             $this->validacion["motivo_mantenimiento"] = "required|min:1";
             $this->validacion["fecha_solicitud"] = "required|date";
-            $this->validacion["fecha_entrega"] = "required|date";
+            // $this->validacion["fecha_entrega"] = "required|date";
             // $this->validacion["array_repuestos"] = "required|min:1";
             $this->validacion["cronogramas"] = "required|min:1";
         }

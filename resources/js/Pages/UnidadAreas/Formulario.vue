@@ -116,7 +116,7 @@ onMounted(async () => {
     <v-row justify="center">
         <v-dialog v-model="dialog" width="1024" persistent scrollable>
             <v-card>
-                <v-card-title class="border-b bg-yellow-lighten-1 pa-5">
+                <v-card-title class="border-b bg-indigo-darken-4 pa-5">
                     <v-icon
                         icon="mdi-close"
                         class="float-right"
@@ -263,7 +263,7 @@ onMounted(async () => {
                         Cancelar
                     </v-btn>
                     <v-btn
-                        class="bg-yellow-lighten-1"
+                        class="bg-indigo-darken-4"
                         prepend-icon="mdi-content-save"
                         @click="enviarFormulario"
                     >

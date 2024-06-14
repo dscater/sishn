@@ -178,6 +178,9 @@ Route::middleware('auth')->group(function () {
     Route::get('y3/8AqiBvS3FVj33hRrK5kJ+PMCvD+bjZchtyTP4nF4=', [ReporteController::class, 'equipos'])->name("reportes.equipos");
     Route::get('/DorIWV2B0lh8zx93k+Vgp89fc+31dXYK4BNRtC6rTs=', [ReporteController::class, 'r_equipos'])->name("reportes.r_equipos");
 
+    Route::get('R3pRTF9n5Qy+ciDBozHPm3FX4U7rczwirGoFRHEGBM7k=', [ReporteController::class, 'repuestos'])->name("reportes.repuestos");
+    Route::get('RP3Ent+ciDBozHPm3FX4U7rczwirGoFRHEGBM7k=', [ReporteController::class, 'r_repuestos'])->name("reportes.r_repuestos");
+
     Route::get('NCmk9YTsQNGCscr4D0JsZcgXZQI5s6piP71O2KRmdAQvTXGf5MmAMazE2pcJj8sM', [ReporteController::class, 'historial_mantenimientos'])->name("reportes.historial_mantenimientos");
     Route::get('HG4lGf+lN85lKoEnHpIDtDdguT9R7opTbXybg3nDYz9pIk4mnnN9GHSWEyXfEWwM', [ReporteController::class, 'r_historial_mantenimientos'])->name("reportes.r_historial_mantenimientos");
 

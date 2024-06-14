@@ -92,7 +92,7 @@ onMounted(() => {
                 <v-card flat>
                     <v-card-title>
                         <v-row
-                            class="bg-grey-darken-3 d-flex align-center pa-3"
+                            class="bg-indigo-darken-4 d-flex align-center pa-3"
                         >
                             <v-col cols="12" sm="6" md="4"> Cronograma </v-col>
                         </v-row>
@@ -121,7 +121,7 @@ onMounted(() => {
         </v-row>
         <v-dialog v-model="dialog" width="1024" scrollable>
             <v-card>
-                <v-card-title class="bg-yellow-lighten-1 pa-4"
+                <v-card-title class="bg-indigo-darken-4 pa-4"
                     ><span class="text-h5"
                         >Cronograma: {{ cronograma.fecha }}</span
                     ></v-card-title

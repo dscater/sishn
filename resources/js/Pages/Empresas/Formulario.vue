@@ -36,9 +36,14 @@ watch(
 const { flash } = usePage().props;
 
 const logo = ref(null);
-function cargaArchivo(e, key) {
+function cargaArchivo(e, key, key_url = null) {
     form[key] = null;
     form[key] = e.target.files[0];
+
+    if (form[key] && key_url) {
+        const imageUrl = URL.createObjectURL(form[key]);
+        form[key_url] = imageUrl;
+    }
 }
 
 const tituloDialog = computed(() => {
@@ -100,7 +105,7 @@ const cerrarDialog = () => {
     <v-row justify="center">
         <v-dialog v-model="dialog" width="1024" persistent scrollable>
             <v-card>
-                <v-card-title class="border-b bg-yellow-lighten-1 pa-5">
+                <v-card-title class="border-b bg-indigo-darken-4 pa-5">
                     <v-icon
                         icon="mdi-close"
                         class="float-right"
@@ -301,9 +306,21 @@ const cerrarDialog = () => {
                                         placeholder="Logo"
                                         prepend-icon="mdi-camera"
                                         label="Logo"
-                                        @change="cargaArchivo($event, 'logo')"
+                                        @change="
+                                            cargaArchivo(
+                                                $event,
+                                                'logo',
+                                                'url_logo'
+                                            )
+                                        "
                                         ref="logo"
                                     ></v-file-input>
+                                    <img
+                                        v-if="form.url_logo"
+                                        class="w-100 mt-1 border rounded-lg"
+                                        :src="form.url_logo"
+                                        alt="Logo"
+                                    />
                                 </v-col>
                             </v-row>
                         </form>
@@ -319,7 +336,7 @@ const cerrarDialog = () => {
                         Cancelar
                     </v-btn>
                     <v-btn
-                        class="bg-yellow-lighten-1"
+                        class="bg-indigo-darken-4"
                         prepend-icon="mdi-content-save"
                         @click="enviarFormulario"
                     >

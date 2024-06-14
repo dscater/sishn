@@ -54,7 +54,7 @@ class RepuestoController extends Controller
             $repuestos->where("nombre", "LIKE", "%$search%");
         }
 
-        $repuestos = $repuestos->paginate($request->itemsPerPage);
+        $repuestos = $repuestos->orderBy("id", "desc")->paginate($request->itemsPerPage);
         return response()->JSON([
             "repuestos" => $repuestos
         ]);

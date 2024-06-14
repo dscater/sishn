@@ -35,7 +35,7 @@ watch(
 const { flash } = usePage().props;
 
 const tituloDialog = computed(() => {
-    return accion.value == 0 ? `Historial de Paciente > Archivos` : ``;
+    return accion.value == 0 ? `Documentos > Archivos` : ``;
 });
 
 const emits = defineEmits(["cerrar-dialog", "envio-formulario"]);
@@ -86,7 +86,7 @@ const cerrarDialog = () => {
     <v-row justify="center">
         <v-dialog v-model="dialog" width="1024" persistent scrollable>
             <v-card>
-                <v-card-title class="border-b bg-cyan-darken-2 pa-5">
+                <v-card-title class="border-b bg-indigo-darken-4 pa-5">
                     <v-icon
                         icon="mdi-close"
                         class="float-right"

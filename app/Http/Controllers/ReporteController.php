@@ -129,6 +129,34 @@ class ReporteController extends Controller
         return $pdf->stream('equipos.pdf');
     }
 
+    public function repuestos()
+    {
+        return Inertia::render("Reportes/Repuestos");
+    }
+
+    public function r_repuestos(Request $request)
+    {
+        $unidad_area_id =  $request->unidad_area_id;
+        $unidad_areas = [];
+        if ($unidad_area_id != 'todos') {
+            $unidad_areas = UnidadArea::where("id", $unidad_area_id)->where("status", 1)->get();
+        } else {
+            $unidad_areas = UnidadArea::all();
+        }
+        $pdf = PDF::loadView('reportes.repuestos', compact('unidad_areas'))->setPaper('letter', 'portrait');
+
+        // ENUMERAR LAS PÁGINAS USANDO CANVAS
+        $pdf->output();
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf->get_canvas();
+        $alto = $canvas->get_height();
+        $ancho = $canvas->get_width();
+        $canvas->page_text($ancho - 85, $alto - 35, date("d/m/Y"), null, 9, array(0, 0, 0));
+        $canvas->page_text($ancho - 90, $alto - 25, "Página {PAGE_NUM} de {PAGE_COUNT}", null, 9, array(0, 0, 0));
+
+        return $pdf->stream('repuestos.pdf');
+    }
+
     public function historial_mantenimientos()
     {
         return Inertia::render("Reportes/HistorialMantenimientos");

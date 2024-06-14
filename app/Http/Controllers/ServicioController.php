@@ -73,7 +73,7 @@ class ServicioController extends Controller
             $servicios->orWhere("biometricos.serie", "LIKE", "%$search%");
             $servicios->orWhere("biometricos.nombre", "LIKE", "%$search%");
         }
-        $servicios = $servicios->paginate($request->itemsPerPage);
+        $servicios = $servicios->orderBy("id", "desc")->paginate($request->itemsPerPage);
         return response()->JSON([
             "servicios" => $servicios
         ]);

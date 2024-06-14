@@ -12,8 +12,8 @@
         @page {
             margin-top: 1cm;
             margin-bottom: 0.5cm;
-            margin-left: 0.5cm;
-            margin-right: 0.5cm;
+            margin-left: 0.2cm;
+            margin-right: 0.2cm;
         }
 
         table {
@@ -207,7 +207,7 @@
         <table border="1">
             <thead>
                 <tr>
-                    <th colspan="15" class="text-md">{{ $biometrico->serie }} - {{ $biometrico->nombre }}</th>
+                    <th colspan="13" class="text-md">{{ $biometrico->serie }} - {{ $biometrico->nombre }}</th>
                 </tr>
                 <tr>
                     <th width="2%">N°</th>
@@ -219,12 +219,10 @@
                     <th>Técnico</th>
                     <th>Tipo de Mantenimiento</th>
                     <th>Motivo de Mantenimiento</th>
-                    <th>Diagnostico</th>
-                    <th>Otros</th>
                     <th>Procedimientos</th>
                     <th>Observaciones</th>
                     <th>Estado del Equipo</th>
-                    <th>Trabajo realizado</th>
+                    <th width="20%">Trabajo realizado</th>
                 </tr>
             </thead>
             <tbody>
@@ -244,8 +242,6 @@
                             <td>{{ $sm->responsable ? $sm->tecnico->full_name : '' }}</td>
                             <td>{{ $sm->tipo_mantenimiento }}</td>
                             <td>{{ $sm->motivo_mantenimiento }}</td>
-                            <td>{{ $sm->diagnostico }}</td>
-                            <td>{{ $sm->otros }}</td>
                             <td>{{ $sm->servicio ? $sm->servicio->procedimientos : '' }}</td>
                             <td>{{ $sm->servicio ? $sm->servicio->observaciones : '' }}</td>
                             <td>{{ $sm->servicio ? $sm->servicio->estado_equipo : '' }}</td>
@@ -255,7 +251,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="15">SIN REGISTROS</td>
+                        <td colspan="13">SIN REGISTROS</td>
                     </tr>
                 @endif
             </tbody>

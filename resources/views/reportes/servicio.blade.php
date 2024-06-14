@@ -213,19 +213,25 @@
         <table border="1" style="margin-top:60px;">
             <tbody>
                 <tr>
-                    <td class="bold gray" colspan="6">DATOS DEL CLIENTE</td>
+                    <td class="bold gray" colspan="6">DATOS DE LA EMPRESA</td>
                 </tr>
                 <tr>
                     <td class="bold" width="16%">Nombre: </td>
-                    <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->empresa? $s->solicitud_mantenimiento->biometrico->empresa->nombre:'' }}</td>
+                    <td colspan="2">
+                        {{ $s->solicitud_mantenimiento->biometrico->empresa ? $s->solicitud_mantenimiento->biometrico->empresa->nombre : '' }}
+                    </td>
                     <td class="bold">Unidad:</td>
                     <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->unidad_area->nombre }}</td>
                 </tr>
                 <tr>
                     <td class="bold" width="20%">Dirección: </td>
-                    <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->empresa? $s->solicitud_mantenimiento->biometrico->empresa->dir:'' }}</td>
+                    <td colspan="2">
+                        {{ $s->solicitud_mantenimiento->biometrico->empresa ? $s->solicitud_mantenimiento->biometrico->empresa->dir : '' }}
+                    </td>
                     <td class="bold">Teléfono:</td>
-                    <td colspan="2">{{ $s->solicitud_mantenimiento->biometrico->empresa? $s->solicitud_mantenimiento->biometrico->empresa->fono:'' }}</td>
+                    <td colspan="2">
+                        {{ $s->solicitud_mantenimiento->biometrico->empresa ? $s->solicitud_mantenimiento->biometrico->empresa->fono : '' }}
+                    </td>
                 </tr>
                 <tr>
                     <td class="bold ">DATOS DEL EQUIPO: </td>
@@ -291,18 +297,18 @@
                     <td class="bold padding_top padding_bot">MOTIVO DE MANTENIMIENTO: </td>
                     <td colspan="5">{{ $s->solicitud_mantenimiento->motivo_mantenimiento }}</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <td class="bold padding_top padding_bot">DIAGONOSTICO: </td>
                     <td colspan="5">{{ $s->solicitud_mantenimiento->diagnostico }}</td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <td class="bold padding_top padding_bot">OTROS: </td>
                     <td colspan="5">{{ $s->solicitud_mantenimiento->otros }}</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <td class="bold padding_top padding_bot">TIPO DE MANTENIMIENTO: </td>
                     <td colspan="5">{{ $s->solicitud_mantenimiento->tipo_mantenimiento }}</td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <td class="bold gray" colspan="6">SERVICIO REALIZADO </td>
                 </tr>
@@ -321,6 +327,14 @@
                 <tr>
                     <td class="bold padding_top padding_bot">OBSERVACIONES: </td>
                     <td colspan="5">{{ $s->observaciones }}</td>
+                </tr>
+                <tr>
+                    <td class="bold padding_top padding_bot">TIPO DE MANTENIMIENTO: </td>
+                    <td colspan="5">{{ $s->solicitud_mantenimiento->tipo_mantenimiento }}</td>
+                </tr>
+                <tr>
+                    <td class="bold padding_top padding_bot">REPUESTOS: </td>
+                    <td colspan="5">{{ $s->repuestos_txt }}</td>
                 </tr>
             </tbody>
         </table>

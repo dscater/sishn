@@ -271,7 +271,7 @@ onMounted(() => {
                                         v-if="listUnidadAreas.length > 0"
                                     >
                                         <v-btn
-                                            class="bg-yellow-lighten-2"
+                                            class="bg-indigo-darken-4"
                                             block
                                             @click="generarReporte"
                                             :disabled="generando"

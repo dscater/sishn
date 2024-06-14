@@ -69,9 +69,13 @@ const obtnerInstitucion = async () => {
     }
 };
 
-function cargaArchivo(e, key) {
+function cargaArchivo(e, key, key_url) {
     form[key] = null;
     form[key] = e.target.files[0];
+    if (form[key] && key_url) {
+        const imageUrl = URL.createObjectURL(form[key]);
+        form[key_url] = imageUrl;
+    }
 }
 
 const foto_director = ref(null);
@@ -95,7 +99,7 @@ function limpiaRefs() {
             <v-col cols="12" class="d-flex justify-end">
                 <v-btn
                     prepend-icon="mdi-pencil"
-                    color="yellow-lighten-1"
+                    color="indigo-darken-4"
                     v-if="window == 0"
                     @click="cambiaVentana(1)"
                 >
@@ -114,7 +118,7 @@ function limpiaRefs() {
                 >
                 <v-btn
                     prepend-icon="mdi-content-save"
-                    color="yellow-lighten-1"
+                    color="indigo-darken-4"
                     v-if="window == 1"
                     @click="enviaFormulario"
                 >
@@ -407,7 +411,7 @@ function limpiaRefs() {
                                     </v-card-text>
                                 </v-card>
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="12" sm="6" md="3">
                                 <v-card>
                                     <v-card-title
                                         class="text-h6 text-center text-body-1 font-weight-black"
@@ -423,7 +427,7 @@ function limpiaRefs() {
                                     </v-card-text>
                                 </v-card>
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="12" sm="6" md="3">
                                 <v-card>
                                     <v-card-title
                                         class="text-h6 text-center text-body-1 font-weight-black"
@@ -439,7 +443,23 @@ function limpiaRefs() {
                                     </v-card-text>
                                 </v-card>
                             </v-col>
-                            <v-col cols="12" sm="6" md="4">
+                            <v-col cols="12" sm="6" md="3">
+                                <v-card>
+                                    <v-card-title
+                                        class="text-h6 text-center text-body-1 font-weight-black"
+                                        >VISIÓN</v-card-title
+                                    >
+                                    <v-card-text>
+                                        <v-col cols="12" class="text-center">
+                                            <p
+                                                class="text-caption text-justify"
+                                                v-text="institucion.vision"
+                                            ></p>
+                                        </v-col>
+                                    </v-card-text>
+                                </v-card>
+                            </v-col>
+                            <v-col cols="12" sm="6" md="3">
                                 <v-card>
                                     <v-card-title
                                         class="text-h6 text-center text-body-1 font-weight-black"
@@ -687,11 +707,23 @@ function limpiaRefs() {
                                                             @change="
                                                                 cargaArchivo(
                                                                     $event,
-                                                                    'foto_director'
+                                                                    'foto_director',
+                                                                    'url_foto_director'
                                                                 )
                                                             "
                                                             ref="foto_director"
                                                         ></v-file-input>
+
+                                                        <img
+                                                            v-if="
+                                                                form.url_foto_director
+                                                            "
+                                                            class="w-50 mx-auto d-block mt-1 border rounded-lg"
+                                                            :src="
+                                                                form.url_foto_director
+                                                            "
+                                                            alt="Imagen"
+                                                        />
                                                     </v-col>
                                                     <v-col
                                                         cols="12"
@@ -766,11 +798,22 @@ function limpiaRefs() {
                                                             @change="
                                                                 cargaArchivo(
                                                                     $event,
-                                                                    'foto_subdirector'
+                                                                    'foto_subdirector',
+                                                                    'url_foto_subdirector'
                                                                 )
                                                             "
                                                             ref="foto_subdirector"
                                                         ></v-file-input>
+                                                        <img
+                                                            v-if="
+                                                                form.url_foto_subdirector
+                                                            "
+                                                            class="w-50 mx-auto d-block mt-1 border rounded-lg"
+                                                            :src="
+                                                                form.url_foto_subdirector
+                                                            "
+                                                            alt="Imagen"
+                                                        />
                                                     </v-col>
                                                     <v-col
                                                         cols="12"
@@ -1095,11 +1138,18 @@ function limpiaRefs() {
                                                             @change="
                                                                 cargaArchivo(
                                                                     $event,
-                                                                    'logo'
+                                                                    'logo',
+                                                                    'url_logo'
                                                                 )
                                                             "
                                                             ref="logo"
                                                         ></v-file-input>
+                                                        <img
+                                                            v-if="form.url_logo"
+                                                            class="w-50 mx-auto d-block mt-1 border rounded-lg"
+                                                            :src="form.url_logo"
+                                                            alt="Logo"
+                                                        />
                                                     </v-col>
                                                     <v-col
                                                         cols="12"
@@ -1137,11 +1187,22 @@ function limpiaRefs() {
                                                             @change="
                                                                 cargaArchivo(
                                                                     $event,
-                                                                    'logo2'
+                                                                    'logo2',
+                                                                    'url_logo2'
                                                                 )
                                                             "
                                                             ref="logo2"
                                                         ></v-file-input>
+                                                        <img
+                                                            v-if="
+                                                                form.url_logo2
+                                                            "
+                                                            class="w-50 mx-auto d-block mt-1 border rounded-lg"
+                                                            :src="
+                                                                form.url_logo2
+                                                            "
+                                                            alt="Log"
+                                                        />
                                                     </v-col>
                                                     <v-col
                                                         cols="12"
@@ -1179,11 +1240,22 @@ function limpiaRefs() {
                                                             @change="
                                                                 cargaArchivo(
                                                                     $event,
-                                                                    'img_organigrama'
+                                                                    'img_organigrama',
+                                                                    'url_img_organigrama'
                                                                 )
                                                             "
                                                             ref="img_organigrama"
                                                         ></v-file-input>
+                                                        <img
+                                                            v-if="
+                                                                form.url_img_organigrama
+                                                            "
+                                                            class="w-50 mx-auto d-block mt-1 border rounded-lg"
+                                                            :src="
+                                                                form.url_img_organigrama
+                                                            "
+                                                            alt="Log"
+                                                        />
                                                     </v-col>
                                                 </v-row>
                                                 <v-row>
@@ -1246,6 +1318,37 @@ function limpiaRefs() {
                                                             auto-grow
                                                             v-model="
                                                                 form.mision
+                                                            "
+                                                        ></v-textarea>
+                                                    </v-col>
+                                                    <v-col cols="12">
+                                                        <v-textarea
+                                                            :hide-details="
+                                                                form.errors
+                                                                    ?.vision
+                                                                    ? false
+                                                                    : true
+                                                            "
+                                                            :error="
+                                                                form.errors
+                                                                    ?.vision
+                                                                    ? true
+                                                                    : false
+                                                            "
+                                                            :error-messages="
+                                                                form.errors
+                                                                    ?.vision
+                                                                    ? form
+                                                                          .errors
+                                                                          ?.vision
+                                                                    : ''
+                                                            "
+                                                            variant="outlined"
+                                                            label="Visión"
+                                                            rows="1"
+                                                            auto-grow
+                                                            v-model="
+                                                                form.vision
                                                             "
                                                         ></v-textarea>
                                                     </v-col>

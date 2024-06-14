@@ -7,7 +7,7 @@ const breadbrums = [
         name_url: "inicio",
     },
     {
-        title: "Reporte Solicitud de Mantenimiento",
+        title: "Reporte Lista de Repuestos",
         disabled: false,
         url: "",
         name_url: "",
@@ -21,7 +21,6 @@ import { useApp } from "@/composables/useApp";
 import { computed, onMounted, ref } from "vue";
 import { Head, usePage } from "@inertiajs/vue3";
 import { useUnidadAreas } from "@/composables/unidad_areas/useUnidadAreas";
-import { useSolicitudMantenimientos } from "@/composables/solicitud_mantenimientos/useSolicitudMantenimientos";
 const { setLoading } = useApp();
 
 const existe_validacion = ref(false);
@@ -37,29 +36,18 @@ const rules = ref([
 ]);
 const form = ref({
     unidad_area_id: null,
-    solicitud_mantenimiento_id: null,
 });
 const formulario = ref(null);
 
-const listSolicitudMantenimientos = ref([]);
 const listUnidadAreas = ref([]);
 const { getUnidadAreas } = useUnidadAreas();
-const { getSolicitudMantenimientoByUnidadAreaId } =
-    useSolicitudMantenimientos();
 
 const cargarUnidadAreas = async () => {
     listUnidadAreas.value = await getUnidadAreas();
-};
-
-const updateSelectUnidadArea = (value) => {
-    listSolicitudMantenimientos.value = [];
-    form.value.solicitud_mantenimiento_id = null;
-    cargarSolicitudMantenimientos(value);
-};
-
-const cargarSolicitudMantenimientos = async (id) => {
-    listSolicitudMantenimientos.value =
-        await getSolicitudMantenimientoByUnidadAreaId(id, "desc");
+    listUnidadAreas.value.unshift({
+        id: "todos",
+        nombre: "TODOS",
+    });
 };
 
 const generando = ref(false);
@@ -74,7 +62,7 @@ const generarReporte = async () => {
     const { valid } = await formulario.value.validate();
     if (valid) {
         generando.value = true;
-        const url = route("reportes.r_solicitud_mantenimiento", form.value);
+        const url = route("reportes.r_repuestos", form.value);
         window.open(url, "_blank");
         setTimeout(() => {
             generando.value = false;
@@ -88,7 +76,6 @@ onMounted(() => {
         cargarUnidadAreas();
     } else {
         form.value.unidad_area_id = user.unidad_area.id;
-        cargarSolicitudMantenimientos(user.unidad_area.id);
     }
     setTimeout(() => {
         setLoading(false);
@@ -96,7 +83,7 @@ onMounted(() => {
 });
 </script>
 <template>
-    <Head title="Reporte Solicitud de Mantenimiento"></Head>
+    <Head title="Reporte Lista de Repuestos"></Head>
     <v-container>
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
         <v-row>
@@ -123,26 +110,6 @@ onMounted(() => {
                                             item-title="nombre"
                                             label="Área*"
                                             v-model="form.unidad_area_id"
-                                            @update:model-value="
-                                                updateSelectUnidadArea
-                                            "
-                                            :rules="rules"
-                                        ></v-autocomplete>
-                                    </v-col>
-
-                                    <v-col cols="12">
-                                        <v-autocomplete
-                                            :hide-details="!existe_validacion"
-                                            no-data-text="Sin datos"
-                                            variant="outlined"
-                                            density="compact"
-                                            :items="listSolicitudMantenimientos"
-                                            item-value="id"
-                                            item-title="codigo"
-                                            label="Código Solicitud de Mantenimiento*"
-                                            v-model="
-                                                form.solicitud_mantenimiento_id
-                                            "
                                             :rules="rules"
                                         ></v-autocomplete>
                                     </v-col>

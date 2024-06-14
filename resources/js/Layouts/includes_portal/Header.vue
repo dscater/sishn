@@ -12,9 +12,39 @@ var url_principal = "";
 
 const listMenu = ref([
     {
-        label: "Inicio",
-        url: route("portal.inicio"),
-        ruta: "portal.inicio",
+        label: "INICIO",
+        url: "",
+        ruta: "",
+        key: "#inicio",
+        type: "ancle",
+    },
+    {
+        label: "SOBRE NOSOTROS",
+        url: "",
+        ruta: "",
+        key: "#sobre_nosotros",
+        type: "ancle",
+    },
+    {
+        label: "SERVICIOS",
+        url: "",
+        ruta: "",
+        key: "#servicios",
+        type: "ancle",
+    },
+    {
+        label: "CONTACTOS",
+        url: "",
+        ruta: "",
+        key: "#contactos",
+        type: "ancle",
+    },
+    {
+        label: "WHATSAPP",
+        url: "https://wa.me/591" + oInstitucion.value?.fono1,
+        ruta: "",
+        key: "",
+        type: "link",
     },
 ]);
 
@@ -22,6 +52,10 @@ const cambiarRuta = (ruta) => {
     menu_portal_store.setLoadingPage(true);
     menu_portal_store.setRutaActual(ruta);
 };
+
+function toggleMenu() {
+    $(".menu_page_movil").toggleClass("show");
+}
 
 onMounted(() => {
     url_assets = props.url_assets;
@@ -90,6 +124,36 @@ onMounted(() => {
             ></path>
         </svg>
     </div>
+
+    <div class="menu_page_movil" @click="toggleMenu">
+        <div class="contenedor_menu_movil">
+            <ul>
+                <li v-for="item in listMenu">
+                    <template v-if="item.type == 'ancle'">
+                        <a @click.stop="toggleMenu" :href="item.key">{{
+                            item.label
+                        }}</a>
+                    </template>
+                    <template v-if="item.type == 'link'">
+                        <a
+                            @click.stop="toggleMenu"
+                            :href="item.url"
+                            v-if="item.label != 'WHATSAPP'"
+                            >{{ item.label }}</a
+                        >
+                        <a
+                            @click.stop="toggleMenu"
+                            :href="item.url"
+                            target="_blank"
+                            class="link_whatsapp"
+                            v-else
+                            >{{ item.label }}</a
+                        >
+                    </template>
+                </li>
+            </ul>
+        </div>
+    </div>
     <!-- preloader end -->
 
     <!-- Main Header -->
@@ -144,7 +208,38 @@ onMounted(() => {
         </div>
         <nav class="navbar">
             <div class="institucion">
+                <button
+                    class="btn btn-default text-white"
+                    @click="toggleMenu()"
+                >
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            <div class="institucion">
                 {{ oInstitucion.nombre }}
+            </div>
+            <div class="menu_page">
+                <ul>
+                    <li v-for="item in listMenu">
+                        <template v-if="item.type == 'ancle'">
+                            <a :href="item.key">{{ item.label }}</a>
+                        </template>
+                        <template v-if="item.type == 'link'">
+                            <a
+                                :href="item.url"
+                                v-if="item.label != 'WHATSAPP'"
+                                >{{ item.label }}</a
+                            >
+                            <a
+                                :href="item.url"
+                                target="_blank"
+                                class="link_whatsapp"
+                                v-else
+                                >{{ item.label }}</a
+                            >
+                        </template>
+                    </li>
+                </ul>
             </div>
             <ul class="menu">
                 <li v-if="user">
@@ -160,3 +255,60 @@ onMounted(() => {
     </header>
     <!-- End Main Header -->
 </template>
+<style>
+.menu_page ul li a,
+.menu_page_movil ul li a {
+    color: white;
+}
+
+.menu_page ul {
+    gap: 10px 25px;
+    display: flex;
+}
+
+.menu_page_movil {
+    display: none;
+    padding-top: 20px;
+}
+
+.menu_page_movil ul li {
+    display: flex;
+    width: 100%;
+}
+
+.menu_page_movil ul li a {
+    width: 100%;
+    padding: 20px 35px;
+}
+
+.menu_page ul li a {
+    padding: 10px 10px;
+}
+.link_whatsapp {
+    background-color: green;
+}
+@media (max-width: 869px) {
+    .menu_page {
+        display: none;
+    }
+
+    .menu_page_movil {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        left: 0px;
+        z-index: 10000;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .menu_page_movil .contenedor_menu_movil{
+        width: 70%;
+        height: 100%;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .menu_page_movil.show {
+        display: block;
+    }
+}
+</style>

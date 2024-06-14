@@ -178,7 +178,7 @@ onMounted(() => {
                                                 class="mt-4"
                                                 elevation="4"
                                                 rounded="0"
-                                                color="yellow-lighten-1"
+                                                color="indigo-darken-4"
                                                 dark
                                                 block
                                                 type="submit"

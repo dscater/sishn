@@ -87,15 +87,14 @@ const scrollActive = () => {
         class="border-0 elevation-2 __sidebar"
         :width="width"
         id="sidebar"
-        color="grey-darken-4"
     >
         <v-sheet>
             <div
-                class="w-100 d-flex flex-column align-center elevation-1 bg-yellow-lighten-1 pa-2 __info_usuario"
+                class="w-100 d-flex flex-column align-center elevation-1 bg-indigo-darken-4 pa-2 __info_usuario"
             >
                 <v-avatar
                     class="mb-1"
-                    color="grey-darken-3"
+                    color="blue-darken-4"
                     :size="`${!rail ? '64' : '32'}`"
                 >
                     <v-img
@@ -326,6 +325,7 @@ const scrollActive = () => {
                 value="Reportes"
                 v-if="
                     oUser.permisos.includes('reportes.usuarios') ||
+                    oUser.permisos.includes('reportes.repuestos') ||
                     oUser.permisos.includes(
                         'reportes.solicitud_mantenimiento'
                     ) ||
@@ -340,6 +340,7 @@ const scrollActive = () => {
                         title="Reportes"
                         :class="[
                             route_current == 'reportes.usuarios' ||
+                            route_current == 'reportes.repuestos' ||
                             route_current ==
                                 'reportes.solicitud_mantenimiento' ||
                             route_current == 'reportes.servicio' ||
@@ -461,6 +462,24 @@ const scrollActive = () => {
                         activator="parent"
                         location="end"
                         >Lista de Equipos</v-tooltip
+                    ></v-list-item
+                >
+                <v-list-item
+                    v-if="oUser.permisos.includes('reportes.repuestos')"
+                    prepend-icon="mdi-chevron-right"
+                    title="Lista de Repuestos"
+                    :class="[
+                        route_current == 'reportes.repuestos' ? 'active' : '',
+                    ]"
+                    @click="cambiarUrl(route('reportes.repuestos'))"
+                    link
+                >
+                    <v-tooltip
+                        v-if="rail && !mobile"
+                        color="white"
+                        activator="parent"
+                        location="end"
+                        >Lista de Repuestos</v-tooltip
                     ></v-list-item
                 >
                 <v-list-item

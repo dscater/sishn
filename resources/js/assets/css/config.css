@@ -1,5 +1,5 @@
 :root {
-    --principal: #ffee58;
+    --principal: #0E0B53;
     --principal_hover: #40a5f7;
     --principal_transparent: #2a99f3c2;
     --secundario: #f1f1f1;
@@ -13,6 +13,10 @@
 html {
     overflow-y: scroll;
     overflow-y: overlay;
+}
+
+.indigo-darken-4{
+    background:#0E0B53!important;
 }
 
 .ubicacion,
@@ -59,7 +63,7 @@ iframe {
 .__sidebar .active {
     border-radius: 8px;
     background-color: var(--principal);
-    color: black;
+    color: white;
 }
 
 /* Estilo del contenedor del cajón de navegación */

@@ -43,7 +43,7 @@ class DocumentoController extends Controller
             $documentos->where("descripcion", "LIKE", "%$search%");
         }
 
-        $documentos = $documentos->paginate($request->itemsPerPage);
+        $documentos = $documentos->orderBy("id", "desc")->paginate($request->itemsPerPage);
         return response()->JSON([
             "documentos" => $documentos
         ]);

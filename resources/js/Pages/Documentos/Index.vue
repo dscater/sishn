@@ -137,7 +137,7 @@ const verUbicación = async (item) => {};
         <v-row class="mt-0">
             <v-col cols="12" class="d-flex justify-end">
                 <v-btn
-                    color="yellow"
+                    color="indigo-darken-4"
                     prepend-icon="mdi-plus"
                     @click="cambiarUrl(route('documentos.create'))"
                 >
@@ -150,7 +150,7 @@ const verUbicación = async (item) => {};
                 <v-card flat>
                     <v-card-title>
                         <v-row
-                            class="bg-grey-darken-3 d-flex align-center pa-3"
+                            class="bg-indigo-darken-4 d-flex align-center pa-3"
                         >
                             <v-col cols="12" sm="6" md="4">
                                 Documentos

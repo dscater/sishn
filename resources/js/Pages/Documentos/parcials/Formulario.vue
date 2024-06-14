@@ -83,7 +83,7 @@ onMounted(() => {});
                 <v-btn
                     :disabled="disabled"
                     icon="mdi-content-save"
-                    color="yellow"
+                    color="indigo-darken-4"
                     @click="enviarFormulario"
                 ></v-btn>
             </template>
@@ -100,7 +100,7 @@ onMounted(() => {});
                     :prepend-icon="
                         oDocumento.id != 0 ? 'mdi-sync' : 'mdi-content-save'
                     "
-                    color="yellow"
+                    color="indigo-darken-4"
                     @click="enviarFormulario"
                 >
                     <span
@@ -117,7 +117,7 @@ onMounted(() => {});
     <v-row>
         <v-col cols="12">
             <v-card>
-                <v-card-title class="border-b yellow pa-5">
+                <v-card-title class="border-b bg-indigo-darken-4 pa-5">
                     <v-icon
                         :icon="form.id == 0 ? 'mdi-plus' : 'mdi-pencil'"
                     ></v-icon>

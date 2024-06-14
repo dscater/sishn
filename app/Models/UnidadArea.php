@@ -36,6 +36,11 @@ class UnidadArea extends Model
 
     public function biometricos()
     {
-        return $this->hasMany(Biometrico::class, 'unidad_area_id');
+        return $this->hasMany(Biometrico::class, 'unidad_area_id')->where("status", 1);
+    }
+
+    public function repuestos()
+    {
+        return $this->hasMany(Repuesto::class, 'unidad_area_id')->where("status", 1);
     }
 }

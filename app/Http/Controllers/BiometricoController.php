@@ -114,10 +114,10 @@ class BiometricoController extends Controller
             $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png,webp|max:2048';
         }
         if ($request->hasFile('manual_usuario')) {
-            $this->validacion['manual_usuario'] = 'file|max:4096|mimes:doc,docx,pdf,xlsx,xls';
+            $this->validacion['manual_usuario'] = 'file|max:8192|mimes:doc,docx,pdf,xlsx,xls';
         }
         if ($request->hasFile('manual_servicio')) {
-            $this->validacion['manual_servicio'] = 'file|max:4096|mimes:doc,docx,pdf,xlsx,xls';
+            $this->validacion['manual_servicio'] = 'file|max:8192|mimes:doc,docx,pdf,xlsx,xls';
         }
 
         if ($request->garantia == 'SI') {
@@ -191,10 +191,10 @@ class BiometricoController extends Controller
             $this->validacion['foto'] = 'image|mimes:jpeg,jpg,png,webp|max:2048';
         }
         if ($request->hasFile('manual_usuario')) {
-            $this->validacion['manual_usuario'] = 'file|max:4096|mimes:doc,docx,pdf,xlsx,xls';
+            $this->validacion['manual_usuario'] = 'file|max:8192|mimes:doc,docx,pdf,xlsx,xls';
         }
         if ($request->hasFile('manual_servicio')) {
-            $this->validacion['manual_servicio'] = 'file|max:4096|mimes:doc,docx,pdf,xlsx,xls';
+            $this->validacion['manual_servicio'] = 'file|max:8192|mimes:doc,docx,pdf,xlsx,xls';
         }
 
         if ($request->garantia == 'SI') {

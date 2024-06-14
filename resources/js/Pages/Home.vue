@@ -39,6 +39,11 @@ const { props } = usePage();
     <v-container>
         <BreadBrums :breadbrums="breadbrums"></BreadBrums>
         <v-row>
+            <v-col cols="12">
+                <h4 class="text-center text-h4">ÁREA DE MANTENIMIENTO</h4>
+            </v-col>
+        </v-row>
+        <v-row>
             <v-col
                 cols="12"
                 sm="6"
@@ -77,7 +82,7 @@ const { props } = usePage();
             </v-col>
         </v-row>
 
-        <v-row>
+        <!-- <v-row>
             <v-col cols="12">
                 <v-card>
                     <v-card-text>
@@ -96,6 +101,6 @@ const { props } = usePage();
                     </v-card-text>
                 </v-card>
             </v-col>
-        </v-row>
+        </v-row> -->
     </v-container>
 </template>
