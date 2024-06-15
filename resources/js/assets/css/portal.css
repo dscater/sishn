@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth!important;
+}
 nav {
     padding-left: 40px;
     padding-right: 40px;

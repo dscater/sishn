@@ -213,10 +213,10 @@
                 @php
                     $nro_reg = 1;
                 @endphp
-                @foreach ($ua->biometricos as $biometrico)
+                @foreach ($ua->repuestos as $repuesto)
                     <tr>
                         <td class="centreado">{{ $nro_reg++ }}</td>
-                        <td>{{ $biometrico->nombre }}</td>
+                        <td>{{ $repuesto->nombre }}</td>
                     </tr>
                 @endforeach
             </tbody>

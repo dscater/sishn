@@ -14,6 +14,14 @@
     <script>
         url_assets = "{{ asset('') }}";
     </script>
+
+    @php
+        $configuracion = App\Models\Institucion::first();
+    @endphp
+    <script>
+        key_captcha_local = "{{ $configuracion->captcha_local }}";
+    </script>
+
     <!-- Scripts -->
     @routes
     @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])

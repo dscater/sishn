@@ -10,14 +10,47 @@ export default {
 import { useInstitucion } from "@/composables/institucion/useInstitucion";
 import { useForm, Head } from "@inertiajs/vue3";
 import { ref } from "vue";
+import { VueRecaptcha } from "vue-recaptcha";
 
 const { oInstitucion } = useInstitucion();
 const form = useForm({
     usuario: "",
     password: "",
+    captcha: false,
 });
 
 const visible = ref(false);
+const key_secret = ref(key_captcha_local);
+const captcha = ref(null);
+const btnDisabled = ref(true);
+
+const errorCaptcha = (e) => {
+    console.log(e);
+};
+const verificaCaptcha = (datos) => {
+    let config = {
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    };
+    let formdata = new FormData();
+    formdata.append("secret", key_secret.value);
+    formdata.append("g-recaptcha-response", datos);
+    axios
+        .post("/verifica_captcha", formdata, config)
+        .then((response) => {
+            if (response.data.success) {
+                captcha.value = response.data.success;
+                form.captcha = captcha.value;
+                btnDisabled.value = false;
+            } else {
+                btnDisabled.value = true;
+            }
+        })
+        .catch((error) => {
+            btnDisabled.value = true;
+        });
+};
 
 const submit = () => {
     form.post(route("login"), {
@@ -65,12 +98,7 @@ onMounted(() => {
                                 :src="url_asset + '/imgs/lateral.jpg'"
                             ></v-img>
                         </v-col>
-                        <v-col
-                            cols="12"
-                            sm="12"
-                            md="6"
-                            xl="6"
-                        >
+                        <v-col cols="12" sm="12" md="6" xl="6">
                             <v-card-text>
                                 <v-img
                                     :src="oInstitucion.url_logo"
@@ -174,6 +202,24 @@ onMounted(() => {
                                                 autocomplete="false"
                                                 v-model="form.password"
                                             ></v-text-field>
+
+                                            <v-row>
+                                                <v-col
+                                                    cols="12"
+                                                    class="mt-2 d-flex"
+                                                >
+                                                    <VueRecaptcha
+                                                        class="mx-auto"
+                                                        :sitekey="key_secret"
+                                                        ref="recaptcha"
+                                                        @verify="
+                                                            verificaCaptcha
+                                                        "
+                                                        @error="errorCaptcha"
+                                                    >
+                                                    </VueRecaptcha>
+                                                </v-col>
+                                            </v-row>
                                             <v-btn
                                                 class="mt-4"
                                                 elevation="4"
@@ -182,6 +228,7 @@ onMounted(() => {
                                                 dark
                                                 block
                                                 type="submit"
+                                                :disabled="btnDisabled"
                                                 >ACCEDER</v-btn
                                             >
                                         </v-col>

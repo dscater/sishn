@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\BiometricoController;
 use App\Http\Controllers\CronogramaController;
 use App\Http\Controllers\DocumentoArchivoController;
@@ -16,7 +17,6 @@ use App\Http\Controllers\SolicitudMantenimientoController;
 use App\Http\Controllers\UnidadAreaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsuarioController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -50,6 +50,8 @@ Route::get('/login', function () {
     }
     return Inertia::render('Auth/Login');
 })->name("login");
+
+Route::post('/verifica_captcha', [AuthenticatedSessionController::class, 'verifica_captcha'])->name("verifica_captcha");
 
 Route::get("institucions/getInstitucion", [InstitucionController::class, 'getInstitucion'])->name("institucions.getInstitucion");
 

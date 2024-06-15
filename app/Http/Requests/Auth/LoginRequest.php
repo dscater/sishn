@@ -27,6 +27,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'captcha' => ['required'],
             'usuario' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];

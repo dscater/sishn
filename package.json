@@ -27,6 +27,7 @@
         "highcharts": "^11.4.1",
         "pinia": "^2.1.7",
         "sweetalert2": "^11.10.4",
+        "vue-recaptcha": "^2.0.3",
         "vuetify": "^3.5.1"
     }
 }
